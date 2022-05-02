@@ -1,4 +1,70 @@
 package Application.GUI.Controllers;
 
-public class AdminViewController {
+import Application.BE.School;
+import Application.GUI.Models.SchoolModel;
+import Application.GUI.Models.StudentModel;
+import Application.GUI.Models.TeacherModel;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class AdminViewController implements Initializable {
+
+    @FXML
+    private TableView<StudentModel> tblViewStudent;
+    @FXML
+    private TableColumn<StudentModel, String> tblClmStudentFirstName;
+    @FXML
+    private TableColumn<StudentModel, String> tblClmStudentLastName;
+    @FXML
+    private TableColumn<StudentModel, String> tblClmStudentEmail;
+    @FXML
+    private TableColumn<StudentModel, String> tblClmStudentClass;
+
+    @FXML
+    private TableView<TeacherModel> tblViewTeacher;
+    @FXML
+    private TableColumn<TeacherModel, String> tblClmTeacherFirstName;
+    @FXML
+    private TableColumn<TeacherModel, String> tblClmTeacherLastName;
+    @FXML
+    private TableColumn<TeacherModel, String> tblClmTeacherEmail;
+
+    @FXML
+    private TableView<SchoolModel> tblViewSchool;
+    @FXML
+    private TableColumn<SchoolModel, String> tblClmSchoolName;
+    @FXML
+    private TableColumn<SchoolModel, Number> tblClmSchoolZipCode;
+    @FXML
+    private TableColumn<SchoolModel, String> tblClmSchoolCity;
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        initTableViews();
+    }
+
+    private void initTableViews()
+    {
+        tblClmSchoolName.setCellValueFactory(param -> param.getValue().getName());
+        tblClmSchoolZipCode.setCellValueFactory(param -> param.getValue().getZipCode());
+        tblClmSchoolCity.setCellValueFactory(param -> param.getValue().getCity());
+        /*
+        tblClmTeacherFirstName.setCellValueFactory(param -> param.getValue().getFirstName);
+        tblClmTeacherLastName.setCellValueFactory(param -> param.getValue().getLastName);
+        tblClmTeacherEmail.setCellValueFactory(param -> param.getValue().getEmail);
+
+        tblClmStudentFirstName.setCellValueFactory(param -> param.getValue().getFirstName);
+        tblClmStudentLastName.setCellValueFactory(param -> param.getValue().getLastName);
+        tblClmStudentEmail.setCellValueFactory(param -> param.getValue().getEmail);
+        tblClmStudentClass.setCellValueFactory(param -> param.getValue().getStudentClass);
+         */
+    }
+
+    public void openCreateSchool(ActionEvent actionEvent) {
+    }
 }
