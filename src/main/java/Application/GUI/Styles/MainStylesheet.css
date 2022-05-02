@@ -79,7 +79,10 @@
     -fx-font-weight: bold;
     -fx-font-size: 14;
 }
+
+
 .panelLbl {
     -fx-text-fill: -fx-txtFillLight;
     -fx-font-size: 14;
 }
+
