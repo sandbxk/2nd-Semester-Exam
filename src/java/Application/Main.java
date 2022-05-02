@@ -17,10 +17,13 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/Views/LoginScreen.fxml"));
-        primaryStage.setTitle("EventManager");
-        primaryStage.setScene(new Scene(root, 1200, 900));
+    public void start(Stage primaryStage) throws IOException
+    {
+        Parent root = FXMLLoader.load(this.getClass().getResource("/views/LoginScreen.fxml"));
+
+        primaryStage.setTitle("main");
+
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 }
