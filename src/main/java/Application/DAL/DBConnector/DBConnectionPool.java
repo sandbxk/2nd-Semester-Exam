@@ -1,114 +1,71 @@
 package Application.DAL.DBConnector;
 
+import javax.sql.DataSource;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public abstract class DBConnectionPool {
+public class DBConnectionPool extends ObjectPool<DBConnection> {
 
-    private ConcurrentLinkedQueue<DBConnection> pool;
+    private static DBConnectionPool instance;
 
-    private ScheduledExecutorService executorService;
-
-
-    /**
-     * Creates a new DB Connection Pool with only a minimum amount of objects given. No checks are performed for this constructor.
-     * @param minObjects
-     */
-    public DBConnectionPool(final int minObjects)
-    {
-        initialize(minObjects);
+    public DBConnectionPool() {
+        super();
     }
 
 
-    /**
-     * Creates a new DB Connection Pool. A check will be performed on a seperate thread every validationInterval seconds,
-     * to see if the pool still has the given amount of minimum and maximum objects.
-     * @param minObjects Minimum number of objects in the pool.
-     * @param maxObjects Maximum number of objects in the pool.
-     * @param validationInterval Time in seconds for periodical checking of minObjects / maxObjects conditions in a separate thread.
-     */
-    public DBConnectionPool(final int minObjects, final int maxObjects, final long validationInterval)
-    {
-        initialize(minObjects);
+    @Override
+    protected DBConnection create() {
+        try {
+            return new DBConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
-        // check pool conditions in a separate thread
-        executorService = Executors.newSingleThreadScheduledExecutor();
-        executorService.scheduleWithFixedDelay((() -> {
-            int size = pool.size();
+    @Override
+    public boolean validate(DBConnection o) {
+        try {
+            return (!o.getConnection().isClosed());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
 
-            if (size < minObjects) {
-                int sizeToBeAdded = minObjects + size;
-                for (int i = 0; i < sizeToBeAdded; i++) {
-                    pool.add(createObject());
-                }
-            } else if (size > maxObjects) {
-                int sizeToBeRemoved = size - maxObjects;
-                for (int i = 0; i < sizeToBeRemoved; i++) {
-                    pool.poll();
-                }
+    @Override
+    public void expire(DBConnection o) {
+        try {
+            o.getConnection().close();
+        } catch (SQLException e) {
+        }
+    }
+
+    public static DBConnectionPool getInstance() {
+        if (instance == null) {
+            instance = new DBConnectionPool();
+        }
+        return instance;
+    }
+
+    public static void main(String[] args) {
+        DBConnectionPool dbConnectionPool = DBConnectionPool.getInstance();
+
+        for (int i = 0; i < 10; i++) {
+            DBConnection dataSource = dbConnectionPool.checkOut();
+            Connection connection = null;
+            try {
+                connection = dataSource.getConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        }), validationInterval, validationInterval, TimeUnit.SECONDS);
-
-    }
-
-    /**
-     * Gets the next free DBConnection object from the pool. If the pool doesn't contain any objects,
-     * a new object will be created and given to the caller of this method back.
-     * @return
-     */
-    public DBConnection borrowObject() {
-        DBConnection object;
-        if ((object = pool.poll()) == null)
-        {
-            object = createObject();
-        }
-        return object;
-    }
-
-
-    /**
-     * Returns the DBConnection object to the pool.
-     * @param object to be returned
-     */
-    public void returnObject(DBConnection object) {
-        if (object == null) {
-            return;
-        }
-        this.pool.offer(object);
-    }
-
-
-    /**
-     * Closes the pool.
-     */
-    public void shutdown()
-    {
-        if (executorService != null)
-        {
-            executorService.shutdown();
+            System.out.println(connection);
         }
     }
-
-
-    /**
-     * Creates a new DB Connection object.
-     * @return the new DB Connection object
-     */
-    protected abstract DBConnection createObject();
-
-
-
-    private void initialize(final int minObjects)
-
-    {
-        pool = new ConcurrentLinkedQueue<DBConnection>();
-
-        for (int i = 0; i < minObjects; i++) {
-            pool.add(createObject());
-        }
-    }
-
-
 }
