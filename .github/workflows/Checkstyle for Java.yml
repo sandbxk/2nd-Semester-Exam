@@ -38,8 +38,7 @@ jobs:
     level: # optional, default is info
     # Reporter of reviewdog command [github-pr-check, github-pr-review].
     reporter: # optional, default is github-pr-check
-    # Filtering mode for the reviewdog command [added, diff_context, file, nofilter].
-Default is added.
+    # Filtering mode for the reviewdog command [added, diff_context, file, nofilter]. Default is added.
 
     filter_mode: # optional, default is added
     # Exit code for reviewdog when errors are found [true, false]
