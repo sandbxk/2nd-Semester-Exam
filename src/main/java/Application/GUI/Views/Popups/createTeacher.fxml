@@ -7,33 +7,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="313.0" prefWidth="271.0" style="-fx-border-color: #fc8f51;" styleClass="background" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.VenuePriceGroupController">
+<AnchorPane prefHeight="279.0" prefWidth="271.0" style="-fx-border-color: #fc8f51;" styleClass="background" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.GUI.Controllers.CreateTeacherController">
     <children>
         <VBox layoutX="92.0" layoutY="52.0">
             <children>
-                <TextField fx:id="txtFieldNewVenueName" styleClass="submit-textField">
+                <TextField fx:id="txtFieldLogin" styleClass="submit-textField">
                     <VBox.margin>
                         <Insets bottom="10.0" />
                     </VBox.margin>
                 </TextField>
-                <TextField fx:id="txtFieldNewVenueAddress" styleClass="submit-textField">
+                <TextField fx:id="txtFieldPassword" styleClass="submit-textField">
                     <VBox.margin>
                         <Insets bottom="10.0" />
                     </VBox.margin>
                 </TextField>
-                <TextField fx:id="txtFieldNewVenueZipcode" styleClass="submit-textField">
+                <TextField fx:id="txtFieldName" styleClass="submit-textField">
                     <VBox.margin>
                         <Insets bottom="10.0" />
                     </VBox.margin>
                 </TextField>
-                <TextField fx:id="txtFieldNewVenueCity" styleClass="submit-textField">
+                <TextField fx:id="txtFieldEmail" styleClass="submit-textField">
                <VBox.margin>
                   <Insets bottom="15.0" />
                </VBox.margin></TextField>
             </children>
         </VBox>
-        <Button layoutX="216.0" layoutY="325.0" mnemonicParsing="false" onAction="#onSaveNewVenue" styleClass="roundButton" text="Gem" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="12.0" />
-        <Button layoutX="17.0" layoutY="325.0" mnemonicParsing="false" onAction="#onCancelNewVenue" styleClass="roundButton" text="Annullere" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" />
+        <Button layoutX="216.0" layoutY="325.0" mnemonicParsing="false" onAction="#onSaveCreateTeacher" styleClass="roundButton" text="Gem" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="12.0" />
+        <Button layoutX="17.0" layoutY="325.0" mnemonicParsing="false" onAction="#onCancelCreateTeacher" styleClass="roundButton" text="Annullere" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" />
       <Label layoutX="35.0" layoutY="166.0" styleClass="Text" text="Email" />
       <Label layoutX="36.0" layoutY="130.0" styleClass="Text" text="Navn" />
       <Label layoutX="36.0" layoutY="93.0" styleClass="Text" text="Kode" />
