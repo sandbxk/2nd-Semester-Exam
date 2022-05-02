@@ -57,6 +57,28 @@
     -fx-font-size: 14;
 }
 
+.panelBtn:hover {
+    -fx-background-color: derive(-fx-panelHighlight, 40%);
+    -fx-background-radius: 30;
+    -fx-padding: 10;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-panelBase;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
+
+
+
+
+.panelBtn:pressed {
+    -fx-background-color: -fx-txtFillLight;
+    -fx-background-radius: 30;
+    -fx-padding: 10;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-panelBase;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
 .panelLbl {
     -fx-text-fill: -fx-txtFillLight;
     -fx-font-size: 14;
