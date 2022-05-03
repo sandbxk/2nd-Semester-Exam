@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -10,7 +9,7 @@
         <tabs>
           <Tab text="elever">
                <content>
-                  <TableView fx:id="tblViewStudent" prefHeight="186.0" prefWidth="438.0" stylesheets="@../Styles/MainStylesheet.css">
+                  <TableView fx:id="tblViewStudent" prefHeight="186.0" prefWidth="438.0" stylesheets="@../Styles/TableViewStylesheet.css">
                     <columns>
                       <TableColumn fx:id="tblClmStudentFirstName" prefWidth="75.0" text="fornavn" />
                         <TableColumn fx:id="tblClmStudentLastName" prefWidth="75.0" text="efternavn" />
@@ -22,7 +21,7 @@
             </Tab>
           <Tab text="lærer">
                <content>
-                  <TableView fx:id="tblViewTeacher" prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="tblViewTeacher" prefHeight="200.0" prefWidth="200.0" stylesheets="@../Styles/TableViewStylesheet.css">
                     <columns>
                       <TableColumn fx:id="tblClmTeacherFirstName" prefWidth="75.0" text="fornavn" />
                       <TableColumn fx:id="tblClmTeacherLastName" prefWidth="75.0" text="efternavn" />
@@ -33,21 +32,16 @@
             </Tab>
             <Tab text="skoler">
                <content>
-                  <TableView fx:id="tblViewSchool" prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="tblViewSchool" prefHeight="200.0" prefWidth="200.0" stylesheets="@../Styles/TableViewStylesheet.css">
                     <columns>
                       <TableColumn fx:id="tblClmSchoolName" prefWidth="75.0" text="navn" />
-                      <TableColumn fx:id="tblClmSchoolZipCode" prefWidth="87.99993896484375" text="postnummer" />
-                        <TableColumn fx:id="tblClmSchoolCity" prefWidth="84.00006103515625" text="by" />
+                      <TableColumn fx:id="tblClmSchoolZipCode" prefWidth="109.0" text="postnummer" />
+                        <TableColumn fx:id="tblClmSchoolCity" prefWidth="64.0" text="by" />
                     </columns>
                   </TableView>
                </content>
             </Tab>
         </tabs>
-         <styleClass>
-            <String fx:value="tabPane" />
-            <String fx:value="tab1" />
-            <String fx:value="text-fieldBase" />
-         </styleClass>
       </TabPane>
       <Button layoutX="151.0" layoutY="324.0" mnemonicParsing="false" styleClass="panel30Deg" text="ny elev" />
       <Button layoutX="266.0" layoutY="324.0" mnemonicParsing="false" styleClass="panel30Deg" text="ny lærer" />

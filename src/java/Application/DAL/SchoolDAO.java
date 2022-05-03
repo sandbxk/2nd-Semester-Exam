@@ -32,7 +32,10 @@ public class SchoolDAO {
     }
 
     public List<School> getAllSchools() throws SQLException {
-        String sqlRead = "Select * FROM school JOIN zipCode ON school.zipCode = zipCode.zipCode";
+        String sqlRead = """
+                        SELECT * FROM school 
+                        JOIN zipCode ON school.zipCode = zipCode.zipCode
+                        """;
         List<School> schoolList = new ArrayList<>();
         String name;
         String city;
@@ -53,10 +56,55 @@ public class SchoolDAO {
             School school = new School(id, name, zipCode, city);
             schoolList.add(school);
         }
+        psas.close();
         return schoolList;
     }
 
+    public void updateSchool(School school)
+    {
+        String sqlUpdate = """
+                UPDATE school SET
+                schoolName =  ?,
+                zipCode = ?
+                WHERE id = ?
+                """;
 
+        try {
+            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
+            PreparedStatement psus = conn.prepareStatement(sqlUpdate);
+
+            psus.setString(1,school.getName());
+            psus.setInt(2,school.getZipCode());
+            psus.setInt(3,school.getId());
+            psus.executeUpdate();
+            psus.close();
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void deleteSchool(School school)
+    {
+        String sqlDelete = """
+                DELETE FROM School WHERE id = ?
+                """;
+
+        try {
+            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
+            PreparedStatement psds = conn.prepareStatement(sqlDelete);
+
+            psds.setInt(1,school.getId());
+
+            psds.executeUpdate();
+            psds.close();
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
     public static void main(String[] args) throws SQLException {
         SchoolDAO DAO = new SchoolDAO();
         System.out.println(DAO.getAllSchools());

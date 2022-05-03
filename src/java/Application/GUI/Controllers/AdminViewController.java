@@ -1,6 +1,5 @@
 package Application.GUI.Controllers;
 
-import Application.BE.School;
 import Application.GUI.Models.SchoolModel;
 import Application.GUI.Models.StudentModel;
 import Application.GUI.Models.TeacherModel;

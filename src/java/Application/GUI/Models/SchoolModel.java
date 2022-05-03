@@ -11,9 +11,9 @@ public class SchoolModel {
 
     SchoolModel(School school)
     {
-        name.setValue(school.name());
-        zipCode.setValue(school.zipCode());
-        city.setValue(school.city());
+        name.setValue(school.getName());
+        zipCode.setValue(school.getZipCode());
+        city.setValue(school.getCity());
     }
 
     public StringProperty getName(){
