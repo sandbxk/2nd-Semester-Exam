@@ -13,7 +13,7 @@
       <Text layoutX="127.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" />
       <TextField fx:id="txtPwd" layoutX="228.0" layoutY="200.0" />
       <Text layoutX="127.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" />
-      <Button fx:id="btnSubmit" layoutX="343.0" layoutY="279.0" mnemonicParsing="false" text="Button" />
+      <Button onAction="#onSubmit" fx:id="btnSubmit" layoutX="343.0" layoutY="279.0" mnemonicParsing="false" text="Button" />
       <ComboBox fx:id="cbUserTypeSelect" layoutX="227.0" layoutY="51.0" prefWidth="150.0" promptText="user type" />
    </children>
 </AnchorPane>
