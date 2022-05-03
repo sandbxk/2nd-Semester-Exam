@@ -2,13 +2,21 @@
     -fx-txtFillLight: #f5f5f5;
     -fx-txtFillDark: #202020;
     -fx-txtRedBlack: #592D2D;
-    -fx-bgbase: #f5f5f5;
+    -fx-bgBase: #f5f5f5;
     -fx-panelBase: #D13F3F;
     -fx-panelHighlight: #FFBFBF;
     -fx-functionBase: #F5B91D;
     -fx-funcBG: #FAF8EC;
     -fx-healthBase: #5DD677;
     -fx-healthBG: #EDFAEC;
+}
+
+.background {
+    -fx-background-color: -fx-bgBase;
+}
+
+.transparentBG {
+    -fx-background-color: transparent;
 }
 
 .panel30Deg {
@@ -87,6 +95,7 @@
     -fx-font-weight: bold;
     -fx-font-size: 14;
 }
+
 .panelLbl {
     -fx-text-fill: -fx-txtFillLight;
     -fx-font-size: 14;
