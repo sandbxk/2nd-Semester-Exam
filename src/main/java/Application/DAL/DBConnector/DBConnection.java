@@ -26,6 +26,7 @@ public class DBConnection {
         dataSource.setDatabaseName(property.getProperty("database"));
         dataSource.setUser(property.getProperty("username"));
         dataSource.setPassword(property.getProperty("password"));
+        dataSource.setTrustServerCertificate(true);
     }
 
     public Connection getConnection() throws SQLServerException

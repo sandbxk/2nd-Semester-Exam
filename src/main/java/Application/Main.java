@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 
 public class Main extends Application {
 
@@ -17,6 +19,15 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage)
     {
-
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("Application/GUI/Views/TeacherView.fxml"));
+            primaryStage.setTitle("Test");
+            primaryStage.setScene(new Scene(root, 800, 600));
+            primaryStage.show();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
