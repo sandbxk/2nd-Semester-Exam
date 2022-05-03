@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -9,7 +10,7 @@
         <tabs>
           <Tab text="elever">
                <content>
-                  <TableView fx:id="tblViewStudent" prefHeight="186.0" prefWidth="438.0">
+                  <TableView fx:id="tblViewStudent" prefHeight="186.0" prefWidth="438.0" stylesheets="@../Styles/MainStylesheet.css">
                     <columns>
                       <TableColumn fx:id="tblClmStudentFirstName" prefWidth="75.0" text="fornavn" />
                         <TableColumn fx:id="tblClmStudentLastName" prefWidth="75.0" text="efternavn" />
@@ -42,6 +43,11 @@
                </content>
             </Tab>
         </tabs>
+         <styleClass>
+            <String fx:value="tabPane" />
+            <String fx:value="tab1" />
+            <String fx:value="text-fieldBase" />
+         </styleClass>
       </TabPane>
       <Button layoutX="151.0" layoutY="324.0" mnemonicParsing="false" styleClass="panel30Deg" text="ny elev" />
       <Button layoutX="266.0" layoutY="324.0" mnemonicParsing="false" styleClass="panel30Deg" text="ny lærer" />
