@@ -16,8 +16,8 @@ public class AdminDataManager {
         accountDAO = new AccountDAO();
     }
 
-    public void createStudent(String username, String password, String firstName, String lastName, String email, School school) {
-        accountDAO.create(new Account(-1, username, password, firstName, lastName, email, school, 0));
+    public void createAccount(String username, String password, String firstName, String lastName, String email, School school, int auth) {
+        accountDAO.create(new Account(-1, username, password, firstName, lastName, email, school, auth));
     }
 
     public void updateAccount(Account student){
@@ -34,10 +34,6 @@ public class AdminDataManager {
 
     public List<Account> getAllStudents(){
         return accountDAO.readAll();
-    }
-
-    public void createTeacher(String username, String password, String firstName, String lastName, String email, School school) {
-        accountDAO.create(new Account(-1, username, password, firstName, lastName, email, school, 1));
     }
 
 }

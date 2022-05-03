@@ -31,13 +31,14 @@ public class CreateTeacherController implements Initializable
         // FIXME: 03/05/2022 -- Dummy School
         School school = new School(-1, "Dummy School", 6700, "NotARealCity");
 
-        adminDataManager.createTeacher(
+        adminDataManager.createAccount(
                 txtFieldLogin.getText(),
                 txtFieldPassword.getText(),
                 txtFieldFirstName.getText(),
                 txtFieldSurname.getText(),
                 txtFieldEmail.getText(),
-                school
+                school,
+                1
         );
 
         ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
