@@ -1,6 +1,6 @@
 package Application.GUI.Controllers.Popups;
 
-import Application.DAL.mockSchoolDAO;
+import Application.DAL.SchoolDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,7 +23,7 @@ public class CreateSchoolController implements Initializable {
     @FXML
     private Button btnCancel;
 
-    private mockSchoolDAO schoolDAO;
+    private SchoolDAO schoolDAO;
 
 
     @Override
@@ -32,7 +32,7 @@ public class CreateSchoolController implements Initializable {
     }
 
     public void createSchool(ActionEvent actionEvent) {
-        schoolDAO.createSchool(txtsSchoolName.getText(),txtSchoolZipCode.getText());
+        schoolDAO.createSchool(txtsSchoolName.getText(),Integer.parseInt(txtSchoolZipCode.getText()));
 
     }
 

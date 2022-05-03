@@ -17,9 +17,9 @@ public class StudentModel {
         this.lastName = new SimpleStringProperty();
         this.email = new SimpleStringProperty();
 
-        firstName.set(student.firstName());
-        lastName.set(student.lastName());
-        email.set(student.email());
+        firstName.set(student.getFirstName());
+        lastName.set(student.getLastName());
+        email.set(student.getEmail());
         this.student = student;
     }
 
