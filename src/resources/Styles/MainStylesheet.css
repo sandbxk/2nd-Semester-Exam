@@ -179,16 +179,24 @@
 
 
 .searchBtn {
-    -fx-background-color: -fx-panelHighlight;
-    -fx-background-radius: 0;
-    -fx-border-radius: 30;
+    -fx-background-image: url('../img/filter.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 20 20;
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+    -fx-background-radius: 30;
     -fx-text-fill: -fx-panelBase;
     -fx-font-weight: bold;
     -fx-font-size: 14;
 }
 
 .searchBtn:hover {
-    -fx-background-color: derive(-fx-panelHighlight, 40%);
+    -fx-background-image: url('../img/filter2.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 20 20;
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+    -fx-background-radius: 30;
     -fx-text-fill: -fx-panelBase;
     -fx-font-weight: bold;
     -fx-font-size: 14;
@@ -196,6 +204,11 @@
 
 
 .searchBtn:pressed {
+    -fx-background-image: url('../img/filter3.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 20 20;
+    -fx-background-position: center;
+    -fx-background-radius: 30;
     -fx-background-color: -fx-txtFillLight;
     -fx-text-fill: -fx-panelBase;
     -fx-font-weight: bold;
