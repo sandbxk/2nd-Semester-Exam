@@ -1,7 +1,11 @@
 package Application.GUI.StateMachine;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 public class State extends TeacherViewStateMachine {
 
@@ -17,12 +21,19 @@ public class State extends TeacherViewStateMachine {
     public void disable() {
         viewPane.setVisible(false);
         menuButton.setDisable(false);
+        Timeline timeline = new Timeline();
+        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(0.3), new KeyValue(viewPane.opacityProperty(), 0)));
+        timeline.play();
     }
 
     @Override
     public void enable() {
-    viewPane.toFront();
-    viewPane.setVisible(true);
-    menuButton.setDisable(true);
+
+        viewPane.toFront();
+        viewPane.setVisible(true);
+        menuButton.setDisable(true);
+        Timeline timeline = new Timeline();
+        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(0.3), new KeyValue(viewPane.opacityProperty(), 1)));
+        timeline.play();
     }
 }

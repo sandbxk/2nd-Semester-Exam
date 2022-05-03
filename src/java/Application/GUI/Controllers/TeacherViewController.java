@@ -93,4 +93,15 @@ public class TeacherViewController implements Initializable {
     public void onMenuItemClicked(ActionEvent event) {
     }
 
+    public void onGeneralInfo(ActionEvent event) {
+    }
+
+    public void onJournal(ActionEvent event) {
+    }
+
+    public void onRemoveStudentToCitizen(ActionEvent event) {
+    }
+
+    public void onAddStudentToCitizen(ActionEvent event) {
+    }
 }

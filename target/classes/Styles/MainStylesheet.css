@@ -15,6 +15,10 @@
     -fx-background-color: -fx-bgBase;
 }
 
+.panelColorBG {
+    -fx-background-color: -fx-panelBase;
+}
+
 .transparentBG {
     -fx-background-color: transparent;
 }
