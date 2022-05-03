@@ -1,11 +1,8 @@
 package Application.DAL;
 
 import Application.BE.Student;
-import Application.DAL.DBConnector.DBConnection;
 import Application.DAL.DBConnector.DBConnectionPool;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

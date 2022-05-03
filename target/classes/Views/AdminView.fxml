@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="391.0" prefWidth="412.0" styleClass="transparentBG" stylesheets="@../Styles/MainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.GUI.Controllers.Popups.CreateStudentController">
+<AnchorPane prefHeight="391.0" prefWidth="412.0" styleClass="transparentBG" stylesheets="@../../java/Application/GUI/Styles/MainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.GUI.Controllers.Popups.CreateStudentController">
    <children>
       <AnchorPane layoutX="6.0" layoutY="3.0" prefHeight="384.0" prefWidth="400.0" styleClass="panel30Deg">
          <children>
