@@ -61,6 +61,7 @@ public class LoginController implements Initializable
         }
         else
         {
+            System.err.println("wrong credentials");
             // post error message
                 // (wrong username / password)
         }
