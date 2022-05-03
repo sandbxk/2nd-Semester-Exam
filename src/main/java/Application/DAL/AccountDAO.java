@@ -81,7 +81,7 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
     @Override
     public Account read(int accountID){
         String sql = """
-                    SELECT id, firstName, surname, email FROM accounts WHERE id = ?
+                    SELECT accountId, firstName, surname, email FROM accounts WHERE accountId = ?
                     JOIN school ON accounts.school = school.id
                     """;
 
@@ -99,19 +99,19 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
 
             while (rs.next()) {
                 school = new School(
-                        rs.getInt(""),
+                        rs.getInt("schoolId"),
                         rs.getString("schoolName"),
-                        rs.getInt("zipCode"),
+                        rs.getInt("schoolZipCode"),
                         rs.getString("cityName")
                 );
 
                 student = new Account(
-                        rs.getInt("id"),
+                        rs.getInt("accountId"),
                         rs.getString("login"),
                         rs.getString("password"),
-                        rs.getString("studentFirstName"),
-                        rs.getString("studentSurname"),
-                        rs.getString("studentEmail"),
+                        rs.getString("firstName"),
+                        rs.getString("surname"),
+                        rs.getString("email"),
                         school,
                         rs.getInt("auth")
                 );
@@ -129,7 +129,7 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
     @Override
     public List<Account> readAll() {
         String sql = """
-                    SELECT id, firstName, surname, email, auth FROM accounts
+                    SELECT accountId, firstName, surname, email, auth FROM accounts
                     """;
         List<Account> studentsList = new ArrayList<>();
 
@@ -142,14 +142,14 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
             while (rs.next()) {
 
                 School school = new School(
-                        rs.getInt(""),
+                        rs.getInt("schoolID"),
                         rs.getString("schoolName"),
                         rs.getInt("zipCode"),
                         rs.getString("cityName")
                 );
 
                 Account student = new Account(
-                        rs.getInt("id"),
+                        rs.getInt("accountId"),
                         rs.getString("login"),
                         rs.getString("password"),
                         rs.getString("studentFirstName"),
@@ -171,7 +171,9 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
 
     @Override
     public void update(Account input) {
-        String sql = "UPDATE accounts SET firstName = ?, surname = ?, email = ? WHERE id = ?";
+        String sql = """
+                     UPDATE accounts SET firstName = ?, surname = ?, email = ? WHERE accountId = ?
+                     """;
 
         Account account = input;
         try {
