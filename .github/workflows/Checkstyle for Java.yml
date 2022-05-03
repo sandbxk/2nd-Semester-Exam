@@ -46,19 +46,20 @@ jobs:
     
     # Filtering mode for the reviewdog command [added, diff_context, file, nofilter]. Default is added.
     filter_mode: # optional, default is added
-    # Exit code for reviewdog when errors are found [true, false]
-Default is `false`.
 
+    # Exit code for reviewdog when errors are found [true, false]
     fail_on_error: # optional, default is false
+
     # Additional reviewdog flags
     reviewdog_flags: # optional, default is 
-    # Checkstyle configuration specifies which ruleset to apply during scan.
-There are two built-in configurations in checkstyle: [google_checks.xml, sun_checks.xml].
-google_checks.xml configures Checkstyle for the Google coding conventions (https://google.github.io/styleguide/javaguide.html)
-sun_checks.xml configures Checkstyle for the Sun coding conventions (https://www.oracle.com/java/technologies/javase/codeconventions-contents.html)
 
-    checkstyle_config: # default is google_checks.xml
+    # Checkstyle configuration specifies which ruleset to apply during scan.
+    # google_checks.xml configures Checkstyle for the Google coding conventions (https://google.github.io/styleguide/javaguide.html)
+    # sun_checks.xml configures Checkstyle for the Sun coding conventions (https://www.oracle.com/java/technologies/javase/codeconventions-contents.html)
+    There are two built-in configurations in checkstyle: [google_checks.xml, sun_checks.xml]
+
+    # For a list of available version numbers go to [Checkstyle release page](https://github.com/checkstyle/checkstyle/releases/).
     # Checkstyle version to be used during analysis.
-For a list of available version numbers go to [Checkstyle release page](https://github.com/checkstyle/checkstyle/releases/).
+    checkstyle_config: # default is google_checks.xml
 
     checkstyle_version: # optional, default is 9.2
