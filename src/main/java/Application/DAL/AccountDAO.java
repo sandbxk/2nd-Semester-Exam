@@ -13,6 +13,11 @@ import java.util.List;
 
 public class AccountDAO extends TemplatePatternDAO<Account> {
 
+    /**
+     * Creates an account from account entity given.
+     * @param input
+     * @return
+     */
     @Override
     public Account create(Account input) {
         String sql = """
@@ -59,6 +64,10 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
     }
 
 
+    /**
+     * Deletes a specific account based on account entity given.
+     * @param accountid
+     */
     @Override
     public void delete(int accountid){
         String sql = "DELETE FROM account WHERE id = ?";
@@ -78,6 +87,11 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
         }
     }
 
+    /**
+     * Returns a specific account based on account entity id given.
+     * @param accountID
+     * @return
+     */
     @Override
     public Account read(int accountID){
         String sql = """
@@ -127,6 +141,10 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
         return account;
     }
 
+    /**
+     * Returns a list of all accounts.
+     * @return
+     */
     @Override
     public List<Account> readAll() {
         String sql = """
@@ -174,6 +192,10 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
         return studentsList;
     }
 
+    /**
+     * Updates accounts using an account entity.
+     * @param input
+     */
     @Override
     public void update(Account input) {
         String sql = """
