@@ -20,11 +20,11 @@ public class AdminDataManager {
         accountDAO.create(new Account(-1, username, password, firstName, lastName, email, school, 0));
     }
 
-    public void updateStudent(Account student){
+    public void updateAccount(Account student){
         accountDAO.update(student);
     }
 
-    public void deleteStudent(Account student){
+    public void deleteAccount(Account student){
         accountDAO.delete(student.getId());
     }
 
@@ -34,6 +34,10 @@ public class AdminDataManager {
 
     public List<Account> getAllStudents(){
         return accountDAO.readAll();
+    }
+
+    public void createTeacher(String username, String password, String firstName, String lastName, String email, School school) {
+        accountDAO.create(new Account(-1, username, password, firstName, lastName, email, school, 1));
     }
 
 }
