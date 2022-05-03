@@ -58,6 +58,7 @@ public class TeacherViewController implements Initializable {
         viewStatesMap.put(tglBtnCases, new State(anchorPaneCases, tglBtnCases)); // Cases
         viewStatesMap.put(tglBtnAssignments, new State(anchorPaneAssignments, tglBtnAssignments)); // Assignments
         viewStatesMap.put(tglBtnJournals, new State(anchorPaneJournals, tglBtnJournals)); // Journals
+
     }
 
     private void initToggleGroup(){
@@ -92,67 +93,4 @@ public class TeacherViewController implements Initializable {
     public void onMenuItemClicked(ActionEvent event) {
     }
 
-    /*public void onMenuItemClicked(ActionEvent event) {
-        if (event.getSource().equals(tglBtnDashboard)) {
-            scrollPaneDashboard.setVisible(true);
-            anchorPaneStudents.setVisible(false);
-            anchorPaneCitizenTemplates.setVisible(false);
-            anchorPaneCitizens.setVisible(false);
-            anchorPaneCases.setVisible(false);
-            anchorPaneAssignments.setVisible(false);
-            anchorPaneJournals.setVisible(false);
-        } else if (event.getSource().equals(tglBtnStudents)) {
-            scrollPaneDashboard.setVisible(false);
-            anchorPaneStudents.setVisible(true);
-            anchorPaneCitizenTemplates.setVisible(false);
-            anchorPaneCitizens.setVisible(false);
-            anchorPaneCases.setVisible(false);
-            anchorPaneAssignments.setVisible(false);
-            anchorPaneJournals.setVisible(false);
-        } else if (event.getSource().equals(tglBtnCitizenTemplates)) {
-            scrollPaneDashboard.setVisible(false);
-            anchorPaneStudents.setVisible(false);
-            anchorPaneCitizenTemplates.setVisible(true);
-            anchorPaneCitizens.setVisible(false);
-            anchorPaneCases.setVisible(false);
-            anchorPaneAssignments.setVisible(false);
-            anchorPaneJournals.setVisible(false);
-        } else if (event.getSource().equals(tglBtnCitizens)) {
-            scrollPaneDashboard.setVisible(false);
-            anchorPaneStudents.setVisible(false);
-            anchorPaneCitizenTemplates.setVisible(false);
-            anchorPaneCitizens.setVisible(true);
-            anchorPaneCases.setVisible(false);
-            anchorPaneAssignments.setVisible(false);
-            anchorPaneJournals.setVisible(false);
-        } else if (event.getSource().equals(tglBtnCases)) {
-            scrollPaneDashboard.setVisible(false);
-            anchorPaneStudents.setVisible(false);
-            anchorPaneCitizenTemplates.setVisible(false);
-            anchorPaneCitizens.setVisible(false);
-            anchorPaneCases.setVisible(true);
-            anchorPaneAssignments.setVisible(false);
-            anchorPaneJournals.setVisible(false);
-        } else if (event.getSource().equals(tglBtnAssignments)) {
-            scrollPaneDashboard.setVisible(false);
-            anchorPaneStudents.setVisible(false);
-            anchorPaneCitizenTemplates.setVisible(false);
-            anchorPaneCitizens.setVisible(false);
-            anchorPaneCases.setVisible(false);
-            anchorPaneAssignments.setVisible(true);
-            anchorPaneJournals.setVisible(false);
-        } else if (event.getSource().equals(tglBtnJournals)) {
-            scrollPaneDashboard.setVisible(false);
-            anchorPaneStudents.setVisible(false);
-            anchorPaneCitizenTemplates.setVisible(false);
-            anchorPaneCitizens.setVisible(false);
-            anchorPaneCases.setVisible(false);
-            anchorPaneAssignments.setVisible(false);
-            anchorPaneJournals.setVisible(true);
-        }
-
-
-    }
-
-     */
 }
