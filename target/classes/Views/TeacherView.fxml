@@ -13,11 +13,11 @@
    <center>
       <StackPane>
          <children>
-            <AnchorPane fx:id="anchorPaneDashboard">
+            <AnchorPane fx:id="anchorPaneDashboard" prefHeight="412.0" prefWidth="609.0" style="-fx-background-color: cyan;">
                <children>
-                  <ScrollPane fx:id="scrollPaneDashboard" fitToHeight="true" fitToWidth="true" prefHeight="412.0" prefWidth="609.0">
+                  <ScrollPane fx:id="scrollPaneDashboard" prefHeight="412.0" prefWidth="609.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <content>
-                        <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: cyan;">
+                        <AnchorPane prefHeight="400.0" prefWidth="600.0">
                   </AnchorPane>
                      </content>
                   </ScrollPane>

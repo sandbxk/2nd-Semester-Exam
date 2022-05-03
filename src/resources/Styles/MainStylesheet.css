@@ -68,8 +68,6 @@
 }
 
 
-
-
 .panelBtn:pressed {
     -fx-background-color: -fx-txtFillLight;
     -fx-background-radius: 30;
@@ -84,5 +82,40 @@
 .panelLbl {
     -fx-text-fill: -fx-txtFillLight;
     -fx-font-size: 14;
+}
+
+
+.sideMenu {
+    -fx-background-color: -fx-panelBase;
+}
+
+.sideMenuToggleBtn {
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-txtFillLight;
+    -fx-font-weight: normal;
+    -fx-font-size: 14;
+    -fx-font-family: "Roboto";
+}
+
+.sideMenuToggleBtn:hover {
+    -fx-font-weight: bold;
+}
+
+.sideMenuToggleBtn:pressed {
+    -fx-background-color: -fx-panelHighlight;
+    -fx-text-fill: -fx-panelBase;
+    -fx-font-weight: normal;
+}
+
+.sideMenuToggleBtn:selected {
+    -fx-background-color: -fx-panelHighlight;
+    -fx-text-fill: -fx-panelBase;
+    -fx-font-weight: normal;
+}
+
+.sideMenuToggleBtn:selected:hover {
+    -fx-background-color: -fx-panelHighlight;
+    -fx-text-fill: -fx-panelBase;
+    -fx-font-weight: bold;
 }
 
