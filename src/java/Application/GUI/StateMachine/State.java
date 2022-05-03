@@ -3,12 +3,12 @@ package Application.GUI.StateMachine;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 
-public class CitizenTemplateState extends ViewState {
+public class State extends TeacherViewStateMachine {
 
     private Pane viewPane;
     private ToggleButton menuButton;
 
-    public CitizenTemplateState(Pane viewPane, ToggleButton menuButton) {
+    public State(Pane viewPane, ToggleButton menuButton) {
         this.viewPane = viewPane;
         this.menuButton = menuButton;
     }

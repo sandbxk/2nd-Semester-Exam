@@ -1,18 +1,17 @@
 package Application.GUI.Controllers;
 
-import Application.GUI.StateMachine.DashboardState;
-import Application.GUI.StateMachine.ViewState;
+import Application.GUI.StateMachine.State;
+import Application.GUI.StateMachine.TeacherViewStateMachine;
+import Application.GUI.StateMachine.ViewStateEnum;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
-import javax.swing.text.View;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -36,8 +35,9 @@ public class TeacherViewController implements Initializable {
     @FXML public ToggleButton tglBtnJournals;
 
     private ToggleGroup toggleGroup;
-    private HashMap<ToggleButton, ViewState> buttonMap;
-    private ViewState viewState;
+    private HashMap<ToggleButton, TeacherViewStateMachine> buttonMap;
+    private TeacherViewStateMachine viewState;
+    private HashMap<ToggleButton, State> viewStatesMap;
 
 
     @Override
@@ -45,8 +45,20 @@ public class TeacherViewController implements Initializable {
         initToggleGroup();
         viewChangedListener();
         initVisible();
+        initViewStates();
+        tglBtnDashboard.setSelected(true);
     }
 
+    private void initViewStates(){
+        viewStatesMap = new HashMap<>();
+        viewStatesMap.put(tglBtnDashboard, new State(anchorPaneDashboard, tglBtnDashboard)); // Dashboard
+        viewStatesMap.put(tglBtnStudents, new State(anchorPaneStudents, tglBtnStudents)); // Students
+        viewStatesMap.put(tglBtnCitizenTemplates, new State(anchorPaneCitizenTemplates, tglBtnCitizenTemplates)); // Citizen Templates
+        viewStatesMap.put(tglBtnCitizens, new State(anchorPaneCitizens, tglBtnCitizens)); // Citizens
+        viewStatesMap.put(tglBtnCases, new State(anchorPaneCases, tglBtnCases)); // Cases
+        viewStatesMap.put(tglBtnAssignments, new State(anchorPaneAssignments, tglBtnAssignments)); // Assignments
+        viewStatesMap.put(tglBtnJournals, new State(anchorPaneJournals, tglBtnJournals)); // Journals
+    }
 
     private void initToggleGroup(){
         toggleGroup = new ToggleGroup();
@@ -57,33 +69,12 @@ public class TeacherViewController implements Initializable {
         tglBtnCases.setToggleGroup(toggleGroup);
         tglBtnAssignments.setToggleGroup(toggleGroup);
         tglBtnJournals.setToggleGroup(toggleGroup);
-
-        buttonMap = new HashMap<>();
-        buttonMap.put(tglBtnDashboard, new DashboardState(anchorPaneDashboard, tglBtnDashboard));
-        buttonMap.put(tglBtnStudents, anchorPaneStudents);
-        buttonMap.put(tglBtnCitizenTemplates, anchorPaneCitizenTemplates);
-        buttonMap.put(tglBtnCitizens, anchorPaneCitizens);
-        buttonMap.put(tglBtnCases, anchorPaneCases);
-        buttonMap.put(tglBtnAssignments, anchorPaneAssignments);
-        buttonMap.put(tglBtnJournals, anchorPaneJournals);
-
     }
 
     private void viewChangedListener(){
         toggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue != null){
-                ToggleButton newToggle = (ToggleButton) newValue;
-                newToggle.setDisable(true);
-                Pane newView = (Pane) buttonMap.get(newToggle);
-                newView.setVisible(true);
-                newView.toFront();
-
-                if(oldValue != null){
-                ToggleButton oldToggle = (ToggleButton) oldValue;
-                oldToggle.setDisable(false);
-                Pane oldView = (Pane) buttonMap.get(oldToggle);
-                oldView.setVisible(false);
-                }
+                viewState.changeState(viewStatesMap.get(newValue));
             }
         });
     }
