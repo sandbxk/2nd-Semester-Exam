@@ -16,7 +16,7 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
     @Override
     public Account create(Account input) {
         String sql = """
-                    INSERT INTO account (login, password, firstName, surname, email, school, auth) 
+                    INSERT INTO accounts (login, password, firstName, surname, email, school, auth) 
                     VALUES (?, ?, ?, ?, ?, ?, ?)
                     """;
 
@@ -81,12 +81,14 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
     @Override
     public Account read(int accountID){
         String sql = """
-                    SELECT accountId, firstName, surname, email FROM accounts WHERE accountId = ?
-                    JOIN school ON accounts.school = school.id
+                    SELECT * FROM accounts
+                    JOIN schools ON accounts.school = schools.schoolId
+                    JOIN zipCode ON schools.schoolZipCode = zipCode.zipCode
+                    WHERE accountId = ?
                     """;
 
         School school = null;
-        Account student = null;
+        Account account = null;
 
         try {
             Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
@@ -105,7 +107,7 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
                         rs.getString("cityName")
                 );
 
-                student = new Account(
+                account = new Account(
                         rs.getInt("accountId"),
                         rs.getString("login"),
                         rs.getString("password"),
@@ -116,24 +118,26 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
                         rs.getInt("auth")
                 );
             }
-
             pstmt.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return student;
+        return account;
     }
 
     @Override
     public List<Account> readAll() {
         String sql = """
-                    SELECT accountId, firstName, surname, email, auth FROM accounts
+                    SELECT * FROM accounts
+                    JOIN schools ON accounts.school = schools.schoolId
+                    JOIN zipCode ON schools.schoolZipCode = zipCode.zipCod
                     """;
         List<Account> studentsList = new ArrayList<>();
 
-        try {
+        try
+        {
             Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
@@ -157,6 +161,7 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
                         rs.getString("email"),
                         school,
                         rs.getInt("auth"));
+
                 studentsList.add(student);
             }
 
@@ -172,7 +177,9 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
     @Override
     public void update(Account input) {
         String sql = """
-                     UPDATE accounts SET firstName = ?, surname = ?, email = ? WHERE accountId = ?
+                     UPDATE accounts 
+                     SET firstName = ?, surname = ?, email = ? 
+                     WHERE accountId = ?
                      """;
 
         Account account = input;
