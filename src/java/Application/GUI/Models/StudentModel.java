@@ -1,7 +1,6 @@
 package Application.GUI.Models;
 
 import Application.BE.Student;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -17,9 +16,6 @@ public class StudentModel {
         this.lastName = new SimpleStringProperty();
         this.email = new SimpleStringProperty();
 
-        firstName.set(student.firstName());
-        lastName.set(student.lastName());
-        email.set(student.email());
         this.student = student;
     }
 
@@ -34,7 +30,7 @@ public class StudentModel {
 
     public void setFirstName(String newFirstName) {
         this.firstName.set(newFirstName);
-        //this.student.firstName(newFirstName);
+
     }
 
     public String getLastName() {
