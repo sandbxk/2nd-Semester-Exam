@@ -6,9 +6,7 @@ import Application.GUI.StateMachine.ViewStateEnum;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -33,6 +31,43 @@ public class TeacherViewController implements Initializable {
     @FXML public ToggleButton tglBtnCases;
     @FXML public ToggleButton tglBtnAssignments;
     @FXML public ToggleButton tglBtnJournals;
+
+
+    
+
+
+    // Citizens
+    public Label lblCitizenName;
+    public ListView listViewContactInfo;
+    public Label lblAge;
+    public Label lblBirthdateYear;
+    public Label lblAddress;
+    public Label lblHelpStatus;
+    public Label lblCivilianStatus;
+    public Button btnGeneralInfo;
+    public Button btnJournal;
+    public ListView listViewStudentsforCitizen;
+    public Button btnRemoveStudentToCitizen;
+    public Button btnAddStudentToCitizen;
+    public TextField txtFieldCitizensSearch;
+    public Button btnCitizensSearch;
+
+
+    // Students
+    public Button btnViewStudentsWork;
+    public ListView listViewStudents;
+    public TextField txtFieldStudentsSearch;
+    public Label lblStudentsStudentName;
+    public Label lblStudentEmail;
+    public ListView listViewContactInfo1;
+    public Button btnViewStudentCases;
+    public Button btnStudentSettings;
+    public ListView listViewCitizensForStudents;
+    public Button btnRemoveCitizenToStudent;
+    public Button btnAddCitizenToStudent;
+
+    
+    
 
     private ToggleGroup toggleGroup;
     private HashMap<ToggleButton, TeacherViewStateMachine> buttonMap;
@@ -90,9 +125,29 @@ public class TeacherViewController implements Initializable {
         anchorPaneJournals.setVisible(false);
     }
 
-    public void onMenuItemClicked(ActionEvent event) {
+
+
+
+    // Students
+    public void onViewStudentCases(ActionEvent event) {
     }
 
+    public void onStudentSettings(ActionEvent event) {
+    }
+
+    public void onRemoveCitizenToStudent(ActionEvent event) {
+    }
+
+    public void onAddCitizenToStudent(ActionEvent event) {
+    }
+
+    public void onViewStudentsWork(ActionEvent event) {
+    }
+
+
+
+
+    // Citizens
     public void onGeneralInfo(ActionEvent event) {
     }
 
@@ -104,4 +159,8 @@ public class TeacherViewController implements Initializable {
 
     public void onAddStudentToCitizen(ActionEvent event) {
     }
+
+    public void onCitizensSearch(ActionEvent event) {
+    }
+
 }
