@@ -1,13 +1,19 @@
 package Application.GUI.Controllers;
 
+import Application.GUI.Models.CategoryEntryModel;
+import Application.GUI.Models.CitizenTemplateModel;
 import Application.GUI.StateMachine.State;
 
 import javafx.application.Platform;
 import Application.GUI.StateMachine.StateMachine;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TreeItemPropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -73,30 +79,30 @@ public class TeacherViewController implements Initializable {
     public ListView listViewCitizenTemplateContactInfo;
     public Button btnAddCitizenTemplateContactInfo;
     public Button btnRemoveCitizenTemplateContactInfo;
-    public Button btnGeneralInfoCitizenTemplate;
     public Label lblAgeCitizenTemplate;
     public Label lblBirthdateCitizenTemplate;
     public Label lblAddressCitizenTemplate;
     public Label lblHelpStatusCitizenTemplate;
 
             // Citizen Template - Functional Conditions
-    public TreeTableColumn treeTblClmnFuncCategory;
-    public TreeTableColumn treeTblClmnFuncLevel;
-    public TreeTableColumn treeTblClmnFuncAssessment;
-    public TreeTableColumn treeTblClmnFuncCause;
-    public TreeTableColumn treeTblClmnFuncImplications;
-    public TreeTableColumn treeTblClmnFuncCitizenGoals;
-    public TreeTableColumn treeTblClmnFuncExpectedCondition;
-    public TreeTableColumn treeTblClmnFuncNote;
+    public TreeTableView<CategoryEntryModel> treeTblViewFunc;
+    public TreeTableColumn<CategoryEntryModel, String> treeTblClmnFuncCategory;
+    public TreeTableColumn<CategoryEntryModel, ImageView> treeTblClmnFuncLevel;
+    public TreeTableColumn<CategoryEntryModel, String> treeTblClmnFuncAssessment;
+    public TreeTableColumn<CategoryEntryModel, String> treeTblClmnFuncCause;
+    public TreeTableColumn<CategoryEntryModel, String> treeTblClmnFuncImplications;
+    public TreeTableColumn<CategoryEntryModel, String> treeTblClmnFuncCitizenGoals;
+    public TreeTableColumn<CategoryEntryModel, String> treeTblClmnFuncExpectedCondition;
+    public TreeTableColumn<CategoryEntryModel, String> treeTblClmnFuncNote;
 
             // Citizen Template - Health Conditions
-    public TreeTableView treeTblViewHealth;
-    public TreeTableColumn treeTblClmnHealthCategory;
-    public TreeTableColumn treeTblClmnHealthLevel;
-    public TreeTableColumn treeTblClmnHealthAssessment;
-    public TreeTableColumn treeTblClmnHealthCause;
-    public TreeTableColumn treeTblClmnHealthExpectedCondition;
-    public TreeTableColumn treeTblClmnHealthNote;
+    public TreeTableView<CategoryEntryModel> treeTblViewHealth;
+    public TreeTableColumn<CategoryEntryModel, String> treeTblClmnHealthCategory;
+    public TreeTableColumn<CategoryEntryModel, Number> treeTblClmnHealthLevel;
+    public TreeTableColumn<CategoryEntryModel, String> treeTblClmnHealthAssessment;
+    public TreeTableColumn<CategoryEntryModel, String> treeTblClmnHealthCause;
+    public TreeTableColumn<CategoryEntryModel, String> treeTblClmnHealthExpectedCondition;
+    public TreeTableColumn<CategoryEntryModel, String> treeTblClmnHealthNote;
 
             // Citizen Template - General Information
     public TextArea txtAreaGenInfoMastering;
@@ -109,7 +115,7 @@ public class TeacherViewController implements Initializable {
     public TextArea txtAreaGenInfoHealthInfo;
     public TextArea txtAreaGenInfoAssistiveDevices;
     public TextArea txtAreaGenInfoHomeLayout;
-    public Label txtAreaGenInfoNetwork;
+    public TextArea txtAreaGenInfoNetwork;
     public ToggleButton tglBtnCitizenTemplateEditOn;
     public ToggleButton tglBtnCitizenTemplateEditOff;
 
@@ -125,6 +131,8 @@ public class TeacherViewController implements Initializable {
         initViewStates();
         tglBtnDashboard.setSelected(true);
         Platform.runLater(this::initVisible);
+        initTreeTableClmns();
+        setFuncTreeTable();
     }
 
 
@@ -216,9 +224,6 @@ public class TeacherViewController implements Initializable {
     public void onCitizenTemplateSearch(ActionEvent event) {
     }
 
-    public void onGeneralInfoCitizenTemplate(ActionEvent event) {
-    }
-
     public void onRemoveCitizenTemplateContactInfo(ActionEvent event) {
     }
 
@@ -226,7 +231,49 @@ public class TeacherViewController implements Initializable {
     }
 
     private void setFuncTreeTable(){
+        // Set up the table
+        CitizenTemplateModel citizenTemplateModel = new CitizenTemplateModel();
+
+        ObservableList<CategoryEntryModel> func = citizenTemplateModel.getFunctionalAbilities();
+        ObservableList<CategoryEntryModel> health = citizenTemplateModel.getHealthConditions();
+
+        ObservableList<TreeItem<CategoryEntryModel>> funcTree = FXCollections.observableArrayList();
+        ObservableList<TreeItem<CategoryEntryModel>> healthTree = FXCollections.observableArrayList();
+
+        TreeItem<CategoryEntryModel> funcRoot = new TreeItem<>(new CategoryEntryModel("Functional Abilities"));
+        TreeItem<CategoryEntryModel> healthRoot = new TreeItem<>(new CategoryEntryModel("Health Conditions"));
+        treeTblViewFunc.setRoot(funcRoot);
+        treeTblViewHealth.setRoot(healthRoot);
+
+        for (CategoryEntryModel categoryEntryModel : func) {
+            funcTree.add(new TreeItem<>(categoryEntryModel));
+        }
+
+        for (CategoryEntryModel categoryEntryModel : health) {
+            healthTree.add(new TreeItem<>(categoryEntryModel));
+        }
+        funcRoot.getChildren().addAll(funcTree);
+        healthRoot.getChildren().addAll(healthTree);
+
         //https://jenkov.com/tutorials/javafx/treetableview.html
+    }
+
+    private void initTreeTableClmns(){
+        treeTblClmnFuncCategory.setCellValueFactory(param -> param.getValue().getValue().categoryNameProperty());
+        treeTblClmnFuncLevel.setCellValueFactory(param -> param.getValue().getValue().getLevelImageProperty());
+        treeTblClmnFuncAssessment.setCellValueFactory(param -> param.getValue().getValue().assessmentProperty());
+        treeTblClmnFuncCause.setCellValueFactory(param -> param.getValue().getValue().causeProperty());
+        treeTblClmnFuncImplications.setCellValueFactory(param -> param.getValue().getValue().implicationsProperty());
+        treeTblClmnFuncCitizenGoals.setCellValueFactory(param -> param.getValue().getValue().citizenGoalsProperty());
+        treeTblClmnFuncExpectedCondition.setCellValueFactory(param -> param.getValue().getValue().expectedConditionProperty());
+        treeTblClmnFuncNote.setCellValueFactory(param -> param.getValue().getValue().noteProperty());
+
+        treeTblClmnHealthCategory.setCellValueFactory(param -> param.getValue().getValue().categoryNameProperty());
+        treeTblClmnHealthLevel.setCellValueFactory(param -> param.getValue().getValue().levelProperty());
+        treeTblClmnHealthAssessment.setCellValueFactory(param -> param.getValue().getValue().assessmentProperty());
+        treeTblClmnHealthCause.setCellValueFactory(param -> param.getValue().getValue().causeProperty());
+        treeTblClmnHealthExpectedCondition.setCellValueFactory(param -> param.getValue().getValue().expectedConditionProperty());
+        treeTblClmnHealthNote.setCellValueFactory(param -> param.getValue().getValue().noteProperty());
     }
 
     public void onCitizenTemplateChangeJournal(ActionEvent event) {

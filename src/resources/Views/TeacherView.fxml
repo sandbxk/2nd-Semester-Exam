@@ -513,10 +513,10 @@
                                                                   <RowConstraints prefHeight="200.0" />
                                                                </rowConstraints>
                                                                <children>
-                                                                  <Label fx:id="txtAreaGenInfoNetwork" alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Netværk" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Netværk" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                </children>
                                                             </GridPane>
-                                                            <TextArea prefHeight="75.0" prefWidth="498.0" />
+                                                            <TextArea fx:id="txtAreaGenInfoNetwork" prefHeight="75.0" prefWidth="498.0" />
                                                          </children>
                                                       </HBox>
                                                    </children>
@@ -551,7 +551,7 @@
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0">
                                              <children>
-                                                <TreeTableView prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.399999999999977" AnchorPane.topAnchor="0.0">
+                                                <TreeTableView fx:id="treeTblViewFunc" prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.399999999999977" AnchorPane.topAnchor="0.0">
                                                   <columns>
                                                     <TreeTableColumn fx:id="treeTblClmnFuncCategory" minWidth="140.0" prefWidth="-1.0" text="Tilstandsklassificering" />
                                                     <TreeTableColumn prefWidth="151.99993896484375" text="Tilstands Præcisering">
