@@ -52,16 +52,6 @@ public class AdminViewController implements Initializable {
         tblClmSchoolName.setCellValueFactory(param -> param.getValue().getName());
         tblClmSchoolZipCode.setCellValueFactory(param -> param.getValue().getZipCode());
         tblClmSchoolCity.setCellValueFactory(param -> param.getValue().getCity());
-        /*
-        tblClmTeacherFirstName.setCellValueFactory(param -> param.getValue().getFirstName);
-        tblClmTeacherLastName.setCellValueFactory(param -> param.getValue().getLastName);
-        tblClmTeacherEmail.setCellValueFactory(param -> param.getValue().getEmail);
-
-        tblClmStudentFirstName.setCellValueFactory(param -> param.getValue().getFirstName);
-        tblClmStudentLastName.setCellValueFactory(param -> param.getValue().getLastName);
-        tblClmStudentEmail.setCellValueFactory(param -> param.getValue().getEmail);
-        tblClmStudentClass.setCellValueFactory(param -> param.getValue().getStudentClass);
-         */
     }
 
     public void openCreateSchool(ActionEvent actionEvent) {

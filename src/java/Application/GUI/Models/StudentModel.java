@@ -19,6 +19,7 @@ public class StudentModel {
         firstName.set(student.getFirstName());
         lastName.set(student.getLastName());
         email.set(student.getEmail());
+      
         this.student = student;
     }
 

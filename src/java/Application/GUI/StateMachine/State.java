@@ -3,7 +3,7 @@ package Application.GUI.StateMachine;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 
-public class State extends TeacherViewStateMachine {
+public class State implements IState {
 
     private Pane viewPane;
     private ToggleButton menuButton;
@@ -20,9 +20,10 @@ public class State extends TeacherViewStateMachine {
     }
 
     @Override
-    public void enable() {
-    viewPane.toFront();
-    viewPane.setVisible(true);
-    menuButton.setDisable(true);
+    public void enable()
+    {
+        viewPane.toFront();
+        viewPane.setVisible(true);
+        menuButton.setDisable(true);
     }
 }

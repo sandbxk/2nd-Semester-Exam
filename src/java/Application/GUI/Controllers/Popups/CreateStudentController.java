@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
 public class CreateStudentController implements Initializable {
 
     @FXML public TextField txtFieldFirstName;
@@ -47,6 +48,4 @@ public class CreateStudentController implements Initializable {
     public void onCancel(ActionEvent event) {
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
-
-
 }
