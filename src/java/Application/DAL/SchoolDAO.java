@@ -85,9 +85,9 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
     @Override
     public List<School> readAll() {
         String sqlRead = """
-                        SELECT * FROM school 
-                        JOIN zipCodes ON school.zipCode = zipCodes.zipCode
-                        """;
+                     SELECT * FROM school 
+                     JOIN zipCodes ON school.zipCode = zipCodes.zipCode
+                     """;
         List<School> schoolList = new ArrayList<>();
         String name;
         String city;
