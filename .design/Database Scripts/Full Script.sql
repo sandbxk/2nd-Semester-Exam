@@ -10,49 +10,39 @@ GO
 USE CSe21A_29_SOSU_Sims
 GO
 
-CREATE TABLE school (
-	id INT IDENTITY(1,1) NOT NULL,
-	schoolName VARCHAR(50)
+CREATE TABLE schools (
+	schoolId INT IDENTITY(1,1) NOT NULL,
+	schoolName VARCHAR(50),
+	schoolZipCode int,
+	PRIMARY KEY (schoolID),
+	FOREIGN KEY (schoolZipCode) REFERENCES zipCode (zipCode)
 	)
 
-CREATE TABLE teachers (
-    id INT IDENTITY(1,1) NOT NULL,
-    teacherLogin VARCHAR(50),
-	teacherPassword VARCHAR(50),
-	teacherFirstName VARCHAR(25),
-	teacherSurname VARCHAR(50),
-	teacherEmail VARCHAR(100),
-	salt VARCHAR(50),
-	school VARCHAR(50),
-	PRIMARY KEY (id),
-	FOREIGN KEY (school) REFERENCES school (id) 
-	)
-	
-	CREATE TABLE students (
-    id INT IDENTITY(1,1) NOT NULL,
-    teacherLogin VARCHAR(50),
-	teacherPassword VARCHAR(50),
-	teacherFirstName VARCHAR(25),
-	teacherSurname VARCHAR(50),
-	teacherEmail VARCHAR(100),
-	salt VARCHAR(50),
-	school VARCHAR(50),
-	PRIMARY KEY (id),
-	FOREIGN KEY (school) REFERENCES school (id) 
+	CREATE TABLE accounts (
+    accountId INT IDENTITY(1,1) NOT NULL,
+    login VARCHAR(50),
+	password VARCHAR(50),
+	firstName VARCHAR(25),
+	surname VARCHAR(50),
+	email VARCHAR(100),
+	school int,
+	auth int NOT NULL,
+	PRIMARY KEY (accountId),
+	FOREIGN KEY (school) REFERENCES schools (schoolId) 
 	)
 	
 	CREATE TABLE classes (
-    id INT IDENTITY(1,1) NOT NULL,
+    classesId INT IDENTITY(1,1) NOT NULL,
 	className VARCHAR(50),
 	teacherID int,
-	school VARCHAR(50),
+	school int,
 	PRIMARY KEY (id),
-	FOREIGN KEY (school) REFERENCES school (id),
-	FOREIGN KEY (teacherID) REFERENCES teachers (id) 
+	FOREIGN KEY (school) REFERENCES schools (schoolId),
+	FOREIGN KEY (teacherID) REFERENCES accounts (accountId) 
 	)
 
-CREATE TABLE cityName (
-    zipCode VARCHAR(255) UNIQUE,
-    cityName VARCHAR (85),
+CREATE TABLE zipCodes (
+    zipCode int UNIQUE,
+    cityName NVARCHAR (85),
     PRIMARY KEY (zipCode)
 	)
