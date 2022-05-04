@@ -529,3 +529,22 @@
 .accordion > .titled-pane:collapsed > .title > .arrow-button .arrow {
     -fx-rotate: -90;
 }
+
+.vboxBotBorder {
+    -fx-border-color: derive(-fx-txtFillDark, 80%);
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 5;
+}
+
+
+.vboxPadding {
+    -fx-padding: 5;
+}
+
+
+.redGridPaneLeft {
+    -fx-background-color: -fx-panelHighlight;
+    -fx-padding: 5;
+    -fx-background-radius: 20 0 0 20;
+}
+

@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleButton?>
@@ -297,15 +298,203 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="230.0" layoutY="275.0" prefHeight="300.0" prefWidth="627.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="275.0">
+                  <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="230.0" layoutY="275.0" prefHeight="300.0" prefWidth="627.0" stylesheets="@../Styles/darkScrollPane.css" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="275.0">
                      <content>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Accordion layoutX="1.0" prefHeight="340.0" prefWidth="658.0" AnchorPane.bottomAnchor="271.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
+                              <Accordion layoutX="1.0" prefWidth="658.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
                                 <panes>
                                   <TitledPane animated="false" text="Generelle Oplysninger">
                                     <content>
-                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="3002.0" prefWidth="658.0">
+                                             <children>
+                                                <VBox layoutX="19.6" layoutY="18.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <children>
+                                                      <Label styleClass="lblBackgroundBold" text="Personlige Faktorer" />
+                                                      <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxBotBorder">
+                                                         <children>
+                                                            <GridPane prefHeight="63.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                               <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                               </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints prefHeight="200.0" />
+                                                               </rowConstraints>
+                                                               <children>
+                                                                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Mestring" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                               </children>
+                                                            </GridPane>
+                                                            <TextArea fx:id="txtAreaGenInfoMastering" prefHeight="75.0" prefWidth="498.0" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxBotBorder">
+                                                         <children>
+                                                            <GridPane prefHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                              <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                              </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints prefHeight="200.0" />
+                                                               </rowConstraints>
+                                                               <children>
+                                                                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Motivation" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                               </children>
+                                                            </GridPane>
+                                                            <TextArea fx:id="txtAreaGenInfoMotivation" prefHeight="75.0" prefWidth="498.0" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxBotBorder">
+                                                         <children>
+                                                            <GridPane prefHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                               <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                               </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints prefHeight="200.0" />
+                                                               </rowConstraints>
+                                                               <children>
+                                                                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Ressourcer" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                               </children>
+                                                            </GridPane>
+                                                            <TextArea fx:id="txtAreaGenInfoRessources" prefHeight="75.0" prefWidth="498.0" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxBotBorder">
+                                                         <children>
+                                                            <GridPane prefHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                               <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                               </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints prefHeight="200.0" />
+                                                               </rowConstraints>
+                                                               <children>
+                                                                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Roller" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                               </children>
+                                                            </GridPane>
+                                                            <TextArea fx:id="txtAreaGenInfoRoles" prefHeight="75.0" prefWidth="498.0" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxBotBorder">
+                                                         <children>
+                                                            <GridPane prefHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                               <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                               </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints prefHeight="200.0" />
+                                                               </rowConstraints>
+                                                               <children>
+                                                                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="126.0" text="Vaner" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                               </children>
+                                                            </GridPane>
+                                                            <TextArea fx:id="txtAreaGenInfoHabits" prefHeight="75.0" prefWidth="498.0" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxBotBorder">
+                                                         <children>
+                                                            <GridPane prefHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                               <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                               </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints prefHeight="200.0" />
+                                                               </rowConstraints>
+                                                               <children>
+                                                                  <Label alignment="CENTER" prefHeight="43.0" prefWidth="106.0" text="Uddannelse og Job" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                               </children>
+                                                            </GridPane>
+                                                            <TextArea fx:id="txtAreaGenInfoEduAndJob" prefHeight="75.0" prefWidth="498.0" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxBotBorder">
+                                                         <children>
+                                                            <GridPane prefHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                               <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                               </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints prefHeight="200.0" />
+                                                               </rowConstraints>
+                                                               <children>
+                                                                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Livshistorie" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                               </children>
+                                                            </GridPane>
+                                                            <TextArea fx:id="txtAreaGenInfoLifeStory" prefHeight="75.0" prefWidth="498.0" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxPadding">
+                                                         <children>
+                                                            <GridPane prefHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                               <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                               </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints prefHeight="200.0" />
+                                                               </rowConstraints>
+                                                               <children>
+                                                                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Helbredsoplysniger" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                               </children>
+                                                            </GridPane>
+                                                            <TextArea fx:id="txtAreaGenInfoHealthInfo" prefHeight="75.0" prefWidth="498.0" />
+                                                         </children>
+                                                      </HBox>
+                                                      <Label styleClass="lblBackgroundBold" text="Omgivelses Faktorer">
+                                                         <VBox.margin>
+                                                            <Insets top="20.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxBotBorder">
+                                                         <children>
+                                                            <GridPane prefHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                               <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                               </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints prefHeight="200.0" />
+                                                               </rowConstraints>
+                                                               <children>
+                                                                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Hjælpemidler" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                               </children>
+                                                            </GridPane>
+                                                            <TextArea fx:id="txtAreaGenInfoAssistiveDevices" prefHeight="75.0" prefWidth="498.0" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxBotBorder">
+                                                         <children>
+                                                            <GridPane prefHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                               <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                               </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints prefHeight="200.0" />
+                                                               </rowConstraints>
+                                                               <children>
+                                                                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Boligens Indretning" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                               </children>
+                                                            </GridPane>
+                                                            <TextArea fx:id="txtAreaGenInfoHomeLayout" prefHeight="75.0" prefWidth="498.0" />
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxPadding">
+                                                         <children>
+                                                            <GridPane prefHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                               <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                               </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints prefHeight="200.0" />
+                                                               </rowConstraints>
+                                                               <children>
+                                                                  <Label fx:id="txtAreaGenInfoNetwork" alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Netværk" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                               </children>
+                                                            </GridPane>
+                                                            <TextArea prefHeight="75.0" prefWidth="498.0" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </children></AnchorPane>
                                     </content>
                                   </TitledPane>
                                   <TitledPane animated="false" text="Helbredstilstande">
