@@ -4,11 +4,11 @@ import java.util.HashMap;
 
 public class StateMachine<T>
 {
-    private HashMap<T, AbstractState> states = new HashMap<>();
+    private HashMap<T, IState> states = new HashMap<>();
 
-    private AbstractState current = null;
+    private IState current = null;
 
-    public void addState(T key, AbstractState state)
+    public void addState(T key, IState state)
     {
         this.states.put(key, state);
     }
@@ -25,7 +25,7 @@ public class StateMachine<T>
         this.current = states.get(key);
     }
 
-    public AbstractState getCurrent()
+    public IState getCurrent()
     {
         return current;
     }

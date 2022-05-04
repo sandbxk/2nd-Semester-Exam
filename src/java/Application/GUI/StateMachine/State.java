@@ -3,7 +3,7 @@ package Application.GUI.StateMachine;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 
-public class State extends AbstractState {
+public class State implements IState {
 
     private Pane viewPane;
     private ToggleButton menuButton;

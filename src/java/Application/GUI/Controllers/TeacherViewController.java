@@ -1,6 +1,5 @@
 package Application.GUI.Controllers;
 
-import Application.GUI.StateMachine.AbstractState;
 import Application.GUI.StateMachine.State;
 import Application.GUI.StateMachine.StateMachine;
 import javafx.event.ActionEvent;
@@ -12,7 +11,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class TeacherViewController implements Initializable {
@@ -34,9 +32,6 @@ public class TeacherViewController implements Initializable {
     @FXML public ToggleButton tglBtnJournals;
 
     private ToggleGroup toggleGroup;
-    //private HashMap<ToggleButton, AbstractState> buttonMap;
-    //private AbstractState viewState;
-    //private HashMap<ToggleButton, State> viewStatesMap;
 
     private StateMachine<ToggleButton> stateMachine = new StateMachine<>();
 
@@ -52,16 +47,6 @@ public class TeacherViewController implements Initializable {
 
     private void initViewStates()
     {
-        // viewStatesMap = new HashMap<>();
-
-        //viewStatesMap.put(tglBtnDashboard, new State(anchorPaneDashboard, tglBtnDashboard)); // Dashboard
-        //viewStatesMap.put(tglBtnStudents, new State(anchorPaneStudents, tglBtnStudents)); // Students
-        //viewStatesMap.put(tglBtnCitizenTemplates, new State(anchorPaneCitizenTemplates, tglBtnCitizenTemplates)); // Citizen Templates
-        //viewStatesMap.put(tglBtnCitizens, new State(anchorPaneCitizens, tglBtnCitizens)); // Citizens
-        //viewStatesMap.put(tglBtnCases, new State(anchorPaneCases, tglBtnCases)); // Cases
-        //viewStatesMap.put(tglBtnAssignments, new State(anchorPaneAssignments, tglBtnAssignments)); // Assignments
-        //viewStatesMap.put(tglBtnJournals, new State(anchorPaneJournals, tglBtnJournals)); // Journals
-
         stateMachine.addState(tglBtnDashboard, new State(anchorPaneDashboard, tglBtnDashboard)); // Dashboard
         stateMachine.addState(tglBtnStudents, new State(anchorPaneStudents, tglBtnStudents)); // Students
         stateMachine.addState(tglBtnCitizenTemplates, new State(anchorPaneCitizenTemplates, tglBtnCitizenTemplates)); // Citizen Templates
