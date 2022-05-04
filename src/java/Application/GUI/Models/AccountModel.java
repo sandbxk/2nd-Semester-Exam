@@ -17,7 +17,7 @@ public class AccountModel {
     private StringProperty email;
     private Account student;
 
-    ObservableList<School> accounts;
+    ObservableList<Account> accounts;
 
     public AccountModel(Account student) {
         this.firstName = new SimpleStringProperty();
@@ -73,6 +73,7 @@ public class AccountModel {
 
     public void createAccount(String text, String text1, String text2, String text3, String text4, School school, int i)
     {
-           adminDataManager.createAccount(text, text1, text2, text3, text4, school, i);
+           var account = adminDataManager.createAccount(text, text1, text2, text3, text4, school, i);
+           accounts.add(account);
     }
 }

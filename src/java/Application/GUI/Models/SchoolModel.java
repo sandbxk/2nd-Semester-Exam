@@ -1,6 +1,7 @@
 package Application.GUI.Models;
 
 import Application.BE.School;
+import Application.BLL.AdminDataManager;
 import Application.DAL.SchoolDAO;
 import Application.DAL.TemplatePatternDAO;
 import javafx.beans.property.IntegerProperty;
@@ -16,7 +17,7 @@ public class SchoolModel {
     ObservableList<School> schools;
 
     // FIXME: 04/05/2022 Make BLL
-    private TemplatePatternDAO DAO = new SchoolDAO();
+    private AdminDataManager DAO = new AdminDataManager();
 
     public SchoolModel(School school)
     {
@@ -42,7 +43,7 @@ public class SchoolModel {
     }
 
     public void create(String random, int i) {
-        var school = DAO.create(new School(-1, random, i, ""));
-        schools.add((School) school);
+        var school = DAO.createSchool(random, i);
+        schools.add(school);
     }
 }

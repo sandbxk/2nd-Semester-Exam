@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage stage)
     {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/Popups/CreateSchoolView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Views/TeacherView.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1000, 830);
             stage.setTitle("Popkernel Time");
             stage.setScene(scene);

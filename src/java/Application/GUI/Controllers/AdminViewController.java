@@ -1,5 +1,6 @@
 package Application.GUI.Controllers;
 
+import Application.BE.Account;
 import Application.GUI.Models.SchoolModel;
 import Application.GUI.Models.StudentModel;
 import javafx.event.ActionEvent;
@@ -25,13 +26,13 @@ public class AdminViewController implements Initializable {
     private TableColumn<StudentModel, String> tblClmStudentClass;
 
     @FXML
-    private TableView<TeacherModel> tblViewTeacher;
+    private TableView<Account> tblViewTeacher;
     @FXML
-    private TableColumn<TeacherModel, String> tblClmTeacherFirstName;
+    private TableColumn<Account, String> tblClmTeacherFirstName;
     @FXML
-    private TableColumn<TeacherModel, String> tblClmTeacherLastName;
+    private TableColumn<Account, String> tblClmTeacherLastName;
     @FXML
-    private TableColumn<TeacherModel, String> tblClmTeacherEmail;
+    private TableColumn<Account, String> tblClmTeacherEmail;
 
     @FXML
     private TableView<SchoolModel> tblViewSchool;
