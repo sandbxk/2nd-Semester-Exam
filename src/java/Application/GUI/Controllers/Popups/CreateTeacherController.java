@@ -1,7 +1,9 @@
 package Application.GUI.Controllers.Popups;
 
+import Application.BE.Account;
 import Application.BE.School;
 import Application.BLL.AdminDataManager;
+import Application.GUI.Models.AccountModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,7 +13,7 @@ import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CreateTeacherController implements Initializable
+public class CreateTeacherController
 {
     @FXML public TextField txtFieldLogin;
     @FXML public TextField txtFieldPassword;
@@ -19,19 +21,16 @@ public class CreateTeacherController implements Initializable
     @FXML public TextField txtFieldSurname;
     @FXML public TextField txtFieldEmail;
 
-    private AdminDataManager adminDataManager;
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        adminDataManager = new AdminDataManager();
-    }
+    AccountModel accountDAO = new AccountModel();
 
     public void onSaveCreateTeacher(ActionEvent actionEvent) {
 
         // FIXME: 03/05/2022 -- Dummy School
         School school = new School(-1, "Dummy School", 6700, "NotARealCity");
 
-        adminDataManager.createAccount(
+
+
+        accountDAO.createAccount(
                 txtFieldLogin.getText(),
                 txtFieldPassword.getText(),
                 txtFieldFirstName.getText(),

@@ -2,7 +2,6 @@ package Application.GUI.Controllers;
 
 import Application.GUI.Models.SchoolModel;
 import Application.GUI.Models.StudentModel;
-import Application.GUI.Models.TeacherModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

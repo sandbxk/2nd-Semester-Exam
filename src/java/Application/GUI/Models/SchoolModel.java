@@ -1,19 +1,32 @@
 package Application.GUI.Models;
 
 import Application.BE.School;
+import Application.DAL.SchoolDAO;
+import Application.DAL.TemplatePatternDAO;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class SchoolModel {
     StringProperty name;
     IntegerProperty zipCode;
     StringProperty city;
 
-    SchoolModel(School school)
+    ObservableList<School> schools;
+
+    // FIXME: 04/05/2022 Make BLL
+    private TemplatePatternDAO DAO = new SchoolDAO();
+
+    public SchoolModel(School school)
     {
-        name.setValue(school.getName());
+        name.setValue(school.getSchoolName());
         zipCode.setValue(school.getZipCode());
-        city.setValue(school.getCity());
+        city.setValue(school.getCityName());
+    }
+
+    public SchoolModel() {
+        schools = FXCollections.observableArrayList();
     }
 
     public StringProperty getName(){
@@ -26,5 +39,10 @@ public class SchoolModel {
 
     public StringProperty getCity(){
         return city;
+    }
+
+    public void create(String random, int i) {
+        var school = DAO.create(new School(-1, random, i, ""));
+        schools.add((School) school);
     }
 }
