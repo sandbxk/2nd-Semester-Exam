@@ -1,5 +1,6 @@
 package Application.GUI.Controllers;
 
+import Application.GUI.Models.AccountModel;
 import Application.GUI.StateMachine.State;
 import Application.GUI.StateMachine.StateMachine;
 import javafx.event.ActionEvent;
@@ -9,6 +10,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
@@ -33,13 +35,24 @@ public class TeacherViewController implements Initializable {
     @FXML public ToggleButton tglBtnAssignments;
     @FXML public ToggleButton tglBtnJournals;
 
+    @FXML public BorderPane TeacherScene;
+
+    /**
+     *  passed by reference through a resource bundle from the login controller
+     *
+     * @see LoginController
+     * */
+    private AccountModel account;
+
     private ToggleGroup toggleGroup;
 
-    private StateMachine<ToggleButton> stateMachine = new StateMachine<>();
+    private final StateMachine<ToggleButton> stateMachine = new StateMachine<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+        this.account = (AccountModel) resources.getObject("account");
+
         initToggleGroup();
         viewChangedListener();
         initVisible();
