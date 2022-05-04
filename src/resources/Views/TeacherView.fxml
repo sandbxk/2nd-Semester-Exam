@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -23,9 +24,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="610.0" prefWidth="1028.0" stylesheets="@../Styles/MainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.GUI.Controllers.TeacherViewController">
+<BorderPane prefHeight="891.0" prefWidth="1090.0" stylesheets="@../Styles/MainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.GUI.Controllers.TeacherViewController">
    <center>
-      <StackPane>
+      <StackPane prefHeight="891.0" prefWidth="938.0">
          <children>
             <AnchorPane fx:id="anchorPaneDashboard" prefHeight="412.0" prefWidth="609.0" style="-fx-background-color: cyan;">
                <children>
@@ -194,7 +195,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="anchorPaneCitizenTemplate" prefHeight="412.0" prefWidth="609.0" styleClass="background">
+            <AnchorPane fx:id="anchorPaneCitizenTemplate" prefHeight="412.0" prefWidth="966.0" styleClass="background">
                <children>
                   <AnchorPane layoutX="14.0" layoutY="23.0" prefHeight="362.0" prefWidth="200.0" styleClass="panel30Deg" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="23.0">
                      <children>
@@ -247,7 +248,7 @@
                                     </VBox>
                                  </children>
                               </GridPane>
-                              <Button fx:id="btnGeneralInfoCitizenTemplate" layoutX="361.0" layoutY="14.0" mnemonicParsing="false" onAction="#onGeneralInfoCitizenTemplate" prefHeight="54.0" prefWidth="111.0" styleClass="panelBtnNoPadding" text="Generelle Oplysninger" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0" />
+                              <Button fx:id="btnCitizenTemplateEditBaseData" layoutX="361.0" layoutY="14.0" mnemonicParsing="false" onAction="#onCitizenTemplateEditBaseData" prefHeight="54.0" prefWidth="111.0" styleClass="panelBtnNoPadding" text="Rediger Stamdata" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0" />
                               <VBox layoutX="258.0" layoutY="12.0" prefHeight="206.0" prefWidth="189.0" AnchorPane.topAnchor="5.0">
                                  <children>
                                     <VBox prefWidth="100.0">
@@ -296,6 +297,30 @@
                                     </VBox>
                                  </children>
                               </VBox>
+                              <Button fx:id="btnCitizenTemplateChangeJournal" layoutX="585.0" layoutY="71.0" mnemonicParsing="false" onAction="#onCitizenTemplateChangeJournal" prefHeight="54.0" prefWidth="111.0" styleClass="panelBtnNoPadding" text="Skift Journal" AnchorPane.rightAnchor="1.599999999999909" AnchorPane.topAnchor="71.0" />
+                              <VBox layoutX="584.0" layoutY="150.0" prefHeight="58.0" prefWidth="114.0" AnchorPane.rightAnchor="-0.6000000000000227" AnchorPane.topAnchor="150.0">
+                                 <children>
+                                    <Label styleClass="smallPanelLblBold" text="Redigerings tilstand">
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <HBox>
+                                       <children>
+                                          <ToggleButton fx:id="tglBtnCitizenTemplateEditOn" mnemonicParsing="false" styleClass="onOfftoggleBtn" text="Til">
+                                             <HBox.margin>
+                                                <Insets left="15.0" />
+                                             </HBox.margin>
+                                          </ToggleButton>
+                                          <ToggleButton fx:id="tglBtnCitizenTemplateEditOff" contentDisplay="CENTER" mnemonicParsing="false" styleClass="onOfftoggleBtn" text="Fra">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </ToggleButton>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
                            </children>
                         </AnchorPane>
                      </children>
@@ -306,7 +331,7 @@
                            <children>
                               <Accordion layoutX="1.0" prefWidth="658.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
                                 <panes>
-                                  <TitledPane animated="false" text="Generelle Oplysninger">
+                                  <TitledPane text="Generelle Oplysninger">
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="3002.0" prefWidth="658.0">
                                              <children>
@@ -500,38 +525,52 @@
                                           </AnchorPane>
                                     </content>
                                   </TitledPane>
-                                  <TitledPane animated="false" text="Helbredstilstande">
+                                  <TitledPane text="Helbredstilstande">
                                     <content>
                                       <AnchorPane minHeight="0.0" minWidth="0.0">
                                              <children>
-                                                <TableView AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                  <columns>
-                                                    <TableColumn prefWidth="143.20000040531158" text="Tilstandsklassificering" />
-                                                    <TableColumn minWidth="7.20001220703125" prefWidth="64.80007934570312" text="Niveau" />
-                                                      <TableColumn prefWidth="96.79995727539062" text="Vurdering" />
-                                                      <TableColumn prefWidth="84.800048828125" text="Årsag" />
-                                                      <TableColumn prefWidth="112.79998779296875" text="Forventet tilstand" />
-                                                      <TableColumn prefWidth="154.39999389648438" text="Faglig Notat" />
-                                                  </columns>
-                                                </TableView>
+                                                <TreeTableView fx:id="treeTblViewHealth" prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <columns>
+                                                      <TreeTableColumn fx:id="treeTblClmnHealthCategory" minWidth="150.0" prefWidth="-1.0" text="Tilstandsklassificering" />
+                                                      <TreeTableColumn fx:id="treeTblClmnHealthLevel" minWidth="60.0" prefWidth="-1.0" text="Niveau" />
+                                                      <TreeTableColumn fx:id="treeTblClmnHealthAssessment" minWidth="70.0" prefWidth="-1.0" text="Vurdering" />
+                                                      <TreeTableColumn fx:id="treeTblClmnHealthCause" minWidth="100.0" prefWidth="-1.0" text="Årsag" />
+                                                      <TreeTableColumn fx:id="treeTblClmnHealthExpectedCondition" minWidth="140.0" prefWidth="-1.0" text="Forventet Tilstand" />
+                                                      <TreeTableColumn fx:id="treeTblClmnHealthNote" minWidth="100.0" prefWidth="-1.0" text="Faglig Notat" />
+                                                   </columns>
+                                                   <styleClass>
+                                                      <String fx:value="healthTable" />
+                                                      <String fx:value="healthTable-view" />
+                                                   </styleClass>
+                                                </TreeTableView>
                                              </children>
                                           </AnchorPane>
                                     </content>
                                   </TitledPane>
-                                  <TitledPane animated="false" text="Funktionsevnetilstande">
+                                  <TitledPane text="Funktionsevnetilstande">
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0">
                                              <children>
-                                                <TableView AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                   <columns>
-                                                      <TableColumn prefWidth="143.20000040531158" text="Tilstandsklassificering" />
-                                                      <TableColumn minWidth="7.20001220703125" prefWidth="64.80007934570312" text="Niveau" />
-                                                      <TableColumn prefWidth="96.79995727539062" text="Vurdering" />
-                                                      <TableColumn prefWidth="84.800048828125" text="Årsag" />
-                                                      <TableColumn prefWidth="112.79998779296875" text="Forventet tilstand" />
-                                                      <TableColumn prefWidth="154.39999389648438" text="Faglig Notat" />
-                                                   </columns>
-                                                </TableView>
+                                                <TreeTableView prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.399999999999977" AnchorPane.topAnchor="0.0">
+                                                  <columns>
+                                                    <TreeTableColumn fx:id="treeTblClmnFuncCategory" minWidth="140.0" prefWidth="-1.0" text="Tilstandsklassificering" />
+                                                    <TreeTableColumn prefWidth="151.99993896484375" text="Tilstands Præcisering">
+                                                         <columns>
+                                                            <TreeTableColumn fx:id="treeTblClmnFuncLevel" minWidth="60.0" prefWidth="-1.0" text="Niveau" />
+                                                            <TreeTableColumn fx:id="treeTblClmnFuncAssessment" minWidth="70.0" prefWidth="-1.0" text="Vurdering" />
+                                                            <TreeTableColumn fx:id="treeTblClmnFuncCause" minWidth="70.0" prefWidth="-1.0" text="Årsag" />
+                                                         </columns>
+                                                      </TreeTableColumn>
+                                                      <TreeTableColumn fx:id="treeTblClmnFuncImplications" minWidth="100.0" prefWidth="-1.0" text="Betydninger for udførelse" />
+                                                      <TreeTableColumn fx:id="treeTblClmnFuncCitizenGoals" minWidth="120.0" prefWidth="-1.0" text="Borgers ønsker/mål" />
+                                                      <TreeTableColumn fx:id="treeTblClmnFuncExpectedCondition" minWidth="65.0" prefWidth="-1.0" text="Forventet Tilstand" />
+                                                      <TreeTableColumn fx:id="treeTblClmnFuncNote" minWidth="70.0" prefWidth="-1.0" text="Faglig Notat" />
+                                                  </columns>
+                                                   <styleClass>
+                                                      <String fx:value="funcTable" />
+                                                      <String fx:value="funcTable-view" />
+                                                   </styleClass>
+                                                </TreeTableView>
                                              </children>
                                           </AnchorPane>
                                        </content>
@@ -542,14 +581,14 @@
                         </AnchorPane>
                      </content>
                   </ScrollPane>
-                  <Button layoutX="14.0" layoutY="809.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="200.0" styleClass="backgroundButton" text="Handlinger" AnchorPane.bottomAnchor="22.0" />
+                  <Button layoutX="14.0" layoutY="809.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="200.0" styleClass="backgroundButton" text="Handlinger" AnchorPane.bottomAnchor="20.0" />
                </children>
             </AnchorPane>
          </children>
       </StackPane>
    </center>
    <left>
-      <AnchorPane prefHeight="889.0" prefWidth="104.0" styleClass="sideMenu" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="891.0" prefWidth="92.0" styleClass="sideMenu" BorderPane.alignment="CENTER">
          <children>
             <VBox layoutX="30.0" layoutY="40.0" prefHeight="642.0" prefWidth="96.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="30.0">
                <children>

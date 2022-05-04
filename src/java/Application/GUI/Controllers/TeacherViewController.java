@@ -79,10 +79,42 @@ public class TeacherViewController implements Initializable {
     public Label lblAddressCitizenTemplate;
     public Label lblHelpStatusCitizenTemplate;
 
+            // Citizen Template - Functional Conditions
+    public TreeTableColumn treeTblClmnFuncCategory;
+    public TreeTableColumn treeTblClmnFuncLevel;
+    public TreeTableColumn treeTblClmnFuncAssessment;
+    public TreeTableColumn treeTblClmnFuncCause;
+    public TreeTableColumn treeTblClmnFuncImplications;
+    public TreeTableColumn treeTblClmnFuncCitizenGoals;
+    public TreeTableColumn treeTblClmnFuncExpectedCondition;
+    public TreeTableColumn treeTblClmnFuncNote;
+
+            // Citizen Template - Health Conditions
+    public TreeTableView treeTblViewHealth;
+    public TreeTableColumn treeTblClmnHealthCategory;
+    public TreeTableColumn treeTblClmnHealthLevel;
+    public TreeTableColumn treeTblClmnHealthAssessment;
+    public TreeTableColumn treeTblClmnHealthCause;
+    public TreeTableColumn treeTblClmnHealthExpectedCondition;
+    public TreeTableColumn treeTblClmnHealthNote;
+
+            // Citizen Template - General Information
+    public TextArea txtAreaGenInfoMastering;
+    public TextArea txtAreaGenInfoMotivation;
+    public TextArea txtAreaGenInfoRessources;
+    public TextArea txtAreaGenInfoRoles;
+    public TextArea txtAreaGenInfoHabits;
+    public TextArea txtAreaGenInfoEduAndJob;
+    public TextArea txtAreaGenInfoLifeStory;
+    public TextArea txtAreaGenInfoHealthInfo;
+    public TextArea txtAreaGenInfoAssistiveDevices;
+    public TextArea txtAreaGenInfoHomeLayout;
+    public Label txtAreaGenInfoNetwork;
+    public ToggleButton tglBtnCitizenTemplateEditOn;
+    public ToggleButton tglBtnCitizenTemplateEditOff;
 
 
     private ToggleGroup toggleGroup;
-    private HashMap<ToggleButton, TeacherViewStateMachine> buttonMap;
     private TeacherViewStateMachine viewState;
     private HashMap<ToggleButton, State> viewStatesMap;
 
@@ -189,5 +221,15 @@ public class TeacherViewController implements Initializable {
     }
 
     public void onAddCitizenTemplateContactInfo(ActionEvent event) {
+    }
+
+    private void setFuncTreeTable(){
+        //https://jenkov.com/tutorials/javafx/treetableview.html
+    }
+
+    public void onCitizenTemplateChangeJournal(ActionEvent event) {
+    }
+
+    public void onCitizenTemplateEditBaseData(ActionEvent event) {
     }
 }
