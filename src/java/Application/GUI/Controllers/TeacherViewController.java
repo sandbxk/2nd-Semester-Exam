@@ -3,6 +3,7 @@ package Application.GUI.Controllers;
 import Application.GUI.StateMachine.State;
 import Application.GUI.StateMachine.TeacherViewStateMachine;
 import Application.GUI.StateMachine.ViewStateEnum;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,7 +19,7 @@ public class TeacherViewController implements Initializable {
     @FXML public ScrollPane scrollPaneDashboard;
     @FXML public AnchorPane anchorPaneDashboard;
     @FXML public AnchorPane anchorPaneStudents;
-    @FXML public AnchorPane anchorPaneCitizenTemplates;
+    @FXML public AnchorPane anchorPaneCitizenTemplate;
     @FXML public AnchorPane anchorPaneCitizens;
     @FXML public AnchorPane anchorPaneCases;
     @FXML public AnchorPane anchorPaneAssignments;
@@ -33,7 +34,18 @@ public class TeacherViewController implements Initializable {
     @FXML public ToggleButton tglBtnJournals;
 
 
-    
+    // Students
+    public Button btnViewStudentsWork;
+    public ListView listViewStudents;
+    public TextField txtFieldStudentsSearch;
+    public Label lblStudentsStudentName;
+    public Label lblStudentEmail;
+    public Button btnViewStudentCases;
+    public Button btnStudentSettings;
+    public ListView listViewCitizensForStudents;
+    public Button btnRemoveCitizenToStudent;
+    public Button btnAddCitizenToStudent;
+    public Label lblCivilianStatusCitizenTemplate;
 
 
     // Citizens
@@ -53,21 +65,21 @@ public class TeacherViewController implements Initializable {
     public Button btnCitizensSearch;
 
 
-    // Students
-    public Button btnViewStudentsWork;
-    public ListView listViewStudents;
-    public TextField txtFieldStudentsSearch;
-    public Label lblStudentsStudentName;
-    public Label lblStudentEmail;
-    public ListView listViewContactInfo1;
-    public Button btnViewStudentCases;
-    public Button btnStudentSettings;
-    public ListView listViewCitizensForStudents;
-    public Button btnRemoveCitizenToStudent;
-    public Button btnAddCitizenToStudent;
+    // Citizen Templates
+    public ListView listViewCitizenTemplates;
+    public TextField txtFieldCitizenTemplateSearch;
+    public Button btnCitizenTemplateSearch;
+    public Label lblCitizenTemplateName;
+    public ListView listViewCitizenTemplateContactInfo;
+    public Button btnAddCitizenTemplateContactInfo;
+    public Button btnRemoveCitizenTemplateContactInfo;
+    public Button btnGeneralInfoCitizenTemplate;
+    public Label lblAgeCitizenTemplate;
+    public Label lblBirthdateCitizenTemplate;
+    public Label lblAddressCitizenTemplate;
+    public Label lblHelpStatusCitizenTemplate;
 
-    
-    
+
 
     private ToggleGroup toggleGroup;
     private HashMap<ToggleButton, TeacherViewStateMachine> buttonMap;
@@ -79,16 +91,16 @@ public class TeacherViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         initToggleGroup();
         viewChangedListener();
-        initVisible();
         initViewStates();
         tglBtnDashboard.setSelected(true);
+        Platform.runLater(this::initVisible);
     }
 
     private void initViewStates(){
         viewStatesMap = new HashMap<>();
         viewStatesMap.put(tglBtnDashboard, new State(anchorPaneDashboard, tglBtnDashboard)); // Dashboard
         viewStatesMap.put(tglBtnStudents, new State(anchorPaneStudents, tglBtnStudents)); // Students
-        viewStatesMap.put(tglBtnCitizenTemplates, new State(anchorPaneCitizenTemplates, tglBtnCitizenTemplates)); // Citizen Templates
+        viewStatesMap.put(tglBtnCitizenTemplates, new State(anchorPaneCitizenTemplate, tglBtnCitizenTemplates)); // Citizen Templates
         viewStatesMap.put(tglBtnCitizens, new State(anchorPaneCitizens, tglBtnCitizens)); // Citizens
         viewStatesMap.put(tglBtnCases, new State(anchorPaneCases, tglBtnCases)); // Cases
         viewStatesMap.put(tglBtnAssignments, new State(anchorPaneAssignments, tglBtnAssignments)); // Assignments
@@ -118,7 +130,7 @@ public class TeacherViewController implements Initializable {
     private void initVisible(){
         anchorPaneDashboard.setVisible(false);
         anchorPaneStudents.setVisible(false);
-        anchorPaneCitizenTemplates.setVisible(false);
+        anchorPaneCitizenTemplate.setVisible(false);
         anchorPaneCitizens.setVisible(false);
         anchorPaneCases.setVisible(false);
         anchorPaneAssignments.setVisible(false);
@@ -163,4 +175,19 @@ public class TeacherViewController implements Initializable {
     public void onCitizensSearch(ActionEvent event) {
     }
 
+
+
+    // Citizen Template
+
+    public void onCitizenTemplateSearch(ActionEvent event) {
+    }
+
+    public void onGeneralInfoCitizenTemplate(ActionEvent event) {
+    }
+
+    public void onRemoveCitizenTemplateContactInfo(ActionEvent event) {
+    }
+
+    public void onAddCitizenTemplateContactInfo(ActionEvent event) {
+    }
 }

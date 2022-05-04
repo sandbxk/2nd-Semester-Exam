@@ -179,16 +179,24 @@
 
 
 .searchBtn {
-    -fx-background-color: -fx-panelHighlight;
-    -fx-background-radius: 0;
-    -fx-border-radius: 30;
+    -fx-background-image: url('../img/filter.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 20 20;
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+    -fx-background-radius: 30;
     -fx-text-fill: -fx-panelBase;
     -fx-font-weight: bold;
     -fx-font-size: 14;
 }
 
 .searchBtn:hover {
-    -fx-background-color: derive(-fx-panelHighlight, 40%);
+    -fx-background-image: url('../img/filter2.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 20 20;
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+    -fx-background-radius: 30;
     -fx-text-fill: -fx-panelBase;
     -fx-font-weight: bold;
     -fx-font-size: 14;
@@ -196,6 +204,11 @@
 
 
 .searchBtn:pressed {
+    -fx-background-image: url('../img/filter3.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 20 20;
+    -fx-background-position: center;
+    -fx-background-radius: 30;
     -fx-background-color: -fx-txtFillLight;
     -fx-text-fill: -fx-panelBase;
     -fx-font-weight: bold;
@@ -356,4 +369,161 @@
 .scroll-bar:vertical .thumb:hover {
     -fx-background-color : -fx-txtFillLight;
     -fx-background-radius : 2.0em;
+}
+
+.lblBackgroundBold {
+    -fx-text-fill: -fx-txtFillDark;
+    -fx-font-size: 12;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: bold;
+}
+
+.lblBackgroundRegular {
+    -fx-text-fill: -fx-txtFillDark;
+    -fx-font-size: 12;
+    -fx-font-family: "Roboto";
+    -fx-font-weight: normal;
+}
+
+
+
+.backgroundButton {
+    -fx-background-color: -fx-panelBase;
+    -fx-background-radius: 30;
+    -fx-padding: 10;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-txtFillLight;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-wrap-text: true;
+    -fx-content-display: center;
+    -fx-text-alignment: center;
+
+}
+
+.backgroundButton:hover {
+    -fx-background-color: derive(-fx-panelHighlight, 40%);
+    -fx-background-radius: 30;
+    -fx-padding: 10;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-panelBase;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
+
+
+.backgroundButton:pressed {
+    -fx-background-color: -fx-panelHighlight;
+    -fx-background-radius: 30;
+    -fx-padding: 10;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-panelBase;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: -fx-panelHighlight;
+    -fx-text-fill: -fx-txtFillDark;
+}
+
+.list-cell:even {
+    -fx-background-color: transparent;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: -fx-panelHighlight;
+    -fx-text-fill: -fx-txtFillDark;
+    -fx-font-weight: bold;
+}
+
+.bg-list-view{
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-txtFillLight;
+}
+
+.list-cell {
+    -fx-control-inner-background: transparent;
+
+}
+
+
+.accordion > .titled-pane > .title {
+    -fx-background-color: -fx-panelBase;
+    -fx-text-fill: -fx-txtFillLight;
+
+}
+
+.accordion > .titled-pane > .title:hover {
+    -fx-background-color: -fx-panelHighlight;
+    -fx-text-fill: -fx-txtFillDark;
+}
+
+.accordion > .titled-pane > .title > .text {
+    -fx-text-fill: -fx-txtFillLight;
+    -fx-fill: -fx-txtFillLight;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-font-family: "Roboto";
+}
+
+.accordion > .titled-pane > .title:hover > .text {
+    -fx-text-fill: -fx-txtFillLight;
+    -fx-fill: -fx-txtFillDark;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-font-family: "Roboto";
+}
+
+.accordion > .titled-pane > .title:hover > .arrow-button {
+    -fx-text-fill: -fx-txtFillLight;
+    -fx-fill: -fx-txtFillLight;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-font-family: "Roboto";
+}
+
+.accordion > .titled-pane > .title > .arrow-button {
+    -fx-text-fill: -fx-txtFillLight;
+    -fx-fill: -fx-txtFillLight;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-font-family: "Roboto";
+    -fx-background-color: null;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0.0em 0.25em 0.0em 0.0em; /* 0 3 0 0 */
+    -fx-effect: null;
+}
+
+.accordion > .titled-pane > .title:hover > .arrow-button > .arrow {
+    -fx-text-fill: -fx-txtFillLight;
+    -fx-fill: -fx-txtFillLight;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-font-family: "Roboto";
+    -fx-effect: null;
+
+    -fx-background-color: -fx-txtFillDark;
+    -fx-background-insets: 1 0 -1 0, 0;
+    -fx-padding: 0.25em 0.3125em 0.25em 0.3125em; /* 3 3.75 3 3.75 */
+    -fx-shape: "M 0 0 h 7 l -3.5 4 z";
+}
+
+.accordion > .titled-pane > .title > .arrow-button > .arrow {
+    -fx-text-fill: -fx-txtFillLight;
+    -fx-fill: -fx-txtFillLight;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-font-family: "Roboto";
+    -fx-effect: null;
+
+    -fx-background-color: -fx-txtFillLight;
+    -fx-background-insets: 1 0 -1 0, 0;
+    -fx-padding: 0.25em 0.3125em 0.25em 0.3125em; /* 3 3.75 3 3.75 */
+    -fx-shape: "M 0 0 h 7 l -3.5 4 z";
+}
+
+.accordion > .titled-pane:collapsed > .title > .arrow-button .arrow {
+    -fx-rotate: -90;
 }
