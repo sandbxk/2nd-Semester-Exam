@@ -158,7 +158,7 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
         String sql = """
                     SELECT * FROM accounts
                     JOIN schools ON accounts.school = schools.schoolId
-                    JOIN zipCode ON schools.schoolZipCode = zipCode.zipCod
+                    JOIN zipCodes ON schools.schoolZipCode = zipCodes.zipCode
                     """;
         List<Account> studentsList = new ArrayList<>();
 
