@@ -47,7 +47,10 @@ public class AccountModel
 
     ObservableList<Account> accounts;
 
-    public AccountModel(Account student) : this() {
+    public AccountModel(Account student)
+    {
+        this();
+
         this.firstName = new SimpleStringProperty();
         this.lastName = new SimpleStringProperty();
         this.email = new SimpleStringProperty();

@@ -17,7 +17,7 @@ import java.util.function.UnaryOperator;
 public class CreateSchoolController implements Initializable {
 
     @FXML
-    private TextField txtsSchoolName;
+    private TextField txtSchoolName;
     @FXML
     private TextField txtSchoolZipCode;
     @FXML
@@ -31,8 +31,10 @@ public class CreateSchoolController implements Initializable {
     }
 
     public void createSchool(ActionEvent actionEvent) {
-        schoolDAO.create("Random", 6700);
+        schoolDAO.create(txtSchoolName.getText(), Integer.parseInt(txtSchoolZipCode.getText()));
 
+        Stage stage = (Stage) btnCancel.getScene().getWindow();
+        stage.close();
     }
 
     public void Cancel(ActionEvent actionEvent) {
