@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="896.0" styleClass="transparentBG" stylesheets="@../../Styles/MainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.GUI.Controllers.Popups.CreateCaseController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="896.0" styleClass="transparentBG" stylesheets="@../../Styles/MainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.GUI.Controllers.Popups.CreaseCaseController">
    <children>
       <AnchorPane layoutX="6.0" layoutY="3.0" prefHeight="711.0" prefWidth="884.0" styleClass="panel30Deg" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -48,8 +48,8 @@
                   </VBox>
                </center>
             </BorderPane>
-            <Button fx:id="btnCanel" layoutX="8.0" layoutY="698.0" mnemonicParsing="false" onAction="#event" text="Annullere" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="30.0" />
-            <Button fx:id="btnSave" layoutX="18.0" layoutY="708.0" mnemonicParsing="false" onAction="#event" text="Gem" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="30.0" />
+            <Button fx:id="btnCancel" layoutX="8.0" layoutY="698.0" mnemonicParsing="false" onAction="#cancel" text="Annullere" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="30.0" />
+            <Button fx:id="btnSave" layoutX="18.0" layoutY="708.0" mnemonicParsing="false" onAction="#save" text="Gem" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="30.0" />
          </children>
       </AnchorPane>
    </children>

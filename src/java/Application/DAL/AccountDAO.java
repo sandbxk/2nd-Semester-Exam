@@ -72,7 +72,10 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
      */
     @Override
     public void delete(int accountid){
-        String sql = "DELETE FROM account WHERE id = ?";
+        String sql = """
+                    DELETE FROM account
+                    WHERE id = ?
+                    """;
 
         try {
             Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
