@@ -3,12 +3,11 @@ package Application.GUI.Controllers;
 import Application.GUI.StateMachine.State;
 import Application.GUI.StateMachine.TeacherViewStateMachine;
 import Application.GUI.StateMachine.ViewStateEnum;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -20,7 +19,7 @@ public class TeacherViewController implements Initializable {
     @FXML public ScrollPane scrollPaneDashboard;
     @FXML public AnchorPane anchorPaneDashboard;
     @FXML public AnchorPane anchorPaneStudents;
-    @FXML public AnchorPane anchorPaneCitizenTemplates;
+    @FXML public AnchorPane anchorPaneCitizenTemplate;
     @FXML public AnchorPane anchorPaneCitizens;
     @FXML public AnchorPane anchorPaneCases;
     @FXML public AnchorPane anchorPaneAssignments;
@@ -34,6 +33,54 @@ public class TeacherViewController implements Initializable {
     @FXML public ToggleButton tglBtnAssignments;
     @FXML public ToggleButton tglBtnJournals;
 
+
+    // Students
+    public Button btnViewStudentsWork;
+    public ListView listViewStudents;
+    public TextField txtFieldStudentsSearch;
+    public Label lblStudentsStudentName;
+    public Label lblStudentEmail;
+    public Button btnViewStudentCases;
+    public Button btnStudentSettings;
+    public ListView listViewCitizensForStudents;
+    public Button btnRemoveCitizenToStudent;
+    public Button btnAddCitizenToStudent;
+    public Label lblCivilianStatusCitizenTemplate;
+
+
+    // Citizens
+    public Label lblCitizenName;
+    public ListView listViewContactInfo;
+    public Label lblAge;
+    public Label lblBirthdateYear;
+    public Label lblAddress;
+    public Label lblHelpStatus;
+    public Label lblCivilianStatus;
+    public Button btnGeneralInfo;
+    public Button btnJournal;
+    public ListView listViewStudentsforCitizen;
+    public Button btnRemoveStudentToCitizen;
+    public Button btnAddStudentToCitizen;
+    public TextField txtFieldCitizensSearch;
+    public Button btnCitizensSearch;
+
+
+    // Citizen Templates
+    public ListView listViewCitizenTemplates;
+    public TextField txtFieldCitizenTemplateSearch;
+    public Button btnCitizenTemplateSearch;
+    public Label lblCitizenTemplateName;
+    public ListView listViewCitizenTemplateContactInfo;
+    public Button btnAddCitizenTemplateContactInfo;
+    public Button btnRemoveCitizenTemplateContactInfo;
+    public Button btnGeneralInfoCitizenTemplate;
+    public Label lblAgeCitizenTemplate;
+    public Label lblBirthdateCitizenTemplate;
+    public Label lblAddressCitizenTemplate;
+    public Label lblHelpStatusCitizenTemplate;
+
+
+
     private ToggleGroup toggleGroup;
     private HashMap<ToggleButton, TeacherViewStateMachine> buttonMap;
     private TeacherViewStateMachine viewState;
@@ -44,20 +91,21 @@ public class TeacherViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         initToggleGroup();
         viewChangedListener();
-        initVisible();
         initViewStates();
         tglBtnDashboard.setSelected(true);
+        Platform.runLater(this::initVisible);
     }
 
     private void initViewStates(){
         viewStatesMap = new HashMap<>();
         viewStatesMap.put(tglBtnDashboard, new State(anchorPaneDashboard, tglBtnDashboard)); // Dashboard
         viewStatesMap.put(tglBtnStudents, new State(anchorPaneStudents, tglBtnStudents)); // Students
-        viewStatesMap.put(tglBtnCitizenTemplates, new State(anchorPaneCitizenTemplates, tglBtnCitizenTemplates)); // Citizen Templates
+        viewStatesMap.put(tglBtnCitizenTemplates, new State(anchorPaneCitizenTemplate, tglBtnCitizenTemplates)); // Citizen Templates
         viewStatesMap.put(tglBtnCitizens, new State(anchorPaneCitizens, tglBtnCitizens)); // Citizens
         viewStatesMap.put(tglBtnCases, new State(anchorPaneCases, tglBtnCases)); // Cases
         viewStatesMap.put(tglBtnAssignments, new State(anchorPaneAssignments, tglBtnAssignments)); // Assignments
         viewStatesMap.put(tglBtnJournals, new State(anchorPaneJournals, tglBtnJournals)); // Journals
+
     }
 
     private void initToggleGroup(){
@@ -82,77 +130,64 @@ public class TeacherViewController implements Initializable {
     private void initVisible(){
         anchorPaneDashboard.setVisible(false);
         anchorPaneStudents.setVisible(false);
-        anchorPaneCitizenTemplates.setVisible(false);
+        anchorPaneCitizenTemplate.setVisible(false);
         anchorPaneCitizens.setVisible(false);
         anchorPaneCases.setVisible(false);
         anchorPaneAssignments.setVisible(false);
         anchorPaneJournals.setVisible(false);
     }
 
-    public void onMenuItemClicked(ActionEvent event) {
+
+
+
+    // Students
+    public void onViewStudentCases(ActionEvent event) {
     }
 
-    /*public void onMenuItemClicked(ActionEvent event) {
-        if (event.getSource().equals(tglBtnDashboard)) {
-            scrollPaneDashboard.setVisible(true);
-            anchorPaneStudents.setVisible(false);
-            anchorPaneCitizenTemplates.setVisible(false);
-            anchorPaneCitizens.setVisible(false);
-            anchorPaneCases.setVisible(false);
-            anchorPaneAssignments.setVisible(false);
-            anchorPaneJournals.setVisible(false);
-        } else if (event.getSource().equals(tglBtnStudents)) {
-            scrollPaneDashboard.setVisible(false);
-            anchorPaneStudents.setVisible(true);
-            anchorPaneCitizenTemplates.setVisible(false);
-            anchorPaneCitizens.setVisible(false);
-            anchorPaneCases.setVisible(false);
-            anchorPaneAssignments.setVisible(false);
-            anchorPaneJournals.setVisible(false);
-        } else if (event.getSource().equals(tglBtnCitizenTemplates)) {
-            scrollPaneDashboard.setVisible(false);
-            anchorPaneStudents.setVisible(false);
-            anchorPaneCitizenTemplates.setVisible(true);
-            anchorPaneCitizens.setVisible(false);
-            anchorPaneCases.setVisible(false);
-            anchorPaneAssignments.setVisible(false);
-            anchorPaneJournals.setVisible(false);
-        } else if (event.getSource().equals(tglBtnCitizens)) {
-            scrollPaneDashboard.setVisible(false);
-            anchorPaneStudents.setVisible(false);
-            anchorPaneCitizenTemplates.setVisible(false);
-            anchorPaneCitizens.setVisible(true);
-            anchorPaneCases.setVisible(false);
-            anchorPaneAssignments.setVisible(false);
-            anchorPaneJournals.setVisible(false);
-        } else if (event.getSource().equals(tglBtnCases)) {
-            scrollPaneDashboard.setVisible(false);
-            anchorPaneStudents.setVisible(false);
-            anchorPaneCitizenTemplates.setVisible(false);
-            anchorPaneCitizens.setVisible(false);
-            anchorPaneCases.setVisible(true);
-            anchorPaneAssignments.setVisible(false);
-            anchorPaneJournals.setVisible(false);
-        } else if (event.getSource().equals(tglBtnAssignments)) {
-            scrollPaneDashboard.setVisible(false);
-            anchorPaneStudents.setVisible(false);
-            anchorPaneCitizenTemplates.setVisible(false);
-            anchorPaneCitizens.setVisible(false);
-            anchorPaneCases.setVisible(false);
-            anchorPaneAssignments.setVisible(true);
-            anchorPaneJournals.setVisible(false);
-        } else if (event.getSource().equals(tglBtnJournals)) {
-            scrollPaneDashboard.setVisible(false);
-            anchorPaneStudents.setVisible(false);
-            anchorPaneCitizenTemplates.setVisible(false);
-            anchorPaneCitizens.setVisible(false);
-            anchorPaneCases.setVisible(false);
-            anchorPaneAssignments.setVisible(false);
-            anchorPaneJournals.setVisible(true);
-        }
-
-
+    public void onStudentSettings(ActionEvent event) {
     }
 
-     */
+    public void onRemoveCitizenToStudent(ActionEvent event) {
+    }
+
+    public void onAddCitizenToStudent(ActionEvent event) {
+    }
+
+    public void onViewStudentsWork(ActionEvent event) {
+    }
+
+
+
+
+    // Citizens
+    public void onGeneralInfo(ActionEvent event) {
+    }
+
+    public void onJournal(ActionEvent event) {
+    }
+
+    public void onRemoveStudentToCitizen(ActionEvent event) {
+    }
+
+    public void onAddStudentToCitizen(ActionEvent event) {
+    }
+
+    public void onCitizensSearch(ActionEvent event) {
+    }
+
+
+
+    // Citizen Template
+
+    public void onCitizenTemplateSearch(ActionEvent event) {
+    }
+
+    public void onGeneralInfoCitizenTemplate(ActionEvent event) {
+    }
+
+    public void onRemoveCitizenTemplateContactInfo(ActionEvent event) {
+    }
+
+    public void onAddCitizenTemplateContactInfo(ActionEvent event) {
+    }
 }
