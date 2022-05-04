@@ -23,7 +23,7 @@ public class CreateSchoolController implements Initializable {
     @FXML
     private Button btnCancel;
 
-    private SchoolDAO schoolDAO;
+    private SchoolDAO schoolDAO = new SchoolDAO();
 
 
     @Override

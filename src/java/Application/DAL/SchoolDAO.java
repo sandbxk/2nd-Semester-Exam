@@ -15,7 +15,7 @@ public class SchoolDAO {
 
     public void createSchool(String name, int zipCode)
     {
-        String sqlCreate = "INSERT INTO school (schoolName, zipCode) VALUES (?, ?);";
+        String sqlCreate = "INSERT INTO schools (schoolName, schoolzipCode) VALUES (?, ?);";
 
         try {
             Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
