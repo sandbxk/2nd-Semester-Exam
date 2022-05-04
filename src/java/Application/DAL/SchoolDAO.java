@@ -11,19 +11,62 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SchoolDAO {
+public class SchoolDAO extends TemplatePatternDAO<School>{
 
-    public void createSchool(String name, int zipCode)
-    {
+
+    @Override
+    public School create(School input) {
         String sqlCreate = "INSERT INTO schools (schoolName, schoolzipCode) VALUES (?, ?);";
 
         try {
             Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
-            PreparedStatement pscs = conn.prepareStatement(sqlCreate);
-            pscs.setString(1,name);
-            pscs.setInt(2,zipCode);
+            PreparedStatement pstmt = conn.prepareStatement(sqlCreate, PreparedStatement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1,input.getSchoolName());
+            pstmt.setInt(2,input.getZipCode());
 
-            pscs.execute();
+            pstmt.execute();
+
+            int id = -1;
+
+            ResultSet generatedKeys = pstmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                id = generatedKeys.getInt(1);
+            }
+
+            pstmt.close();
+            return new School(
+                    id,
+                    input.getSchoolName(),
+                    input.getZipCode(),
+                    input.getCityName()
+            );
+
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+            return null;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public void update(School input) {
+        String sqlUpdate = """
+                UPDATE school 
+                SET schoolName =  ?, zipCode = ?
+                WHERE id = ?
+                """;
+
+        try {
+            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
+            PreparedStatement psus = conn.prepareStatement(sqlUpdate);
+
+            psus.setString(1, input.getSchoolName());
+            psus.setInt(2, input.getZipCode());
+            psus.setInt(3, input.getSchoolID());
+            psus.executeUpdate();
+            psus.close();
         } catch (SQLServerException throwables) {
             throwables.printStackTrace();
         } catch (SQLException throwables) {
@@ -31,7 +74,13 @@ public class SchoolDAO {
         }
     }
 
-    public List<School> getAllSchools() throws SQLException {
+    @Override
+    public School read(int id) {
+        return null;
+    }
+
+    @Override
+    public List<School> readAll() {
         String sqlRead = """
                         SELECT * FROM school 
                         JOIN zipCode ON school.zipCode = zipCode.zipCode
@@ -42,60 +91,42 @@ public class SchoolDAO {
         int zipCode;
         int id;
 
-
-        Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
-        PreparedStatement psas = conn.prepareStatement(sqlRead);
-
-        ResultSet rs = psas.executeQuery();
-
-        while (rs.next()) {
-            name = rs.getString("schoolName");
-            city = rs.getString("cityName");
-            zipCode = rs.getInt("zipCode");
-            id = rs.getInt("id");
-            School school = new School(id, name, zipCode, city);
-            schoolList.add(school);
-        }
-        psas.close();
-        return schoolList;
-    }
-
-    public void updateSchool(School school)
-    {
-        String sqlUpdate = """
-                UPDATE school SET
-                schoolName =  ?,
-                zipCode = ?
-                WHERE id = ?
-                """;
-
         try {
             Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
-            PreparedStatement psus = conn.prepareStatement(sqlUpdate);
+            PreparedStatement psas = conn.prepareStatement(sqlRead);
 
-            psus.setString(1,school.getName());
-            psus.setInt(2,school.getZipCode());
-            psus.setInt(3,school.getId());
-            psus.executeUpdate();
-            psus.close();
-        } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            ResultSet rs = psas.executeQuery();
+
+            while (rs.next()) {
+                name = rs.getString("schoolName");
+                city = rs.getString("cityName");
+                zipCode = rs.getInt("zipCode");
+                id = rs.getInt("id");
+                School school = new School(id, name, zipCode, city);
+                schoolList.add(school);
+            }
+            psas.close();
+            return schoolList;
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
         }
     }
 
-    public void deleteSchool(School school)
+    @Override
+    public void delete(int id)
     {
         String sqlDelete = """
-                DELETE FROM School WHERE id = ?
+                DELETE FROM School 
+                WHERE id = ?
                 """;
 
         try {
             Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
             PreparedStatement psds = conn.prepareStatement(sqlDelete);
 
-            psds.setInt(1,school.getId());
+            psds.setInt(1, id);
 
             psds.executeUpdate();
             psds.close();
@@ -104,9 +135,5 @@ public class SchoolDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-    }
-    public static void main(String[] args) throws SQLException {
-        SchoolDAO DAO = new SchoolDAO();
-        System.out.println(DAO.getAllSchools());
     }
 }
