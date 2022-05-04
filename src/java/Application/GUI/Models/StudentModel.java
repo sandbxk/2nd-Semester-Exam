@@ -16,6 +16,10 @@ public class StudentModel {
         this.lastName = new SimpleStringProperty();
         this.email = new SimpleStringProperty();
 
+        firstName.set(student.getFirstName());
+        lastName.set(student.getLastName());
+        email.set(student.getEmail());
+      
         this.student = student;
     }
 
@@ -56,5 +60,4 @@ public class StudentModel {
     public void setEmail(String email) {
         this.email.set(email);
     }
-
 }

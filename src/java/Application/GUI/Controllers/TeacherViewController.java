@@ -9,8 +9,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class TeacherViewController implements Initializable {
@@ -59,7 +61,6 @@ public class TeacherViewController implements Initializable {
     private void initToggleGroup()
     {
         toggleGroup = new ToggleGroup();
-
         tglBtnDashboard.setToggleGroup(toggleGroup);
         tglBtnStudents.setToggleGroup(toggleGroup);
         tglBtnCitizenTemplates.setToggleGroup(toggleGroup);
