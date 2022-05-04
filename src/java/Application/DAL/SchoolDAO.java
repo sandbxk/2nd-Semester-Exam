@@ -16,7 +16,10 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
 
     @Override
     public School create(School input) {
-        String sqlCreate = "INSERT INTO schools (schoolName, schoolzipCode) VALUES (?, ?);";
+        String sqlCreate = """
+                INSERT INTO schools (schoolName, schoolZipCode)
+                VALUES (?, ?)
+                """;
 
         try {
             Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
