@@ -16,7 +16,8 @@ public class CategoryEntryModel {
     private StringProperty categoryName;
     private StringProperty superCategory;
     private IntegerProperty level;
-    private ObjectProperty<ComboBox> levelComboBox;
+    private ObjectProperty<ComboBox<FunctionalLevels>> levelFuncComboBox;
+    private ObjectProperty<ComboBox<HealthLevels>> levelHealthComboBox;
     private StringProperty assessment;
     private StringProperty cause;
     private StringProperty implications;
@@ -25,9 +26,6 @@ public class CategoryEntryModel {
     private StringProperty note;
     private boolean isFunctionAbility;
     private CategoryEntry categoryEntry;
-
-    private ObjectProperty<ComboBox<FunctionalLevels>> levelFuncComboBoxProperty;
-    private ObjectProperty<ComboBox<HealthLevels>> levelFuncComboBoxProperty;
 
     public CategoryEntryModel(CategoryEntry categoryEntry) {
         categoryName = new SimpleStringProperty(categoryEntry.getCategoryName());
@@ -42,14 +40,14 @@ public class CategoryEntryModel {
         isFunctionAbility = categoryEntry.isFunctionAbility();
         this.categoryEntry = categoryEntry;
         this.id = categoryEntry.getId();
-        levelComboBox = new SimpleObjectProperty<>(new ComboBox<>());
+        levelFuncComboBox = new SimpleObjectProperty<>(new ComboBox<>());
+        levelHealthComboBox = new SimpleObjectProperty<>(new ComboBox<>());
         initLevelComboBox();
 
-        onImageLevelChanged();
 
         if (level.get() == 9){
-            levelComboBox.get().setValue(FunctionalLevels.LEVEL_9);
-        } else levelComboBox.get().setValue(FunctionalLevels.values()[level.get()]);
+            levelFuncComboBox.get().setValue(FunctionalLevels.LEVEL_9);
+        } else levelFuncComboBox.get().setValue(FunctionalLevels.values()[level.get()]);
 
     }
 
@@ -62,21 +60,27 @@ public class CategoryEntryModel {
      */
     private void initLevelComboBox(){
 
+        onFuncLevelChanged();
+        onHealthLevelChanged();
+
+        ObservableList<FunctionalLevels> funcData = FXCollections.observableArrayList(FunctionalLevels.values());
+        levelFuncComboBox.get().setItems(funcData);
+        levelFuncComboBox.get().setCellFactory(e -> comboBoxImageCell());
+        levelFuncComboBox.get().setButtonCell(comboBoxImageCell());
+
+        ObservableList<HealthLevels> healthData = FXCollections.observableArrayList(HealthLevels.values());
+        levelHealthComboBox.get().setItems(healthData);
+        levelHealthComboBox.get().setCellFactory(e -> comboBoxHealthDescCell());
+        levelHealthComboBox.get().setButtonCell(comboBoxHealthDescCell());
+
         if (isFunctionAbility) {
-            levelComboBox = new SimpleObjectProperty<>(new ComboBox<FunctionalLevels>());
-            onImageLevelChanged();
-
             if (level.get() == 9){
-                levelComboBox.get().setValue(FunctionalLevels.LEVEL_9);
-            } else levelComboBox.get().setValue(FunctionalLevels.values()[level.get()]);
+                levelFuncComboBox.get().setValue(FunctionalLevels.LEVEL_9);
+            } else levelFuncComboBox.get().setValue(FunctionalLevels.values()[level.get()]);
 
-            ObservableList<FunctionalLevels> data = FXCollections.observableArrayList(FunctionalLevels.values());
-            levelComboBox.get().setItems(data);
-
-            levelComboBox.get().setCellFactory(e -> comboBoxImageCell());
-            levelComboBox.get().setButtonCell(comboBoxImageCell());
-        } else {
-
+        }
+        else {
+            levelHealthComboBox.get().setValue(HealthLevels.values()[level.get()]);
         }
     }
 
@@ -103,22 +107,53 @@ public class CategoryEntryModel {
         };
     }
 
+    private ListCell<HealthLevels> comboBoxHealthDescCell() {
+        return new ListCell<HealthLevels>() {
+            @Override
+            public void updateItem(HealthLevels level, boolean empty) {
+                super.updateItem(level, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setText(level.description);
+                }
+            }
+        };
+    }
+
     /**
      * Sets the level of this category entry entity to the value of the selected item in the combo box
      */
-    private void onImageLevelChanged(){
-        levelComboBox.get().selectionModelProperty().get().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+    private void onFuncLevelChanged(){
+        levelFuncComboBox.get().selectionModelProperty().get().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            setLevel(newValue.level);
+        });
+    }
+
+    private void onHealthLevelChanged(){
+        levelHealthComboBox.get().selectionModelProperty().get().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             setLevel(newValue.level);
         });
     }
 
     public ComboBox<FunctionalLevels> getFuncLevelComboBox(){
-        return levelComboBox.get();
+        return levelFuncComboBox.get();
     }
 
-    public ObjectProperty<ComboBox<FunctionalLevels>> getLevelImageComboBoxProperty(){
-        return levelComboBox;
+    public ObjectProperty<ComboBox<FunctionalLevels>> getFuncComboBoxProperty(){
+        return levelFuncComboBox;
     }
+
+    public ComboBox<HealthLevels> getHealthLevelComboBox(){
+        return levelHealthComboBox.get();
+    }
+
+    public ObjectProperty<ComboBox<HealthLevels>> getHealthComboBoxProperty(){
+        return levelHealthComboBox;
+    }
+
+
+
 
     public int getId() {
         return id;

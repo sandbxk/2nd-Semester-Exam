@@ -4,6 +4,7 @@ import Application.GUI.Models.CategoryEntryModel;
 import Application.GUI.Models.CitizenTemplateModel;
 import Application.GUI.Models.ControllerModels.CitizenTemplateControllerModel;
 import Application.GUI.Models.FunctionalLevels;
+import Application.GUI.Models.HealthLevels;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -52,7 +53,7 @@ public class CitizenTemplateController implements Initializable {
     // Citizen Template - Health Conditions
     public TreeTableView<CategoryEntryModel> treeTblViewHealth;
     public TreeTableColumn<CategoryEntryModel, String> treeTblColumnHealthCategory;
-    public TreeTableColumn<CategoryEntryModel, Number> treeTblColumnHealthLevel;
+    public TreeTableColumn<CategoryEntryModel, ComboBox<HealthLevels>> treeTblColumnHealthLevel;
     public TreeTableColumn<CategoryEntryModel, String> treeTblColumnHealthAssessment;
     public TreeTableColumn<CategoryEntryModel, String> treeTblColumnHealthCause;
     public TreeTableColumn<CategoryEntryModel, String> treeTblColumnHealthExpectedCondition;
@@ -126,7 +127,7 @@ public class CitizenTemplateController implements Initializable {
 
     private void initTreeTableClmns(){
         treeTblColumnFuncCategory.setCellValueFactory(param -> param.getValue().getValue().categoryNameProperty());
-        treeTblColumnFuncLevel.setCellValueFactory(param -> param.getValue().getValue().getLevelImageComboBoxProperty());
+        treeTblColumnFuncLevel.setCellValueFactory(param -> param.getValue().getValue().getFuncComboBoxProperty());
         treeTblColumnFuncAssessment.setCellValueFactory(param -> param.getValue().getValue().assessmentProperty());
         treeTblColumnFuncCause.setCellValueFactory(param -> param.getValue().getValue().causeProperty());
         treeTblColumnFuncImplications.setCellValueFactory(param -> param.getValue().getValue().implicationsProperty());
@@ -135,7 +136,7 @@ public class CitizenTemplateController implements Initializable {
         treeTblColumnFuncNote.setCellValueFactory(param -> param.getValue().getValue().noteProperty());
 
         treeTblColumnHealthCategory.setCellValueFactory(param -> param.getValue().getValue().categoryNameProperty());
-        treeTblColumnHealthLevel.setCellValueFactory(param -> param.getValue().getValue().levelProperty());
+        treeTblColumnHealthLevel.setCellValueFactory(param -> param.getValue().getValue().getHealthComboBoxProperty());
         treeTblColumnHealthAssessment.setCellValueFactory(param -> param.getValue().getValue().assessmentProperty());
         treeTblColumnHealthCause.setCellValueFactory(param -> param.getValue().getValue().causeProperty());
         treeTblColumnHealthExpectedCondition.setCellValueFactory(param -> param.getValue().getValue().expectedConditionProperty());
@@ -247,7 +248,7 @@ public class CitizenTemplateController implements Initializable {
 
 
     public void onTreeTblColumnStartEdit(TreeTableColumn.CellEditEvent<CategoryEntryModel, String> editEvent) {
-        ed
+
     }
 
     public void onTreeTblColumnCommitEdit(TreeTableColumn.CellEditEvent<CategoryEntryModel, String> editEvent) {
