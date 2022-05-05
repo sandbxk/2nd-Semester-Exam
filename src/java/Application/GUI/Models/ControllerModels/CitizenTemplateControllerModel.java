@@ -82,4 +82,12 @@ public class CitizenTemplateControllerModel {
         return treeItem;
     }
 
+    public void newCitizenTemplate() {
+    }
+
+    public void deleteCitizenTemplate() {
+    }
+
+    public void copyCitizenTemplate() {
+    }
 }

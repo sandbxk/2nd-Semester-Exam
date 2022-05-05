@@ -15,6 +15,8 @@ import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class CitizenTemplateController implements Initializable {
@@ -37,6 +39,7 @@ public class CitizenTemplateController implements Initializable {
     public Button btnCitizenTemplateEditOn;
     public Button btnCitizenTemplateEditCancel;
     public Button btnCitizenTemplateEditSave;
+    public Button btnActions;
 
 
     // Citizen Template - Functional Conditions
@@ -74,6 +77,7 @@ public class CitizenTemplateController implements Initializable {
 
 
     private CitizenTemplateControllerModel model = new CitizenTemplateControllerModel();
+    private ContextMenu actionsMenu = new ContextMenu();
 
 
     @Override
@@ -81,6 +85,7 @@ public class CitizenTemplateController implements Initializable {
         initTreeTableClmns();
         setFuncTreeTable();
         initCitizenTemplatesList();
+        initActionsMenu();
     }
 
 
@@ -96,6 +101,52 @@ public class CitizenTemplateController implements Initializable {
     public void onAddCitizenTemplateContactInfo(ActionEvent event) {
         model.addCitizenTemplateContactInfo();
     }
+
+    public void onActions(ActionEvent event) {
+        double onScreenX = btnActions.getScene().getWindow().getX() + btnActions.getHeight() + btnActions.localToScene(btnActions.getBoundsInLocal()).getMinX();
+        double onScreenY = btnActions.getScene().getWindow().getY() + btnActions.getWidth() + btnActions.localToScene(btnActions.getBoundsInLocal()).getMinY();
+
+        double offsetX = btnActions.getWidth() * 2;
+        double offsetY = btnActions.getHeight() * 1.5;
+
+        //ContextMenu showed at the location of the button, with offsets applied
+        //actionsMenu.show(btnActions, onScreenX - offsetX, onScreenY + offsetY);
+        actionsMenu.show(btnActions, onScreenX, onScreenY);
+    }
+
+    private void initActionsMenu() {
+        MenuItem newCitizenTemplate = new MenuItem("Ny Borger Skabelon");
+        newCitizenTemplate.setOnAction(event -> onNewCitizenTemplate());
+        MenuItem copyCitizenTemplate = new MenuItem("Kopier Borger Skabelon");
+        copyCitizenTemplate.setOnAction(event -> onCopyCitizenTemplate());
+        MenuItem deleteCitizenTemplate = new MenuItem("Slet Borger Skabelon");
+        deleteCitizenTemplate.setOnAction(event -> onDeleteCitizenTemplate());
+
+        actionsMenu = new ContextMenu(newCitizenTemplate, copyCitizenTemplate, deleteCitizenTemplate);
+        actionsMenu.setAutoHide(true);
+    }
+
+    private void onNewCitizenTemplate(){
+        model.newCitizenTemplate();
+    }
+
+    private void onDeleteCitizenTemplate(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Er du sikker på at du vil slette denne borger skabelonen?");
+        alert.setContentText("Dette kan ikke fortrydes.");
+        alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("Styles/MainStylesheet.css")).toExternalForm());
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            model.deleteCitizenTemplate();
+        }
+    }
+
+    private void onCopyCitizenTemplate(){
+        model.copyCitizenTemplate();
+    }
+
+
 
     private void setFuncTreeTable(){
         //TODO: Proper table population

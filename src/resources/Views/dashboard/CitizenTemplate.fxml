@@ -30,7 +30,7 @@
                             <Button fx:id="btnCitizenTemplateSearch" mnemonicParsing="false" onAction="#onCitizenTemplateSearch" prefHeight="26.0" prefWidth="34.0" styleClass="searchBtn" />
                         </children>
                     </HBox>
-                    <Button layoutX="21.0" layoutY="777.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="159.0" styleClass="outlineBtn" text="Handlinger" AnchorPane.bottomAnchor="29.200000000000045" />
+                    <Button fx:id="btnActions" layoutX="21.0" layoutY="777.0" mnemonicParsing="false" onAction="#onActions" prefHeight="52.0" prefWidth="159.0" styleClass="outlineBtn" text="Handlinger" AnchorPane.bottomAnchor="29.200000000000045" />
                 </children>
             </AnchorPane>
             <AnchorPane layoutX="230.0" layoutY="23.0" prefHeight="233.0" prefWidth="621.0" styleClass="panel30Deg" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="23.0">
@@ -376,7 +376,7 @@
                                         <content>
                                             <AnchorPane minHeight="0.0" minWidth="0.0">
                                                 <children>
-                                                    <TreeTableView fx:id="treeTblViewFunc" editable="true" prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                    <TreeTableView fx:id="treeTblViewFunc" prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                         <columns>
                                                             <TreeTableColumn fx:id="treeTblColumnFuncCategory" minWidth="140.0" prefWidth="-1.0" text="Tilstandsklassificering" />
                                                             <TreeTableColumn prefWidth="151.99993896484375" text="Tilstands Præcisering">
