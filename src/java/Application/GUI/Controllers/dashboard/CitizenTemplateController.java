@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.geometry.Side;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
@@ -106,12 +107,13 @@ public class CitizenTemplateController implements Initializable {
         double onScreenX = btnActions.getScene().getWindow().getX() + btnActions.getHeight() + btnActions.localToScene(btnActions.getBoundsInLocal()).getMinX();
         double onScreenY = btnActions.getScene().getWindow().getY() + btnActions.getWidth() + btnActions.localToScene(btnActions.getBoundsInLocal()).getMinY();
 
-        double offsetX = btnActions.getWidth() * 2;
-        double offsetY = btnActions.getHeight() * 1.5;
+        double offsetX = -15;
+        double offsetY = btnActions.getHeight() / 2.2;
 
         //ContextMenu showed at the location of the button, with offsets applied
         //actionsMenu.show(btnActions, onScreenX - offsetX, onScreenY + offsetY);
-        actionsMenu.show(btnActions, onScreenX, onScreenY);
+        //actionsMenu.show(btnActions, onScreenX, onScreenY);
+        actionsMenu.show(btnActions, Side.TOP, offsetX, -offsetY);
     }
 
     private void initActionsMenu() {
