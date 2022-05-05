@@ -9,12 +9,15 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
+import java.net.URL;
 import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
 
-public class CitizenTemplate {
+public class CitizenTemplate implements Initializable {
 
     public AnchorPane anchorPaneCitizenTemplateDashboard;
     public ListView listViewCitizenTemplates;
@@ -71,6 +74,16 @@ public class CitizenTemplate {
     private BooleanProperty citizenTemplateEditMode = new SimpleBooleanProperty(false);
     private ToggleGroup toggleGroup;
     private TeacherViewModel teacherViewModel = new TeacherViewModel();
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+    initTreeTableClmns();
+    initToggleGroup();
+    setFuncTreeTable();
+    editModeListener();
+    }
+
 
     public void onCitizenTemplateSearch(ActionEvent event) {
         teacherViewModel.citizenTemplateSearch();
@@ -209,6 +222,4 @@ public class CitizenTemplate {
         }
 
     }
-
-
 }

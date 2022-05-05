@@ -64,7 +64,7 @@ public class TeacherViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources)
     {
 
-        this.account = (AccountModel) resources.getObject("account");
+        //this.account = (AccountModel) resources.getObject("account");
 
         initToggleGroup();
         viewChangedListener();
