@@ -252,7 +252,7 @@ public class CitizenTemplateController implements Initializable {
 
     //https://www.youtube.com/watch?v=BNvVSU9nHDY
     public void onTreeTblColumnStartEdit(TreeTableColumn.CellEditEvent<CategoryEntryModel, String> editEvent) {
-        //TODO
+        //TODO individual methods for each column
     }
 
     public void onTreeTblColumnCommitEdit(TreeTableColumn.CellEditEvent<CategoryEntryModel, String> editEvent) {
