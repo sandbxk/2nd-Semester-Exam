@@ -55,7 +55,7 @@ public class LoginController implements Initializable
         {
             if (account.type == UserType.STUDENT)
             {
-                // switch to student dashboard
+                // switch to student Application.GUI.Controllers.dashboard
                     // pass in account info
             }
         }
