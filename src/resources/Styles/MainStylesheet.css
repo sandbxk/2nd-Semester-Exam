@@ -549,11 +549,15 @@
 }
 
 .healthTable-view {
-    -fx-background-color: -fx-healthBG;
+    -fx-background-color: transparent;
 }
 
 .healthTable-view .column-header-background .filler {
     -fx-background-color: -fx-healthBase;
+}
+
+.healthTable-view > .placeholder {
+    -fx-background-color: transparent;
 }
 
 .healthTable-view .column-header .label {
@@ -583,8 +587,44 @@
 
 }
 
-.healthTable .table-cell{
+.healthTable .tree-table-row-cell:odd{
+    -fx-background-color: -fx-healthBG;
+    -fx-font-size: 10pt;
+    -fx-wrap-text: true;
+    -fx-content-display: center
+}
+
+.healthTable .tree-table-row-cell:even{
+    -fx-background-color: transparent;
+    -fx-font-size: 10pt;
+    -fx-wrap-text: true;
+    -fx-content-display: center
+}
+
+.healthTable .tree-table-row-cell:odd:selected{
+    -fx-background-color: -fx-healthBase;
+    -fx-font-size: 10pt;
+    -fx-wrap-text: true;
+    -fx-content-display: center
+}
+
+.healthTable .tree-table-row-cell:even:selected{
+    -fx-background-color: -fx-healthBase;
+    -fx-font-size: 10pt;
+    -fx-wrap-text: true;
+    -fx-content-display: center
+}
+
+.healthTable .tree-table-cell{
     -fx-border-color: transparent;
+    -fx-text-fill: -fx-txtFillDark;
+    -fx-wrap-text: true;
+    -fx-content-display: center
+}
+
+
+.healthTable .tree-table-cell:selected{
+    -fx-border-color: -fx-txtFillDark;
     -fx-text-fill: -fx-txtFillDark;
     -fx-wrap-text: true;
     -fx-content-display: center
@@ -611,7 +651,11 @@
 
 
 .funcTable-view {
-    -fx-background-color: -fx-funcBG;
+    -fx-background-color: transparent;
+}
+
+.funcTable-view > .placeholder {
+    -fx-background-color: transparent;
 }
 
 .funcTable-view .column-header-background .filler {
@@ -646,12 +690,50 @@
     -fx-border-width: 0 1 0 0;
 }
 
-.funcTable .table-cell{
+
+.funcTable .tree-table-row-cell:odd{
+    -fx-background-color: -fx-funcBG;
+    -fx-font-size: 10pt;
+    -fx-wrap-text: true;
+    -fx-content-display: center
+}
+
+.funcTable .tree-table-row-cell:even{
+    -fx-background-color: transparent;
+    -fx-font-size: 10pt;
+    -fx-wrap-text: true;
+    -fx-content-display: center
+}
+
+.funcTable .tree-table-row-cell:odd:selected{
+    -fx-background-color: -fx-funcBase;
+    -fx-font-size: 10pt;
+    -fx-wrap-text: true;
+    -fx-content-display: center
+}
+
+.funcTable .tree-table-row-cell:even:selected{
+    -fx-background-color: -fx-funcBase;
+    -fx-font-size: 10pt;
+    -fx-wrap-text: true;
+    -fx-content-display: center
+}
+
+.funcTable .tree-table-cell{
     -fx-border-color: transparent;
     -fx-text-fill: -fx-txtFillDark;
     -fx-wrap-text: true;
     -fx-content-display: center
 }
+
+.funcTable .tree-table-cell:selected{
+    -fx-border-color: -fx-txtFillDark;
+    -fx-text-fill: -fx-txtFillDark;
+    -fx-wrap-text: true;
+    -fx-content-display: center
+}
+
+
 
 .onOfftoggleBtn {
     -fx-background-color: -fx-panelHighlight;

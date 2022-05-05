@@ -36,8 +36,8 @@ public class CategoryEntryModel {
         levelImage = new SimpleObjectProperty<>(new ImageView());
 
 
-        levelImage.get().setFitHeight(20);
-        levelImage.get().setFitWidth(20);
+        levelImage.get().setFitHeight(50);
+        levelImage.get().setFitWidth(60);
 
         this.categoryEntry = categoryEntry;
         this.id = categoryEntry.getId();
@@ -52,17 +52,17 @@ public class CategoryEntryModel {
         Image image;
 
         switch (level){
-            case 0: image = new Image("file:src/resources/images/func0.png");
+            case 0: image = new Image(getClass().getResource("/img/func0.png").toExternalForm());
                 break;
-            case 1: image = new Image("file:src/resources/images/func1.png");
+            case 1: image = new Image(getClass().getResource("/img/func1.png").toExternalForm());
                 break;
-            case 2: image = new Image("file:src/resources/images/func2.png");
+            case 2: image = new Image(getClass().getResource("/img/func2.png").toExternalForm());
                 break;
-            case 3: image = new Image("file:src/resources/images/func3.png");
+            case 3: image = new Image(getClass().getResource("/img/func3.png").toExternalForm());
                 break;
-            case 4: image = new Image("file:src/resources/images/func4.png");
+            case 4: image = new Image(getClass().getResource("/img/func4.png").toExternalForm());
                 break;
-            default: image = new Image("file:src/resources/images/func9.png");
+            default: image = new Image(getClass().getResource("/img/func0.png").toExternalForm());
         }
 
         levelImage.get().setImage(image);

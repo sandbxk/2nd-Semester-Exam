@@ -67,7 +67,7 @@ public class CitizenTemplateModel {
         functionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Walking", 1, true)));
         functionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Climbing", 1, true)));
         functionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Swimming", 1, true)));
-        functionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Bathing", 1, true)));
+        functionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Bathing", 4, true)));
     }
 
     private void initHealthConditions() {
