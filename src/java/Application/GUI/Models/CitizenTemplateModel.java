@@ -37,15 +37,16 @@ public class CitizenTemplateModel {
     private ObservableList<CategoryEntryModel> nonRelevantHealthConditions;
 
 
-    public CitizenTemplateModel() {
-        this.name = new SimpleStringProperty();
-        this.surname = new SimpleStringProperty();
-        this.age = new SimpleIntegerProperty();
-        this.birthDate = LocalDate.now();
-        this.helpStatus = new SimpleStringProperty();
-        this.civilianStatus = new SimpleStringProperty();
-        this.address = new SimpleStringProperty();
-        this.contactInfo = new SimpleListProperty<>();
+    public CitizenTemplateModel(String name, String surname, int age, LocalDate birthDate, String helpStatus, String civilianStatus, String address, ObservableList<ContactInfo> contactInfo) {
+        initProperties();
+        this.name.set(name);
+        this.surname.set(surname);
+        this.age.set(age);
+        this.helpStatus.set(helpStatus);
+        this.civilianStatus.set(civilianStatus);
+        this.address.set(address);
+        this.contactInfo.set(contactInfo);
+        this.birthDate = birthDate;
         this.mastering = "";
         this.motivation = "";
         this.resources = "";
@@ -57,31 +58,75 @@ public class CitizenTemplateModel {
         this.assistiveDevices = "";
         this.homeLayout = "";
         this.network = "";
-        this.relevantFunctionalAbilities = null;
-        this.relevantHealthConditions = null;
 
-
+        this.relevantFunctionalAbilities = FXCollections.observableArrayList();
+        this.relevantHealthConditions = FXCollections.observableArrayList();
+        this.nonRelevantFunctionalAbilities = FXCollections.observableArrayList();
+        this.nonRelevantHealthConditions = FXCollections.observableArrayList();
 
         initFunctionalAbilities();
         initHealthConditions();
     }
 
+    public CitizenTemplateModel() {
+        initProperties();
+        this.name = new SimpleStringProperty();
+        this.surname = new SimpleStringProperty();
+        this.age = new SimpleIntegerProperty();
+        this.helpStatus = new SimpleStringProperty();
+        this.civilianStatus = new SimpleStringProperty();
+        this.address = new SimpleStringProperty();
+        this.contactInfo = new SimpleListProperty<>();
+        this.birthDate = LocalDate.now();
+        this.mastering = "";
+        this.motivation = "";
+        this.resources = "";
+        this.roles = "";
+        this.habits = "";
+        this.eduAndJob = "";
+        this.lifeStory = "";
+        this.healthInfo = "";
+        this.assistiveDevices = "";
+        this.homeLayout = "";
+        this.network = "";
+
+
+        this.relevantFunctionalAbilities = FXCollections.observableArrayList();
+        this.relevantHealthConditions = FXCollections.observableArrayList();
+        this.nonRelevantFunctionalAbilities = FXCollections.observableArrayList();
+        this.nonRelevantHealthConditions = FXCollections.observableArrayList();
+
+        initFunctionalAbilities();
+        initHealthConditions();
+    }
+
+    private void initProperties() {
+        this.name = new SimpleStringProperty();
+        this.surname = new SimpleStringProperty();
+        this.age = new SimpleIntegerProperty();
+        this.helpStatus = new SimpleStringProperty();
+        this.civilianStatus = new SimpleStringProperty();
+        this.address = new SimpleStringProperty();
+        this.contactInfo = new SimpleListProperty<>();
+    }
+
+    @Override
+    public String toString() {
+        return name.get() + " " + surname.get();
+    }
 
     private void initFunctionalAbilities() {
-        relevantFunctionalAbilities = FXCollections.observableArrayList();
         relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Walking", 1, true)));
         relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Climbing", 1, true)));
         relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Swimming", 1, true)));
         relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Bathing", 4, true)));
 
-        nonRelevantFunctionalAbilities = FXCollections.observableArrayList();
         nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Sleeping", 0, true)));
         nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Eating", 0, true)));
         nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Toileting", 0, true)));
     }
 
     private void initHealthConditions() {
-        relevantHealthConditions = FXCollections.observableArrayList();
         relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Diabetes", 1, false)));
         relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "High Blood Pressure", 1, false)));
         relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Heart Disease", 1, false)));
@@ -90,7 +135,6 @@ public class CitizenTemplateModel {
         relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Allergies", 1, false)));
         relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Other", 1, false)));
 
-        nonRelevantHealthConditions = FXCollections.observableArrayList();
         nonRelevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "None", 0, false)));
 
     }
@@ -305,5 +349,19 @@ public class CitizenTemplateModel {
 
     public void setRelevantHealthConditions(ObservableList<CategoryEntryModel> relevantHealthConditions) {
         this.relevantHealthConditions = relevantHealthConditions;
+    }
+
+    public ObservableList<CategoryEntryModel> getAllFuncCategories() {
+        ObservableList<CategoryEntryModel> allFuncConditions = FXCollections.observableArrayList();
+        allFuncConditions.addAll(nonRelevantFunctionalAbilities);
+        allFuncConditions.addAll(relevantFunctionalAbilities);
+        return allFuncConditions;
+    }
+
+    public ObservableList<CategoryEntryModel> getAllHealthConditions() {
+        ObservableList<CategoryEntryModel> allHealthConditions = FXCollections.observableArrayList();
+        allHealthConditions.addAll(nonRelevantHealthConditions);
+        allHealthConditions.addAll(relevantHealthConditions);
+        return allHealthConditions;
     }
 }

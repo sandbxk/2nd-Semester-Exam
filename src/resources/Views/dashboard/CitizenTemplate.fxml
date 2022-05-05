@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="anchorPaneCitizenTemplateDashboard" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../../Styles/MainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.GUI.Controllers.dashboard.CitizenTemplate">
+<AnchorPane fx:id="anchorPaneCitizenTemplateDashboard" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../../Styles/MainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.GUI.Controllers.dashboard.CitizenTemplateController">
         <children>
             <AnchorPane layoutX="14.0" layoutY="23.0" prefHeight="300.0" prefWidth="200.0" styleClass="panel30Deg" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="23.0">
                 <children>
@@ -30,7 +30,7 @@
                             <Button fx:id="btnCitizenTemplateSearch" mnemonicParsing="false" onAction="#onCitizenTemplateSearch" prefHeight="26.0" prefWidth="34.0" styleClass="searchBtn" />
                         </children>
                     </HBox>
-                    <Button layoutX="21.0" layoutY="777.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="159.0" styleClass="backgroundButton" text="Handlinger" AnchorPane.bottomAnchor="29.200000000000045" AnchorPane.topAnchor="775.0" />
+                    <Button layoutX="21.0" layoutY="777.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="159.0" styleClass="outlineBtn" text="Handlinger" AnchorPane.bottomAnchor="29.200000000000045" />
                 </children>
             </AnchorPane>
             <AnchorPane layoutX="230.0" layoutY="23.0" prefHeight="233.0" prefWidth="621.0" styleClass="panel30Deg" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="23.0">
@@ -139,9 +139,9 @@
                               <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Button fx:id="btnCitizenTemplateEditOn" mnemonicParsing="false" onAction="#onEditOn" styleClass="onOfftoggleBtn" text="Start Redigering" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" />
-                              <Button fx:id="btnCitizenTemplateEditCancel" mnemonicParsing="false" onAction="#onEditCancel" styleClass="onOfftoggleBtn" text="Annullér" visible="false" GridPane.halignment="CENTER" />
-                              <Button fx:id="btnCitizenTemplateEditSave" mnemonicParsing="false" onAction="#onEditDone" styleClass="onOfftoggleBtn" text="Gem" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                              <Button fx:id="btnCitizenTemplateEditOn" mnemonicParsing="false" onAction="#onEditOn" styleClass="outlineBtn" text="Start Redigering" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" />
+                              <Button fx:id="btnCitizenTemplateEditCancel" mnemonicParsing="false" onAction="#onEditCancel" styleClass="outlineBtn" text="Annullér" visible="false" GridPane.halignment="CENTER" />
+                              <Button fx:id="btnCitizenTemplateEditSave" mnemonicParsing="false" onAction="#onEditDone" styleClass="outlineBtn" text="Gem" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                            </children>
                         </GridPane>
                                 </children>
@@ -154,7 +154,7 @@
                 <content>
                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                         <children>
-                            <Accordion layoutX="1.0" prefWidth="658.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
+                            <Accordion layoutX="1.0" prefWidth="658.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
                                 <panes>
                                     <TitledPane text="Generelle Oplysninger">
                                         <content>
@@ -356,12 +356,12 @@
                                                 <children>
                                                     <TreeTableView fx:id="treeTblViewHealth" prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                         <columns>
-                                                            <TreeTableColumn fx:id="treeTblColumnHealthCategory" minWidth="150.0" prefWidth="-1.0" text="Tilstandsklassificering" />
-                                                            <TreeTableColumn fx:id="treeTblColumnHealthLevel" minWidth="60.0" prefWidth="-1.0" text="Niveau" />
-                                                            <TreeTableColumn fx:id="treeTblColumnHealthAssessment" minWidth="70.0" prefWidth="-1.0" text="Vurdering" />
-                                                            <TreeTableColumn fx:id="treeTblColumnHealthCause" minWidth="100.0" prefWidth="-1.0" text="Årsag" />
-                                                            <TreeTableColumn fx:id="treeTblColumnHealthExpectedCondition" minWidth="140.0" prefWidth="-1.0" text="Forventet Tilstand" />
-                                                            <TreeTableColumn fx:id="treeTblColumnHealthNote" minWidth="100.0" prefWidth="-1.0" text="Faglig Notat" />
+                                                            <TreeTableColumn fx:id="treeTblColumnHealthCategory" minWidth="150.0" onEditCancel="#onTreeTblColumnCancelEdit" prefWidth="-1.0" text="Tilstandsklassificering" />
+                                                            <TreeTableColumn fx:id="treeTblColumnHealthLevel" minWidth="60.0" onEditCancel="#onTreeTblColumnCancelEdit" prefWidth="-1.0" text="Niveau" />
+                                                            <TreeTableColumn fx:id="treeTblColumnHealthAssessment" minWidth="70.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Vurdering" />
+                                                            <TreeTableColumn fx:id="treeTblColumnHealthCause" minWidth="100.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Årsag" />
+                                                            <TreeTableColumn fx:id="treeTblColumnHealthExpectedCondition" minWidth="140.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Forventet Tilstand" />
+                                                            <TreeTableColumn fx:id="treeTblColumnHealthNote" minWidth="100.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Faglig Notat" />
                                                         </columns>
                                                         <styleClass>
                                                             <String fx:value="healthTable" />
@@ -376,20 +376,20 @@
                                         <content>
                                             <AnchorPane minHeight="0.0" minWidth="0.0">
                                                 <children>
-                                                    <TreeTableView fx:id="treeTblViewFunc" prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.399999999999977" AnchorPane.topAnchor="0.0">
+                                                    <TreeTableView fx:id="treeTblViewFunc" editable="true" prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                         <columns>
                                                             <TreeTableColumn fx:id="treeTblColumnFuncCategory" minWidth="140.0" prefWidth="-1.0" text="Tilstandsklassificering" />
                                                             <TreeTableColumn prefWidth="151.99993896484375" text="Tilstands Præcisering">
                                                                 <columns>
                                                                     <TreeTableColumn fx:id="treeTblColumnFuncLevel" minWidth="60.0" prefWidth="-1.0" text="Niveau" />
-                                                                    <TreeTableColumn fx:id="treeTblColumnFuncAssessment" minWidth="70.0" prefWidth="-1.0" text="Vurdering" />
-                                                                    <TreeTableColumn fx:id="treeTblColumnFuncCause" minWidth="70.0" prefWidth="-1.0" text="Årsag" />
+                                                                    <TreeTableColumn fx:id="treeTblColumnFuncAssessment" minWidth="70.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Vurdering" />
+                                                                    <TreeTableColumn fx:id="treeTblColumnFuncCause" minWidth="70.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Årsag" />
                                                                 </columns>
                                                             </TreeTableColumn>
-                                                            <TreeTableColumn fx:id="treeTblColumnFuncImplications" minWidth="100.0" prefWidth="-1.0" text="Betydninger for udførelse" />
-                                                            <TreeTableColumn fx:id="treeTblColumnFuncCitizenGoals" minWidth="120.0" prefWidth="-1.0" text="Borgers ønsker/mål" />
-                                                            <TreeTableColumn fx:id="treeTblColumnFuncExpectedCondition" minWidth="65.0" prefWidth="-1.0" text="Forventet Tilstand" />
-                                                            <TreeTableColumn fx:id="treeTblColumnFuncNote" minWidth="70.0" prefWidth="-1.0" text="Faglig Notat" />
+                                                            <TreeTableColumn fx:id="treeTblColumnFuncImplications" minWidth="100.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Betydninger for udførelse" />
+                                                            <TreeTableColumn fx:id="treeTblColumnFuncCitizenGoals" minWidth="120.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Borgers ønsker/mål" />
+                                                            <TreeTableColumn fx:id="treeTblColumnFuncExpectedCondition" minWidth="65.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Forventet Tilstand" />
+                                                            <TreeTableColumn fx:id="treeTblColumnFuncNote" minWidth="70.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Faglig Notat" />
                                                         </columns>
                                                         <styleClass>
                                                             <String fx:value="funcTable" />

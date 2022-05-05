@@ -864,9 +864,10 @@
 }
 
 .combo-box-base:disabled {
-    -fx-border-color: txtFillDark;
+    -fx-border-color: -fx-txtFillDark;
     -fx-border-width: 1;
     -fx-background-color: transparent;
+    -fx-opacity: 1;
 }
 
 .combo-box-base:disabled > .arrow, .combo-box .arrow-button {
@@ -908,4 +909,29 @@
 .tab-pane .tab
 {
     -fx-background-color: #e6e6e6;
+}
+
+.outlineBtn{
+    -fx-background-color: transparent;
+    -fx-background-radius: 30;
+    -fx-border-color: -fx-txtFillLight;
+    -fx-border-radius: 30;
+    -fx-border-width: 2;
+    -fx-text-fill: -fx-txtFillLight;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+
+.outlineBtn:hover{
+    -fx-background-color: -fx-panelHighlight;
+    -fx-text-fill: -fx-panelBase;
+    -fx-border-color: transparent;
+    -fx-font-weight: bold;
+}
+
+.outlineBtn:pressed{
+    -fx-background-color: -fx-txtFillLight;
+    -fx-text-fill: -fx-panelBase;
+    -fx-font-weight: bold;
 }
