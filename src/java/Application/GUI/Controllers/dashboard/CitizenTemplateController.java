@@ -86,6 +86,7 @@ public class CitizenTemplateController implements Initializable {
 
     public void onCitizenTemplateSearch(ActionEvent event) {
         model.citizenTemplateSearch();
+        //TODO: Implement search
     }
 
     public void onRemoveCitizenTemplateContactInfo(ActionEvent event) {
@@ -97,6 +98,7 @@ public class CitizenTemplateController implements Initializable {
     }
 
     private void setFuncTreeTable(){
+        //TODO: Proper table population
         // Set up the table
         CitizenTemplateModel citizenTemplateModel = new CitizenTemplateModel();
 
@@ -124,7 +126,10 @@ public class CitizenTemplateController implements Initializable {
         //https://jenkov.com/tutorials/javafx/treetableview.html
     }
 
-
+    /**
+     * Initializes the TreeTableColumns for the Function and Health TreeTableViews.
+     * Where not custom cellFatory is used, the TextFieldTreeTableCell applied.
+     */
     private void initTreeTableClmns(){
         treeTblColumnFuncCategory.setCellValueFactory(param -> param.getValue().getValue().categoryNameProperty());
         treeTblColumnFuncLevel.setCellValueFactory(param -> param.getValue().getValue().getFuncComboBoxProperty());
@@ -145,7 +150,6 @@ public class CitizenTemplateController implements Initializable {
 
 
         treeTblColumnFuncCategory.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-        //TODO treeTblColumnFuncLevel.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
         treeTblColumnFuncAssessment.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
         treeTblColumnFuncCause.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
         treeTblColumnFuncImplications.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
@@ -154,14 +158,10 @@ public class CitizenTemplateController implements Initializable {
         treeTblColumnFuncNote.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
         treeTblColumnHealthCategory.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-        //TODO treeTblColumnHealthLevel.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
         treeTblColumnHealthAssessment.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
         treeTblColumnHealthCause.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
         treeTblColumnHealthExpectedCondition.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
         treeTblColumnHealthNote.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-
-
-
     }
 
     public void onCitizenTemplateChangeJournal(ActionEvent event) {
@@ -192,7 +192,11 @@ public class CitizenTemplateController implements Initializable {
         listViewCitizenTemplateContactInfo.setItems(model.getSelectedCitizenTemplateModel().getContactInfo());
     }
 
-
+    /**
+     * Sets the tables and relevant columns to editable or not. The same applies to the combo boxes within the level columns.
+     * Also changes the visible buttons deciding whether to start, save or abandon the edit.
+     * @param editable
+     */
     private void setEditable(boolean editable) {
         treeTblViewFunc.setEditable(editable);
         treeTblViewHealth.setEditable(editable);
@@ -205,7 +209,6 @@ public class CitizenTemplateController implements Initializable {
         treeTblColumnFuncExpectedCondition.setEditable(editable);
         treeTblColumnFuncNote.setEditable(editable);
 
-        treeTblColumnHealthCategory.setEditable(editable);
         treeTblColumnHealthLevel.setEditable(editable);
         treeTblColumnHealthAssessment.setEditable(editable);
         treeTblColumnHealthCause.setEditable(editable);
@@ -217,7 +220,7 @@ public class CitizenTemplateController implements Initializable {
             cat.getValue().getFuncLevelComboBox().setDisable(!editable);
         }
         for (TreeItem<CategoryEntryModel> cat : treeTblViewHealth.getRoot().getChildren()) {
-            cat.getValue().getFuncLevelComboBox().setDisable(!editable);
+            cat.getValue().getHealthLevelComboBox().setDisable(!editable);
         }
 
         btnCitizenTemplateEditOn.setVisible(!editable); //Only visible if not editable
@@ -228,6 +231,7 @@ public class CitizenTemplateController implements Initializable {
 
     public void onEditOn(ActionEvent event) {
         setEditable(true);
+        //TODO: Save current state in model
         treeTblViewFunc.setRoot(model.getAllFuncCategories());
         treeTblViewHealth.setRoot(model.getAllHealthConditions());
 
@@ -246,14 +250,16 @@ public class CitizenTemplateController implements Initializable {
         treeTblViewHealth.setRoot(model.getRelevantHealthCategories());
     }
 
-
+    //https://www.youtube.com/watch?v=BNvVSU9nHDY
     public void onTreeTblColumnStartEdit(TreeTableColumn.CellEditEvent<CategoryEntryModel, String> editEvent) {
-
+        //TODO
     }
 
     public void onTreeTblColumnCommitEdit(TreeTableColumn.CellEditEvent<CategoryEntryModel, String> editEvent) {
+        //TODO
     }
 
     public void onTreeTblColumnCancelEdit(TreeTableColumn.CellEditEvent<CategoryEntryModel, String> editEvent) {
+        //TODO
     }
 }
