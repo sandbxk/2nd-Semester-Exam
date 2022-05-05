@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class StateMachine<T>
 {
-    private HashMap<T, IState> states = new HashMap<>();
+    private final HashMap<T, IState> states = new HashMap<>();
 
     private IState current = null;
 
@@ -15,7 +15,9 @@ public class StateMachine<T>
 
     public void change(T key)
     {
-        states.get(key).enable();
+        var newState = states.get(key);
+
+        newState.enable();
 
         if (current != null)
         {

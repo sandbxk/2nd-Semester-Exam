@@ -28,8 +28,6 @@ public class CreateTeacherController
         // FIXME: 03/05/2022 -- Dummy School
         School school = new School(-1, "Dummy School", 6700, "NotARealCity");
 
-
-
         accountDAO.createAccount(
                 txtFieldLogin.getText(),
                 txtFieldPassword.getText(),
