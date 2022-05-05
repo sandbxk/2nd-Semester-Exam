@@ -10,6 +10,9 @@
     -fx-funcBG: #FAF8EC;
     -fx-healthBase: #5DD677;
     -fx-healthBG: #EDFAEC;
+    -fx-oddRowFunc: #d2bc90;
+    -fx-oddRowHealth: #97d290;
+
 }
 
 .background {
@@ -566,7 +569,8 @@
     -fx-font-weight: bold;
     -fx-font-family: "Roboto";
     -fx-wrap-text: true;
-    -fx-content-display: center
+    -fx-content-display: center;
+    -fx-text-alignment: center;
 
 }
 .healthTable-view .column-header-background {
@@ -588,38 +592,47 @@
 }
 
 .healthTable .tree-table-row-cell:odd{
-    -fx-background-color: -fx-healthBG;
+    -fx-background-color: transparent;
+    -fx-border-color: -fx-oddRowHealth;
+    -fx-border-width: 0 1 0 0;
     -fx-font-size: 10pt;
     -fx-wrap-text: true;
-    -fx-content-display: center
+    -fx-content-display: center;
+    -fx-text-alignment: center;
 }
 
 .healthTable .tree-table-row-cell:even{
     -fx-background-color: transparent;
+    -fx-border-color: -fx-oddRowHealth;
+    -fx-border-width: 0 1 0 0;
     -fx-font-size: 10pt;
     -fx-wrap-text: true;
-    -fx-content-display: center
+    -fx-content-display: center;
+    -fx-text-alignment: center;
 }
 
 .healthTable .tree-table-row-cell:odd:selected{
     -fx-background-color: -fx-healthBase;
     -fx-font-size: 10pt;
     -fx-wrap-text: true;
-    -fx-content-display: center
+    -fx-content-display: center;
+    -fx-text-alignment: center;
 }
 
 .healthTable .tree-table-row-cell:even:selected{
     -fx-background-color: -fx-healthBase;
     -fx-font-size: 10pt;
     -fx-wrap-text: true;
-    -fx-content-display: center
+    -fx-content-display: center;
+    -fx-text-alignment: center;
 }
 
 .healthTable .tree-table-cell{
     -fx-border-color: transparent;
     -fx-text-fill: -fx-txtFillDark;
     -fx-wrap-text: true;
-    -fx-content-display: center
+    -fx-content-display: center;
+    -fx-text-alignment: center;
 }
 
 
@@ -627,26 +640,27 @@
     -fx-border-color: -fx-txtFillDark;
     -fx-text-fill: -fx-txtFillDark;
     -fx-wrap-text: true;
-    -fx-content-display: center
+    -fx-content-display: center;
+    -fx-text-alignment: center;
 }
 
 .table-row-cell:odd{
     -fx-background-color: transparent;
     -fx-font-size: 10pt;
     -fx-wrap-text: true;
-    -fx-content-display: center
+    -fx-content-display: center;
 }
 .table-row-cell:even{
     -fx-background-color: transparent;
     -fx-font-size: 10pt;
     -fx-wrap-text: true;
-    -fx-content-display: center
+    -fx-content-display: center;
 }
 
 .table-row-cell:empty {
     -fx-background-color: transparent;
     -fx-wrap-text: true;
-    -fx-content-display: center
+    -fx-content-display: center;
 }
 
 
@@ -670,6 +684,7 @@
     -fx-font-family: "Roboto";
     -fx-wrap-text: true;
     -fx-content-display: center;
+    -fx-text-alignment: center;
 
 }
 
@@ -692,45 +707,56 @@
 
 
 .funcTable .tree-table-row-cell:odd{
-    -fx-background-color: -fx-funcBG;
+    -fx-background-color: transparent;
+    -fx-border-color: -fx-oddRowFunc;
+    -fx-border-width: 0 1 0 0;
     -fx-font-size: 10pt;
     -fx-wrap-text: true;
-    -fx-content-display: center
+    -fx-content-display: center;
+    -fx-text-alignment: center;
 }
 
 .funcTable .tree-table-row-cell:even{
     -fx-background-color: transparent;
+    -fx-border-color: -fx-oddRowFunc;
+    -fx-border-width: 0 1 0 0;
     -fx-font-size: 10pt;
     -fx-wrap-text: true;
-    -fx-content-display: center
+    -fx-content-display: center;
+    -fx-text-alignment: center;
 }
 
 .funcTable .tree-table-row-cell:odd:selected{
-    -fx-background-color: -fx-funcBase;
+    -fx-background-color: -fx-functionBase;
     -fx-font-size: 10pt;
     -fx-wrap-text: true;
-    -fx-content-display: center
+    -fx-content-display: center;
+    -fx-text-alignment: center;
 }
 
 .funcTable .tree-table-row-cell:even:selected{
-    -fx-background-color: -fx-funcBase;
+    -fx-background-color: -fx-functionBase;
     -fx-font-size: 10pt;
     -fx-wrap-text: true;
-    -fx-content-display: center
+    -fx-content-display: center;
+    -fx-text-alignment: center;
 }
 
 .funcTable .tree-table-cell{
     -fx-border-color: transparent;
     -fx-text-fill: -fx-txtFillDark;
     -fx-wrap-text: true;
-    -fx-content-display: center
+    -fx-content-display: center;
+    -fx-text-alignment: center;
 }
 
 .funcTable .tree-table-cell:selected{
     -fx-border-color: -fx-txtFillDark;
+    -fx-border-width: 0 1 0 0;
     -fx-text-fill: -fx-txtFillDark;
     -fx-wrap-text: true;
-    -fx-content-display: center
+    -fx-content-display: center;
+    -fx-text-alignment: center;
 }
 
 
