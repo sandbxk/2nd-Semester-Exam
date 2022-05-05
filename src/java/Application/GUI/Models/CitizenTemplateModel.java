@@ -15,7 +15,7 @@ public class CitizenTemplateModel {
     private IntegerProperty age;
     private LocalDate birthDate;
     private StringProperty helpStatus;
-    private StringProperty civilStatus;
+    private StringProperty civilianStatus;
     private StringProperty address;
     private ListProperty<ContactInfo> contactInfo;
 
@@ -40,7 +40,7 @@ public class CitizenTemplateModel {
         this.age = new SimpleIntegerProperty();
         this.birthDate = LocalDate.now();
         this.helpStatus = new SimpleStringProperty();
-        this.civilStatus = new SimpleStringProperty();
+        this.civilianStatus = new SimpleStringProperty();
         this.address = new SimpleStringProperty();
         this.contactInfo = new SimpleListProperty<>();
         this.mastering = "";
@@ -138,16 +138,16 @@ public class CitizenTemplateModel {
         this.helpStatus.set(helpStatus);
     }
 
-    public String getCivilStatus() {
-        return civilStatus.get();
+    public String getCivilianStatus() {
+        return civilianStatus.get();
     }
 
-    public StringProperty civilStatusProperty() {
-        return civilStatus;
+    public StringProperty civilianStatusProperty() {
+        return civilianStatus;
     }
 
-    public void setCivilStatus(String civilStatus) {
-        this.civilStatus.set(civilStatus);
+    public void setCivilianStatus(String civilStatus) {
+        this.civilianStatus.set(civilStatus);
     }
 
     public String getAddress() {

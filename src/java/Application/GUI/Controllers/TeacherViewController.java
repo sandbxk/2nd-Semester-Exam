@@ -2,23 +2,25 @@ package Application.GUI.Controllers;
 
 import Application.GUI.Models.CategoryEntryModel;
 import Application.GUI.Models.CitizenTemplateModel;
+import Application.GUI.Models.ControllerModels.TeacherViewModel;
+import Application.GUI.Models.FunctionalLevels;
 import Application.GUI.StateMachine.State;
 
 import javafx.application.Platform;
 import Application.GUI.StateMachine.StateMachine;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 
 import java.net.URL;
-import java.util.HashMap;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class TeacherViewController implements Initializable {
@@ -87,7 +89,7 @@ public class TeacherViewController implements Initializable {
             // Citizen Template - Functional Conditions
     public TreeTableView<CategoryEntryModel> treeTblViewFunc;
     public TreeTableColumn<CategoryEntryModel, String> treeTblClmnFuncCategory;
-    public TreeTableColumn<CategoryEntryModel, ImageView> treeTblClmnFuncLevel;
+    public TreeTableColumn<CategoryEntryModel, ComboBox<FunctionalLevels>> treeTblClmnFuncLevel;
     public TreeTableColumn<CategoryEntryModel, String> treeTblClmnFuncAssessment;
     public TreeTableColumn<CategoryEntryModel, String> treeTblClmnFuncCause;
     public TreeTableColumn<CategoryEntryModel, String> treeTblClmnFuncImplications;
@@ -119,14 +121,17 @@ public class TeacherViewController implements Initializable {
     public ToggleButton tglBtnCitizenTemplateEditOn;
     public ToggleButton tglBtnCitizenTemplateEditOff;
 
-
-    private ToggleGroup toggleGroup;
+    private BooleanProperty citizenTemplateEditMode = new SimpleBooleanProperty(false);
+    private ToggleGroup toggleGroupViews;
+    private ToggleGroup toggleGroupEditModeCitizenTemplate;
     private StateMachine<ToggleButton> stateMachine = new StateMachine<>();
+    private TeacherViewModel teacherViewModel = new TeacherViewModel();
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        initToggleGroup();
+        initToggleGroups();
         viewChangedListener();
         initViewStates();
         tglBtnDashboard.setSelected(true);
@@ -147,27 +152,76 @@ public class TeacherViewController implements Initializable {
         stateMachine.addState(tglBtnJournals, new State(anchorPaneJournals, tglBtnJournals)); // Journals
     }
 
-    private void initToggleGroup()
+    private void initToggleGroups()
     {
-        toggleGroup = new ToggleGroup();
-        tglBtnDashboard.setToggleGroup(toggleGroup);
-        tglBtnStudents.setToggleGroup(toggleGroup);
-        tglBtnCitizenTemplates.setToggleGroup(toggleGroup);
-        tglBtnCitizens.setToggleGroup(toggleGroup);
-        tglBtnCases.setToggleGroup(toggleGroup);
-        tglBtnAssignments.setToggleGroup(toggleGroup);
-        tglBtnJournals.setToggleGroup(toggleGroup);
+        toggleGroupViews = new ToggleGroup();
+        tglBtnDashboard.setToggleGroup(toggleGroupViews);
+        tglBtnStudents.setToggleGroup(toggleGroupViews);
+        tglBtnCitizenTemplates.setToggleGroup(toggleGroupViews);
+        tglBtnCitizens.setToggleGroup(toggleGroupViews);
+        tglBtnCases.setToggleGroup(toggleGroupViews);
+        tglBtnAssignments.setToggleGroup(toggleGroupViews);
+        tglBtnJournals.setToggleGroup(toggleGroupViews);
+
+        toggleGroupEditModeCitizenTemplate = new ToggleGroup();
+        tglBtnCitizenTemplateEditOn.setToggleGroup(toggleGroupEditModeCitizenTemplate);
+        tglBtnCitizenTemplateEditOff.setToggleGroup(toggleGroupEditModeCitizenTemplate);
     }
 
     private void viewChangedListener()
     {
-        toggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) ->
+        toggleGroupViews.selectedToggleProperty().addListener((observable, oldValue, newValue) ->
         {
             if(newValue != null)
             {
                 stateMachine.change((ToggleButton) newValue);
             }
         });
+    }
+
+    private void editModeListener(){
+        toggleGroupEditModeCitizenTemplate.selectedToggleProperty().addListener((observable, oldValue, newValue) ->
+        {
+            ToggleButton newToggleValue = null;
+            ToggleButton oldToggleValue = null;
+            if(newValue != null) {
+                newToggleValue = (ToggleButton) newValue;
+                newToggleValue.setDisable(true);
+            }
+
+            if (oldValue != null) {
+                oldToggleValue = (ToggleButton) oldValue;
+                oldToggleValue.setDisable(false);
+            }
+
+            if(newToggleValue == tglBtnCitizenTemplateEditOn && newToggleValue != null)
+            {
+
+            }
+            else if(newToggleValue == tglBtnCitizenTemplateEditOff && newToggleValue != null) {
+
+            }
+
+
+        });
+    }
+
+    private void editModePropertyListener() {
+        citizenTemplateEditMode.addListener((observable, oldValue, newValue) -> editComboBoxes(newValue));
+
+        //TODO: Switch table items
+        }
+
+    private void editComboBoxes(boolean editable) {
+        treeTblViewFunc.setEditable(editable);
+        treeTblViewHealth.setEditable(editable);
+        for (TreeItem<CategoryEntryModel> cat : treeTblViewFunc.getRoot().getChildren()) {
+            cat.getValue().getLevelImageComboBox().setDisable(editable);
+        }
+        for (TreeItem<CategoryEntryModel> cat : treeTblViewHealth.getRoot().getChildren()) {
+            cat.getValue().getLevelImageComboBox().setDisable(editable);
+        }
+
     }
 
     private void initVisible()
@@ -184,18 +238,23 @@ public class TeacherViewController implements Initializable {
 
     // Students
     public void onViewStudentCases(ActionEvent event) {
+        teacherViewModel.viewStudentCases();
     }
 
     public void onStudentSettings(ActionEvent event) {
+        teacherViewModel.studentSettings();
     }
 
     public void onRemoveCitizenToStudent(ActionEvent event) {
+        teacherViewModel.removeCitizenToStudent();
     }
 
     public void onAddCitizenToStudent(ActionEvent event) {
+        teacherViewModel.addStudentToCitizen();
     }
 
     public void onViewStudentsWork(ActionEvent event) {
+        teacherViewModel.viewStudentsWork();
     }
 
 
@@ -203,31 +262,38 @@ public class TeacherViewController implements Initializable {
 
     // Citizens
     public void onGeneralInfo(ActionEvent event) {
+        teacherViewModel.generalInfo();
     }
 
     public void onJournal(ActionEvent event) {
+        teacherViewModel.journal();
     }
 
     public void onRemoveStudentToCitizen(ActionEvent event) {
+        teacherViewModel.removeStudentToCitizen();
     }
 
     public void onAddStudentToCitizen(ActionEvent event) {
+        teacherViewModel.addCitizenToStudent();
     }
 
     public void onCitizensSearch(ActionEvent event) {
+        teacherViewModel.citizensSearch();
     }
 
 
 
     // Citizen Template
-
     public void onCitizenTemplateSearch(ActionEvent event) {
+        teacherViewModel.citizenTemplateSearch();
     }
 
     public void onRemoveCitizenTemplateContactInfo(ActionEvent event) {
+        teacherViewModel.removeCitizenTemplateContactInfo();
     }
 
     public void onAddCitizenTemplateContactInfo(ActionEvent event) {
+        teacherViewModel.addCitizenTemplateContactInfo();
     }
 
     private void setFuncTreeTable(){
@@ -260,7 +326,7 @@ public class TeacherViewController implements Initializable {
 
     private void initTreeTableClmns(){
         treeTblClmnFuncCategory.setCellValueFactory(param -> param.getValue().getValue().categoryNameProperty());
-        treeTblClmnFuncLevel.setCellValueFactory(param -> param.getValue().getValue().getLevelImageProperty());
+        treeTblClmnFuncLevel.setCellValueFactory(param -> param.getValue().getValue().getLevelImageComboBoxProperty());
         treeTblClmnFuncAssessment.setCellValueFactory(param -> param.getValue().getValue().assessmentProperty());
         treeTblClmnFuncCause.setCellValueFactory(param -> param.getValue().getValue().causeProperty());
         treeTblClmnFuncImplications.setCellValueFactory(param -> param.getValue().getValue().implicationsProperty());
@@ -277,9 +343,30 @@ public class TeacherViewController implements Initializable {
     }
 
     public void onCitizenTemplateChangeJournal(ActionEvent event) {
+        teacherViewModel.citizenTemplateChangeJournal();
     }
 
     public void onCitizenTemplateEditBaseData(ActionEvent event) {
+        teacherViewModel.onCitizenTemplateEditBaseData();
+    }
+
+    private void initCitizenTemplatesList(){
+        listViewCitizenTemplates.setItems(teacherViewModel.getCitizenTemplates());
+        listViewCitizenTemplates.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            teacherViewModel.setSelectedCitizenTemplateModel((CitizenTemplateModel) newValue);
+            setDataToCitizenTemplateView();
+        });
+    }
+
+    private void setDataToCitizenTemplateView(){
+        lblCitizenTemplateName.setText(teacherViewModel.getSelectedCitizenTemplateModel().getName());
+        lblAgeCitizenTemplate.setText(teacherViewModel.getSelectedCitizenTemplateModel().getAge() + "");
+        lblAddressCitizenTemplate.setText(teacherViewModel.getSelectedCitizenTemplateModel().getAddress());
+        lblBirthdateCitizenTemplate.setText(teacherViewModel.getSelectedCitizenTemplateModel().getBirthDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        lblHelpStatusCitizenTemplate.setText(teacherViewModel.getSelectedCitizenTemplateModel().getHelpStatus());
+        lblCivilianStatusCitizenTemplate.setText(teacherViewModel.getSelectedCitizenTemplateModel().getCivilianStatus());
+
+        listViewCitizenTemplateContactInfo.setItems(teacherViewModel.getSelectedCitizenTemplateModel().getContactInfo());
     }
 
 }

@@ -2,6 +2,10 @@ package Application.GUI.Models;
 
 import Application.BE.CategoryEntry;
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -12,7 +16,7 @@ public class CategoryEntryModel {
     private StringProperty categoryName;
     private StringProperty superCategory;
     private IntegerProperty level;
-    private ObjectProperty<ImageView> levelImage;
+    private ObjectProperty<ComboBox<FunctionalLevels>> levelImageComboBox;
     private StringProperty assessment;
     private StringProperty cause;
     private StringProperty implications;
@@ -33,47 +37,63 @@ public class CategoryEntryModel {
         expectedCondition = new SimpleStringProperty(categoryEntry.getExpectedCondition());
         note = new SimpleStringProperty(categoryEntry.getNote());
         isFunctionAbility = categoryEntry.isFunctionAbility();
-        levelImage = new SimpleObjectProperty<>(new ImageView());
-
-
-        levelImage.get().setFitHeight(50);
-        levelImage.get().setFitWidth(60);
-
+        levelImageComboBox = new SimpleObjectProperty<>(new ComboBox<>());
         this.categoryEntry = categoryEntry;
         this.id = categoryEntry.getId();
-        setLevelImage(level.get());
+
+        initImageComboBox();
+
+        onImageLevelChanged();
+
+        if (level.get() == 9){
+            levelImageComboBox.get().setValue(FunctionalLevels.LEVEL_9);
+        } else levelImageComboBox.get().setValue(FunctionalLevels.values()[level.get()]);
+
     }
 
     public CategoryEntryModel(String categoryName){
         this.categoryName = new SimpleStringProperty(categoryName);
     }
 
-    private void setLevelImage(int level){
-        Image image;
+    private void initImageComboBox(){
+        ObservableList<FunctionalLevels> data = FXCollections.observableArrayList(FunctionalLevels.values());
+        levelImageComboBox.get().setItems(data);
 
-        switch (level){
-            case 0: image = new Image(getClass().getResource("/img/func0.png").toExternalForm());
-                break;
-            case 1: image = new Image(getClass().getResource("/img/func1.png").toExternalForm());
-                break;
-            case 2: image = new Image(getClass().getResource("/img/func2.png").toExternalForm());
-                break;
-            case 3: image = new Image(getClass().getResource("/img/func3.png").toExternalForm());
-                break;
-            case 4: image = new Image(getClass().getResource("/img/func4.png").toExternalForm());
-                break;
-            default: image = new Image(getClass().getResource("/img/func0.png").toExternalForm());
-        }
-
-        levelImage.get().setImage(image);
+        levelImageComboBox.get().setCellFactory(e -> comboBoxCell());
+        levelImageComboBox.get().setButtonCell(comboBoxCell());
     }
 
-    public ImageView getLevelImage(){
-        return levelImage.get();
+    private ListCell<FunctionalLevels> comboBoxCell() {
+        return new ListCell<FunctionalLevels>() {
+            ImageView imageView = new ImageView();
+
+            @Override
+            public void updateItem(FunctionalLevels level, boolean empty) {
+                super.updateItem(level, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    imageView.setImage(level.image);
+                    imageView.setFitWidth(60);
+                    imageView.setFitHeight(50);
+                    setGraphic(imageView);
+                }
+            }
+        };
     }
 
-    public ObjectProperty<ImageView> getLevelImageProperty(){
-        return levelImage;
+    private void onImageLevelChanged(){
+        levelImageComboBox.get().selectionModelProperty().get().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            setLevel(newValue.level);
+        });
+    }
+
+    public ComboBox<FunctionalLevels> getLevelImageComboBox(){
+        return levelImageComboBox.get();
+    }
+
+    public ObjectProperty<ComboBox<FunctionalLevels>> getLevelImageComboBoxProperty(){
+        return levelImageComboBox;
     }
 
     public int getId() {
