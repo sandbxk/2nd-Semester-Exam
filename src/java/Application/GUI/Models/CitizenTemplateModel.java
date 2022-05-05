@@ -31,8 +31,11 @@ public class CitizenTemplateModel {
     private String homeLayout;
     private String network;
 
-    private ObservableList<CategoryEntryModel> functionalAbilities;
-    private ObservableList<CategoryEntryModel> healthConditions;
+    private ObservableList<CategoryEntryModel> relevantFunctionalAbilities;
+    private ObservableList<CategoryEntryModel> relevantHealthConditions;
+    private ObservableList<CategoryEntryModel> nonRelevantFunctionalAbilities;
+    private ObservableList<CategoryEntryModel> nonRelevantHealthConditions;
+
 
     public CitizenTemplateModel() {
         this.name = new SimpleStringProperty();
@@ -54,8 +57,10 @@ public class CitizenTemplateModel {
         this.assistiveDevices = "";
         this.homeLayout = "";
         this.network = "";
-        this.functionalAbilities = null;
-        this.healthConditions = null;
+        this.relevantFunctionalAbilities = null;
+        this.relevantHealthConditions = null;
+
+
 
         initFunctionalAbilities();
         initHealthConditions();
@@ -63,22 +68,31 @@ public class CitizenTemplateModel {
 
 
     private void initFunctionalAbilities() {
-        functionalAbilities = FXCollections.observableArrayList();
-        functionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Walking", 1, true)));
-        functionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Climbing", 1, true)));
-        functionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Swimming", 1, true)));
-        functionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Bathing", 4, true)));
+        relevantFunctionalAbilities = FXCollections.observableArrayList();
+        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Walking", 1, true)));
+        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Climbing", 1, true)));
+        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Swimming", 1, true)));
+        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Bathing", 4, true)));
+
+        nonRelevantFunctionalAbilities = FXCollections.observableArrayList();
+        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Sleeping", 0, true)));
+        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Eating", 0, true)));
+        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Toileting", 0, true)));
     }
 
     private void initHealthConditions() {
-        healthConditions = FXCollections.observableArrayList();
-        healthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Diabetes", 1, false)));
-        healthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "High Blood Pressure", 1, false)));
-        healthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Heart Disease", 1, false)));
-        healthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Asthma", 1, false)));
-        healthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Epilepsy", 1, false)));
-        healthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Allergies", 1, false)));
-        healthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Other", 1, false)));
+        relevantHealthConditions = FXCollections.observableArrayList();
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Diabetes", 1, false)));
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "High Blood Pressure", 1, false)));
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Heart Disease", 1, false)));
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Asthma", 1, false)));
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Epilepsy", 1, false)));
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Allergies", 1, false)));
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Other", 1, false)));
+
+        nonRelevantHealthConditions = FXCollections.observableArrayList();
+        nonRelevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "None", 0, false)));
+
     }
 
 
@@ -262,19 +276,34 @@ public class CitizenTemplateModel {
         this.network = network;
     }
 
-    public ObservableList<CategoryEntryModel> getFunctionalAbilities() {
-        return functionalAbilities;
+    public ObservableList<CategoryEntryModel> getNonRelevantFunctionalAbilities() {
+        return nonRelevantFunctionalAbilities;
     }
 
-    public void setFunctionalAbilities(ObservableList<CategoryEntryModel> functionalAbilities) {
-        this.functionalAbilities = functionalAbilities;
+    public void setNonRelevantFunctionalAbilities(ObservableList<CategoryEntryModel> nonRelevantFunctionalAbilities) {
+        this.nonRelevantFunctionalAbilities = relevantFunctionalAbilities;
     }
 
-    public ObservableList<CategoryEntryModel> getHealthConditions() {
-        return healthConditions;
+    public ObservableList<CategoryEntryModel> getNonRelevantHealthConditions() {
+        return nonRelevantHealthConditions;
     }
 
-    public void setHealthConditions(ObservableList<CategoryEntryModel> healthConditions) {
-        this.healthConditions = healthConditions;
+    public void setNonRelevantHealthConditions(ObservableList<CategoryEntryModel> nonRelevantHealthConditions) {
+        this.nonRelevantHealthConditions = relevantHealthConditions;
+    }
+    public ObservableList<CategoryEntryModel> getRelevantFunctionalAbilities() {
+        return relevantFunctionalAbilities;
+    }
+
+    public void setRelevantFunctionalAbilities(ObservableList<CategoryEntryModel> relevantFunctionalAbilities) {
+        this.relevantFunctionalAbilities = relevantFunctionalAbilities;
+    }
+
+    public ObservableList<CategoryEntryModel> getRelevantHealthConditions() {
+        return relevantHealthConditions;
+    }
+
+    public void setRelevantHealthConditions(ObservableList<CategoryEntryModel> relevantHealthConditions) {
+        this.relevantHealthConditions = relevantHealthConditions;
     }
 }

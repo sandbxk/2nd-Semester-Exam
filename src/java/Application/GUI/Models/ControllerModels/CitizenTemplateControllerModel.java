@@ -4,53 +4,11 @@ import Application.GUI.Models.CategoryEntryModel;
 import Application.GUI.Models.CitizenTemplateModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.scene.control.TreeItem;
 
-public class TeacherViewModel {
+public class CitizenTemplateControllerModel {
 
     private CitizenTemplateModel selectedCitizenTemplateModel;
-
-
-    //Students
-    public void viewStudentCases() {
-        //TODO
-    }
-
-    public void studentSettings() {
-    }
-
-    public void removeCitizenToStudent() {
-    }
-
-    public void addCitizenToStudent() {
-    }
-
-    public void viewStudentsWork() {
-    }
-
-
-
-
-    // Citizens
-    public void generalInfo() {
-    }
-
-    public void journal() {
-    }
-
-    public void removeStudentToCitizen() {
-    }
-
-    public void addStudentToCitizen() {
-    }
-
-    public void citizensSearch() {
-    }
-
-
-
-    // Citizen Template
 
     public void citizenTemplateSearch() {
     }
@@ -78,5 +36,29 @@ public class TeacherViewModel {
 
     public CitizenTemplateModel getSelectedCitizenTemplateModel() {
         return selectedCitizenTemplateModel;
+    }
+
+    public TreeItem<CategoryEntryModel> getAllFuncCategories() {
+        return null; //TODO
+    }
+
+    public TreeItem<CategoryEntryModel> getAllHealthCategories() {
+        return null; //TODO
+    }
+
+    public TreeItem<CategoryEntryModel> getNewRelevantFuncCategories() {
+        return null; //TODO
+    }
+
+    public TreeItem<CategoryEntryModel> getNewRelevantHealthCategories() {
+        return null; //TODO
+    }
+
+    public TreeItem<CategoryEntryModel> getRelevantFuncCategories() {
+        return null; //TODO
+    }
+
+    public TreeItem<CategoryEntryModel> getRelevantHealthCategories() {
+        return null; //TODO
     }
 }

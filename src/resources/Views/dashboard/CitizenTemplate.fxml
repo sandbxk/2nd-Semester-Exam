@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
@@ -11,7 +10,6 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -21,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="anchorPaneCitizenTemplateDashboard" prefHeight="400.0" prefWidth="600.0" styleClass="background" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.GUI.Controllers.dashboard.CitizenTemplate">
+<AnchorPane fx:id="anchorPaneCitizenTemplateDashboard" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../../Styles/MainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.GUI.Controllers.dashboard.CitizenTemplate">
         <children>
             <AnchorPane layoutX="14.0" layoutY="23.0" prefHeight="300.0" prefWidth="200.0" styleClass="panel30Deg" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="23.0">
                 <children>
@@ -125,27 +123,27 @@
                                 </children>
                             </VBox>
                             <Button fx:id="btnCitizenTemplateChangeJournal" layoutX="585.0" layoutY="71.0" mnemonicParsing="false" onAction="#onCitizenTemplateChangeJournal" prefHeight="54.0" prefWidth="111.0" styleClass="panelBtnNoPadding" text="Skift Journal" AnchorPane.rightAnchor="1.599999999999909" AnchorPane.topAnchor="71.0" />
-                            <VBox layoutX="584.0" layoutY="150.0" prefHeight="58.0" prefWidth="114.0" AnchorPane.rightAnchor="-0.6000000000000227" AnchorPane.topAnchor="150.0">
+                            <VBox layoutX="393.0" layoutY="165.0" prefHeight="58.0" prefWidth="135.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="165.0">
                                 <children>
-                                    <Label styleClass="smallPanelLblBold" text="Redigerings tilstand">
+                                    <Label alignment="CENTER" prefHeight="15.0" prefWidth="198.0" styleClass="smallPanelLblBold" text="Redigerings tilstand" textAlignment="CENTER">
                                         <VBox.margin>
                                             <Insets bottom="5.0" />
                                         </VBox.margin>
                                     </Label>
-                                    <HBox>
-                                        <children>
-                                            <ToggleButton fx:id="tglBtnCitizenTemplateEditOn" mnemonicParsing="false" styleClass="onOfftoggleBtn" text="Til">
-                                                <HBox.margin>
-                                                    <Insets left="15.0" />
-                                                </HBox.margin>
-                                            </ToggleButton>
-                                            <ToggleButton fx:id="tglBtnCitizenTemplateEditOff" contentDisplay="CENTER" mnemonicParsing="false" styleClass="onOfftoggleBtn" text="Fra">
-                                                <HBox.margin>
-                                                    <Insets left="10.0" />
-                                                </HBox.margin>
-                                            </ToggleButton>
-                                        </children>
-                                    </HBox>
+                        <GridPane>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Button fx:id="btnCitizenTemplateEditOn" mnemonicParsing="false" onAction="#onEditOn" styleClass="onOfftoggleBtn" text="Start Redigering" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" />
+                              <Button fx:id="btnCitizenTemplateEditCancel" mnemonicParsing="false" onAction="#onEditCancel" styleClass="onOfftoggleBtn" text="Annullér" visible="false" GridPane.halignment="CENTER" />
+                              <Button fx:id="btnCitizenTemplateEditSave" mnemonicParsing="false" onAction="#onEditDone" styleClass="onOfftoggleBtn" text="Gem" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                           </children>
+                        </GridPane>
                                 </children>
                             </VBox>
                         </children>

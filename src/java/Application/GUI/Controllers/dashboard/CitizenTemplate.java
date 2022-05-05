@@ -2,10 +2,8 @@ package Application.GUI.Controllers.dashboard;
 
 import Application.GUI.Models.CategoryEntryModel;
 import Application.GUI.Models.CitizenTemplateModel;
-import Application.GUI.Models.ControllerModels.TeacherViewModel;
+import Application.GUI.Models.ControllerModels.CitizenTemplateControllerModel;
 import Application.GUI.Models.FunctionalLevels;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,8 +32,9 @@ public class CitizenTemplate implements Initializable {
     public Label lblHelpStatusCitizenTemplate;
     public Label lblCivilianStatusCitizenTemplate;
     public Button btnCitizenTemplateChangeJournal;
-    public ToggleButton tglBtnCitizenTemplateEditOn;
-    public ToggleButton tglBtnCitizenTemplateEditOff;
+    public Button btnCitizenTemplateEditOn;
+    public Button btnCitizenTemplateEditCancel;
+    public Button btnCitizenTemplateEditSave;
 
 
     // Citizen Template - Functional Conditions
@@ -71,38 +70,36 @@ public class CitizenTemplate implements Initializable {
     public TextArea txtAreaGenInfoHomeLayout;
     public TextArea txtAreaGenInfoNetwork;
 
-    private BooleanProperty citizenTemplateEditMode = new SimpleBooleanProperty(false);
-    private ToggleGroup toggleGroup;
-    private TeacherViewModel teacherViewModel = new TeacherViewModel();
+
+    private CitizenTemplateControllerModel model = new CitizenTemplateControllerModel();
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    initTreeTableClmns();
-    initToggleGroup();
-    setFuncTreeTable();
-    editModeListener();
+        initTreeTableClmns();
+        setFuncTreeTable();
+        initCitizenTemplatesList();
     }
 
 
     public void onCitizenTemplateSearch(ActionEvent event) {
-        teacherViewModel.citizenTemplateSearch();
+        model.citizenTemplateSearch();
     }
 
     public void onRemoveCitizenTemplateContactInfo(ActionEvent event) {
-        teacherViewModel.removeCitizenTemplateContactInfo();
+        model.removeCitizenTemplateContactInfo();
     }
 
     public void onAddCitizenTemplateContactInfo(ActionEvent event) {
-        teacherViewModel.addCitizenTemplateContactInfo();
+        model.addCitizenTemplateContactInfo();
     }
 
     private void setFuncTreeTable(){
         // Set up the table
         CitizenTemplateModel citizenTemplateModel = new CitizenTemplateModel();
 
-        ObservableList<CategoryEntryModel> func = citizenTemplateModel.getFunctionalAbilities();
-        ObservableList<CategoryEntryModel> health = citizenTemplateModel.getHealthConditions();
+        ObservableList<CategoryEntryModel> func = citizenTemplateModel.getRelevantFunctionalAbilities();
+        ObservableList<CategoryEntryModel> health = citizenTemplateModel.getRelevantHealthConditions();
 
         ObservableList<TreeItem<CategoryEntryModel>> funcTree = FXCollections.observableArrayList();
         ObservableList<TreeItem<CategoryEntryModel>> healthTree = FXCollections.observableArrayList();
@@ -125,13 +122,6 @@ public class CitizenTemplate implements Initializable {
         //https://jenkov.com/tutorials/javafx/treetableview.html
     }
 
-    private void initToggleGroup()
-    {
-
-        toggleGroup = new ToggleGroup();
-        tglBtnCitizenTemplateEditOn.setToggleGroup(toggleGroup);
-        tglBtnCitizenTemplateEditOff.setToggleGroup(toggleGroup);
-    }
 
     private void initTreeTableClmns(){
         treeTblColumnFuncCategory.setCellValueFactory(param -> param.getValue().getValue().categoryNameProperty());
@@ -152,66 +142,35 @@ public class CitizenTemplate implements Initializable {
     }
 
     public void onCitizenTemplateChangeJournal(ActionEvent event) {
-        teacherViewModel.citizenTemplateChangeJournal();
+        model.citizenTemplateChangeJournal();
     }
 
     public void onCitizenTemplateEditBaseData(ActionEvent event) {
-        teacherViewModel.onCitizenTemplateEditBaseData();
+        model.onCitizenTemplateEditBaseData();
     }
 
     private void initCitizenTemplatesList(){
-        listViewCitizenTemplates.setItems(teacherViewModel.getCitizenTemplates());
+        listViewCitizenTemplates.setItems(model.getCitizenTemplates());
+
         listViewCitizenTemplates.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            teacherViewModel.setSelectedCitizenTemplateModel((CitizenTemplateModel) newValue);
+            model.setSelectedCitizenTemplateModel((CitizenTemplateModel) newValue);
             setDataToCitizenTemplateView();
         });
     }
 
     private void setDataToCitizenTemplateView(){
-        lblCitizenTemplateName.setText(teacherViewModel.getSelectedCitizenTemplateModel().getName());
-        lblAgeCitizenTemplate.setText(teacherViewModel.getSelectedCitizenTemplateModel().getAge() + "");
-        lblAddressCitizenTemplate.setText(teacherViewModel.getSelectedCitizenTemplateModel().getAddress());
-        lblBirthdateCitizenTemplate.setText(teacherViewModel.getSelectedCitizenTemplateModel().getBirthDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-        lblHelpStatusCitizenTemplate.setText(teacherViewModel.getSelectedCitizenTemplateModel().getHelpStatus());
-        lblCivilianStatusCitizenTemplate.setText(teacherViewModel.getSelectedCitizenTemplateModel().getCivilianStatus());
+        lblCitizenTemplateName.setText(model.getSelectedCitizenTemplateModel().getName());
+        lblAgeCitizenTemplate.setText(model.getSelectedCitizenTemplateModel().getAge() + "");
+        lblAddressCitizenTemplate.setText(model.getSelectedCitizenTemplateModel().getAddress());
+        lblBirthdateCitizenTemplate.setText(model.getSelectedCitizenTemplateModel().getBirthDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        lblHelpStatusCitizenTemplate.setText(model.getSelectedCitizenTemplateModel().getHelpStatus());
+        lblCivilianStatusCitizenTemplate.setText(model.getSelectedCitizenTemplateModel().getCivilianStatus());
 
-        listViewCitizenTemplateContactInfo.setItems(teacherViewModel.getSelectedCitizenTemplateModel().getContactInfo());
+        listViewCitizenTemplateContactInfo.setItems(model.getSelectedCitizenTemplateModel().getContactInfo());
     }
 
-    private void editModeListener(){
-        toggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) ->
-        {
-            ToggleButton newToggleValue = null;
-            ToggleButton oldToggleValue = null;
-            if(newValue != null) {
-                newToggleValue = (ToggleButton) newValue;
-                newToggleValue.setDisable(true);
-            }
 
-            if (oldValue != null) {
-                oldToggleValue = (ToggleButton) oldValue;
-                oldToggleValue.setDisable(false);
-            }
-
-            if(newToggleValue == tglBtnCitizenTemplateEditOn && newToggleValue != null)
-            {
-
-            }
-            else if(newToggleValue == tglBtnCitizenTemplateEditOff && newToggleValue != null) {
-
-            }
-
-
-        });
-    }
-
-    private void editModePropertyListener() {
-        citizenTemplateEditMode.addListener((observable, oldValue, newValue) -> editComboBoxes(newValue));
-
-        //TODO: Switch table items
-    }
-
-    private void editComboBoxes(boolean editable) {
+    private void setEditable(boolean editable) {
         treeTblViewFunc.setEditable(editable);
         treeTblViewHealth.setEditable(editable);
         for (TreeItem<CategoryEntryModel> cat : treeTblViewFunc.getRoot().getChildren()) {
@@ -220,6 +179,29 @@ public class CitizenTemplate implements Initializable {
         for (TreeItem<CategoryEntryModel> cat : treeTblViewHealth.getRoot().getChildren()) {
             cat.getValue().getLevelImageComboBox().setDisable(editable);
         }
+        btnCitizenTemplateEditOn.setVisible(!editable); //Only visible if not editable
+        btnCitizenTemplateEditSave.setVisible(editable); //Only visible if editable
+        btnCitizenTemplateEditSave.setVisible(editable); //Only visible if editable
 
+    }
+
+    public void onEditOn(ActionEvent event) {
+        setEditable(true);
+        treeTblViewFunc.setRoot(model.getAllFuncCategories());
+        treeTblViewHealth.setRoot(model.getAllHealthCategories());
+
+    }
+
+    public void onEditDone(ActionEvent event) {
+        //TODO: Save data and alert
+        treeTblViewFunc.setRoot(model.getNewRelevantFuncCategories());
+        treeTblViewHealth.setRoot(model.getNewRelevantHealthCategories());
+        setEditable(false);
+    }
+
+    public void onEditCancel(ActionEvent event) {
+        setEditable(false);
+        treeTblViewFunc.setRoot(model.getRelevantFuncCategories());
+        treeTblViewHealth.setRoot(model.getRelevantHealthCategories());
     }
 }

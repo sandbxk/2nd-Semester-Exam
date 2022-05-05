@@ -55,6 +55,9 @@ public class CategoryEntryModel {
         this.categoryName = new SimpleStringProperty(categoryName);
     }
 
+    /**
+     * Sets the data of the combo box and the custom list cells
+     */
     private void initImageComboBox(){
         ObservableList<FunctionalLevels> data = FXCollections.observableArrayList(FunctionalLevels.values());
         levelImageComboBox.get().setItems(data);
@@ -63,6 +66,10 @@ public class CategoryEntryModel {
         levelImageComboBox.get().setButtonCell(comboBoxCell());
     }
 
+    /**
+     * A custom list cell for the combo box, allowing for the image to be displayed
+     * @return
+     */
     private ListCell<FunctionalLevels> comboBoxCell() {
         return new ListCell<FunctionalLevels>() {
             ImageView imageView = new ImageView();
@@ -82,6 +89,9 @@ public class CategoryEntryModel {
         };
     }
 
+    /**
+     * Sets the level of this category entry entity to the value of the selected item in the combo box
+     */
     private void onImageLevelChanged(){
         levelImageComboBox.get().selectionModelProperty().get().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             setLevel(newValue.level);
