@@ -3,9 +3,9 @@
     -fx-txtFillDark: #202020;
     -fx-txtRedBlack: #592D2D;
     -fx-bgBase: #f5f5f5;
-    -fx-panelBase: #D13F3F;
+    -fx-panelBase: #b63939;
     -fx-panelHighlight: #FFBFBF;
-    -fx-panelDarkHighlight: #b63939;
+    -fx-panelDarkHighlight: #9b2e2e;
     -fx-functionBase: #F5B91D;
     -fx-funcBG: #FAF8EC;
     -fx-healthBase: #5DD677;
@@ -13,6 +13,12 @@
     -fx-oddRowFunc: #d2bc90;
     -fx-oddRowHealth: #97d290;
 
+
+    /* Original:
+    -fx-panelBase: #D13F3F;
+    -fx-panelHighlight: #FFBFBF;
+    -fx-panelDarkHighlight: #b63939;
+     */
 }
 
 .background {
@@ -546,7 +552,7 @@
 
 
 .redGridPaneLeft {
-    -fx-background-color: -fx-panelHighlight;
+    -fx-background-color: -fx-panelBase;
     -fx-padding: 5;
     -fx-background-radius: 20 0 0 20;
 }

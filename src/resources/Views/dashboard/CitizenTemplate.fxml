@@ -150,7 +150,7 @@
                     </AnchorPane>
                 </children>
             </AnchorPane>
-            <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="230.0" layoutY="275.0" prefHeight="300.0" prefWidth="627.0" stylesheets="@../../Styles/darkScrollPane.css" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="275.0">
+            <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="230.0" layoutY="275.0" prefHeight="300.0" prefWidth="627.0" stylesheets="@../../Styles/darkScrollPane.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="275.0">
                 <content>
                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                         <children>
@@ -173,7 +173,7 @@
                                                                             <RowConstraints prefHeight="200.0" />
                                                                         </rowConstraints>
                                                                         <children>
-                                                                            <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Mestring" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                                            <Label alignment="CENTER" prefWidth="125.0" styleClass="smallPanelLblBold" text="Mestring" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
                                                                     <TextArea fx:id="txtAreaGenInfoMastering" prefHeight="75.0" prefWidth="498.0" />
@@ -189,7 +189,7 @@
                                                                             <RowConstraints prefHeight="200.0" />
                                                                         </rowConstraints>
                                                                         <children>
-                                                                            <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Motivation" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                                            <Label alignment="CENTER" prefWidth="125.0" styleClass="smallPanelLblBold" text="Motivation" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
                                                                     <TextArea fx:id="txtAreaGenInfoMotivation" prefHeight="75.0" prefWidth="498.0" />
@@ -205,7 +205,7 @@
                                                                             <RowConstraints prefHeight="200.0" />
                                                                         </rowConstraints>
                                                                         <children>
-                                                                            <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Ressourcer" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                                            <Label alignment="CENTER" prefWidth="125.0" styleClass="smallPanelLblBold" text="Ressourcer" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
                                                                     <TextArea fx:id="txtAreaGenInfoRessources" prefHeight="75.0" prefWidth="498.0" />
@@ -221,7 +221,7 @@
                                                                             <RowConstraints prefHeight="200.0" />
                                                                         </rowConstraints>
                                                                         <children>
-                                                                            <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Roller" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                                            <Label alignment="CENTER" prefWidth="125.0" styleClass="smallPanelLblBold" text="Roller" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
                                                                     <TextArea fx:id="txtAreaGenInfoRoles" prefHeight="75.0" prefWidth="498.0" />
@@ -237,7 +237,7 @@
                                                                             <RowConstraints prefHeight="200.0" />
                                                                         </rowConstraints>
                                                                         <children>
-                                                                            <Label alignment="CENTER" prefHeight="42.0" prefWidth="126.0" text="Vaner" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                                            <Label alignment="CENTER" prefWidth="126.0" styleClass="smallPanelLblBold" text="Vaner" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
                                                                     <TextArea fx:id="txtAreaGenInfoHabits" prefHeight="75.0" prefWidth="498.0" />
@@ -253,7 +253,7 @@
                                                                             <RowConstraints prefHeight="200.0" />
                                                                         </rowConstraints>
                                                                         <children>
-                                                                            <Label alignment="CENTER" prefHeight="43.0" prefWidth="106.0" text="Uddannelse og Job" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                                            <Label alignment="CENTER" prefWidth="106.0" styleClass="smallPanelLblBold" text="Uddannelse og Job" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
                                                                     <TextArea fx:id="txtAreaGenInfoEduAndJob" prefHeight="75.0" prefWidth="498.0" />
@@ -269,7 +269,7 @@
                                                                             <RowConstraints prefHeight="200.0" />
                                                                         </rowConstraints>
                                                                         <children>
-                                                                            <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Livshistorie" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                                            <Label alignment="CENTER" prefWidth="125.0" styleClass="smallPanelLblBold" text="Livshistorie" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
                                                                     <TextArea fx:id="txtAreaGenInfoLifeStory" prefHeight="75.0" prefWidth="498.0" />
@@ -285,7 +285,7 @@
                                                                             <RowConstraints prefHeight="200.0" />
                                                                         </rowConstraints>
                                                                         <children>
-                                                                            <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Helbredsoplysniger" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                                            <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" styleClass="smallPanelLblBold" text="Helbredsoplysniger" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
                                                                     <TextArea fx:id="txtAreaGenInfoHealthInfo" prefHeight="75.0" prefWidth="498.0" />
@@ -306,7 +306,7 @@
                                                                             <RowConstraints prefHeight="200.0" />
                                                                         </rowConstraints>
                                                                         <children>
-                                                                            <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Hjælpemidler" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                                            <Label alignment="CENTER" styleClass="smallPanelLblBold" text="Hjælpemidler" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
                                                                     <TextArea fx:id="txtAreaGenInfoAssistiveDevices" prefHeight="75.0" prefWidth="498.0" />
@@ -322,7 +322,7 @@
                                                                             <RowConstraints prefHeight="200.0" />
                                                                         </rowConstraints>
                                                                         <children>
-                                                                            <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Boligens Indretning" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                                            <Label alignment="CENTER" prefWidth="125.0" styleClass="smallPanelLblBold" text="Boligens Indretning" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
                                                                     <TextArea fx:id="txtAreaGenInfoHomeLayout" prefHeight="75.0" prefWidth="498.0" />
@@ -338,7 +338,7 @@
                                                                             <RowConstraints prefHeight="200.0" />
                                                                         </rowConstraints>
                                                                         <children>
-                                                                            <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Netværk" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                                            <Label alignment="CENTER" prefWidth="125.0" styleClass="smallPanelLblBold" text="Netværk" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
                                                                     <TextArea fx:id="txtAreaGenInfoNetwork" prefHeight="75.0" prefWidth="498.0" />

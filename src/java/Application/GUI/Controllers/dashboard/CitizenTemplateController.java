@@ -134,7 +134,7 @@ public class CitizenTemplateController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("Er du sikker på at du vil slette denne borger skabelonen?");
         alert.setContentText("Dette kan ikke fortrydes.");
-        alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("Styles/MainStylesheet.css")).toExternalForm());
+        alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/Styles/MainStylesheet.css")).toExternalForm());
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
@@ -277,6 +277,8 @@ public class CitizenTemplateController implements Initializable {
         btnCitizenTemplateEditOn.setVisible(!editable); //Only visible if not editable
         btnCitizenTemplateEditSave.setVisible(editable); //Only visible if editable
         btnCitizenTemplateEditCancel.setVisible(editable); //Only visible if editable
+
+        //TODO: GEN INFO
 
     }
 
