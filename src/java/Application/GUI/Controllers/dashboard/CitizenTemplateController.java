@@ -9,13 +9,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-public class CitizenTemplate implements Initializable {
+public class CitizenTemplateController implements Initializable {
 
     public AnchorPane anchorPaneCitizenTemplateDashboard;
     public ListView listViewCitizenTemplates;
@@ -139,6 +140,27 @@ public class CitizenTemplate implements Initializable {
         treeTblColumnHealthCause.setCellValueFactory(param -> param.getValue().getValue().causeProperty());
         treeTblColumnHealthExpectedCondition.setCellValueFactory(param -> param.getValue().getValue().expectedConditionProperty());
         treeTblColumnHealthNote.setCellValueFactory(param -> param.getValue().getValue().noteProperty());
+
+
+
+        treeTblColumnFuncCategory.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+        //TODO treeTblColumnFuncLevel.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+        treeTblColumnFuncAssessment.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+        treeTblColumnFuncCause.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+        treeTblColumnFuncImplications.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+        treeTblColumnFuncCitizenGoals.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+        treeTblColumnFuncExpectedCondition.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+        treeTblColumnFuncNote.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+
+        treeTblColumnHealthCategory.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+        //TODO treeTblColumnHealthLevel.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+        treeTblColumnHealthAssessment.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+        treeTblColumnHealthCause.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+        treeTblColumnHealthExpectedCondition.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+        treeTblColumnHealthNote.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+
+
+
     }
 
     public void onCitizenTemplateChangeJournal(ActionEvent event) {
@@ -159,7 +181,7 @@ public class CitizenTemplate implements Initializable {
     }
 
     private void setDataToCitizenTemplateView(){
-        lblCitizenTemplateName.setText(model.getSelectedCitizenTemplateModel().getName());
+        lblCitizenTemplateName.setText(model.getSelectedCitizenTemplateModel().getName() + " " + model.getSelectedCitizenTemplateModel().getSurname());
         lblAgeCitizenTemplate.setText(model.getSelectedCitizenTemplateModel().getAge() + "");
         lblAddressCitizenTemplate.setText(model.getSelectedCitizenTemplateModel().getAddress());
         lblBirthdateCitizenTemplate.setText(model.getSelectedCitizenTemplateModel().getBirthDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
@@ -173,22 +195,40 @@ public class CitizenTemplate implements Initializable {
     private void setEditable(boolean editable) {
         treeTblViewFunc.setEditable(editable);
         treeTblViewHealth.setEditable(editable);
+
+        treeTblColumnFuncLevel.setEditable(editable);
+        treeTblColumnFuncAssessment.setEditable(editable);
+        treeTblColumnFuncCause.setEditable(editable);
+        treeTblColumnFuncImplications.setEditable(editable);
+        treeTblColumnFuncCitizenGoals.setEditable(editable);
+        treeTblColumnFuncExpectedCondition.setEditable(editable);
+        treeTblColumnFuncNote.setEditable(editable);
+
+        treeTblColumnHealthCategory.setEditable(editable);
+        treeTblColumnHealthLevel.setEditable(editable);
+        treeTblColumnHealthAssessment.setEditable(editable);
+        treeTblColumnHealthCause.setEditable(editable);
+        treeTblColumnHealthExpectedCondition.setEditable(editable);
+        treeTblColumnHealthNote.setEditable(editable);
+
+
         for (TreeItem<CategoryEntryModel> cat : treeTblViewFunc.getRoot().getChildren()) {
-            cat.getValue().getLevelImageComboBox().setDisable(editable);
+            cat.getValue().getFuncLevelComboBox().setDisable(!editable);
         }
         for (TreeItem<CategoryEntryModel> cat : treeTblViewHealth.getRoot().getChildren()) {
-            cat.getValue().getLevelImageComboBox().setDisable(editable);
+            cat.getValue().getFuncLevelComboBox().setDisable(!editable);
         }
+
         btnCitizenTemplateEditOn.setVisible(!editable); //Only visible if not editable
         btnCitizenTemplateEditSave.setVisible(editable); //Only visible if editable
-        btnCitizenTemplateEditSave.setVisible(editable); //Only visible if editable
+        btnCitizenTemplateEditCancel.setVisible(editable); //Only visible if editable
 
     }
 
     public void onEditOn(ActionEvent event) {
         setEditable(true);
         treeTblViewFunc.setRoot(model.getAllFuncCategories());
-        treeTblViewHealth.setRoot(model.getAllHealthCategories());
+        treeTblViewHealth.setRoot(model.getAllHealthConditions());
 
     }
 
@@ -203,5 +243,16 @@ public class CitizenTemplate implements Initializable {
         setEditable(false);
         treeTblViewFunc.setRoot(model.getRelevantFuncCategories());
         treeTblViewHealth.setRoot(model.getRelevantHealthCategories());
+    }
+
+
+    public void onTreeTblColumnStartEdit(TreeTableColumn.CellEditEvent<CategoryEntryModel, String> editEvent) {
+        ed
+    }
+
+    public void onTreeTblColumnCommitEdit(TreeTableColumn.CellEditEvent<CategoryEntryModel, String> editEvent) {
+    }
+
+    public void onTreeTblColumnCancelEdit(TreeTableColumn.CellEditEvent<CategoryEntryModel, String> editEvent) {
     }
 }

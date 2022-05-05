@@ -7,7 +7,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-public class Students {
+public class StudentsController {
     public AnchorPane anchorPaneStudents;
     public ListView listViewStudents;
     public TextField txtFieldStudentsSearch;

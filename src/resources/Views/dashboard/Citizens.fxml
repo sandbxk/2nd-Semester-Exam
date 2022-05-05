@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="anchorPaneCitizensDashboard" prefHeight="400.0" prefWidth="600.0" styleClass="background" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.GUI.Controllers.dashboard.Citizens">
+<AnchorPane fx:id="anchorPaneCitizensDashboard" prefHeight="400.0" prefWidth="600.0" styleClass="background" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.GUI.Controllers.dashboard.CitizensController">
     <AnchorPane layoutX="234.0" layoutY="284.0" prefHeight="565.0" prefWidth="660.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="234.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="284.0">
         <Label styleClass="lblBackgroundBold" text="Borgeren kan tilgås af følgende elever" AnchorPane.bottomAnchor="550.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="434.0" AnchorPane.topAnchor="0.0">
             <padding>
