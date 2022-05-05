@@ -1,32 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="891.0" prefWidth="1090.0" stylesheets="@../Styles/MainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.GUI.Controllers.TeacherViewController">
+
+<BorderPane fx:id="TeacherScene" stylesheets="@../Styles/MainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.GUI.Controllers.TeacherViewController">
    <center>
       <StackPane prefHeight="891.0" prefWidth="938.0">
+      <!-->
          <children>
             <AnchorPane fx:id="anchorPaneDashboard" prefHeight="412.0" prefWidth="609.0" style="-fx-background-color: cyan;">
                <children>
@@ -197,15 +180,16 @@
             </AnchorPane>
             <AnchorPane fx:id="anchorPaneCitizenTemplate" prefHeight="412.0" prefWidth="966.0" styleClass="background">
                <children>
-                  <AnchorPane layoutX="14.0" layoutY="23.0" prefHeight="362.0" prefWidth="200.0" styleClass="panel30Deg" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="23.0">
+                  <AnchorPane layoutX="14.0" layoutY="23.0" prefHeight="300.0" prefWidth="200.0" styleClass="panel30Deg" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="23.0">
                      <children>
-                        <ListView fx:id="listViewCitizenTemplates" layoutX="18.0" layoutY="70.0" prefHeight="272.0" prefWidth="163.0" AnchorPane.bottomAnchor="18.399999999999977" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="16.80000000000001" AnchorPane.topAnchor="70.0" />
+                        <ListView fx:id="listViewCitizenTemplates" layoutX="18.0" layoutY="70.0" prefHeight="272.0" prefWidth="163.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="16.80000000000001" AnchorPane.topAnchor="70.0" />
                         <HBox layoutX="20.0" layoutY="26.0" prefHeight="26.0" prefWidth="163.0" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="24.0">
                            <children>
                               <TextField fx:id="txtFieldCitizenTemplateSearch" prefHeight="26.0" prefWidth="141.0" promptText="Search" styleClass="text-fieldBase" />
                               <Button fx:id="btnCitizenTemplateSearch" mnemonicParsing="false" onAction="#onCitizenTemplateSearch" prefHeight="26.0" prefWidth="34.0" styleClass="searchBtn" />
                            </children>
                         </HBox>
+                        <Button layoutX="21.0" layoutY="777.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="159.0" styleClass="backgroundButton" text="Handlinger" AnchorPane.bottomAnchor="29.200000000000045" AnchorPane.topAnchor="775.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutX="230.0" layoutY="23.0" prefHeight="233.0" prefWidth="621.0" styleClass="panel30Deg" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="23.0">
@@ -513,10 +497,10 @@
                                                                   <RowConstraints prefHeight="200.0" />
                                                                </rowConstraints>
                                                                <children>
-                                                                  <Label fx:id="txtAreaGenInfoNetwork" alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Netværk" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" text="Netværk" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                </children>
                                                             </GridPane>
-                                                            <TextArea prefHeight="75.0" prefWidth="498.0" />
+                                                            <TextArea fx:id="txtAreaGenInfoNetwork" prefHeight="75.0" prefWidth="498.0" />
                                                          </children>
                                                       </HBox>
                                                    </children>
@@ -551,7 +535,7 @@
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0">
                                              <children>
-                                                <TreeTableView prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.399999999999977" AnchorPane.topAnchor="0.0">
+                                                <TreeTableView fx:id="treeTblViewFunc" prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.399999999999977" AnchorPane.topAnchor="0.0">
                                                   <columns>
                                                     <TreeTableColumn fx:id="treeTblClmnFuncCategory" minWidth="140.0" prefWidth="-1.0" text="Tilstandsklassificering" />
                                                     <TreeTableColumn prefWidth="151.99993896484375" text="Tilstands Præcisering">
@@ -581,10 +565,17 @@
                         </AnchorPane>
                      </content>
                   </ScrollPane>
-                  <Button layoutX="14.0" layoutY="809.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="200.0" styleClass="backgroundButton" text="Handlinger" AnchorPane.bottomAnchor="20.0" />
                </children>
             </AnchorPane>
          </children>
+               <!-->
+            <fx:include fx:id="anchorPaneDashboard" source="dashboard/Default.fxml"/>
+            <fx:include fx:id="anchorPaneCases" source="dashboard/Cases.fxml"/>
+            <fx:include fx:id="anchorPaneAssignments" source="dashboard/Assignment.fxml"/>
+            <fx:include fx:id="anchorPaneJournals" source="dashboard/Journals.fxml"/>
+            <fx:include fx:id="anchorPaneStudents" source="dashboard/Students.fxml"/>
+            <fx:include fx:id="anchorPaneCitizens" source="dashboard/Citizens.fxml"/>
+            <fx:include fx:id="anchorPaneCitizenTemplate" source="dashboard/CitizenTemplate.fxml"/>
       </StackPane>
    </center>
    <left>
