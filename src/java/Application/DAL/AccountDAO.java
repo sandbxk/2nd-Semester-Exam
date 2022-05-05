@@ -13,8 +13,6 @@ import java.util.List;
 
 public class AccountDAO extends TemplatePatternDAO<Account> {
 
-    private int accountID;
-
     /**
      * Creates an account from account entity given.
      * @param input

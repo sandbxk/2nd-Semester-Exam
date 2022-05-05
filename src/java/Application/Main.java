@@ -19,7 +19,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException
     {
-        Parent root = FXMLLoader.load(this.getClass().getResource("/views/Popups/CreateStudentView.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("/views/Popups/CreateCaseView.fxml"));
 
         primaryStage.setTitle("main");
 
