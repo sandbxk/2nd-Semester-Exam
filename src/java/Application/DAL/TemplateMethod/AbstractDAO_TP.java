@@ -19,7 +19,7 @@ public abstract class AbstractDAO_TP<RETURN_TYPE, PARAM_TYPE>
     /**
      * @param input may be null
      * */
-    public boolean run(PARAM_TYPE input) {
+    public final boolean run(PARAM_TYPE input) {
         try
         {
             Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
@@ -42,12 +42,12 @@ public abstract class AbstractDAO_TP<RETURN_TYPE, PARAM_TYPE>
         }
     }
 
-    public RETURN_TYPE getResult() {
+    public final RETURN_TYPE getResult() {
 
         return return_value;
     }
 
-    public long getResultID()
+    public final long getResultID()
     {
         return return_id;
     }
@@ -58,7 +58,7 @@ public abstract class AbstractDAO_TP<RETURN_TYPE, PARAM_TYPE>
 
     //protected abstract PreparedStatement setup() throws SQLException;
 
-    protected Exception getLastError() {
+    protected final Exception getLastError() {
         return LastException;
     };
 

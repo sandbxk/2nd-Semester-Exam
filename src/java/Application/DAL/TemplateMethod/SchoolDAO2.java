@@ -23,7 +23,7 @@ public class SchoolDAO2
         }
     };
 
-    public School create(School input) throws Exception {
+    public School create(School input){
         var query = new AbstractDAO_TP<School, School>() {
             @Override
             protected School execute(PreparedStatement statement, School input) throws SQLException {
@@ -42,7 +42,10 @@ public class SchoolDAO2
         };
 
         if (!query.run(input))
-            throw query.getLastError();
+        {
+            //query.getLastError().printStackTrace();
+            return null;
+        }
 
         return new School(
                 (int) query.getResultID(),

@@ -1,5 +1,6 @@
 package Application.GUI.Controllers;
 
+import Application.DAL.TemplateMethod.SchoolDAO2;
 import Application.GUI.Models.ControllerModels.TeacherViewModel;
 import Application.GUI.Models.AccountModel;
 
@@ -53,6 +54,7 @@ public class TeacherViewController implements Initializable {
     {
 
         //this.account = (AccountModel) resources.getObject("account");
+
 
         initToggleGroup();
         viewChangedListener();
