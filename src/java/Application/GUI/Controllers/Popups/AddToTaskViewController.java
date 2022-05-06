@@ -1,9 +1,14 @@
 package Application.GUI.Controllers.Popups;
 
 import Application.BE.Account;
+import Application.BE.Case;
+import Application.BE.Inquiry;
+import Application.BE.School;
 import Application.DAL.CasesDAO;
 import Application.GUI.Models.AccountModel;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,11 +18,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.collections.FXCollections;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddToTaskViewController implements Initializable {
+
 
     // FIXME: 06/05/2022 -- DAO for testing purpose, decouple
     CasesDAO casesDAO = new CasesDAO();
@@ -26,27 +33,29 @@ public class AddToTaskViewController implements Initializable {
     @FXML
     public Button btnCancel;
     @FXML
-    public TableView tblAccountTable;
-    @FXML
-    public TableColumn<AccountModel> tblClmAttName;
-    @FXML
-    public TableColumn tblClmAttName1;
-    @FXML
     public Button btnAddAccount;
     @FXML
     public Button btnRemoveAccount;
     @FXML
-    public TableView tblAddedAccounts;
+    public Button btnSearch;
     @FXML
-    public TableColumn clmAddedUserName;
+    public TableView<AccountModel> tblAccountTable;
+    @FXML
+    public TableView<AccountModel> tblAddedAccountsTable;
+    @FXML
+    public TableColumn<AccountModel, String> clmAddedAccountName;
+    @FXML
+    public TableColumn<AccountModel, String> clmAddedAccountClass;
+    @FXML
+    public TableColumn<AccountModel, String> tblClmAccountName;
+    @FXML
+    public TableColumn<AccountModel, String> tblClmAccountClass;
     @FXML
     public TextField txtAccountSearch;
     @FXML
-    public Button btnSearch;
+    public ComboBox<Case> comboBoxCases;
     @FXML
-    public ComboBox comboBoxViewType;
-
-    @FXML public TableColumn<AccountModel, String> tblClmAccountName;
+    public ComboBox<Class> comboBoxClasses;
 
     AccountModel accountDAO = new AccountModel();
 
@@ -54,6 +63,7 @@ public class AddToTaskViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources)
     {
         initEventListeners();
+        comboBoxCases.setItems(mockCases());
     }
 
     public AddToTaskViewController()
@@ -62,7 +72,7 @@ public class AddToTaskViewController implements Initializable {
 
     public void onSave(ActionEvent actionEvent)
     {
-        casesDAO.assignToCase(accountDAO.getAccountList(), );
+        casesDAO.assignToCase(accountDAO.getAccountList(), comboBoxCases.getSelectionModel().getSelectedItem());
 
         Stage stage = (Stage) btnSave.getScene().getWindow();
         stage.close();
@@ -75,19 +85,29 @@ public class AddToTaskViewController implements Initializable {
     }
 
     public void addAccountToList(ActionEvent actionEvent) {
+        AccountModel selection = tblAccountTable.getSelectionModel().getSelectedItem();
+
+        if (selection != null) {
+            tblAddedAccountsTable.getItems().add(selection);
+        }
     }
 
-    public void removeAccountFromList(ActionEvent actionEvent) {
+    public void removeAccountFromList(ActionEvent actionEvent)
+    {
+        AccountModel selection = tblAddedAccountsTable.getSelectionModel().getSelectedItem();
+
+        if(selection != null)
+        {
+            tblAddedAccountsTable.getItems().remove(selection);
+        }
     }
 
     public void initEventListeners()
     {
-        tblClmAccountName.setCellValueFactory(param -> param.getValue().firstNameProperty());
-
-
+        tblClmAccountName.setCellValueFactory(param -> param.getValue().getFullNameProperty());
 
         //Wrap ObservableList of UserInfo in a FilteredList.
-        FilteredList<Account> filteredData = new FilteredList<>(accountDAO.getAccountList(), b -> true);
+        FilteredList<AccountModel> filteredData = new FilteredList<>(mockAccounts(), b -> true);
 
         //Sets the filter predict when filter changes.
 
@@ -103,13 +123,46 @@ public class AddToTaskViewController implements Initializable {
                 //Compare user name with filter text.
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (account.getFullName().toLowerCase().indexOf(lowerCaseFilter) != -1)
+                if (account.getFirstName().toLowerCase().indexOf(lowerCaseFilter) != -1)
                 {
                     return true;
                 } else return false;
             });
         });
+
+        SortedList<AccountModel> sortedUsers = new SortedList<>(filteredData);
+
+        sortedUsers.comparatorProperty().bind(tblAccountTable.comparatorProperty());
+
+        tblAccountTable.setItems(sortedUsers);
     }
 
+    // FIXME: 06-05-2022 Mock data, hook up to DAO
+    private ObservableList<Case> mockCases()
+        {
+            ObservableList<Case> mockCaseList = FXCollections.observableArrayList();
 
+            mockCaseList.add(new Case(1, "This is the reason", "1234", new Inquiry(1, "Læge")));
+            mockCaseList.add(new Case(2, "This is the reason", "1234", new Inquiry(2, "Mor")));
+            mockCaseList.add(new Case(3, "This is the reason", "1234", new Inquiry(3, "Bror")));
+            mockCaseList.add(new Case(4, "This is the reason", "1234", new Inquiry(4, "Far")));
+            mockCaseList.add(new Case(5, "This is the reason", "1234", new Inquiry(5, "Dolf")));
+
+            return mockCaseList;
+        }
+
+    // FIXME: 06-05-2022 Mock data, hook up to DAO
+    private ObservableList<AccountModel> mockAccounts()
+    {
+        ObservableList<AccountModel> mockAccountList = FXCollections.observableArrayList();
+
+        School school = new School(1, "EASV", 6700, "Esbjerg");
+
+        mockAccountList.add(new AccountModel(new Account(1, "", "", "Kasper", "Rasmussen", "", school, 0)));
+        mockAccountList.add(new AccountModel(new Account(1, "", "", "Rasmus", "Remøs", "", school, 0)));
+        mockAccountList.add(new AccountModel(new Account(1, "", "", "Philip", "Zadeh", "", school, 0)));
+        mockAccountList.add(new AccountModel(new Account(1, "", "", "Mads", "Bath", "", school, 0)));
+
+        return mockAccountList;
+    }
 }

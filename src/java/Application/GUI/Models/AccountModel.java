@@ -1,11 +1,5 @@
 package Application.GUI.Models;
 
-import Application.BLL.AccountManager;
-import at.favre.lib.crypto.bcrypt.BCrypt;
-
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-
 import Application.BE.Account;
 import Application.BE.School;
 import Application.BLL.AdminDataManager;
@@ -62,6 +56,8 @@ public class AccountModel
     public StringProperty lastNameProperty() {
         return lastName;
     }
+
+    public StringProperty getFullNameProperty(){return new SimpleStringProperty(firstName + " " + lastName);}
 
     public void setLastName(String lastName) {
         this.lastName.set(lastName);
