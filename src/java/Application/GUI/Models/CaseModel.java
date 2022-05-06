@@ -1,5 +1,6 @@
 package Application.GUI.Models;
 
+import Application.BE.Inquiry;
 import Application.BLL.TeacherDataManager;
 import Application.DAL.InquiryDAO;
 import Application.DAL.TemplatePatternDAO;
@@ -18,5 +19,10 @@ public class CaseModel {
     public List getAllInquries()
     {
         return teacherBLL.getAllInquries();
+    }
+
+    public void createCase(int id, String inquiryReason, String medicalDiagnose, Inquiry inquiry)
+    {
+        teacherBLL.createCase(id,inquiryReason, medicalDiagnose, inquiry);
     }
 }

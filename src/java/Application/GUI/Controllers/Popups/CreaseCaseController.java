@@ -30,9 +30,6 @@ public class CreaseCaseController implements Initializable {
 
     CaseModel caseModel = new CaseModel();
 
-    // FIXME: 05/05/2022 -- Decouple from DAO
-    TeacherDataManager teacherBLL;
-
     ObservableList<Inquiry> inquiryList;
 
     @Override
@@ -44,7 +41,7 @@ public class CreaseCaseController implements Initializable {
 
     public void save(ActionEvent actionEvent)
     {
-        teacherBLL.createCase(-1, inquiryReason.getText(), medicalDiagnose.getText(), comboBoxInquiry.getSelectionModel().getSelectedItem());
+        caseModel.createCase(-1, inquiryReason.getText(), medicalDiagnose.getText(), comboBoxInquiry.getSelectionModel().getSelectedItem());
 
         Stage stage = (Stage) btnSave.getScene().getWindow();
         stage.close();
