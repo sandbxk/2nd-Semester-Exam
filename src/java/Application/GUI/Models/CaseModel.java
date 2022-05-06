@@ -2,8 +2,6 @@ package Application.GUI.Models;
 
 import Application.BE.Inquiry;
 import Application.BLL.TeacherDataManager;
-import Application.DAL.InquiryDAO;
-import Application.DAL.TemplatePatternDAO;
 
 import java.util.List;
 
