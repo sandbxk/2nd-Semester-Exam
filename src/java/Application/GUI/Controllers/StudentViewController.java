@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class StudentViewController implements Initializable {
+
     @FXML public ListView<CitizenModel> listViewCitizens;
     @FXML public TextField txtFieldCitizenSearch;
     @FXML public Button btnCitizenSearch;
@@ -42,6 +43,8 @@ public class StudentViewController implements Initializable {
     @FXML public TableColumn<CategoryEntryModel, ImageView> tblColumnStudentDashboardFuncLevel;
     @FXML public TableColumn<CategoryEntryModel, String> tblColumnStudentDashboardFuncNote;
     @FXML public AnchorPane anchorPaneChartContainer;
+
+
 
     private StudentViewControllerModel model = new StudentViewControllerModel();
 
@@ -99,14 +102,18 @@ public class StudentViewController implements Initializable {
 
 
     public void onStudentCitizensSearch(ActionEvent event) {
+        model.onStudentCitizensSearch();
     }
 
     public void onOpenJournal(ActionEvent event) {
+        model.onOpenJournal();
     }
 
     public void onViewCases(ActionEvent event) {
+        model.onViewCases();
     }
 
     public void onAddObservation(ActionEvent event) {
+        model.onAddObservation();
     }
 }
