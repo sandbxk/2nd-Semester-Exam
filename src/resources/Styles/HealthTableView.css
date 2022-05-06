@@ -15,6 +15,7 @@
     -fx-healthBG: #EDFAEC;
     -fx-oddRowFunc: #d2bc90;
     -fx-oddRowHealth: #97d290;
+    -fx-tblBG: #d9d9d9;
 
 
     /* Original:
@@ -95,7 +96,7 @@
 
 .table-view .table-row-cell:even{
     -fx-background-color: transparent;
-    -fx-border-color: -fx-oddRowHealth;
+    -fx-border-color: -fx-tblBG;
     -fx-border-width: 0 1 0 0;
     -fx-font-size: 10pt;
     -fx-wrap-text: true;
@@ -120,11 +121,12 @@
 }
 
 .table-view .table-cell{
-    -fx-border-color: transparent;
     -fx-text-fill: -fx-txtFillDark;
     -fx-wrap-text: true;
     -fx-content-display: center;
     -fx-text-alignment: center;
+    -fx-border-color: -fx-tblBG;
+    -fx-border-width: 0 1 0 1;
 }
 
 
@@ -135,6 +137,8 @@
     -fx-content-display: center;
     -fx-text-alignment: center;
 }
+
+.
 
 .table-row-cell:odd{
     -fx-background-color: transparent;
@@ -156,14 +160,24 @@
 }
 
 
-.table-view > .virtual-flow > .scroll-bar:vertical,
+
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track,
 .table-view > .virtual-flow > .scroll-bar:vertical > .track,
 .table-view > .virtual-flow > .scroll-bar:vertical > .track-background,
-.table-view > .virtual-flow > .scroll-bar:horizontal,
-.table-view > .virtual-flow > .scroll-bar:horizontal > .track,
 .table-view > .virtual-flow > .scroll-bar:horizontal > .track-background {
     -fx-background-color: transparent;
 }
+
+.table-view > .virtual-flow > .scroll-bar:horizontal, .table-view > .virtual-flow > .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+.table-view > .virtual-flow > .scroll-bar:horizontal > .thumb,
+.table-view > .virtual-flow > .scroll-bar:vertical > .thumb {
+    -fx-background-color: -fx-oddRowHealth;
+}
+
+
 
 
 

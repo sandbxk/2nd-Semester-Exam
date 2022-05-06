@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TreeItem;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class CategoryEntryModel {
@@ -18,6 +19,8 @@ public class CategoryEntryModel {
     private IntegerProperty level;
     private ObjectProperty<ComboBox<FunctionalLevels>> levelFuncComboBox;
     private ObjectProperty<ComboBox<HealthLevels>> levelHealthComboBox;
+    private ObjectProperty<FunctionalLevels> levelFunc;
+    private ObjectProperty<HealthLevels> levelHealth;
     private StringProperty assessment;
     private StringProperty cause;
     private StringProperty implications;
@@ -26,6 +29,8 @@ public class CategoryEntryModel {
     private StringProperty note;
     private boolean isFunctionAbility;
     private CategoryEntry categoryEntry;
+
+    //TODO: Use Generic types and Refactor
 
     public CategoryEntryModel(CategoryEntry categoryEntry) {
         categoryName = new SimpleStringProperty(categoryEntry.getCategoryName());
@@ -42,7 +47,10 @@ public class CategoryEntryModel {
         this.id = categoryEntry.getId();
         levelFuncComboBox = new SimpleObjectProperty<>(new ComboBox<>());
         levelHealthComboBox = new SimpleObjectProperty<>(new ComboBox<>());
+        levelFunc = new SimpleObjectProperty<>();
+        levelHealth = new SimpleObjectProperty<>();
         initLevelComboBox();
+        initLevelFuncAndLevelHealth();
 
 
         if (level.get() == 9){
@@ -53,6 +61,18 @@ public class CategoryEntryModel {
 
     public CategoryEntryModel(String categoryName){
         this.categoryName = new SimpleStringProperty(categoryName);
+    }
+
+    public CategoryEntryModel(String categoryName, int level, String note, boolean isFunctionAbility) {
+        this.categoryName = new SimpleStringProperty(categoryName);
+        this.level = new SimpleIntegerProperty(level);
+        this.note = new SimpleStringProperty(note);
+        this.isFunctionAbility = isFunctionAbility;
+
+        levelFunc = new SimpleObjectProperty<>();
+        levelHealth = new SimpleObjectProperty<>();
+
+        initLevelFuncAndLevelHealth();
     }
 
     /**
@@ -151,6 +171,47 @@ public class CategoryEntryModel {
     public ObjectProperty<ComboBox<HealthLevels>> getHealthComboBoxProperty(){
         return levelHealthComboBox;
     }
+
+
+
+    private void initLevelFuncAndLevelHealth(){
+        if (isFunctionAbility){
+            this.levelFunc.set(FunctionalLevels.values()[level.get()]);
+        }
+        else {
+            this.levelHealth.set(HealthLevels.values()[level.get()]);
+        }
+    }
+
+    public FunctionalLevels getLevelFunc() {
+        return levelFunc.get();
+    }
+
+    public ObjectProperty<ImageView> levelFuncProperty() {
+        Image image = levelFunc.get().image;
+        ImageView imageView = new ImageView(levelFunc.get().image);
+        imageView.setFitWidth(60);
+        imageView.setFitHeight(50);
+
+        return new SimpleObjectProperty<ImageView>(imageView);
+    }
+
+    public void setLevelFunc(FunctionalLevels levelFunc) {
+        this.levelFunc.set(levelFunc);
+    }
+
+    public HealthLevels getLevelHealth() {
+        return levelHealth.get();
+    }
+
+    public StringProperty levelHealthProperty() {
+        return new SimpleStringProperty(levelHealth.get().description);
+    }
+
+    public void setLevelHealth(HealthLevels levelHealth) {
+        this.levelHealth.set(levelHealth);
+    }
+
 
 
 
@@ -313,4 +374,5 @@ public class CategoryEntryModel {
     public TreeItem<CategoryEntryModel> getAsTreeItem(){
         return new TreeItem<>(this);
     }
+
 }

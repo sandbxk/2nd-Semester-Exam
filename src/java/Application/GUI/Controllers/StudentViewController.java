@@ -1,67 +1,102 @@
 package Application.GUI.Controllers;
 
-import eu.hansolo.fx.charts.SectorChart;
-import eu.hansolo.fx.charts.data.ChartItem;
-import eu.hansolo.fx.charts.series.ChartItemSeries;
+import Application.BE.ContactInfo;
+import Application.GUI.Models.CategoryEntryModel;
+import Application.GUI.Models.CitizenModel;
+import Application.GUI.Models.ControllerModels.StudentViewControllerModel;
+import Application.GUI.Models.FunctionalLevels;
+import Application.GUI.Models.HealthLevels;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class StudentViewController implements Initializable {
-    @FXML public ListView listViewCitizens;
+    @FXML public ListView<CitizenModel> listViewCitizens;
     @FXML public TextField txtFieldCitizenSearch;
     @FXML public Button btnCitizenSearch;
     @FXML public Label lblCitizenName;
-    @FXML public ListView listViewCitizenContactInfo;
+    @FXML public ListView<ContactInfo> listViewCitizenContactInfo;
     @FXML public Label lblAge;
     @FXML public Label lblBirthdate;
     @FXML public Label lblAddress;
     @FXML public Label lblHelpStatus;
     @FXML public Label lblCivilianStatus;
-    @FXML public TableView tblViewStudentDashboardHealth;
-    @FXML public TableColumn tblColumnStudentDashboardHealthCategory;
-    @FXML public TableColumn tblColumnStudentDashboardHealthLevel;
-    @FXML public TableColumn tblColumnStudentDashboardHealthNote;
-    @FXML public TableView tblViewStudentDashboardFunc;
-    @FXML public TableColumn tblColumnStudentDashboardFuncCategory;
-    @FXML public TableColumn tblColumnStudentDashboardFuncLevel;
-    @FXML public TableColumn tblColumnStudentDashboardFuncNote;
+    @FXML public TableView<CategoryEntryModel> tblViewStudentDashboardHealth;
+    @FXML public TableColumn<CategoryEntryModel, String> tblColumnStudentDashboardHealthCategory;
+    @FXML public TableColumn<CategoryEntryModel, String> tblColumnStudentDashboardHealthLevel;
+    @FXML public TableColumn<CategoryEntryModel, String> tblColumnStudentDashboardHealthNote;
+    @FXML public TableView<CategoryEntryModel> tblViewStudentDashboardFunc;
+    @FXML public TableColumn<CategoryEntryModel, String> tblColumnStudentDashboardFuncCategory;
+    @FXML public TableColumn<CategoryEntryModel, ImageView> tblColumnStudentDashboardFuncLevel;
+    @FXML public TableColumn<CategoryEntryModel, String> tblColumnStudentDashboardFuncNote;
     @FXML public AnchorPane anchorPaneChartContainer;
+
+    private StudentViewControllerModel model = new StudentViewControllerModel();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initChart();
+        initTableViews();
+        initListViewCitizens();
+        initTestData();
     }
 
-    private void initChart(){
-        SectorChart chart = new SectorChart();;
-        chart.setPrefSize(anchorPaneChartContainer.getPrefWidth(), anchorPaneChartContainer.getPrefHeight());
-        anchorPaneChartContainer.getChildren().add(chart);
-        chart.setAllSeries(initSeries());
+    private void initTestData() {
+        ObservableList<CitizenModel> citizens = FXCollections.observableArrayList();
+        citizens.add(new CitizenModel("John", "Doe", 22, LocalDate.now(), "HelpStatus", "CivilianStatus","Address street", FXCollections.observableArrayList(new ContactInfo("Tlf: 12345678"))));
+        citizens.add(new CitizenModel("Jfeohn", "Dofee", 2245, LocalDate.now(), "Help1Status", "Civili1anStatus","Ad1dress street", FXCollections.observableArrayList(new ContactInfo("Tlf: 12345678"))));
+        listViewCitizens.setItems(citizens);
+
+        //TODO: Make age autofill from birthdate in citizenmodel and citizenTemplateModel
     }
 
-    private List<ChartItemSeries<ChartItem>> initSeries(){
-        List<ChartItemSeries<ChartItem>> seriesList = new ArrayList<>();
+    private void initTableViews() {
+        tblColumnStudentDashboardHealthCategory.setCellValueFactory(cellData -> cellData.getValue().categoryNameProperty());
+        tblColumnStudentDashboardHealthLevel.setCellValueFactory(cellData -> cellData.getValue().levelHealthProperty());
+        tblColumnStudentDashboardHealthNote.setCellValueFactory(cellData -> cellData.getValue().noteProperty());
+        tblColumnStudentDashboardFuncCategory.setCellValueFactory(cellData -> cellData.getValue().categoryNameProperty());
+        tblColumnStudentDashboardFuncLevel.setCellValueFactory(cellData -> cellData.getValue().levelFuncProperty());
+        tblColumnStudentDashboardFuncNote.setCellValueFactory(cellData -> cellData.getValue().noteProperty());
 
-        //for(int i = 0; i < 5; i++) {
-            ChartItemSeries<ChartItem> series = new ChartItemSeries<>();
-            series.getItems().add(new ChartItem("Category 1", 10));
-            series.getItems().add(new ChartItem("Category 15", 30));
-            series.getItems().add(new ChartItem("Category 11", 50));
-            series.getItems().add(new ChartItem("Category 771", 20));
-            seriesList.add(series);
-            series.setName("Series 1");
-        //}
+        tblViewStudentDashboardHealth.setFixedCellSize(50);
 
-        return seriesList;
+        tblViewStudentDashboardHealth.getItems().add(new CategoryEntryModel("Health", HealthLevels.RELEVANT.ordinal(), "", false));
+
+        tblViewStudentDashboardFunc.getItems().add(new CategoryEntryModel("FUNCY", HealthLevels.RELEVANT.ordinal(), "", true));
     }
+
+    private void updateCitizenInfo(CitizenModel citizen) {
+        lblCitizenName.setText(citizen.getName() + " " + citizen.getSurname());
+        lblAge.setText(citizen.getAge() + "");
+        lblBirthdate.setText(citizen.getBirthDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        lblAddress.setText(citizen.getAddress());
+        lblHelpStatus.setText(citizen.getHelpStatus());
+        lblCivilianStatus.setText(citizen.getCivilianStatus());
+
+        tblViewStudentDashboardHealth.setItems(model.getSelectedCitizen().getAllHealthConditions());
+        tblViewStudentDashboardFunc.setItems(model.getSelectedCitizen().getRelevantFunctionalAbilities());
+    }
+
+    private void initListViewCitizens(){
+        listViewCitizens.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                model.setSelectedCitizen(newValue);
+                updateCitizenInfo(newValue);
+            }
+        });
+    }
+
 
     public void onStudentCitizensSearch(ActionEvent event) {
     }
