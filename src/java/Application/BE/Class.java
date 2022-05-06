@@ -1,6 +1,8 @@
 package Application.BE;
 
 import Application.DAL.Annotations.SQLColumn;
+import Application.DAL.Annotations.SQLGetter;
+import Application.DAL.Annotations.SQLSetter;
 import Application.DAL.Annotations.SQLTable;
 
 @SQLTable(name = "classes")
@@ -32,38 +34,49 @@ public class Class {
         this.schoolID = schoolID;
     }
 
+    @SQLGetter(name = "classId")
     public int getId()
     {
         return id;
     }
 
+    @SQLSetter(name = "classId")
     public void setId(int id)
     {
         this.id = id;
     }
 
+
+    @SQLGetter(name = "className")
     public String getName()
     {
         return className;
     }
 
+    @SQLSetter(name = "className")
     public void setName(String name)
     {
         this.className = name;
     }
 
+
+    @SQLGetter(name = "school")
     public int getSchoolID() {
         return schoolID;
     }
 
+    @SQLSetter(name = "school")
     public void setSchoolID(int schoolID) {
         this.schoolID = schoolID;
     }
 
+
+    @SQLGetter(name = "teacherID")
     public int getTeacherID() {
         return teacherID;
     }
 
+    @SQLSetter(name = "teacherID")
     public void setTeacherID(int teacherID) {
         this.teacherID = teacherID;
     }
