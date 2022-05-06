@@ -1,6 +1,7 @@
 package Application.GUI.Controllers;
 
 import Application.GUI.Models.AccountModel;
+import Application.GUI.Models.SessionModel;
 import Application.GUI.Models.UserType;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -21,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable
 {
-    private AccountModel account;
+    private SessionModel account;
 
     @FXML
     public AnchorPane LoginScene;
@@ -66,7 +67,7 @@ public class LoginController implements Initializable
 
     public void onSubmit(ActionEvent event) throws IOException {
 
-        account = new AccountModel();
+        account = new SessionModel();
 
         if (account.authenticate(this.txtUsername.getText(), this.txtPwd.getText()))
         {

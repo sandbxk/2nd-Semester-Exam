@@ -91,7 +91,7 @@ public class CasesDAO extends TemplatePatternDAO<Case>{
         }
     }
 
-    public void assignToCase(Account account, Case caseInput)
+    public void assignToCase(List<Account> accountList, Case caseInput)
     {
         String sql = """
                     INSERT INTO caseAssigned (accountId, caseId)
@@ -101,11 +101,15 @@ public class CasesDAO extends TemplatePatternDAO<Case>{
             Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
-            pstmt.setInt(1, account.getId());
-            pstmt.setInt(2, caseInput.getId());
+            for (Account account : accountList) {
 
-            pstmt.executeUpdate();
+                pstmt.setInt(1, account.getId());
+                pstmt.setInt(2, caseInput.getId());
 
+                pstmt.addBatch();
+            }
+
+            pstmt.executeBatch();
             pstmt.close();
 
         } catch (SQLException e) {

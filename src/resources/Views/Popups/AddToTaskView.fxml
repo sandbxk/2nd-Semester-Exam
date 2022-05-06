@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
-<AnchorPane prefHeight="562.0" prefWidth="771.0" styleClass="panel30Deg" stylesheets="@../../Styles/MainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.GUI.Controllers.Popups.AddTaskViewController">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="562.0" prefWidth="771.0" styleClass="panel30Deg" stylesheets="@../../Styles/MainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.GUI.Controllers.Popups.AddToTaskViewController">
     <children>
         <Button fx:id="btnSave" layoutX="222.0" layoutY="244.0" mnemonicParsing="false" onAction="#onSave" styleClass="panelBtnNoPadding" text="Gem" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="27.0" />
         <Button fx:id="btnCancel" layoutX="146.0" layoutY="244.0" mnemonicParsing="false" onAction="#onCancel" styleClass="panelBtnNoPadding" text="Annullere" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="27.0" />
@@ -14,7 +21,7 @@
                     <top>
                         <TableView fx:id="tblAccountTable" prefHeight="521.0" prefWidth="345.0" styleClass="tab" BorderPane.alignment="CENTER">
                             <columns>
-                                <TableColumn fx:id="tblClmAttName" editable="false" prefWidth="161.59997940063477" text="Navn" />
+                                <TableColumn fx:id="tblClmAccountName" editable="false" prefWidth="161.59997940063477" text="Navn" />
                                 <TableColumn fx:id="tblClmAttName1" editable="false" prefWidth="209.6000213623047" text="Klasse" />
                             </columns>
                         </TableView>
@@ -24,7 +31,7 @@
                     <children>
                         <Button fx:id="btnAddAccount" mnemonicParsing="false" onAction="#addAccountToList" prefHeight="34.0" prefWidth="34.0" styleClass="panelBtnNoPadding" text="➤" />
                         <AnchorPane prefHeight="75.0" prefWidth="34.0" />
-                        <Button fx:id="btnRemoveAccount" mnemonicParsing="false" onAction="#removeAccountFromList" prefHeight="34.0" prefWidth="34.0" styleClass="panelBtnNoPadding" text="⟸" />
+                        <Button fx:id="btnRemoveAccount" mnemonicParsing="false" onAction="#removeAccountFromList" prefHeight="34.0" prefWidth="34.0" rotate="180.0" styleClass="panelBtnNoPadding" text="➤" />
                     </children>
                 </VBox>
                 <BorderPane prefHeight="521.0" prefWidth="332.0" styleClass="panel">
