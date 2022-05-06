@@ -909,3 +909,24 @@
 {
     -fx-background-color: #e6e6e6;
 }
+
+
+.customCombo-box {
+    -fx-background-color: -fx-txtFillLight;
+    -fx-border-width: 0;
+    -fx-border-color: -fx-panelHighlight;
+    -fx-background-radius: 50;
+
+}
+
+.customText-fieldBase {
+    -fx-background-color: transparent;
+    -fx-border-color: -fx-txtFillLight;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-radius: 0;
+    -fx-text-fill: -fx-txtFillLight;
+    -fx-font-size: 17;
+    -fx-font-family: "Roboto";
+    -fx-prompt-text-fill: derive(-fx-txtFillLight, -10%);
+}
+
