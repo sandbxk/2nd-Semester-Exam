@@ -4,6 +4,9 @@
     -fx-txtRedBlack: #592D2D;
     -fx-bgBase: #f5f5f5;
     -fx-panelBase: #b63939;
+    -fx-studentPanelBase: #3961b6;
+    -fx-studentPanelHighlights: #bfdbff;
+    -fx-studentPanelDarkHighlights: #2e4d9b;
     -fx-panelHighlight: #FFBFBF;
     -fx-panelDarkHighlight: #9b2e2e;
     -fx-functionBase: #F5B91D;
@@ -29,6 +32,11 @@
     -fx-background-color: -fx-panelBase;
 }
 
+.studentPanelColorBG {
+    -fx-background-color: -fx-studentPanelBase;
+}
+
+
 .transparentBG {
     -fx-background-color: transparent;
 }
@@ -40,6 +48,15 @@
     -fx-border-radius: 30;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
 }
+
+.studentPanel30Deg {
+    -fx-background-color: -fx-studentPanelBase;
+    -fx-background-radius: 30;
+    -fx-padding: 2;
+    -fx-border-radius: 30;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}
+
 
 .text-fieldBase {
    -fx-background-color: transparent;
@@ -129,6 +146,76 @@
     -fx-font-size: 14;
 }
 
+
+
+
+.StudentPanelBtn {
+    -fx-background-color: -fx-studentPanelHightLights;
+    -fx-background-radius: 30;
+    -fx-padding: 10;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-studentPanelBase;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-wrap-text: true;
+    -fx-content-display: center;
+    -fx-text-alignment: center;
+
+}
+
+.StudentPanelBtn:hover {
+    -fx-background-color: derive(-fx-panelHighlight, 40%);
+    -fx-background-radius: 30;
+    -fx-padding: 10;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-studentPanelBase;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
+
+
+.StudentPanelBtn:pressed {
+    -fx-background-color: -fx-txtFillLight;
+    -fx-background-radius: 30;
+    -fx-padding: 10;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-studentPanelBase;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
+
+
+.StudentPanelBtnNoPadding {
+    -fx-background-color: -fx-studentPanelHightlights;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-studentPanelBase;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-wrap-text: true;
+    -fx-content-display: center;
+    -fx-text-alignment: center;
+
+}
+
+.StudentPanelBtnNoPadding:hover {
+    -fx-background-color: derive(-fx-panelHighlight, 40%);
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-studentPanelBase;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
+
+
+.StudentPanelBtnNoPadding:pressed {
+    -fx-background-color: -fx-txtFillLight;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-studentPanelBase;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
 
 
 .panelLbl {
@@ -300,6 +387,14 @@
     -fx-font-size: 14;
     -fx-background-color: -fx-panelHighlight;
     -fx-text-fill: -fx-panelBase;
+    -fx-font-weight: bold;
+    -fx-padding: 5;
+}
+
+.nameLbl {
+    -fx-font-size: 14;
+    -fx-background-color: -fx-studentPanelHighlight;
+    -fx-text-fill: -fx-studentPanelBase;
     -fx-font-weight: bold;
     -fx-padding: 5;
 }
@@ -800,6 +895,7 @@
     -fx-font-weight: bold;
 }
 
+
 .combo-box .list-cell
 {
     -fx-background: transparent;
@@ -915,7 +1011,6 @@
 {
     -fx-background-color: #e6e6e6;
 }
-
 
 .outlineBtn{
     -fx-background-color: transparent;
@@ -1059,6 +1154,7 @@
 
 .dialog-pane .content.list-cell {
     -fx-control-inner-background: transparent;
+}
 
 .customCombo-box {
     -fx-background-color: -fx-txtFillLight;
@@ -1077,6 +1173,39 @@
     -fx-font-size: 17;
     -fx-font-family: "Roboto";
     -fx-prompt-text-fill: derive(-fx-txtFillLight, -10%);
+}
 
+.container-funcTable {
+    -fx-background-color: -fx-bgBase;
+    -fx-border-color: -fx-functionBase;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+    -fx-text-fill: -fx-txtBase;
+}
+
+.container-healthTable {
+    -fx-background-color: -fx-bgBase;
+    -fx-border-color: -fx-healthBase;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+    -fx-text-fill: -fx-txtBase;
+}
+
+.healthLabel {
+    -fx-background-color: -fx-healthBase;
+    -fx-padding: 2;
+    -fx-background-radius: 0 0 5 5;
+    -fx-text-fill: -fx-txtFillDark;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 14;
+}
+
+.funcLabel {
+    -fx-background-color: -fx-functionBase;
+    -fx-padding: 2;
+    -fx-background-radius: 0 0 5 5;
+    -fx-text-fill: -fx-txtFillDark;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 14;
 }
 
