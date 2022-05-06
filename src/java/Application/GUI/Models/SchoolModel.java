@@ -16,7 +16,6 @@ public class SchoolModel {
 
     ObservableList<School> schools;
 
-    // FIXME: 04/05/2022 Make BLL
     private AdminDataManager DAO = new AdminDataManager();
 
     public SchoolModel(School school)
