@@ -13,8 +13,6 @@ import java.util.List;
 
 public class AccountDAO extends TemplatePatternDAO<Account> {
 
-    private int accountID;
-
     /**
      * Creates an account from account entity given.
      * @param input
@@ -72,7 +70,10 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
      */
     @Override
     public void delete(int accountid){
-        String sql = "DELETE FROM account WHERE id = ?";
+        String sql = """
+                    DELETE FROM account
+                    WHERE id = ?
+                    """;
 
         try {
             Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
@@ -158,7 +159,7 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
         String sql = """
                     SELECT * FROM accounts
                     JOIN schools ON accounts.school = schools.schoolId
-                    JOIN zipCode ON schools.schoolZipCode = zipCode.zipCod
+                    JOIN zipCodes ON schools.schoolZipCode = zipCodes.zipCode
                     """;
         List<Account> studentsList = new ArrayList<>();
 
