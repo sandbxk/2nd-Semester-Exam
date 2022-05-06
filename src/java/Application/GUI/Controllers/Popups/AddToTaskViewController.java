@@ -72,6 +72,7 @@ public class AddToTaskViewController implements Initializable {
 
     public void onSave(ActionEvent actionEvent)
     {
+        // FIXME: 06-05-2022 Change getAccountList to list of added users
         casesDAO.assignToCase(accountDAO.getAccountList(), comboBoxCases.getSelectionModel().getSelectedItem());
 
         Stage stage = (Stage) btnSave.getScene().getWindow();
@@ -92,7 +93,7 @@ public class AddToTaskViewController implements Initializable {
         }
     }
 
-    public void removeAccountFromList(ActionEvent actionEvent)
+    public void removeAccountFromList(ActionEvent actionEvent) 
     {
         AccountModel selection = tblAddedAccountsTable.getSelectionModel().getSelectedItem();
 
