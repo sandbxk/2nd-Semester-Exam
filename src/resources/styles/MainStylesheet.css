@@ -541,8 +541,8 @@
 
 .vboxBotBorder {
     -fx-border-color: derive(-fx-txtFillDark, 80%);
+    -fx-border-insets: 0 0 -7 0;
     -fx-border-width: 0 0 2 0;
-    -fx-padding: 5;
 }
 
 

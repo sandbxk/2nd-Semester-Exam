@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="anchorPaneCitizenTemplateDashboard" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../../Styles/MainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.GUI.Controllers.dashboard.CitizenTemplateController">
+<AnchorPane fx:id="anchorPaneCitizenTemplateDashboard" styleClass="background" stylesheets="@../../Styles/MainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.GUI.Controllers.dashboard.CitizenTemplateController">
         <children>
             <AnchorPane layoutX="14.0" layoutY="23.0" prefHeight="300.0" prefWidth="200.0" styleClass="panel30Deg" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="23.0">
                 <children>
@@ -30,7 +30,7 @@
                             <Button fx:id="btnCitizenTemplateSearch" mnemonicParsing="false" onAction="#onCitizenTemplateSearch" prefHeight="26.0" prefWidth="34.0" styleClass="searchBtn" />
                         </children>
                     </HBox>
-                    <Button fx:id="btnActions" layoutX="21.0" layoutY="777.0" mnemonicParsing="false" onAction="#onActions" prefHeight="52.0" prefWidth="159.0" styleClass="outlineBtn" text="Handlinger" AnchorPane.bottomAnchor="29.200000000000045" />
+                    <Button fx:id="btnActions" layoutX="21.0" layoutY="777.0" maxHeight="52.0" maxWidth="159.0" minHeight="52.0" minWidth="159.0" mnemonicParsing="false" onAction="#onActions" prefHeight="52.0" prefWidth="159.0" styleClass="outlineBtn" text="Handlinger" AnchorPane.bottomAnchor="29.200000000000045" />
                 </children>
             </AnchorPane>
             <AnchorPane layoutX="230.0" layoutY="23.0" prefHeight="233.0" prefWidth="621.0" styleClass="panel30Deg" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="23.0">
@@ -150,22 +150,22 @@
                     </AnchorPane>
                 </children>
             </AnchorPane>
-            <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="230.0" layoutY="275.0" prefHeight="300.0" prefWidth="627.0" stylesheets="@../../Styles/darkScrollPane.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="275.0">
-                <content>
-                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                        <children>
-                            <Accordion layoutX="1.0" prefWidth="658.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
-                                <panes>
-                                    <TitledPane text="Generelle Oplysninger">
-                                        <content>
-                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="3002.0" prefWidth="658.0">
+              <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="275.0">
+                  <children>
+                      <Accordion layoutX="1.0" prefWidth="658.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
+                          <panes>
+                              <TitledPane text="Generelle Oplysninger">
+                                  <content>
+                        <ScrollPane>
+                           <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="658.0">
                                                 <children>
-                                                    <VBox layoutX="19.6" layoutY="18.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                    <VBox layoutX="19.6" layoutY="-2.0" maxHeight="700.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="20.0">
                                                         <children>
                                                             <Label styleClass="lblBackgroundBold" text="Personlige Faktorer" />
-                                                            <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxBotBorder">
+                                                            <HBox minHeight="100.0" prefWidth="600.0" styleClass="vboxBotBorder">
                                                                 <children>
-                                                                    <GridPane prefHeight="63.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                                    <GridPane minHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
                                                                         <columnConstraints>
                                                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                                         </columnConstraints>
@@ -175,13 +175,23 @@
                                                                         <children>
                                                                             <Label alignment="CENTER" prefWidth="125.0" styleClass="smallPanelLblBold" text="Mestring" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
                                                                     </GridPane>
-                                                                    <TextArea fx:id="txtAreaGenInfoMastering" prefHeight="75.0" prefWidth="498.0" />
+                                                                    <TextArea fx:id="txtAreaGenInfoMastering" minHeight="100.0" prefWidth="498.0">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                </TextArea>
                                                                 </children>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                             </VBox.margin>
                                                             </HBox>
-                                                            <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxBotBorder">
+                                                            <HBox minHeight="100.0" prefWidth="600.0" styleClass="vboxBotBorder">
                                                                 <children>
-                                                                    <GridPane prefHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                                    <GridPane minHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
                                                                         <columnConstraints>
                                                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                                         </columnConstraints>
@@ -192,12 +202,15 @@
                                                                             <Label alignment="CENTER" prefWidth="125.0" styleClass="smallPanelLblBold" text="Motivation" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
-                                                                    <TextArea fx:id="txtAreaGenInfoMotivation" prefHeight="75.0" prefWidth="498.0" />
+                                                                    <TextArea fx:id="txtAreaGenInfoMotivation" minHeight="100.0" prefWidth="498.0" />
                                                                 </children>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                             </VBox.margin>
                                                             </HBox>
-                                                            <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxBotBorder">
+                                                            <HBox minHeight="100.0" prefWidth="600.0" styleClass="vboxBotBorder">
                                                                 <children>
-                                                                    <GridPane prefHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                                    <GridPane minHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
                                                                         <columnConstraints>
                                                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                                         </columnConstraints>
@@ -208,12 +221,15 @@
                                                                             <Label alignment="CENTER" prefWidth="125.0" styleClass="smallPanelLblBold" text="Ressourcer" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
-                                                                    <TextArea fx:id="txtAreaGenInfoRessources" prefHeight="75.0" prefWidth="498.0" />
+                                                                    <TextArea fx:id="txtAreaGenInfoRessources" minHeight="100.0" prefWidth="498.0" />
                                                                 </children>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                             </VBox.margin>
                                                             </HBox>
-                                                            <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxBotBorder">
+                                                            <HBox minHeight="100.0" prefWidth="600.0" styleClass="vboxBotBorder">
                                                                 <children>
-                                                                    <GridPane prefHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                                    <GridPane minHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
                                                                         <columnConstraints>
                                                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                                         </columnConstraints>
@@ -224,12 +240,15 @@
                                                                             <Label alignment="CENTER" prefWidth="125.0" styleClass="smallPanelLblBold" text="Roller" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
-                                                                    <TextArea fx:id="txtAreaGenInfoRoles" prefHeight="75.0" prefWidth="498.0" />
+                                                                    <TextArea fx:id="txtAreaGenInfoRoles" minHeight="100.0" prefWidth="498.0" />
                                                                 </children>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                             </VBox.margin>
                                                             </HBox>
-                                                            <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxBotBorder">
+                                                            <HBox minHeight="100.0" prefWidth="600.0" styleClass="vboxBotBorder">
                                                                 <children>
-                                                                    <GridPane prefHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                                    <GridPane minHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
                                                                         <columnConstraints>
                                                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                                         </columnConstraints>
@@ -240,12 +259,15 @@
                                                                             <Label alignment="CENTER" prefWidth="126.0" styleClass="smallPanelLblBold" text="Vaner" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
-                                                                    <TextArea fx:id="txtAreaGenInfoHabits" prefHeight="75.0" prefWidth="498.0" />
+                                                                    <TextArea fx:id="txtAreaGenInfoHabits" minHeight="100.0" prefWidth="498.0" />
                                                                 </children>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                             </VBox.margin>
                                                             </HBox>
-                                                            <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxBotBorder">
+                                                            <HBox minHeight="100.0" prefHeight="120.0" prefWidth="600.0" styleClass="vboxBotBorder">
                                                                 <children>
-                                                                    <GridPane prefHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                                    <GridPane minHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
                                                                         <columnConstraints>
                                                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                                         </columnConstraints>
@@ -256,12 +278,15 @@
                                                                             <Label alignment="CENTER" prefWidth="106.0" styleClass="smallPanelLblBold" text="Uddannelse og Job" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
-                                                                    <TextArea fx:id="txtAreaGenInfoEduAndJob" prefHeight="75.0" prefWidth="498.0" />
+                                                                    <TextArea fx:id="txtAreaGenInfoEduAndJob" minHeight="100.0" prefWidth="498.0" />
                                                                 </children>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                             </VBox.margin>
                                                             </HBox>
-                                                            <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxBotBorder">
+                                                            <HBox minHeight="100.0" prefWidth="600.0" styleClass="vboxBotBorder">
                                                                 <children>
-                                                                    <GridPane prefHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                                    <GridPane minHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
                                                                         <columnConstraints>
                                                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                                         </columnConstraints>
@@ -272,12 +297,15 @@
                                                                             <Label alignment="CENTER" prefWidth="125.0" styleClass="smallPanelLblBold" text="Livshistorie" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
-                                                                    <TextArea fx:id="txtAreaGenInfoLifeStory" prefHeight="75.0" prefWidth="498.0" />
+                                                                    <TextArea fx:id="txtAreaGenInfoLifeStory" minHeight="100.0" prefWidth="498.0" />
                                                                 </children>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                             </VBox.margin>
                                                             </HBox>
-                                                            <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxPadding">
+                                                            <HBox minHeight="100.0" prefWidth="600.0">
                                                                 <children>
-                                                                    <GridPane prefHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                                    <GridPane minHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
                                                                         <columnConstraints>
                                                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                                         </columnConstraints>
@@ -285,20 +313,23 @@
                                                                             <RowConstraints prefHeight="200.0" />
                                                                         </rowConstraints>
                                                                         <children>
-                                                                            <Label alignment="CENTER" prefHeight="18.0" prefWidth="125.0" styleClass="smallPanelLblBold" text="Helbredsoplysniger" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                                            <Label alignment="CENTER" prefWidth="125.0" styleClass="smallPanelLblBold" text="Helbreds Oplysniger" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
-                                                                    <TextArea fx:id="txtAreaGenInfoHealthInfo" prefHeight="75.0" prefWidth="498.0" />
+                                                                    <TextArea fx:id="txtAreaGenInfoHealthInfo" minHeight="100.0" prefWidth="498.0" />
                                                                 </children>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                             </VBox.margin>
                                                             </HBox>
                                                             <Label styleClass="lblBackgroundBold" text="Omgivelses Faktorer">
                                                                 <VBox.margin>
                                                                     <Insets top="20.0" />
                                                                 </VBox.margin>
                                                             </Label>
-                                                            <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxBotBorder">
+                                                            <HBox minHeight="100.0" prefWidth="600.0" styleClass="vboxBotBorder">
                                                                 <children>
-                                                                    <GridPane prefHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                                    <GridPane minHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
                                                                         <columnConstraints>
                                                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                                         </columnConstraints>
@@ -309,12 +340,15 @@
                                                                             <Label alignment="CENTER" styleClass="smallPanelLblBold" text="Hjælpemidler" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
-                                                                    <TextArea fx:id="txtAreaGenInfoAssistiveDevices" prefHeight="75.0" prefWidth="498.0" />
+                                                                    <TextArea fx:id="txtAreaGenInfoAssistiveDevices" minHeight="100.0" prefWidth="498.0" />
                                                                 </children>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                             </VBox.margin>
                                                             </HBox>
-                                                            <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxBotBorder">
+                                                            <HBox minHeight="100.0" prefWidth="600.0" styleClass="vboxBotBorder">
                                                                 <children>
-                                                                    <GridPane prefHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                                    <GridPane minHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
                                                                         <columnConstraints>
                                                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                                         </columnConstraints>
@@ -325,12 +359,15 @@
                                                                             <Label alignment="CENTER" prefWidth="125.0" styleClass="smallPanelLblBold" text="Boligens Indretning" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
-                                                                    <TextArea fx:id="txtAreaGenInfoHomeLayout" prefHeight="75.0" prefWidth="498.0" />
+                                                                    <TextArea fx:id="txtAreaGenInfoHomeLayout" minHeight="100.0" prefWidth="498.0" />
                                                                 </children>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                             </VBox.margin>
                                                             </HBox>
-                                                            <HBox prefHeight="75.0" prefWidth="600.0" styleClass="vboxPadding">
+                                                            <HBox minHeight="100.0" prefWidth="600.0">
                                                                 <children>
-                                                                    <GridPane prefHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
+                                                                    <GridPane minHeight="100.0" prefWidth="106.0" styleClass="redGridPaneLeft">
                                                                         <columnConstraints>
                                                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                                         </columnConstraints>
@@ -341,70 +378,73 @@
                                                                             <Label alignment="CENTER" prefWidth="125.0" styleClass="smallPanelLblBold" text="Netværk" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                                                         </children>
                                                                     </GridPane>
-                                                                    <TextArea fx:id="txtAreaGenInfoNetwork" prefHeight="75.0" prefWidth="498.0" />
+                                                                    <TextArea fx:id="txtAreaGenInfoNetwork" minHeight="100.0" prefWidth="498.0" />
                                                                 </children>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                             </VBox.margin>
                                                             </HBox>
                                                         </children>
                                                     </VBox>
                                                 </children>
                                             </AnchorPane>
-                                        </content>
-                                    </TitledPane>
-                                    <TitledPane text="Helbredstilstande">
-                                        <content>
-                                            <AnchorPane minHeight="0.0" minWidth="0.0">
-                                                <children>
-                                                    <TreeTableView fx:id="treeTblViewHealth" prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                        <columns>
-                                                            <TreeTableColumn fx:id="treeTblColumnHealthCategory" minWidth="150.0" onEditCancel="#onTreeTblColumnCancelEdit" prefWidth="-1.0" text="Tilstandsklassificering" />
-                                                            <TreeTableColumn fx:id="treeTblColumnHealthLevel" minWidth="60.0" onEditCancel="#onTreeTblColumnCancelEdit" prefWidth="-1.0" text="Niveau" />
-                                                            <TreeTableColumn fx:id="treeTblColumnHealthAssessment" minWidth="70.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Vurdering" />
-                                                            <TreeTableColumn fx:id="treeTblColumnHealthCause" minWidth="100.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Årsag" />
-                                                            <TreeTableColumn fx:id="treeTblColumnHealthExpectedCondition" minWidth="140.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Forventet Tilstand" />
-                                                            <TreeTableColumn fx:id="treeTblColumnHealthNote" minWidth="100.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Faglig Notat" />
-                                                        </columns>
-                                                        <styleClass>
-                                                            <String fx:value="healthTable" />
-                                                            <String fx:value="healthTable-view" />
-                                                        </styleClass>
-                                                    </TreeTableView>
-                                                </children>
-                                            </AnchorPane>
-                                        </content>
-                                    </TitledPane>
-                                    <TitledPane text="Funktionsevnetilstande">
-                                        <content>
-                                            <AnchorPane minHeight="0.0" minWidth="0.0">
-                                                <children>
-                                                    <TreeTableView fx:id="treeTblViewFunc" prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                        <columns>
-                                                            <TreeTableColumn fx:id="treeTblColumnFuncCategory" minWidth="140.0" prefWidth="-1.0" text="Tilstandsklassificering" />
-                                                            <TreeTableColumn prefWidth="151.99993896484375" text="Tilstands Præcisering">
-                                                                <columns>
-                                                                    <TreeTableColumn fx:id="treeTblColumnFuncLevel" minWidth="60.0" prefWidth="-1.0" text="Niveau" />
-                                                                    <TreeTableColumn fx:id="treeTblColumnFuncAssessment" minWidth="70.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Vurdering" />
-                                                                    <TreeTableColumn fx:id="treeTblColumnFuncCause" minWidth="70.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Årsag" />
-                                                                </columns>
-                                                            </TreeTableColumn>
-                                                            <TreeTableColumn fx:id="treeTblColumnFuncImplications" minWidth="100.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Betydninger for udførelse" />
-                                                            <TreeTableColumn fx:id="treeTblColumnFuncCitizenGoals" minWidth="120.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Borgers ønsker/mål" />
-                                                            <TreeTableColumn fx:id="treeTblColumnFuncExpectedCondition" minWidth="65.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Forventet Tilstand" />
-                                                            <TreeTableColumn fx:id="treeTblColumnFuncNote" minWidth="70.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Faglig Notat" />
-                                                        </columns>
-                                                        <styleClass>
-                                                            <String fx:value="funcTable" />
-                                                            <String fx:value="funcTable-view" />
-                                                        </styleClass>
-                                                    </TreeTableView>
-                                                </children>
-                                            </AnchorPane>
-                                        </content>
-                                    </TitledPane>
-                                </panes>
-                            </Accordion>
-                        </children>
-                    </AnchorPane>
-                </content>
-            </ScrollPane>
+                           </content>
+                        </ScrollPane>
+                                  </content>
+                              </TitledPane>
+                              <TitledPane text="Helbredstilstande">
+                                  <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0">
+                                          <children>
+                                              <TreeTableView fx:id="treeTblViewHealth" prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <columns>
+                                                      <TreeTableColumn fx:id="treeTblColumnHealthCategory" minWidth="150.0" onEditCancel="#onTreeTblColumnCancelEdit" prefWidth="-1.0" text="Tilstandsklassificering" />
+                                                      <TreeTableColumn fx:id="treeTblColumnHealthLevel" minWidth="60.0" onEditCancel="#onTreeTblColumnCancelEdit" prefWidth="-1.0" text="Niveau" />
+                                                      <TreeTableColumn fx:id="treeTblColumnHealthAssessment" minWidth="70.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Vurdering" />
+                                                      <TreeTableColumn fx:id="treeTblColumnHealthCause" minWidth="100.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Årsag" />
+                                                      <TreeTableColumn fx:id="treeTblColumnHealthExpectedCondition" minWidth="140.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Forventet Tilstand" />
+                                                      <TreeTableColumn fx:id="treeTblColumnHealthNote" minWidth="100.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Faglig Notat" />
+                                                  </columns>
+                                                  <styleClass>
+                                                      <String fx:value="healthTable" />
+                                                      <String fx:value="healthTable-view" />
+                                                  </styleClass>
+                                              </TreeTableView>
+                                          </children>
+                                      </AnchorPane>
+                                  </content>
+                              </TitledPane>
+                              <TitledPane text="Funktionsevnetilstande">
+                                  <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0">
+                                          <children>
+                                              <TreeTableView fx:id="treeTblViewFunc" prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                  <columns>
+                                                      <TreeTableColumn fx:id="treeTblColumnFuncCategory" minWidth="140.0" prefWidth="-1.0" text="Tilstandsklassificering" />
+                                                      <TreeTableColumn prefWidth="151.99993896484375" text="Tilstands Præcisering">
+                                                          <columns>
+                                                              <TreeTableColumn fx:id="treeTblColumnFuncLevel" minWidth="60.0" prefWidth="-1.0" text="Niveau" />
+                                                              <TreeTableColumn fx:id="treeTblColumnFuncAssessment" minWidth="70.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Vurdering" />
+                                                              <TreeTableColumn fx:id="treeTblColumnFuncCause" minWidth="70.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Årsag" />
+                                                          </columns>
+                                                      </TreeTableColumn>
+                                                      <TreeTableColumn fx:id="treeTblColumnFuncImplications" minWidth="100.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Betydninger for udførelse" />
+                                                      <TreeTableColumn fx:id="treeTblColumnFuncCitizenGoals" minWidth="120.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Borgers ønsker/mål" />
+                                                      <TreeTableColumn fx:id="treeTblColumnFuncExpectedCondition" minWidth="65.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Forventet Tilstand" />
+                                                      <TreeTableColumn fx:id="treeTblColumnFuncNote" minWidth="70.0" onEditCancel="#onTreeTblColumnCancelEdit" onEditCommit="#onTreeTblColumnCommitEdit" onEditStart="#onTreeTblColumnStartEdit" prefWidth="-1.0" text="Faglig Notat" />
+                                                  </columns>
+                                                  <styleClass>
+                                                      <String fx:value="funcTable" />
+                                                      <String fx:value="funcTable-view" />
+                                                  </styleClass>
+                                              </TreeTableView>
+                                          </children>
+                                      </AnchorPane>
+                                  </content>
+                              </TitledPane>
+                          </panes>
+                      </Accordion>
+                  </children>
+              </AnchorPane>
         </children>
     </AnchorPane>
