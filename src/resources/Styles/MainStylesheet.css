@@ -391,9 +391,9 @@
     -fx-padding: 5;
 }
 
-.nameLbl {
+.studentNameLbl {
     -fx-font-size: 14;
-    -fx-background-color: -fx-studentPanelHighlight;
+    -fx-background-color: -fx-studentPanelHighlights;
     -fx-text-fill: -fx-studentPanelBase;
     -fx-font-weight: bold;
     -fx-padding: 5;
@@ -491,7 +491,40 @@
     -fx-font-weight: normal;
 }
 
+.studentBackgroundButton {
+    -fx-background-color: -fx-studentPanelBase;
+    -fx-background-radius: 30;
+    -fx-padding: 10;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-txtFillLight;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-wrap-text: true;
+    -fx-content-display: center;
+    -fx-text-alignment: center;
 
+}
+
+.studentBackgroundButton:hover {
+    -fx-background-color: derive(-fx-studentPanelHighlights, 40%);
+    -fx-background-radius: 30;
+    -fx-padding: 10;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-studentPanelBase;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
+
+
+.studentBackgroundButton:pressed {
+    -fx-background-color: -fx-studentPanelHighlights;
+    -fx-background-radius: 30;
+    -fx-padding: 10;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-studentPanelBase;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
 
 .backgroundButton {
     -fx-background-color: -fx-panelBase;
@@ -676,7 +709,7 @@
 }
 .healthTable-view .column-header-background {
     -fx-background-color: -fx-healthBase;
-    -fx-background-radius: 20 0 20 0;
+    -fx-background-radius: 20 20 0 0;
 }
 
 
@@ -686,7 +719,7 @@
 
 .healthTable .column-header {
     -fx-background-color: -fx-healthBase;
-    -fx-background-radius: 20 0 20 0;
+    -fx-background-radius: 20 20 0 0;
     -fx-border-color: rgba(0,0,0, 0.15);
     -fx-border-width: 0 1 0 0;
 
@@ -791,7 +824,7 @@
 
 .funcTable-view .column-header-background {
     -fx-background-color: -fx-functionBase;
-    -fx-background-radius: 20 0 20 0;
+    -fx-background-radius: 20 20 0 0;
 
 }
 
@@ -801,7 +834,7 @@
 
 .funcTable .column-header {
     -fx-background-color: -fx-functionBase;
-    -fx-background-radius: 20 0 20 0;
+    -fx-background-radius: 20 20 0 0;
     -fx-border-color: rgba(0,0,0, 0.15);
     -fx-border-width: 0 1 0 0;
 }
