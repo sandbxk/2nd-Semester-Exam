@@ -60,7 +60,7 @@ public class StudentViewController implements Initializable {
         citizens.add(new CitizenModel("John", "Doe", 22, LocalDate.now(), "HelpStatus", "CivilianStatus","Address street", FXCollections.observableArrayList(new ContactInfo("Tlf: 12345678"))));
         citizens.add(new CitizenModel("Jfeohn", "Dofee", 2245, LocalDate.now(), "Help1Status", "Civili1anStatus","Ad1dress street", FXCollections.observableArrayList(new ContactInfo("Tlf: 12345678"))));
         listViewCitizens.setItems(citizens);
-
+        //TODO: Fix Scaling
         //TODO: Make age autofill from birthdate in citizenmodel and citizenTemplateModel
     }
 

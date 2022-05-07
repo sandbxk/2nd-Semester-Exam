@@ -201,6 +201,8 @@ public class CitizenTemplateController implements Initializable {
         treeTblColumnHealthNote.setCellValueFactory(param -> param.getValue().getValue().noteProperty());
 
 
+        //https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/cell/ComboBoxTreeCell.html
+
 
         treeTblColumnFuncCategory.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
         treeTblColumnFuncAssessment.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
