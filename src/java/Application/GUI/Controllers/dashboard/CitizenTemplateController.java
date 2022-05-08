@@ -1,12 +1,11 @@
 package Application.GUI.Controllers.dashboard;
 
+import Application.BE.ContactInfo;
 import Application.GUI.Models.CategoryEntryModel;
 import Application.GUI.Models.CitizenTemplateModel;
 import Application.GUI.Models.ControllerModels.CitizenTemplateControllerModel;
 import Application.GUI.Models.FunctionalLevels;
 import Application.GUI.Models.HealthLevels;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,11 +22,11 @@ import java.util.*;
 public class CitizenTemplateController implements Initializable {
 
     public AnchorPane anchorPaneCitizenTemplateDashboard;
-    public ListView listViewCitizenTemplates;
+    public ListView<CitizenTemplateModel> listViewCitizenTemplates;
     public TextField txtFieldCitizenTemplateSearch;
     public Button btnCitizenTemplateSearch;
     public Label lblCitizenTemplateName;
-    public ListView listViewCitizenTemplateContactInfo;
+    public ListView<ContactInfo> listViewCitizenTemplateContactInfo;
     public Button btnAddCitizenTemplateContactInfo;
     public Button btnRemoveCitizenTemplateContactInfo;
     public Button btnCitizenTemplateEditBaseData;
@@ -244,6 +243,8 @@ public class CitizenTemplateController implements Initializable {
             model.setSelectedCitizenTemplateModel((CitizenTemplateModel) newValue);
             setDataToCitizenTemplateView();
         });
+
+        listViewCitizenTemplates.getSelectionModel().select(0);
     }
 
 
@@ -309,6 +310,8 @@ public class CitizenTemplateController implements Initializable {
         for (TreeItem<CategoryEntryModel> cat : treeTblViewHealth.getRoot().getChildren()) {
             cat.getValue().getHealthLevelComboBox().setDisable(!editable);
         }
+
+        listViewCitizenTemplates.setDisable(editable);
 
         btnCitizenTemplateEditOn.setVisible(!editable); //Only visible if not editable
         btnCitizenTemplateEditSave.setVisible(editable); //Only visible if editable
