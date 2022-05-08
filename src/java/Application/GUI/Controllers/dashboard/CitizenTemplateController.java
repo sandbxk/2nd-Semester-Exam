@@ -317,8 +317,7 @@ public class CitizenTemplateController implements Initializable {
 
     public void onEditOn(ActionEvent event) {
         setEditable(true);
-        model.setPreEditHealthCategoryEntryModels(treeTblViewHealth.getRoot());
-        model.setPreEditFunctionCategoryEntryModels(treeTblViewFunc.getRoot());
+        model.savePreEditState();
         treeTblViewFunc.setRoot(model.getAllFuncCategoriesAsTreeItem());
         treeTblViewHealth.setRoot(model.getAllHealthConditionsAsTreeItem());
 
@@ -333,6 +332,19 @@ public class CitizenTemplateController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
+            model.getSelectedCitizenTemplateModel().setMastering(txtAreaGenInfoMastering.getText());
+            model.getSelectedCitizenTemplateModel().setMotivation(txtAreaGenInfoMotivation.getText());
+            model.getSelectedCitizenTemplateModel().setResources(txtAreaGenInfoResources.getText());
+            model.getSelectedCitizenTemplateModel().setRoles(txtAreaGenInfoRoles.getText());
+            model.getSelectedCitizenTemplateModel().setHabits(txtAreaGenInfoHabits.getText());
+            model.getSelectedCitizenTemplateModel().setEduAndJob(txtAreaGenInfoEduAndJob.getText());
+            model.getSelectedCitizenTemplateModel().setLifeStory(txtAreaGenInfoLifeStory.getText());
+            model.getSelectedCitizenTemplateModel().setHealthInfo(txtAreaGenInfoHealthInfo.getText());
+            model.getSelectedCitizenTemplateModel().setAssistiveDevices(txtAreaGenInfoAssistiveDevices.getText());
+            model.getSelectedCitizenTemplateModel().setHomeLayout(txtAreaGenInfoHomeLayout.getText());
+            model.getSelectedCitizenTemplateModel().setNetwork(txtAreaGenInfoNetwork.getText());
+
+
             model.saveEditedCitizenTemplate();
             treeTblViewFunc.setRoot(model.getNewRelevantFuncCategoriesAsTreeItem());
             treeTblViewHealth.setRoot(model.getNewRelevantHealthCategoriesAsTreeItem());
@@ -342,9 +354,10 @@ public class CitizenTemplateController implements Initializable {
 
     public void onEditCancel(ActionEvent event) {
         setEditable(false);
-        treeTblViewFunc.setRoot(model.getPreEditFunctionCategoryEntryModels());
-        treeTblViewHealth.setRoot(model.getPreEditHealthCategoryEntryModels());
-        //TODO: erase changes in citizen template
+        ObservableList<CitizenTemplateModel> templateModelObservableList = listViewCitizenTemplates.getItems();
+        int index = templateModelObservableList.indexOf(model.getSelectedCitizenTemplateModel());
+        listViewCitizenTemplates.getItems().set(index, model.getPreEditState());
+        listViewCitizenTemplates.getSelectionModel().select(index);
     }
 
     //https://www.youtube.com/watch?v=BNvVSU9nHDY

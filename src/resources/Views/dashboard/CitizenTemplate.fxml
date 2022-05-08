@@ -398,7 +398,7 @@
                                           <children>
                                               <TreeTableView fx:id="treeTblViewHealth" prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                   <columns>
-                                                      <TreeTableColumn fx:id="treeTblColumnHealthCategory" minWidth="150.0" onEditCancel="#" prefWidth="-1.0" style="-fx-alignment: center;" text="Tilstandsklassificering" />
+                                                      <TreeTableColumn fx:id="treeTblColumnHealthCategory" minWidth="150.0" prefWidth="-1.0" style="-fx-alignment: center;" text="Tilstandsklassificering" />
                                                       <TreeTableColumn fx:id="treeTblColumnHealthLevel" minWidth="60.0" prefWidth="96.0" style="-fx-alignment: center;" text="Niveau" />
                                                       <TreeTableColumn fx:id="treeTblColumnHealthAssessment" minWidth="53.0" style="-fx-alignment: center;" text="Vurdering" />
                                                       <TreeTableColumn fx:id="treeTblColumnHealthCause" minWidth="64.0" prefWidth="82.0" style="-fx-alignment: center;" text="Årsag" />

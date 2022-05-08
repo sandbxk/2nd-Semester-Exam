@@ -10,7 +10,7 @@ import javafx.scene.control.TreeItem;
 import java.time.LocalDate;
 import java.util.stream.Collectors;
 
-public class CitizenTemplateModel {
+public class CitizenTemplateModel implements Cloneable {
 
     private StringProperty name;
     private StringProperty surname;
@@ -367,5 +367,8 @@ public class CitizenTemplateModel {
         return allHealthConditions;
     }
 
-
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

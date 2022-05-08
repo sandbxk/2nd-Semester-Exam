@@ -87,11 +87,13 @@ public class CategoryEntryModel {
         levelFuncComboBox.get().setItems(funcData);
         levelFuncComboBox.get().setCellFactory(e -> comboBoxImageCell());
         levelFuncComboBox.get().setButtonCell(comboBoxImageCell());
+        levelFuncComboBox.get().setDisable(true);
 
         ObservableList<HealthLevels> healthData = FXCollections.observableArrayList(HealthLevels.values());
         levelHealthComboBox.get().setItems(healthData);
         levelHealthComboBox.get().setCellFactory(e -> comboBoxHealthDescCell());
         levelHealthComboBox.get().setButtonCell(comboBoxHealthDescCell());
+        levelHealthComboBox.get().setDisable(true);
 
         if (isFunctionAbility) {
             if (level.get() == 9){

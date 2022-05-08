@@ -2,6 +2,7 @@ package Application.GUI.Models.ControllerModels;
 
 import Application.BE.ContactInfo;
 import Application.GUI.Models.CategoryEntryModel;
+import Application.GUI.Models.CitizenModel;
 import Application.GUI.Models.CitizenTemplateModel;
 import com.sun.source.tree.Tree;
 import javafx.collections.FXCollections;
@@ -16,6 +17,8 @@ public class CitizenTemplateControllerModel {
 
     private TreeItem<CategoryEntryModel> preEditHealthCategoryEntryModels;
     private TreeItem<CategoryEntryModel> preEditFunctionCategoryEntryModels;
+
+    private CitizenTemplateModel preEditCitizenTemplateModel;
 
 
     public void citizenTemplateSearch() {
@@ -61,7 +64,7 @@ public class CitizenTemplateControllerModel {
     public TreeItem<CategoryEntryModel> getNewRelevantFuncCategoriesAsTreeItem() {
         TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("All Functional Ability Categories"));
         return listToTreeItem(treeItem, selectedCitizenTemplateModel.getRelevantFunctionalAbilities());
-        //TODO sort the two lists (relevant and non-relevant) and make a new one
+        //TODO sort the two lists (relevant and non-relevant) and make a new one.
     }
 
     public TreeItem<CategoryEntryModel> getNewRelevantHealthCategoriesAsTreeItem() {
@@ -107,12 +110,12 @@ public class CitizenTemplateControllerModel {
         return preEditHealthCategoryEntryModels;
     }
 
-    public void setPreEditHealthCategoryEntryModels(TreeItem<CategoryEntryModel> preEditHealthCategoryEntryModels) {
-        this.preEditHealthCategoryEntryModels = preEditHealthCategoryEntryModels;
-    }
-
-    public TreeItem<CategoryEntryModel> getPreEditFunctionCategoryEntryModels() {
-        return preEditFunctionCategoryEntryModels;
+    public void savePreEditState() {
+        try {
+            this.preEditCitizenTemplateModel = (CitizenTemplateModel) selectedCitizenTemplateModel.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setPreEditFunctionCategoryEntryModels(TreeItem<CategoryEntryModel> preEditFunctionCategoryEntryModels) {
@@ -121,5 +124,9 @@ public class CitizenTemplateControllerModel {
 
     public void saveEditedCitizenTemplate() {
         //TODO save to DB
+    }
+
+    public CitizenTemplateModel getPreEditState() {
+        return preEditCitizenTemplateModel;
     }
 }
