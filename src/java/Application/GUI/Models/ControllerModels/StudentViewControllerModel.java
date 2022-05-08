@@ -1,11 +1,18 @@
 package Application.GUI.Models.ControllerModels;
 
+import Application.BLL.StudentDataManager;
 import Application.GUI.Models.CitizenModel;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
 public class StudentViewControllerModel {
 
     private CitizenModel selectedCitizen;
+    private StudentDataManager studentDataManager;
+
+    public StudentViewControllerModel() {
+        studentDataManager = new StudentDataManager();
+    }
 
     public void onStudentCitizensSearch() {
         //TODO
@@ -21,6 +28,10 @@ public class StudentViewControllerModel {
 
     public void onAddObservation() {
         //TODO
+    }
+
+    public ObservableList<CitizenModel> getAllCitizens() {
+        return studentDataManager.getAllCitizens();
     }
 
     public CitizenModel getSelectedCitizen() {

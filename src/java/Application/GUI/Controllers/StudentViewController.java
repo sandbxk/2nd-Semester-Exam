@@ -98,6 +98,7 @@ public class StudentViewController implements Initializable {
                 updateCitizenInfo(newValue);
             }
         });
+        listViewCitizens.setItems(model.getAllCitizens());
     }
 
 
