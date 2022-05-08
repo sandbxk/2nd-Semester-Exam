@@ -9,12 +9,18 @@ import Application.GUI.Models.HealthLevels;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Side;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -233,7 +239,24 @@ public class CitizenTemplateController implements Initializable {
     }
 
     public void onCitizenTemplateEditBaseData(ActionEvent event) {
-        model.onCitizenTemplateEditBaseData();
+
+        Stage stage = new Stage();
+        stage.setTitle("Rediger Stamdata");
+
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(this.getClass().getResource("/Views/Popups/EditCitizenTemplateBaseData.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        stage.setScene(new Scene(root));
+        stage.show();
+
+        stage.setOnHiding(event1 -> {
+            setDataToCitizenTemplateView());
+            model.onCitizenTemplateEditBaseData();
+        });
     }
 
     private void initCitizenTemplatesList() {
