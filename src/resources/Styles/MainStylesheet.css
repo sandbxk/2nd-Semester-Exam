@@ -3,16 +3,26 @@
     -fx-txtFillDark: #202020;
     -fx-txtRedBlack: #592D2D;
     -fx-bgBase: #f5f5f5;
-    -fx-panelBase: #D13F3F;
+    -fx-panelBase: #b63939;
+    -fx-studentPanelBase: #3961b6;
+    -fx-studentPanelHighlights: #bfdbff;
+    -fx-studentPanelDarkHighlights: #2e4d9b;
     -fx-panelHighlight: #FFBFBF;
-    -fx-panelDarkHighlight: #b63939;
+    -fx-panelDarkHighlight: #9b2e2e;
     -fx-functionBase: #F5B91D;
     -fx-funcBG: #FAF8EC;
     -fx-healthBase: #5DD677;
     -fx-healthBG: #EDFAEC;
     -fx-oddRowFunc: #d2bc90;
     -fx-oddRowHealth: #97d290;
+    -fx-tblBG: #d9d9d9;
 
+
+    /* Original:
+    -fx-panelBase: #D13F3F;
+    -fx-panelHighlight: #FFBFBF;
+    -fx-panelDarkHighlight: #b63939;
+     */
 }
 
 .background {
@@ -22,6 +32,11 @@
 .panelColorBG {
     -fx-background-color: -fx-panelBase;
 }
+
+.studentPanelColorBG {
+    -fx-background-color: -fx-studentPanelBase;
+}
+
 
 .transparentBG {
     -fx-background-color: transparent;
@@ -34,6 +49,15 @@
     -fx-border-radius: 30;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
 }
+
+.studentPanel30Deg {
+    -fx-background-color: -fx-studentPanelBase;
+    -fx-background-radius: 30;
+    -fx-padding: 2;
+    -fx-border-radius: 30;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 0);
+}
+
 
 .text-fieldBase {
    -fx-background-color: transparent;
@@ -123,6 +147,76 @@
     -fx-font-size: 14;
 }
 
+
+
+
+.StudentPanelBtn {
+    -fx-background-color: -fx-studentPanelHightLights;
+    -fx-background-radius: 30;
+    -fx-padding: 10;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-studentPanelBase;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-wrap-text: true;
+    -fx-content-display: center;
+    -fx-text-alignment: center;
+
+}
+
+.StudentPanelBtn:hover {
+    -fx-background-color: derive(-fx-panelHighlight, 40%);
+    -fx-background-radius: 30;
+    -fx-padding: 10;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-studentPanelBase;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
+
+
+.StudentPanelBtn:pressed {
+    -fx-background-color: -fx-txtFillLight;
+    -fx-background-radius: 30;
+    -fx-padding: 10;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-studentPanelBase;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
+
+
+.StudentPanelBtnNoPadding {
+    -fx-background-color: -fx-studentPanelHightlights;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-studentPanelBase;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-wrap-text: true;
+    -fx-content-display: center;
+    -fx-text-alignment: center;
+
+}
+
+.StudentPanelBtnNoPadding:hover {
+    -fx-background-color: derive(-fx-panelHighlight, 40%);
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-studentPanelBase;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
+
+
+.StudentPanelBtnNoPadding:pressed {
+    -fx-background-color: -fx-txtFillLight;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-studentPanelBase;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
 
 
 .panelLbl {
@@ -298,6 +392,14 @@
     -fx-padding: 5;
 }
 
+.studentNameLbl {
+    -fx-font-size: 14;
+    -fx-background-color: -fx-studentPanelHighlights;
+    -fx-text-fill: -fx-studentPanelBase;
+    -fx-font-weight: bold;
+    -fx-padding: 5;
+}
+
 
 .scroll-pane {
     -fx-background-color: transparent;
@@ -390,7 +492,40 @@
     -fx-font-weight: normal;
 }
 
+.studentBackgroundButton {
+    -fx-background-color: -fx-studentPanelBase;
+    -fx-background-radius: 30;
+    -fx-padding: 10;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-txtFillLight;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+    -fx-wrap-text: true;
+    -fx-content-display: center;
+    -fx-text-alignment: center;
 
+}
+
+.studentBackgroundButton:hover {
+    -fx-background-color: derive(-fx-studentPanelHighlights, 40%);
+    -fx-background-radius: 30;
+    -fx-padding: 10;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-studentPanelBase;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
+
+
+.studentBackgroundButton:pressed {
+    -fx-background-color: -fx-studentPanelHighlights;
+    -fx-background-radius: 30;
+    -fx-padding: 10;
+    -fx-border-radius: 30;
+    -fx-text-fill: -fx-studentPanelBase;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
 
 .backgroundButton {
     -fx-background-color: -fx-panelBase;
@@ -535,8 +670,8 @@
 
 .vboxBotBorder {
     -fx-border-color: derive(-fx-txtFillDark, 80%);
+    -fx-border-insets: 0 0 -7 0;
     -fx-border-width: 0 0 2 0;
-    -fx-padding: 5;
 }
 
 
@@ -546,7 +681,7 @@
 
 
 .redGridPaneLeft {
-    -fx-background-color: -fx-panelHighlight;
+    -fx-background-color: -fx-panelBase;
     -fx-padding: 5;
     -fx-background-radius: 20 0 0 20;
 }
@@ -575,7 +710,7 @@
 }
 .healthTable-view .column-header-background {
     -fx-background-color: -fx-healthBase;
-    -fx-background-radius: 20 0 20 0;
+    -fx-background-radius: 20 20 0 0;
 }
 
 
@@ -585,7 +720,7 @@
 
 .healthTable .column-header {
     -fx-background-color: -fx-healthBase;
-    -fx-background-radius: 20 0 20 0;
+    -fx-background-radius: 20 20 0 0;
     -fx-border-color: rgba(0,0,0, 0.15);
     -fx-border-width: 0 1 0 0;
 
@@ -628,11 +763,12 @@
 }
 
 .healthTable .tree-table-cell{
-    -fx-border-color: transparent;
     -fx-text-fill: -fx-txtFillDark;
     -fx-wrap-text: true;
     -fx-content-display: center;
     -fx-text-alignment: center;
+    -fx-border-color: -fx-tblBG;
+    -fx-border-width: 0 0 1 1;
 }
 
 
@@ -690,7 +826,7 @@
 
 .funcTable-view .column-header-background {
     -fx-background-color: -fx-functionBase;
-    -fx-background-radius: 20 0 20 0;
+    -fx-background-radius: 20 20 0 0;
 
 }
 
@@ -700,7 +836,7 @@
 
 .funcTable .column-header {
     -fx-background-color: -fx-functionBase;
-    -fx-background-radius: 20 0 20 0;
+    -fx-background-radius: 20 20 0 0;
     -fx-border-color: rgba(0,0,0, 0.15);
     -fx-border-width: 0 1 0 0;
 }
@@ -743,16 +879,17 @@
 }
 
 .funcTable .tree-table-cell{
-    -fx-border-color: transparent;
     -fx-text-fill: -fx-txtFillDark;
     -fx-wrap-text: true;
     -fx-content-display: center;
     -fx-text-alignment: center;
+    -fx-border-color: -fx-tblBG;
+    -fx-border-width: 0 0 1 1;
 }
 
 .funcTable .tree-table-cell:selected{
     -fx-border-color: -fx-txtFillDark;
-    -fx-border-width: 0 1 0 0;
+    -fx-border-width: 1 0 0 1;
     -fx-text-fill: -fx-txtFillDark;
     -fx-wrap-text: true;
     -fx-content-display: center;
@@ -864,9 +1001,10 @@
 }
 
 .combo-box-base:disabled {
-    -fx-border-color: txtFillDark;
+    -fx-border-color: -fx-txtFillDark;
     -fx-border-width: 1;
     -fx-background-color: transparent;
+    -fx-opacity: 1;
 }
 
 .combo-box-base:disabled > .arrow, .combo-box .arrow-button {
@@ -910,6 +1048,149 @@
     -fx-background-color: #e6e6e6;
 }
 
+.outlineBtn{
+    -fx-background-color: transparent;
+    -fx-background-radius: 30;
+    -fx-border-color: -fx-txtFillLight;
+    -fx-border-radius: 30;
+    -fx-border-width: 2;
+    -fx-text-fill: -fx-txtFillLight;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+
+.outlineBtn:hover{
+    -fx-background-color: -fx-panelHighlight;
+    -fx-text-fill: -fx-panelBase;
+    -fx-border-color: transparent;
+    -fx-font-weight: bold;
+}
+
+.outlineBtn:pressed{
+    -fx-background-color: -fx-txtFillLight;
+    -fx-text-fill: -fx-panelBase;
+    -fx-font-weight: bold;
+}
+
+.context-menu {
+    -fx-background-color: -fx-panelBase;
+    -fx-text-fill: -fx-txtFillLight;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 12pt;
+}
+
+.menu-item .label {
+    -fx-text-fill: -fx-txtFillLight;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 12pt;
+}
+.menu-item:focused {
+    -fx-background-color: -fx-txtFillLight;
+    -fx-text-fill: -fx-panelBase;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 12pt;
+}
+
+.menu-item:focused .label {
+    -fx-text-fill: -fx-panelBase;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 12pt;
+}
+
+
+
+/****************       Dialogue Pane / Alert       *****************/
+.dialog-pane{
+}
+
+/**Costumization of The Bar where the buttons are located**/
+.dialog-pane > .button-bar > .container {
+    -fx-background-color: -fx-bgBase;
+}
+
+.dialog-pane > .content.label {
+    -fx-padding: 0.5em 0.5em 0.5em 0.5em;
+    -fx-background-color: -fx-bgBase;
+    -fx-text-fill: -fx-txtBase;
+    -fx-font-family: Roboto;
+    -fx-font-size: 14px;
+    -fx-wrap-text: true;
+
+}
+
+.dialog-pane > .content {
+    -fx-background-color: #303030;
+}
+
+/**Costumization of DialogPane Header**/
+.dialog-pane:header .header-panel {
+    -fx-background-color: -fx-bgBase;
+    -fx-border-color: -fx-accent1;
+    -fx-border-width: 0px 0px 2px 0px
+
+}
+
+.dialog-pane:header .header-panel .label{;
+    -fx-background-radius:10px;
+    -fx-text-fill: -fx-txtBase;
+    -fx-font-weight: bold;
+    -fx-font-size:16px;
+}
+
+
+/**Costumization of Buttons**/
+.dialog-pane .button{
+    -fx-background-color: -fx-bgBase;
+    -fx-wrap-text: true;
+    -fx-cursor:hand;
+    -fx-font-family: Roboto;
+    -fx-font-size: 10pt;
+    -fx-text-fill: -fx-txtBase;
+    -fx-content-display: CENTER;
+    -fx-border-radius: 20;
+    -fx-border-width: 2;
+    -fx-border-color: -fx-txtBase;
+    -fx-background-radius: 20;
+}
+
+.dialog-pane .button:hover{
+    -fx-background-color: -fx-accent1;
+    -fx-text-fill: -fx-txtBase;
+    -fx-border-color: -fx-accent1;
+    -fx-font-weight: bold;
+}
+
+.dialog-pane .button:pressed{
+    -fx-background-color: -fx-bgBase;
+    -fx-text-fill: -fx-accent1;
+    -fx-border-color: -fx-accent1;
+    -fx-border-radius: 20;
+}
+
+
+.dialog-pane .content.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: -fx-accent1;
+    -fx-text-fill: -fx-txtBase;
+}
+
+.dialog-pane .content.list-cell:even {
+    -fx-background-color: -fx-bgBase;
+}
+
+.dialog-pane .content.list-cell:filled:hover {
+    -fx-background-color: -fx-bgBase;
+    -fx-text-fill: -fx-txtBase;
+}
+
+.dialog-pane .content.list-view{
+    -fx-background-color: -fx-bgBase;
+    -fx-text-fill: -fx-txtBase;
+}
+
+.dialog-pane .content.list-cell {
+    -fx-control-inner-background: transparent;
+}
 
 .customCombo-box {
     -fx-background-color: -fx-txtFillLight;
@@ -928,5 +1209,39 @@
     -fx-font-size: 17;
     -fx-font-family: "Roboto";
     -fx-prompt-text-fill: derive(-fx-txtFillLight, -10%);
+}
+
+.container-funcTable {
+    -fx-background-color: -fx-bgBase;
+    -fx-border-color: -fx-functionBase;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+    -fx-text-fill: -fx-txtBase;
+}
+
+.container-healthTable {
+    -fx-background-color: -fx-bgBase;
+    -fx-border-color: -fx-healthBase;
+    -fx-border-width: 2;
+    -fx-border-radius: 20;
+    -fx-text-fill: -fx-txtBase;
+}
+
+.healthLabel {
+    -fx-background-color: -fx-healthBase;
+    -fx-padding: 2;
+    -fx-background-radius: 0 0 5 5;
+    -fx-text-fill: -fx-txtFillDark;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 14;
+}
+
+.funcLabel {
+    -fx-background-color: -fx-functionBase;
+    -fx-padding: 2;
+    -fx-background-radius: 0 0 5 5;
+    -fx-text-fill: -fx-txtFillDark;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 14;
 }
 

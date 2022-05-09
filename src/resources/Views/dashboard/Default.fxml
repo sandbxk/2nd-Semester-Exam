@@ -5,7 +5,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Application.GUI.Controllers.dashboard.Default"
+            fx:controller="Application.GUI.Controllers.dashboard.DefaultController"
             prefHeight="400.0" prefWidth="600.0" stylesheets="@../../Styles/MainStylesheet.css">
     <ScrollPane fx:id="scrollPaneDashboard" prefHeight="412.0" prefWidth="609.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
         <AnchorPane prefHeight="400.0" prefWidth="600.0"/>

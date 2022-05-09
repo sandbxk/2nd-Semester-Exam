@@ -28,4 +28,6 @@ public class TeacherDataManager
     {
         return inquiryDAO.readAll();
     }
+
+
 }
