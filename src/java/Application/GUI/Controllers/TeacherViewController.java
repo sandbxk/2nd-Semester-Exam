@@ -1,6 +1,5 @@
 package Application.GUI.Controllers;
 
-import Application.DAL.TemplateMethod.SchoolDAO2;
 import Application.GUI.Models.ControllerModels.TeacherViewModel;
 import Application.GUI.Models.AccountModel;
 

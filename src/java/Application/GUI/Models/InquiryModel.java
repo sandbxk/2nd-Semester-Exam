@@ -2,10 +2,7 @@ package Application.GUI.Models;
 
 import Application.BE.Inquiry;
 import Application.BLL.TeacherDataManager;
-import Application.DAL.TemplatePatternDAO;
 import javafx.beans.property.StringProperty;
-
-import java.util.List;
 
 public class InquiryModel
 {

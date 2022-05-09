@@ -24,7 +24,7 @@ public class TeacherDataManager
         return (Case) caseDAO.create(new Case(id, inquiryReason, medicalDiagnose, inquiry));
     }
 
-    public List getAllInquries()
+    public List getAllInquiries()
     {
         return inquiryDAO.readAll();
     }

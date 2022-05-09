@@ -75,6 +75,10 @@ public class Account {
         this.lastName = lastName;
     }
 
+    public String getFullName()
+    {
+        return this.firstName + this.lastName;
+    }
 
     @SQLGetter(name = "email")
     public String getEmail() {
