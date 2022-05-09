@@ -1,5 +1,6 @@
 package Application.DAL;
 
+import Application.BE.Account;
 import Application.BE.Case;
 import Application.DAL.DBConnector.DBConnectionPool;
 
@@ -83,6 +84,32 @@ public class CasesDAO extends TemplatePatternDAO<Case>{
 
             pstmt.executeUpdate();
 
+            pstmt.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void assignToCase(List<Account> accountList, Case caseInput)
+    {
+        String sql = """
+                    INSERT INTO caseAssigned (accountId, caseId)
+                    VALUES (?, ?)
+                    """;
+        try {
+            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            for (Account account : accountList) {
+
+                pstmt.setInt(1, account.getId());
+                pstmt.setInt(2, caseInput.getId());
+
+                pstmt.addBatch();
+            }
+
+            pstmt.executeBatch();
             pstmt.close();
 
         } catch (SQLException e) {

@@ -1,17 +1,11 @@
 package Application.GUI.Controllers.Popups;
 
-import Application.BE.Account;
 import Application.BE.School;
-import Application.BLL.AdminDataManager;
 import Application.GUI.Models.AccountModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
-
-import java.awt.*;
-import java.net.URL;
-import java.util.ResourceBundle;
+import javafx.scene.control.TextField;
 
 public class CreateTeacherController
 {
