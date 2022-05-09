@@ -5,12 +5,10 @@ import Application.BE.ContactInfo;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TreeItem;
 
 import java.time.LocalDate;
-import java.util.stream.Collectors;
 
-public class CitizenTemplateModel implements Cloneable {
+public class CitizenTemplateModel {
 
     private StringProperty name;
     private StringProperty surname;
@@ -33,53 +31,18 @@ public class CitizenTemplateModel implements Cloneable {
     private String homeLayout;
     private String network;
 
-    private ObservableList<CategoryEntryModel> relevantFunctionalAbilities;
-    private ObservableList<CategoryEntryModel> relevantHealthConditions;
-    private ObservableList<CategoryEntryModel> nonRelevantFunctionalAbilities;
-    private ObservableList<CategoryEntryModel> nonRelevantHealthConditions;
-
-
-    public CitizenTemplateModel(String name, String surname, LocalDate birthDate, String helpStatus, String civilianStatus, String address, ObservableList<ContactInfo> contactInfo) {
-        initProperties();
-        this.name.set(name);
-        this.surname.set(surname);
-        this.age.set((LocalDate.now().getYear()) - (birthDate.getYear()));
-        this.helpStatus.set(helpStatus);
-        this.civilianStatus.set(civilianStatus);
-        this.address.set(address);
-        this.contactInfo.set(contactInfo);
-        this.birthDate = birthDate;
-        this.mastering = "";
-        this.motivation = "";
-        this.resources = "";
-        this.roles = "";
-        this.habits = "";
-        this.eduAndJob = "";
-        this.lifeStory = "";
-        this.healthInfo = "";
-        this.assistiveDevices = "";
-        this.homeLayout = "";
-        this.network = "";
-
-        this.relevantFunctionalAbilities = FXCollections.observableArrayList();
-        this.relevantHealthConditions = FXCollections.observableArrayList();
-        this.nonRelevantFunctionalAbilities = FXCollections.observableArrayList();
-        this.nonRelevantHealthConditions = FXCollections.observableArrayList();
-
-        initFunctionalAbilities();
-        initHealthConditions();
-    }
+    private ObservableList<CategoryEntryModel> functionalAbilities;
+    private ObservableList<CategoryEntryModel> healthConditions;
 
     public CitizenTemplateModel() {
-        initProperties();
         this.name = new SimpleStringProperty();
         this.surname = new SimpleStringProperty();
         this.age = new SimpleIntegerProperty();
+        this.birthDate = LocalDate.now();
         this.helpStatus = new SimpleStringProperty();
         this.civilianStatus = new SimpleStringProperty();
         this.address = new SimpleStringProperty();
         this.contactInfo = new SimpleListProperty<>();
-        this.birthDate = LocalDate.now();
         this.mastering = "";
         this.motivation = "";
         this.resources = "";
@@ -91,54 +54,31 @@ public class CitizenTemplateModel implements Cloneable {
         this.assistiveDevices = "";
         this.homeLayout = "";
         this.network = "";
-
-
-        this.relevantFunctionalAbilities = FXCollections.observableArrayList();
-        this.relevantHealthConditions = FXCollections.observableArrayList();
-        this.nonRelevantFunctionalAbilities = FXCollections.observableArrayList();
-        this.nonRelevantHealthConditions = FXCollections.observableArrayList();
+        this.functionalAbilities = null;
+        this.healthConditions = null;
 
         initFunctionalAbilities();
         initHealthConditions();
     }
 
-    private void initProperties() {
-        this.name = new SimpleStringProperty();
-        this.surname = new SimpleStringProperty();
-        this.age = new SimpleIntegerProperty();
-        this.helpStatus = new SimpleStringProperty();
-        this.civilianStatus = new SimpleStringProperty();
-        this.address = new SimpleStringProperty();
-        this.contactInfo = new SimpleListProperty<>();
-    }
-
-    @Override
-    public String toString() {
-        return name.get() + " " + surname.get();
-    }
 
     private void initFunctionalAbilities() {
-        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Walking", 1, true)));
-        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Climbing", 1, true)));
-        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Swimming", 1, true)));
-        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Bathing", 4, true)));
-
-        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Sleeping", 0, true)));
-        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Eating", 0, true)));
-        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Toileting", 0, true)));
+        functionalAbilities = FXCollections.observableArrayList();
+        functionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Walking", 1, true)));
+        functionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Climbing", 1, true)));
+        functionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Swimming", 1, true)));
+        functionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Bathing", 4, true)));
     }
 
     private void initHealthConditions() {
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Diabetes", 1, false)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "High Blood Pressure", 1, false)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Heart Disease", 1, false)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Asthma", 1, false)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Epilepsy", 1, false)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Allergies", 1, false)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Other", 1, false)));
-
-        nonRelevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "None", 0, false)));
-
+        healthConditions = FXCollections.observableArrayList();
+        healthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Diabetes", 1, false)));
+        healthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "High Blood Pressure", 1, false)));
+        healthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Heart Disease", 1, false)));
+        healthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Asthma", 1, false)));
+        healthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Epilepsy", 1, false)));
+        healthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Allergies", 1, false)));
+        healthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Other", 1, false)));
     }
 
 
@@ -322,53 +262,19 @@ public class CitizenTemplateModel implements Cloneable {
         this.network = network;
     }
 
-    public ObservableList<CategoryEntryModel> getNonRelevantFunctionalAbilities() {
-        return nonRelevantFunctionalAbilities;
+    public ObservableList<CategoryEntryModel> getFunctionalAbilities() {
+        return functionalAbilities;
     }
 
-    public void setNonRelevantFunctionalAbilities(ObservableList<CategoryEntryModel> nonRelevantFunctionalAbilities) {
-        this.nonRelevantFunctionalAbilities = relevantFunctionalAbilities;
+    public void setFunctionalAbilities(ObservableList<CategoryEntryModel> functionalAbilities) {
+        this.functionalAbilities = functionalAbilities;
     }
 
-    public ObservableList<CategoryEntryModel> getNonRelevantHealthConditions() {
-        return nonRelevantHealthConditions;
+    public ObservableList<CategoryEntryModel> getHealthConditions() {
+        return healthConditions;
     }
 
-    public void setNonRelevantHealthConditions(ObservableList<CategoryEntryModel> nonRelevantHealthConditions) {
-        this.nonRelevantHealthConditions = relevantHealthConditions;
-    }
-    public ObservableList<CategoryEntryModel> getRelevantFunctionalAbilities() {
-        return relevantFunctionalAbilities;
-    }
-
-    public void setRelevantFunctionalAbilities(ObservableList<CategoryEntryModel> relevantFunctionalAbilities) {
-        this.relevantFunctionalAbilities = relevantFunctionalAbilities;
-    }
-
-    public ObservableList<CategoryEntryModel> getRelevantHealthConditions() {
-        return relevantHealthConditions;
-    }
-
-    public void setRelevantHealthConditions(ObservableList<CategoryEntryModel> relevantHealthConditions) {
-        this.relevantHealthConditions = relevantHealthConditions;
-    }
-
-    public ObservableList<CategoryEntryModel> getAllFuncCategories() {
-        ObservableList<CategoryEntryModel> allFuncConditions = FXCollections.observableArrayList();
-        allFuncConditions.addAll(nonRelevantFunctionalAbilities);
-        allFuncConditions.addAll(relevantFunctionalAbilities);
-        return allFuncConditions;
-    }
-
-    public ObservableList<CategoryEntryModel> getAllHealthConditions() {
-        ObservableList<CategoryEntryModel> allHealthConditions = FXCollections.observableArrayList();
-        allHealthConditions.addAll(nonRelevantHealthConditions);
-        allHealthConditions.addAll(relevantHealthConditions);
-        return allHealthConditions;
-    }
-
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public void setHealthConditions(ObservableList<CategoryEntryModel> healthConditions) {
+        this.healthConditions = healthConditions;
     }
 }

@@ -2,6 +2,6 @@ package Application.GUI.Controllers.dashboard;
 
 import javafx.scene.layout.AnchorPane;
 
-public class CasesController {
+public class Cases {
     public AnchorPane anchorPaneCasesDashboard;
 }

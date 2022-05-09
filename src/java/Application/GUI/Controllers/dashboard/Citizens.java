@@ -11,7 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CitizensController implements Initializable
+public class Citizens implements Initializable
 {
     public AnchorPane anchorPaneCitizensDashboard;
 
