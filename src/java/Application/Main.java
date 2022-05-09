@@ -1,5 +1,7 @@
 package Application;
 
+import Application.BE.School;
+import Application.DAL.TemplateMethod.DefaultDAO;
 import Application.DAL.TemplateMethod.SchoolDAO2;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -26,5 +28,7 @@ public class Main extends Application {
 
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+
+        new DefaultDAO().create(new School(0, "hello", 6800, "Varde"));
     }
 }
