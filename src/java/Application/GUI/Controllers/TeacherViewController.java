@@ -1,5 +1,6 @@
 package Application.GUI.Controllers;
 
+import Application.GUI.Models.ControllerModels.TeacherViewModel;
 import Application.GUI.Models.AccountModel;
 
 import Application.GUI.StateMachine.State;
