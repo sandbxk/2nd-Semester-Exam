@@ -160,7 +160,7 @@ public class AddToTaskViewController implements Initializable {
         School school = new School(1, "EASV", 6700, "Esbjerg");
 
         mockAccountList.add(new AccountModel(new Account(1, "", "", "Kasper", "Rasmussen", "", school, 0)));
-        mockAccountList.add(new AccountModel(new Account(1, "", "", "Rasmus", "Remøs", "", school, 0)));
+        mockAccountList.add(new AccountModel(new Account(1, "", "", "Rasmus", "Sandbæk", "", school, 0)));
         mockAccountList.add(new AccountModel(new Account(1, "", "", "Philip", "Zadeh", "", school, 0)));
         mockAccountList.add(new AccountModel(new Account(1, "", "", "Mads", "Bath", "", school, 0)));
 
