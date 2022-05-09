@@ -1,11 +1,7 @@
 package Application.GUI.Controllers.Popups;
 
 import Application.BE.Inquiry;
-import Application.BLL.TeacherDataManager;
-import Application.DAL.InquiryDAO;
-import Application.DAL.TemplatePatternDAO;
 import Application.GUI.Models.CaseModel;
-import Application.GUI.Models.InquiryModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
