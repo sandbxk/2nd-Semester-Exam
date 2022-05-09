@@ -108,7 +108,7 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
                 zipCode = rs.getInt("zipCode");
                 id = rs.getInt("id");
                 School school = new School(id, name, zipCode, city);
-                schoolList.add(school);
+                    schoolList.add(school);
             }
             psas.close();
             return schoolList;
