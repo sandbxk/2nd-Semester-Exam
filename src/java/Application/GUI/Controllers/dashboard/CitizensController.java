@@ -41,7 +41,7 @@ public class CitizensController implements Initializable
         // TODO: 09-05-2022 abstract to a model
 
         CitizenDAO dao = new CitizenDAO();
-        citizens = FXCollections.observableList(dao.readAll(0));
+        //citizens = FXCollections.observableList(dao.readAll(0));
 
         AvailableCitizens = new ListView<>();
         AvailableCitizens.getSelectionModel().selectFirst();
