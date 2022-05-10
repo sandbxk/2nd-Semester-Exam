@@ -1,7 +1,6 @@
 package Application.GUI.Models;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public enum FunctionalLevels {
 

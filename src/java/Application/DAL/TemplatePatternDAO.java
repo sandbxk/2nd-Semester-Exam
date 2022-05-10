@@ -4,7 +4,6 @@ import java.util.List;
 
 public abstract class TemplatePatternDAO<T>
 {
-
     public abstract T create(T input);
 
     public abstract void update(T input);
@@ -14,4 +13,6 @@ public abstract class TemplatePatternDAO<T>
     public abstract List<T> readAll();
 
     public abstract void delete(int id);
+
+
 }
