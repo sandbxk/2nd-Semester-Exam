@@ -118,6 +118,7 @@ public class CitizenTemplateModel implements Cloneable {
     }
 
     private void initFunctionalAbilities() {
+
         relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Walking", 1, true)));
         relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Climbing", 1, true)));
         relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Swimming", 1, true)));
@@ -126,9 +127,13 @@ public class CitizenTemplateModel implements Cloneable {
         nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Sleeping", 0, true)));
         nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Eating", 0, true)));
         nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Toileting", 0, true)));
+
+        relevantFunctionalAbilities.add(new CategoryEntryModel("Other", 2, "note", true));
+        nonRelevantFunctionalAbilities.add(new CategoryEntryModel("Other", 0, "note", true));
     }
 
     private void initHealthConditions() {
+
         relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Diabetes", 1, false)));
         relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "High Blood Pressure", 1, false)));
         relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Heart Disease", 1, false)));
@@ -139,6 +144,8 @@ public class CitizenTemplateModel implements Cloneable {
 
         nonRelevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "None", 0, false)));
 
+        relevantHealthConditions.add(new CategoryEntryModel("Other", 1, "note", false));
+        nonRelevantHealthConditions.add(new CategoryEntryModel("Other", 0, "note", false));
     }
 
 

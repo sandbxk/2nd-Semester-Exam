@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -94,6 +95,9 @@ public class CitizenTemplateController implements Initializable {
         setFuncTreeTable();
         initTreeTableClmns();
         initTreeTblColumnEdit();
+
+        //setFuncTreeTable();
+
         initCitizenTemplatesList();
         initActionsMenu();
     }
@@ -229,6 +233,7 @@ public class CitizenTemplateController implements Initializable {
         treeTblColumnHealthExpectedCondition.setCellValueFactory(param -> param.getValue().getValue().expectedConditionProperty());
         treeTblColumnHealthNote.setCellValueFactory(param -> param.getValue().getValue().noteProperty());
 
+
         //Use TextFieldTreeTableCell for the editable columns
         editableTreeTableColumns.forEach(col -> col.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn()));
 
@@ -281,14 +286,17 @@ public class CitizenTemplateController implements Initializable {
 
         listViewCitizenTemplateContactInfo.setItems(model.getSelectedCitizenTemplateModel().getContactInfo());
 
+
         TreeItem<CategoryEntryModel> funcRoot = new TreeItem<>();
         funcRoot.getChildren().addAll(model.getRelevantFuncCategoriesAsTreeItem());
         treeTblViewFunc.setRoot(funcRoot);
+        treeTblViewFunc.setShowRoot(false);
 
 
         TreeItem<CategoryEntryModel> healthRoot = new TreeItem<>();
         healthRoot.getChildren().addAll(model.getRelevantHealthCategoriesAsTreeItem());
-        treeTblViewFunc.setRoot(healthRoot);
+        treeTblViewHealth.setRoot(healthRoot);
+        treeTblViewHealth.setShowRoot(false);
 
         txtAreaGenInfoMastering.setText(model.getSelectedCitizenTemplateModel().getMastering());
         txtAreaGenInfoMotivation.setText(model.getSelectedCitizenTemplateModel().getMotivation());

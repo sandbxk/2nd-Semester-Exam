@@ -30,18 +30,18 @@ public class CategoryEntryModel {
     private boolean isFunctionAbility;
     private CategoryEntry categoryEntry;
 
-    //TODO: Use Generic types and Refactor
 
     public CategoryEntryModel(CategoryEntry categoryEntry) {
-        categoryName = new SimpleStringProperty(categoryEntry.getCategoryName());
-        superCategory = new SimpleStringProperty(categoryEntry.getSuperCategory());
-        level = new SimpleIntegerProperty(categoryEntry.getLevel());
-        assessment = new SimpleStringProperty(categoryEntry.getAssessment());
-        cause = new SimpleStringProperty(categoryEntry.getCause());
-        implications = new SimpleStringProperty(categoryEntry.getImplications());
-        citizenGoals = new SimpleStringProperty(categoryEntry.getCitizenGoals());
-        expectedCondition = new SimpleStringProperty(categoryEntry.getExpectedCondition());
-        note = new SimpleStringProperty(categoryEntry.getNote());
+        initProperties();
+        categoryName.set(categoryEntry.getCategoryName());
+        superCategory.set(categoryEntry.getSuperCategory());
+        level.set(categoryEntry.getLevel());
+        assessment.set(categoryEntry.getAssessment());
+        cause.set(categoryEntry.getCause());
+        implications.set(categoryEntry.getImplications());
+        citizenGoals.set(categoryEntry.getCitizenGoals());
+        expectedCondition.set(categoryEntry.getExpectedCondition());
+        note.set(categoryEntry.getNote());
         isFunctionAbility = categoryEntry.isFunctionAbility();
 
         this.categoryEntry = categoryEntry;
@@ -62,19 +62,35 @@ public class CategoryEntryModel {
     }
 
     public CategoryEntryModel(String categoryName){
-        this.categoryName = new SimpleStringProperty(categoryName);
+        initProperties();
+        this.categoryName.set(categoryName);
     }
 
     public CategoryEntryModel(String categoryName, int level, String note, boolean isFunctionAbility) {
-        this.categoryName = new SimpleStringProperty(categoryName);
-        this.level = new SimpleIntegerProperty(level);
-        this.note = new SimpleStringProperty(note);
+        initProperties();
+        this.categoryName.set(categoryName);
+        this.level.set(level);
+        this.note.set(note);
         this.isFunctionAbility = isFunctionAbility;
 
+        initLevelFuncAndLevelHealth();
+    }
+
+
+    private void initProperties() {
+        categoryName = new SimpleStringProperty();
+        superCategory = new SimpleStringProperty();
+        level = new SimpleIntegerProperty();
+        levelFuncComboBox = new SimpleObjectProperty<>();
+        levelHealthComboBox = new SimpleObjectProperty<>();
         levelFunc = new SimpleObjectProperty<>();
         levelHealth = new SimpleObjectProperty<>();
-
-        initLevelFuncAndLevelHealth();
+        assessment = new SimpleStringProperty();
+        cause = new SimpleStringProperty();
+        implications = new SimpleStringProperty();
+        citizenGoals = new SimpleStringProperty();
+        expectedCondition = new SimpleStringProperty();
+        note = new SimpleStringProperty();
     }
 
     /**
