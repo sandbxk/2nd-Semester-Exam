@@ -43,15 +43,17 @@ public class CategoryEntryModel {
         expectedCondition = new SimpleStringProperty(categoryEntry.getExpectedCondition());
         note = new SimpleStringProperty(categoryEntry.getNote());
         isFunctionAbility = categoryEntry.isFunctionAbility();
+
         this.categoryEntry = categoryEntry;
         this.id = categoryEntry.getId();
+
         levelFuncComboBox = new SimpleObjectProperty<>(new ComboBox<>());
         levelHealthComboBox = new SimpleObjectProperty<>(new ComboBox<>());
         levelFunc = new SimpleObjectProperty<>();
         levelHealth = new SimpleObjectProperty<>();
+
         initLevelComboBox();
         initLevelFuncAndLevelHealth();
-
 
         if (level.get() == 9){
             levelFuncComboBox.get().setValue(FunctionalLevels.LEVEL_9);
@@ -231,7 +233,7 @@ public class CategoryEntryModel {
     }
 
     public StringProperty categoryNameProperty() {
-        return categoryName;
+        return this.categoryName;
     }
 
     public void setCategoryName(String categoryName) {

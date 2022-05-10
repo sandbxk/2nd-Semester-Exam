@@ -323,7 +323,6 @@ public class CitizenTemplateController implements Initializable {
         //Set all standard columns to editable, except the category column
         editableTreeTableColumns.forEach(col -> col.setEditable(editable));
 
-
         //Set all TextAreas to editable
         editableTextAreas.forEach(ta -> ta.setEditable(editable));
 
