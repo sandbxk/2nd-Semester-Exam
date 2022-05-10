@@ -8,10 +8,11 @@ import java.sql.SQLException;
 
 public class DBConnectionPool extends ObjectPool<DBConnection> {
 
-    private static DBConnectionPool instance;
+    private static volatile DBConnectionPool instance;
 
     public DBConnectionPool() {
         super();
+        instance = this;
     }
 
     @Override
@@ -42,10 +43,25 @@ public class DBConnectionPool extends ObjectPool<DBConnection> {
         }
     }
 
-    public static DBConnectionPool getInstance() {
-        if (instance == null) {
-            instance = new DBConnectionPool();
+    /**
+     * private static class.
+     * Thread-safe lazy initialization is achieved without explicit synchronization.
+     * the variable INSTANCE is wrapped in an inner class, utilizing the class loader to do synchronization.
+     * The class loader guarantees to complete all static initialization before it grants access to the class.
+     * This implementation lazy initializes the INSTANCE by calling LoadSingleton.INSTANCE
+     * when first accessed inside getInstance() method.
+     */
+    private static class LoadSingleton {
+        private static final DBConnectionPool INSTANCE = new DBConnectionPool();
+
+        private LoadSingleton() {}
+
+        public static DBConnectionPool getInstance() {
+            return INSTANCE;
         }
-        return instance;
+    }
+
+    public static DBConnectionPool getInstance() {
+        return LoadSingleton.getInstance();
     }
 }
