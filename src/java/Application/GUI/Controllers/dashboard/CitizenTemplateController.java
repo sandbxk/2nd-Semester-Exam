@@ -283,14 +283,17 @@ public class CitizenTemplateController implements Initializable {
 
         listViewCitizenTemplateContactInfo.setItems(model.getSelectedCitizenTemplateModel().getContactInfo());
 
+
         TreeItem<CategoryEntryModel> funcRoot = new TreeItem<>();
         funcRoot.getChildren().addAll(model.getRelevantFuncCategoriesAsTreeItem());
         treeTblViewFunc.setRoot(funcRoot);
+        treeTblViewFunc.setShowRoot(false);
 
 
         TreeItem<CategoryEntryModel> healthRoot = new TreeItem<>();
         healthRoot.getChildren().addAll(model.getRelevantHealthCategoriesAsTreeItem());
-        treeTblViewFunc.setRoot(healthRoot);
+        treeTblViewHealth.setRoot(healthRoot);
+        treeTblViewHealth.setShowRoot(false);
 
         txtAreaGenInfoMastering.setText(model.getSelectedCitizenTemplateModel().getMastering());
         txtAreaGenInfoMotivation.setText(model.getSelectedCitizenTemplateModel().getMotivation());
