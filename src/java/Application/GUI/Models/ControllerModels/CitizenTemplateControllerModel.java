@@ -38,8 +38,8 @@ public class CitizenTemplateControllerModel {
 
     public ObservableList<CitizenTemplateModel> getCitizenTemplates() {
         ObservableList<CitizenTemplateModel> citizenTemplates = FXCollections.observableArrayList();
-        citizenTemplates.add(new CitizenTemplateModel("John", "Jørgensen", LocalDate.now(), "Active", "Single", "I am living in your walls", FXCollections.observableArrayList(new ContactInfo("Søn Tlf 12 12 12 12"), new ContactInfo("Datter Tlf 12 12 12 12"))));
-        citizenTemplates.add(new CitizenTemplateModel("Mark", "Hansen", LocalDate.now(), "Ikke Aktiv", "Gift", "I am living in your walls", FXCollections.observableArrayList(new ContactInfo("Mor Tlf 12 12 12 12"), new ContactInfo("Far Tlf 12 12 12 12"))));
+        citizenTemplates.add(new CitizenTemplateModel("John", "Jørgensen", LocalDate.now(), "Active", "Single", "Gade 2", FXCollections.observableArrayList(new ContactInfo("Søn Tlf 12 12 12 12"), new ContactInfo("Datter Tlf 12 12 12 12"))));
+        citizenTemplates.add(new CitizenTemplateModel("Mark", "Hansen", LocalDate.now(), "Ikke Aktiv", "Gift", "En anden gade 5", FXCollections.observableArrayList(new ContactInfo("Mor Tlf 12 12 12 12"), new ContactInfo("Far Tlf 12 12 12 12"))));
         return citizenTemplates;
     }
 
