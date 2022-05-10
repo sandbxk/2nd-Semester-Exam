@@ -91,9 +91,9 @@ public class CitizenTemplateController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         initColumnList();
         initTextAreaList();
+        setFuncTreeTable();
         initTreeTableClmns();
         initTreeTblColumnEdit();
-        setFuncTreeTable();
         initCitizenTemplatesList();
         initActionsMenu();
     }
@@ -210,7 +210,7 @@ public class CitizenTemplateController implements Initializable {
 
     /**
      * Initializes the TreeTableColumns for the Function and Health TreeTableViews.
-     * Where not custom cellFatory is used, the TextFieldTreeTableCell applied.
+     * Where no custom cellFatory is used, the TextFieldTreeTableCell applied.
      */
     private void initTreeTableClmns() {
         treeTblColumnFuncCategory.setCellValueFactory(param -> param.getValue().getValue().categoryNameProperty());

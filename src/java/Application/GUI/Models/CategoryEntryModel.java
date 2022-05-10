@@ -233,7 +233,7 @@ public class CategoryEntryModel {
     }
 
     public StringProperty categoryNameProperty() {
-        return this.categoryName;
+        return categoryName;
     }
 
     public void setCategoryName(String categoryName) {
