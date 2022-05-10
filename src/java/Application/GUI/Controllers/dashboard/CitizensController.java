@@ -1,11 +1,12 @@
 package Application.GUI.Controllers.dashboard;
 
+import Application.BE.Citizen;
+import Application.DAL.TemplateMethod.CitizenDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
@@ -15,7 +16,7 @@ public class CitizensController implements Initializable
 {
     public AnchorPane anchorPaneCitizensDashboard;
 
-    public ListView AvailableCitizens;
+    public ListView<Citizen> AvailableCitizens;
     public ListView listViewContactInfo;
     public ListView listViewStudentsForCitizen;
 
@@ -32,9 +33,20 @@ public class CitizensController implements Initializable
     public Button btnGeneralInfo;
     public Button btnJournal;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    private ObservableList<Citizen> citizens;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources)
+    {
+        // TODO: 09-05-2022 abstract to a model
+
+        CitizenDAO dao = new CitizenDAO();
+        citizens = FXCollections.observableList(dao.readAll(0));
+
+        AvailableCitizens = new ListView<>();
+        AvailableCitizens.getSelectionModel().selectFirst();
+
+       // lblCitizenName.textProperty().bindBidirectional(AvailableCitizens.getSelectionModel().getSelectedItem().getFirstname());
     }
 
     public void onRemoveStudentToCitizen(ActionEvent event) {

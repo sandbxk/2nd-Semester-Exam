@@ -42,7 +42,6 @@ public class StudentViewController implements Initializable {
     @FXML public TableColumn<CategoryEntryModel, String> tblColumnStudentDashboardFuncCategory;
     @FXML public TableColumn<CategoryEntryModel, ImageView> tblColumnStudentDashboardFuncLevel;
     @FXML public TableColumn<CategoryEntryModel, String> tblColumnStudentDashboardFuncNote;
-    @FXML public AnchorPane anchorPaneChartContainer;
 
 
 

@@ -3,10 +3,10 @@ package Application.GUI.Controllers;
 
 import Application.GUI.Models.AccountModel;
 
-import Application.GUI.StateMachine.State;
+import Application.Utility.StateMachine.State;
 
 import javafx.application.Platform;
-import Application.GUI.StateMachine.StateMachine;
+import Application.Utility.StateMachine.StateMachine;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -37,6 +37,7 @@ public class TeacherViewController implements Initializable {
 
     private ToggleGroup toggleGroupViews;
     private StateMachine<ToggleButton> stateMachine = new StateMachine<>();
+    private TeacherViewModel teacherViewModel = new TeacherViewModel();
 
     @FXML public BorderPane TeacherScene;
 
@@ -52,6 +53,7 @@ public class TeacherViewController implements Initializable {
     {
 
         //this.account = (AccountModel) resources.getObject("account");
+
 
         initToggleGroup();
         viewChangedListener();
