@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -93,7 +94,7 @@ public class CitizenTemplateController implements Initializable {
         initTextAreaList();
         initTreeTableClmns();
         initTreeTblColumnEdit();
-        setFuncTreeTable();
+        //setFuncTreeTable();
         initCitizenTemplatesList();
         initActionsMenu();
     }
@@ -228,6 +229,7 @@ public class CitizenTemplateController implements Initializable {
         treeTblColumnHealthCause.setCellValueFactory(param -> param.getValue().getValue().causeProperty());
         treeTblColumnHealthExpectedCondition.setCellValueFactory(param -> param.getValue().getValue().expectedConditionProperty());
         treeTblColumnHealthNote.setCellValueFactory(param -> param.getValue().getValue().noteProperty());
+
 
         //Use TextFieldTreeTableCell for the editable columns
         editableTreeTableColumns.forEach(col -> col.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn()));
