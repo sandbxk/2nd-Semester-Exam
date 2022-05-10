@@ -254,7 +254,7 @@ public class CitizenTemplateController implements Initializable {
         stage.show();
 
         stage.setOnHiding(event1 -> {
-            setDataToCitizenTemplateView());
+            setDataToCitizenTemplateView();
             model.onCitizenTemplateEditBaseData();
         });
     }
