@@ -17,27 +17,20 @@ public class CitizenTemplateControllerModel {
 
     private CitizenTemplateModel selectedCitizenTemplateModel;
 
+    //Copies from before the editMode is activated
     private TreeItem<CategoryEntryModel> preEditHealthCategoryEntryModels;
     private TreeItem<CategoryEntryModel> preEditFunctionCategoryEntryModels;
-
     private CitizenTemplateModel preEditCitizenTemplateModel;
 
 
     public void citizenTemplateSearch() {
     }
 
-    public void removeCitizenTemplateContactInfo() {
-    }
 
-    public void addCitizenTemplateContactInfo() {
-    }
-
-    public void citizenTemplateChangeJournal() {
-    }
-
-    public void onCitizenTemplateEditBaseData() {
-    }
-
+    /**
+     * Get all the citizen templates from the DB and put them in a list.
+     * @return
+     */
     public ObservableList<CitizenTemplateModel> getCitizenTemplates() {
         ObservableList<CitizenTemplateModel> citizenTemplates = FXCollections.observableArrayList();
         citizenTemplates.add(new CitizenTemplateModel("John", "Jørgensen", LocalDate.now(), "Active", "Single", "Gade 2", FXCollections.observableArrayList(new ContactInfo("Søn Tlf 12 12 12 12"), new ContactInfo("Datter Tlf 12 12 12 12"))));
@@ -45,10 +38,16 @@ public class CitizenTemplateControllerModel {
         return citizenTemplates;
     }
 
+    /**
+     * Set the selected citizen template.
+     **/
     public void setSelectedCitizenTemplateModel(CitizenTemplateModel selectedCitizenTemplateModel) {
         this.selectedCitizenTemplateModel = selectedCitizenTemplateModel;
     }
 
+    /**
+     * Get the selected citizen template.
+     **/
     public CitizenTemplateModel getSelectedCitizenTemplateModel() {
         return selectedCitizenTemplateModel;
     }
@@ -63,12 +62,20 @@ public class CitizenTemplateControllerModel {
         return listToTreeItem(treeItem, selectedCitizenTemplateModel.getAllHealthConditions());
     }
 
+    /**
+     * All relevant categories after editing the citizenTemplateModel.
+     * @return
+     */
     public TreeItem<CategoryEntryModel> getNewRelevantFuncCategoriesAsTreeItem() {
         TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("All Functional Ability Categories"));
         return listToTreeItem(treeItem, selectedCitizenTemplateModel.getRelevantFunctionalAbilities());
         //TODO sort the two lists (relevant and non-relevant) and make a new one.
     }
 
+    /**
+     * All relevant categories after editing the citizenTemplateModel.
+     * @return
+     */
     public TreeItem<CategoryEntryModel> getNewRelevantHealthCategoriesAsTreeItem() {
         TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("All Health Categories"));
         return listToTreeItem(treeItem, selectedCitizenTemplateModel.getRelevantHealthConditions());
@@ -85,6 +92,12 @@ public class CitizenTemplateControllerModel {
         return listToTreeItem(treeItem, selectedCitizenTemplateModel.getRelevantHealthConditions());
     }
 
+    /**
+     * Utility method to convert a list to a tree items children.
+     * @param treeItem
+     * @param list
+     * @return
+     */
     private TreeItem<CategoryEntryModel> listToTreeItem(TreeItem<CategoryEntryModel> treeItem, ObservableList<CategoryEntryModel> list) {
         for (CategoryEntryModel categoryEntryModel : list) {
             treeItem.getChildren().add(categoryEntryModel.getAsTreeItem());
@@ -92,6 +105,11 @@ public class CitizenTemplateControllerModel {
         return treeItem;
     }
 
+    /**
+     * Create a new citizen template and write it to the DB.
+     * Returns the instance for it to be added to the list in the GUI.
+     * @return
+     */
     public CitizenTemplateModel newCitizenTemplate() {
         //TODO Write to DB
         CitizenTemplateModel CitizenTemplateModel = new CitizenTemplateModel("Ny", "Skabelon", LocalDate.now(), "", "", "", FXCollections.observableArrayList());
@@ -100,18 +118,38 @@ public class CitizenTemplateControllerModel {
         return CitizenTemplateModel;
     }
 
+    /**
+     * Delete the selected citizen template.
+     **/
     public void deleteCitizenTemplate() {
         //TODO delete from DB
         //DataManager.deleteCitizenTemplate(selectedCitizenTemplateModel);
     }
 
-    public void copyCitizenTemplate() {
+    /**
+     * Creates a copy of the citizen template and writes it to the DB.
+     */
+    public CitizenTemplateModel copyCitizenTemplate() {
+        try {
+            return (CitizenTemplateModel) selectedCitizenTemplateModel.clone();
+            //TODO Write to DB
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
+    /**
+     * Restore the health categories to the pre edit values.
+     * @return
+     */
     public TreeItem<CategoryEntryModel> getPreEditHealthCategoryEntryModels() {
         return preEditHealthCategoryEntryModels;
     }
 
+    /**
+     * Creates a copy of the citizen template and stores it in the preEditCitizenTemplateModel variable for later user.
+     */
     public void savePreEditState() {
         try {
             this.preEditCitizenTemplateModel = (CitizenTemplateModel) selectedCitizenTemplateModel.clone();
@@ -120,18 +158,34 @@ public class CitizenTemplateControllerModel {
         }
     }
 
+    /**
+     * Sets the function categories to the pre edit values.
+     * @param preEditFunctionCategoryEntryModels
+     */
     public void setPreEditFunctionCategoryEntryModels(TreeItem<CategoryEntryModel> preEditFunctionCategoryEntryModels) {
         this.preEditFunctionCategoryEntryModels = preEditFunctionCategoryEntryModels;
     }
 
+    /**
+     * Save all the edits to the citizen template to the DB.
+     */
     public void saveEditedCitizenTemplate() {
         //TODO save to DB
     }
 
+    /**
+     * Gets the pre edit citizen template.
+     * @return
+     */
     public CitizenTemplateModel getPreEditState() {
         return preEditCitizenTemplateModel;
     }
 
+    /**
+     * Utility method for unwrapping the CategoryEntryModel from a TreeItem.
+     * @param root
+     * @return a list of CategoryEntryModels present in the TreeItem root.
+     */
     public List<CategoryEntryModel> getTreeItemsFromRoot(TreeItem<CategoryEntryModel> root) {
         List<CategoryEntryModel> catList = new ArrayList<>(); //List to store the categories
         Thread thread = new Thread(() -> {

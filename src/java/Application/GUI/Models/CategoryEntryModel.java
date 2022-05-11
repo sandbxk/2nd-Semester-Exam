@@ -76,7 +76,9 @@ public class CategoryEntryModel {
         initLevelFuncAndLevelHealth();
     }
 
-
+    /**
+     * Initializes the property objects of this model.
+     */
     private void initProperties() {
         categoryName = new SimpleStringProperty();
         superCategory = new SimpleStringProperty();
@@ -147,6 +149,9 @@ public class CategoryEntryModel {
         };
     }
 
+    /**
+     * A custom list cell for the combo box, allowing for the health description to be displayed
+     **/
     private ListCell<HealthLevels> comboBoxHealthDescCell() {
         return new ListCell<HealthLevels>() {
             @Override
@@ -170,6 +175,9 @@ public class CategoryEntryModel {
         });
     }
 
+    /**
+     * Sets the level of this category entry entity to the value of the selected item in the combo box
+     **/
     private void onHealthLevelChanged(){
         levelHealthComboBox.get().selectionModelProperty().get().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             setLevel(newValue.level);
@@ -194,6 +202,9 @@ public class CategoryEntryModel {
 
 
 
+    /**
+     * Sets the level of this category entry entity to the value of the selected item in the combo box
+     **/
     private void initLevelFuncAndLevelHealth(){
         if (isFunctionAbility){
             this.levelFunc.set(FunctionalLevels.values()[level.get()]);

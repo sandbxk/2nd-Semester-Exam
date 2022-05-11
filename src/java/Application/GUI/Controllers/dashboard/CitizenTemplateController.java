@@ -20,11 +20,13 @@ import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.converter.IntegerStringConverter;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.function.UnaryOperator;
 
 public class CitizenTemplateController implements Initializable {
 
@@ -102,19 +104,32 @@ public class CitizenTemplateController implements Initializable {
         //TODO: Implement search
     }
 
+    /**
+     * Sets the textFields containing the citizen template base information to disabled and applies
+     * a textformatter to the age textfield, allowing only integers to be entered.
+     */
     private void initTextFields() {
         txtFieldName.setDisable(true);
         txtFieldSurname.setDisable(true);
         txtFieldAge.setDisable(true);
+        txtFieldAge.setTextFormatter(new TextFormatter<>(new IntegerStringConverter(),0, integerFilter()));
     }
 
 
+    /**
+     * Shows the context menu with the available actions for the selected citizen template
+     * right above the clicked button.
+     * @param event
+     */
     public void onActions(ActionEvent event) {
         double offsetX = -15;
         double offsetY = btnActions.getHeight() / 2.2;
         actionsMenu.show(btnActions, Side.TOP, offsetX, -offsetY);
     }
 
+    /**
+     * Initializes the context menu with the available actions for the selected citizen template
+     */
     private void initActionsMenu() {
         MenuItem newCitizenTemplate = new MenuItem("Ny Borger Skabelon");
         newCitizenTemplate.setOnAction(event -> onNewCitizenTemplate());
@@ -127,10 +142,18 @@ public class CitizenTemplateController implements Initializable {
         actionsMenu.setAutoHide(true);
     }
 
+    /**
+     * Creates a new blank citizen template.
+     */
     private void onNewCitizenTemplate() {
         listViewCitizenTemplates.getItems().add(model.newCitizenTemplate());
+        model.newCitizenTemplate();
     }
 
+    /**
+     * Displays a confirmation dialog before deleting the selected citizen template.
+     * If confirmed, the selected template is deleted.
+     */
     private void onDeleteCitizenTemplate() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("Er du sikker på at du vil slette denne borger skabelonen?");
@@ -144,6 +167,9 @@ public class CitizenTemplateController implements Initializable {
         }
     }
 
+    /**
+     * Creates a copy of the selected citizen template.
+     */
     private void onCopyCitizenTemplate() {
         model.copyCitizenTemplate();
     }
@@ -177,6 +203,12 @@ public class CitizenTemplateController implements Initializable {
 
     }
 
+    /**
+     * Adds all textAreas to the list of textAreas.
+     * The purpose of the list to be able to iterate over all textAreas
+     * and call a method on them without creating clutter in the code by addressing them manually
+     * each time.
+     */
     private void initTextAreaList(){
         editableTextAreas.add(txtAreaGenInfoMastering);
         editableTextAreas.add(txtAreaGenInfoMotivation);
@@ -191,6 +223,13 @@ public class CitizenTemplateController implements Initializable {
         editableTextAreas.add(txtAreaGenInfoNetwork);
     }
 
+    /**
+     * Adds all treeTableColumns intended to be editable through a TextFieldTree tablecell
+     * to the list of columns.
+     * The purpose of the list to be able to iterate over all it's elements
+     * and call a method on them without creating clutter in the code by addressing them manually
+     * each time.
+     */
     private void initColumnList() {
         editableTreeTableColumns.add(treeTblColumnFuncAssessment);
         editableTreeTableColumns.add(treeTblColumnFuncCause);
@@ -207,7 +246,9 @@ public class CitizenTemplateController implements Initializable {
 
     /**
      * Initializes the TreeTableColumns for the Function and Health TreeTableViews.
-     * Where no custom cellFatory is used, the TextFieldTreeTableCell applied.
+     * Sets the cellValueFactory for the TreeTableColumns.
+     * Any standard column intended to be editable, which is every one but the ones containing the category name,
+     * has a TextTreeTableCell as its cellFactory.
      */
     private void initTreeTableClmns() {
         treeTblColumnFuncCategory.setCellValueFactory(param -> param.getValue().getValue().categoryNameProperty());
@@ -233,6 +274,10 @@ public class CitizenTemplateController implements Initializable {
     }
 
 
+    /**
+     * Initializes the citizen templates list and its ChangeListener,
+     * which calls the setDataToCitizenTemplatesList() method when the selected citizenTemplate changes.
+     */
     private void initCitizenTemplatesList() {
         listViewCitizenTemplates.setItems(model.getCitizenTemplates());
 
@@ -245,23 +290,29 @@ public class CitizenTemplateController implements Initializable {
     }
 
 
+    /**
+     * sets every compononent of the citizen template view to the values of the selected citizen template.
+     */
     private void setDataToCitizenTemplateView() {
         if (model.getSelectedCitizenTemplateModel() != null) {
+            //set the base data of name, surname and age to that of the selected citizen template
             txtFieldName.setText(model.getSelectedCitizenTemplateModel().getName());
             txtFieldSurname.setText(model.getSelectedCitizenTemplateModel().getSurname());
             txtFieldAge.setText(String.valueOf(model.getSelectedCitizenTemplateModel().getAge()));
 
+            //set the functionl abilities TreeTableView to the values of the selected citizen template
             TreeItem<CategoryEntryModel> funcRoot = new TreeItem<>();
             funcRoot.getChildren().addAll(model.getRelevantFuncCategoriesAsTreeItem());
             treeTblViewFunc.setRoot(funcRoot);
             treeTblViewFunc.setShowRoot(false);
 
-
+            //set the health categories to the health categories of the selected citizen template
             TreeItem<CategoryEntryModel> healthRoot = new TreeItem<>();
             healthRoot.getChildren().addAll(model.getRelevantHealthCategoriesAsTreeItem());
             treeTblViewHealth.setRoot(healthRoot);
             treeTblViewHealth.setShowRoot(false);
 
+            //set the general information section to that of the selected citizen template
             txtAreaGenInfoMastering.setText(model.getSelectedCitizenTemplateModel().getMastering());
             txtAreaGenInfoMotivation.setText(model.getSelectedCitizenTemplateModel().getMotivation());
             txtAreaGenInfoResources.setText(model.getSelectedCitizenTemplateModel().getResources());
@@ -287,11 +338,11 @@ public class CitizenTemplateController implements Initializable {
         treeTblViewFunc.setEditable(editable);
         treeTblViewHealth.setEditable(editable);
 
-        treeTblColumnFuncCategory.setEditable(false);
-        treeTblColumnFuncLevel.setEditable(editable);
+        treeTblColumnFuncCategory.setEditable(false); //the category column is not editable
+        treeTblColumnFuncLevel.setEditable(editable); //the level column is editable
 
-        treeTblColumnHealthCategory.setEditable(false);
-        treeTblColumnHealthLevel.setEditable(editable);
+        treeTblColumnHealthCategory.setEditable(false); //the category column is not editable
+        treeTblColumnHealthLevel.setEditable(editable); //the level column is editable
 
         //Set all standard columns to editable, except the category column
         editableTreeTableColumns.forEach(col -> col.setEditable(editable));
@@ -299,6 +350,7 @@ public class CitizenTemplateController implements Initializable {
         //Set all TextAreas to editable
         editableTextAreas.forEach(ta -> ta.setEditable(editable));
 
+        //Set all ComboBoxes to editable
         for (CategoryEntryModel cat : model.getTreeItemsFromRoot(treeTblViewFunc.getRoot())) {
             ComboBox<FunctionalLevels> funcLevelComboBox = cat.getFuncLevelComboBox();
             if (funcLevelComboBox != null) {
@@ -312,10 +364,12 @@ public class CitizenTemplateController implements Initializable {
             }
         }
 
+        //Allow the user to edit the name and age of the citizen template
         txtFieldName.setDisable(!editable);
         txtFieldSurname.setDisable(!editable);
         txtFieldAge.setDisable(!editable);
 
+        //ensures another citizen template is not selected while editing
         listViewCitizenTemplates.setDisable(editable);
 
         btnCitizenTemplateEditOn.setVisible(!editable); //Only visible if not editable
@@ -324,6 +378,12 @@ public class CitizenTemplateController implements Initializable {
     }
 
 
+    /**
+     * Calls the model to save the pre-edit state of the citizen template.
+     * Sets the root of the tree tables to the have every category for
+     * health conditions and functional abilities respectively.
+     * @param event
+     */
     public void onEditOn(ActionEvent event) {
         model.savePreEditState();
         treeTblViewFunc.setRoot(model.getAllFuncCategoriesAsTreeItem());
@@ -332,6 +392,13 @@ public class CitizenTemplateController implements Initializable {
 
     }
 
+    /**
+     * Displays a confirmation dialog to the user, asking if they want to save the changes.
+     * If the user clicks yes, the model is called to save the changes.
+     * Changes made to the base data and general info are applied directly to the citizen template.
+     * A new root is set to the tree tables containing all relevant categories after the edit, and the edit mode is turned off.
+     * @param event
+     */
     public void onEditDone(ActionEvent event) {
         //TODO: Save data
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -341,15 +408,29 @@ public class CitizenTemplateController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            if (model.getSelectedCitizenTemplateModel().getName() != txtFieldName.getText() && !txtFieldName.getText().isEmpty()) {
-                model.getSelectedCitizenTemplateModel().setName(txtFieldName.getText());
+            CitizenTemplateModel selected = model.getSelectedCitizenTemplateModel();
+            if (selected.getName() != txtFieldName.getText() && !txtFieldName.getText().isEmpty()) {
+                selected.setName(txtFieldName.getText());
             }
-            if (model.getSelectedCitizenTemplateModel().getSurname() != txtFieldSurname.getText() && !txtFieldSurname.getText().isEmpty()) {
-                model.getSelectedCitizenTemplateModel().setName(txtFieldSurname.getText());
+            if (selected.getSurname() != txtFieldSurname.getText() && !txtFieldSurname.getText().isEmpty()) {
+                selected.setName(txtFieldSurname.getText());
             }
-            if (model.getSelectedCitizenTemplateModel().getAge() != Integer.parseInt(txtFieldAge.getText()) && !txtFieldAge.getText().isEmpty()) {
-                model.getSelectedCitizenTemplateModel().setAge(Integer.parseInt(txtFieldAge.getText()));
+            if (selected.getAge() != Integer.parseInt(txtFieldAge.getText()) && !txtFieldAge.getText().isEmpty()) {
+                selected.setAge(Integer.parseInt(txtFieldAge.getText()));
             }
+
+            selected.setMastering(txtAreaGenInfoMastering.getText());
+            selected.setMotivation(txtAreaGenInfoMotivation.getText());
+            selected.setResources(txtAreaGenInfoResources.getText());
+            selected.setRoles(txtAreaGenInfoRoles.getText());
+            selected.setHabits(txtAreaGenInfoHabits.getText());
+            selected.setEduAndJob(txtAreaGenInfoEduAndJob.getText());
+            selected.setLifeStory(txtAreaGenInfoLifeStory.getText());
+            selected.setHealthInfo(txtAreaGenInfoHealthInfo.getText());
+            selected.setAssistiveDevices(txtAreaGenInfoAssistiveDevices.getText());
+            selected.setHomeLayout(txtAreaGenInfoHomeLayout.getText());
+            selected.setNetwork(txtAreaGenInfoNetwork.getText());
+
 
             model.saveEditedCitizenTemplate();
             treeTblViewFunc.setRoot(model.getNewRelevantFuncCategoriesAsTreeItem());
@@ -358,6 +439,11 @@ public class CitizenTemplateController implements Initializable {
         }
     }
 
+    /**
+     * Cancels the edit mode and returns the citizen template to its pre-edit state by replacing the
+     * object present at the index of the selected citizen with the clone made before the edit was started.
+     * @param event
+     */
     public void onEditCancel(ActionEvent event) {
         ObservableList<CitizenTemplateModel> templateModelObservableList = listViewCitizenTemplates.getItems();
         int index = templateModelObservableList.indexOf(model.getSelectedCitizenTemplateModel());
@@ -366,7 +452,11 @@ public class CitizenTemplateController implements Initializable {
         setEditable(false);
     }
 
-    //https://www.youtube.com/watch?v=BNvVSU9nHDY
+    /**
+     * sets the onEditCommit and onEditCancel methods for each tree table column.
+     * onEditCommit applies the changes made in the tree table to the edited categoryEntryModel.
+     * onEditCancel returns the edited variable to its pre-edit state.
+     */
     private void initTreeTblColumnEdit() {
             //Commit Edit
         treeTblColumnFuncAssessment.setOnEditCommit(event -> getItemFromEditEvent(event).setAssessment(event.getOldValue()));
@@ -395,9 +485,32 @@ public class CitizenTemplateController implements Initializable {
         treeTblColumnHealthNote.setOnEditCancel(event -> getItemFromEditEvent(event).setNote(event.getOldValue()));
     }
 
+    /**
+     * Utility method to get the item from the edit event from onEditCommit and onEditCancel methods.
+     * @param editEvent
+     * @return
+     */
     private CategoryEntryModel getItemFromEditEvent(TreeTableColumn.CellEditEvent<CategoryEntryModel, String> editEvent) {
         TreeItem<CategoryEntryModel> treeItem = editEvent.getTreeTablePosition().getTreeItem();
         return treeItem.getValue();
+    }
+
+    /**
+     * And interger TextFormatter to only allow numbers to be entered.
+     * @return
+     */
+    private UnaryOperator<TextFormatter.Change> integerFilter(){
+        UnaryOperator<TextFormatter.Change> integerFilter = change -> {
+            String newText = change.getControlNewText();
+            //if (newText.matches("-?([1-9][0-9]*)?")) {
+            if (newText.matches("-?([1-9][0-9]*)?")) {
+
+                return change;
+            }
+            return null;
+        };
+
+        return integerFilter;
     }
 
 }

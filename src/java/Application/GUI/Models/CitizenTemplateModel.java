@@ -118,7 +118,6 @@ public class CitizenTemplateModel implements Cloneable {
     }
 
     private void initFunctionalAbilities() {
-
         relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Walking", 1, true)));
         relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Climbing", 1, true)));
         relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Swimming", 1, true)));
@@ -133,7 +132,6 @@ public class CitizenTemplateModel implements Cloneable {
     }
 
     private void initHealthConditions() {
-
         relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Diabetes", 1, false)));
         relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "High Blood Pressure", 1, false)));
         relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Heart Disease", 1, false)));
