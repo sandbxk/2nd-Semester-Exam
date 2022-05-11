@@ -79,6 +79,19 @@
     -fx-prompt-text-fill: derive(-fx-txtFillLight, -10%);
 }
 
+.text-fieldBase:disabled {
+    -fx-background-color: transparent;
+    -fx-border-color: -fx-txtFillLight;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-radius: 0;
+    -fx-text-fill: -fx-txtFillLight;
+    -fx-font-size: 14;
+    -fx-font-family: "Roboto";
+    -fx-prompt-text-fill: derive(-fx-txtFillLight, -10%);
+    -fx-opacity: 1;
+}
+
+
 .panelBtn {
     -fx-background-color: -fx-panelHighlight;
     -fx-background-radius: 30;
@@ -390,6 +403,15 @@
     -fx-text-fill: -fx-panelBase;
     -fx-font-weight: bold;
     -fx-padding: 5;
+}
+
+.nameLbl:disabled {
+    -fx-font-size: 14;
+    -fx-background-color: -fx-panelHighlight;
+    -fx-text-fill: -fx-panelBase;
+    -fx-font-weight: bold;
+    -fx-padding: 5;
+    -fx-opacity: 1;
 }
 
 .studentNameLbl {

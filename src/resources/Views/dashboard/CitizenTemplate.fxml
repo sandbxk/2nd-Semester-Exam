@@ -33,124 +33,42 @@
                     <Button fx:id="btnActions" layoutX="21.0" layoutY="777.0" maxHeight="52.0" maxWidth="159.0" minHeight="52.0" minWidth="159.0" mnemonicParsing="false" onAction="#onActions" prefHeight="52.0" prefWidth="159.0" styleClass="outlineBtn" text="Handlinger" AnchorPane.bottomAnchor="29.200000000000045" />
                 </children>
             </AnchorPane>
-            <AnchorPane layoutX="230.0" layoutY="23.0" prefHeight="233.0" prefWidth="621.0" styleClass="panel30Deg" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="23.0">
+            <AnchorPane layoutX="230.0" layoutY="23.0" maxHeight="156.0" prefHeight="81.0" prefWidth="719.0" styleClass="panel30Deg" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="23.0">
                 <children>
-                    <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="223.0" prefWidth="584.0" styleClass="transparentBG" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="3.0">
-                        <children>
-                            <GridPane layoutX="3.0" layoutY="5.0" prefHeight="211.0" prefWidth="227.0" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="0.0">
-                                <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                    <RowConstraints maxHeight="96.60001220703126" minHeight="10.0" prefHeight="35.000009918212896" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="173.39998397827148" minHeight="10.0" prefHeight="166.9999900817871" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                <children>
-                                    <Label fx:id="lblCitizenTemplateName" styleClass="nameLbl" text="Rasmus Scherning Sandbæk" GridPane.halignment="CENTER" />
-                                    <VBox GridPane.rowIndex="1">
-                                        <children>
-                                            <Label styleClass="smallPanelLblBold" text="Kontakt Oplysninger">
-                                                <VBox.margin>
-                                                    <Insets left="17.0" />
-                                                </VBox.margin>
-                                            </Label>
-                                            <ListView fx:id="listViewCitizenTemplateContactInfo" prefHeight="127.0" prefWidth="227.0">
-                                                <padding>
-                                                    <Insets left="10.0" right="10.0" />
-                                                </padding>
-                                            </ListView>
-                                            <HBox>
-                                                <children>
-                                                    <Button fx:id="btnAddCitizenTemplateContactInfo" mnemonicParsing="false" onAction="#onAddCitizenTemplateContactInfo" styleClass="panelBtnNoPadding" text="Tilføj">
-                                                        <HBox.margin>
-                                                            <Insets left="20.0" right="10.0" />
-                                                        </HBox.margin>
-                                                    </Button>
-                                                    <Button fx:id="btnRemoveCitizenTemplateContactInfo" mnemonicParsing="false" onAction="#onRemoveCitizenTemplateContactInfo" styleClass="panelBtnNoPadding" text="Fjern" />
-                                                </children>
-                                            </HBox>
-                                        </children>
-                                    </VBox>
-                                </children>
-                            </GridPane>
-                            <Button fx:id="btnCitizenTemplateEditBaseData" layoutX="361.0" layoutY="14.0" mnemonicParsing="false" onAction="#onCitizenTemplateEditBaseData" prefHeight="54.0" prefWidth="111.0" styleClass="panelBtnNoPadding" text="Rediger Stamdata" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0" />
-                            <VBox layoutX="258.0" layoutY="12.0" prefHeight="206.0" prefWidth="189.0" AnchorPane.topAnchor="5.0">
-                                <children>
-                                    <VBox prefWidth="100.0">
-                                        <children>
-                                            <Label styleClass="smallPanelLblBold" text="Alder" />
-                                            <Label fx:id="lblAgeCitizenTemplate" styleClass="smallPanelLblNormal" text="Label" />
-                                        </children>
-                                        <VBox.margin>
-                                            <Insets bottom="7.0" />
-                                        </VBox.margin>
-                                    </VBox>
-                                    <VBox prefWidth="100.0">
-                                        <children>
-                                            <Label styleClass="smallPanelLblBold" text="Født" />
-                                            <Label fx:id="lblBirthdateCitizenTemplate" styleClass="smallPanelLblNormal" text="Label">
-                                                <VBox.margin>
-                                                    <Insets bottom="7.0" />
-                                                </VBox.margin>
-                                            </Label>
-                                        </children>
-                                    </VBox>
-                                    <VBox prefWidth="100.0">
-                                        <children>
-                                            <Label styleClass="smallPanelLblBold" text="Adresse" />
-                                            <Label fx:id="lblAddressCitizenTemplate" styleClass="smallPanelLblNormal" text="Label">
-                                                <VBox.margin>
-                                                    <Insets bottom="7.0" />
-                                                </VBox.margin>
-                                            </Label>
-                                        </children>
-                                    </VBox>
-                                    <VBox prefWidth="100.0">
-                                        <children>
-                                            <Label styleClass="smallPanelLblBold" text="Hjælpe Status" />
-                                            <Label fx:id="lblHelpStatusCitizenTemplate" styleClass="smallPanelLblNormal" text="Label" />
-                                        </children>
-                                        <VBox.margin>
-                                            <Insets bottom="7.0" />
-                                        </VBox.margin>
-                                    </VBox>
-                                    <VBox prefWidth="100.0">
-                                        <children>
-                                            <Label styleClass="smallPanelLblBold" text="Civil Status" />
-                                            <Label fx:id="lblCivilianStatusCitizenTemplate" styleClass="smallPanelLblNormal" text="Label" />
-                                        </children>
-                                    </VBox>
-                                </children>
-                            </VBox>
-                            <Button fx:id="btnCitizenTemplateChangeJournal" layoutX="585.0" layoutY="71.0" mnemonicParsing="false" onAction="#onCitizenTemplateChangeJournal" prefHeight="54.0" prefWidth="111.0" styleClass="panelBtnNoPadding" text="Skift Journal" AnchorPane.rightAnchor="1.599999999999909" AnchorPane.topAnchor="71.0" />
-                            <VBox layoutX="393.0" layoutY="165.0" prefHeight="58.0" prefWidth="135.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="165.0">
-                                <children>
-                                    <Label alignment="CENTER" prefHeight="15.0" prefWidth="198.0" styleClass="smallPanelLblBold" text="Redigerings tilstand" textAlignment="CENTER">
-                                        <VBox.margin>
-                                            <Insets bottom="5.0" />
-                                        </VBox.margin>
-                                    </Label>
-                        <GridPane>
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <children>
-                              <Button fx:id="btnCitizenTemplateEditOn" mnemonicParsing="false" onAction="#onEditOn" styleClass="outlineBtn" text="Start Redigering" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" />
-                              <Button fx:id="btnCitizenTemplateEditCancel" mnemonicParsing="false" onAction="#onEditCancel" styleClass="outlineBtn" text="Annullér" visible="false" GridPane.halignment="CENTER" />
-                              <Button fx:id="btnCitizenTemplateEditSave" mnemonicParsing="false" onAction="#onEditDone" styleClass="outlineBtn" text="Gem" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                           </children>
-                        </GridPane>
-                                </children>
-                            </VBox>
-                        </children>
-                    </AnchorPane>
+                      <VBox layoutX="559.0" layoutY="16.0" prefHeight="52.0" prefWidth="135.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="13.0">
+                          <children>
+                              <Label alignment="CENTER" prefHeight="15.0" prefWidth="198.0" styleClass="smallPanelLblBold" text="Redigerings tilstand" textAlignment="CENTER">
+                                  <VBox.margin>
+                                      <Insets bottom="5.0" />
+                                  </VBox.margin>
+                              </Label>
+                  <GridPane prefHeight="30.0" prefWidth="135.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Button fx:id="btnCitizenTemplateEditOn" mnemonicParsing="false" onAction="#onEditOn" styleClass="outlineBtn" text="Start Redigering" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" />
+                        <Button fx:id="btnCitizenTemplateEditCancel" mnemonicParsing="false" onAction="#onEditCancel" styleClass="outlineBtn" text="Annullér" visible="false" GridPane.halignment="CENTER" />
+                        <Button fx:id="btnCitizenTemplateEditSave" mnemonicParsing="false" onAction="#onEditDone" styleClass="outlineBtn" text="Gem" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                     </children>
+                  </GridPane>
+                          </children>
+                      </VBox>
+            <HBox layoutX="320.0" layoutY="26.0" maxWidth="226.0" prefHeight="30.0" prefWidth="97.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="26.0">
+               <children>
+                                <Label prefHeight="32.0" prefWidth="45.0" styleClass="smallPanelLblBold" text="Alder:   " />
+                  <TextField fx:id="txtFieldAge" prefHeight="30.0" prefWidth="47.0" styleClass="text-fieldBase" text="99" />
+               </children>
+            </HBox>
+            <TextField fx:id="txtFieldName" layoutX="22.0" layoutY="33.0" prefHeight="30.0" prefWidth="125.0" styleClass="nameLbl" text="Navn" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="25.0" />
+            <TextField fx:id="txtFieldSurname" layoutX="149.0" layoutY="33.0" prefHeight="30.0" prefWidth="153.0" styleClass="nameLbl" text="Efternavn" AnchorPane.leftAnchor="149.0" AnchorPane.topAnchor="25.0" />
                 </children>
             </AnchorPane>
-              <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="275.0">
+              <AnchorPane layoutY="130.0" prefHeight="345.0" prefWidth="725.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="130.0">
                   <children>
                       <Accordion layoutX="1.0" prefWidth="658.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
                           <panes>

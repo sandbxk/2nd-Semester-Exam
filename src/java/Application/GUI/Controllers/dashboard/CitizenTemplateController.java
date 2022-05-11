@@ -32,17 +32,9 @@ public class CitizenTemplateController implements Initializable {
     public ListView<CitizenTemplateModel> listViewCitizenTemplates;
     public TextField txtFieldCitizenTemplateSearch;
     public Button btnCitizenTemplateSearch;
-    public Label lblCitizenTemplateName;
-    public ListView<ContactInfo> listViewCitizenTemplateContactInfo;
-    public Button btnAddCitizenTemplateContactInfo;
-    public Button btnRemoveCitizenTemplateContactInfo;
-    public Button btnCitizenTemplateEditBaseData;
-    public Label lblAgeCitizenTemplate;
-    public Label lblBirthdateCitizenTemplate;
-    public Label lblAddressCitizenTemplate;
-    public Label lblHelpStatusCitizenTemplate;
-    public Label lblCivilianStatusCitizenTemplate;
-    public Button btnCitizenTemplateChangeJournal;
+    public TextField txtFieldName;
+    public TextField txtFieldSurname;
+    public TextField txtFieldAge;
     public Button btnCitizenTemplateEditOn;
     public Button btnCitizenTemplateEditCancel;
     public Button btnCitizenTemplateEditSave;
@@ -100,6 +92,8 @@ public class CitizenTemplateController implements Initializable {
 
         initCitizenTemplatesList();
         initActionsMenu();
+        initTextFields();
+
     }
 
 
@@ -108,13 +102,12 @@ public class CitizenTemplateController implements Initializable {
         //TODO: Implement search
     }
 
-    public void onRemoveCitizenTemplateContactInfo(ActionEvent event) {
-        model.removeCitizenTemplateContactInfo();
+    private void initTextFields() {
+        txtFieldName.setDisable(true);
+        txtFieldSurname.setDisable(true);
+        txtFieldAge.setDisable(true);
     }
 
-    public void onAddCitizenTemplateContactInfo(ActionEvent event) {
-        model.addCitizenTemplateContactInfo();
-    }
 
     public void onActions(ActionEvent event) {
         double offsetX = -15;
@@ -239,30 +232,6 @@ public class CitizenTemplateController implements Initializable {
 
     }
 
-    public void onCitizenTemplateChangeJournal(ActionEvent event) {
-        model.citizenTemplateChangeJournal();
-    }
-
-    public void onCitizenTemplateEditBaseData(ActionEvent event) {
-
-        Stage stage = new Stage();
-        stage.setTitle("Rediger Stamdata");
-
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(this.getClass().getResource("/Views/Popups/EditCitizenTemplateBaseData.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        stage.setScene(new Scene(root));
-        stage.show();
-
-        stage.setOnHiding(event1 -> {
-            setDataToCitizenTemplateView();
-            model.onCitizenTemplateEditBaseData();
-        });
-    }
 
     private void initCitizenTemplatesList() {
         listViewCitizenTemplates.setItems(model.getCitizenTemplates());
@@ -277,38 +246,34 @@ public class CitizenTemplateController implements Initializable {
 
 
     private void setDataToCitizenTemplateView() {
-        lblCitizenTemplateName.setText(model.getSelectedCitizenTemplateModel().getName() + " " + model.getSelectedCitizenTemplateModel().getSurname());
-        lblAgeCitizenTemplate.setText(model.getSelectedCitizenTemplateModel().getAge() + "");
-        lblAddressCitizenTemplate.setText(model.getSelectedCitizenTemplateModel().getAddress());
-        lblBirthdateCitizenTemplate.setText(model.getSelectedCitizenTemplateModel().getBirthDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-        lblHelpStatusCitizenTemplate.setText(model.getSelectedCitizenTemplateModel().getHelpStatus());
-        lblCivilianStatusCitizenTemplate.setText(model.getSelectedCitizenTemplateModel().getCivilianStatus());
+        if (model.getSelectedCitizenTemplateModel() != null) {
+            txtFieldName.setText(model.getSelectedCitizenTemplateModel().getName());
+            txtFieldSurname.setText(model.getSelectedCitizenTemplateModel().getSurname());
+            txtFieldAge.setText(String.valueOf(model.getSelectedCitizenTemplateModel().getAge()));
 
-        listViewCitizenTemplateContactInfo.setItems(model.getSelectedCitizenTemplateModel().getContactInfo());
-
-
-        TreeItem<CategoryEntryModel> funcRoot = new TreeItem<>();
-        funcRoot.getChildren().addAll(model.getRelevantFuncCategoriesAsTreeItem());
-        treeTblViewFunc.setRoot(funcRoot);
-        treeTblViewFunc.setShowRoot(false);
+            TreeItem<CategoryEntryModel> funcRoot = new TreeItem<>();
+            funcRoot.getChildren().addAll(model.getRelevantFuncCategoriesAsTreeItem());
+            treeTblViewFunc.setRoot(funcRoot);
+            treeTblViewFunc.setShowRoot(false);
 
 
-        TreeItem<CategoryEntryModel> healthRoot = new TreeItem<>();
-        healthRoot.getChildren().addAll(model.getRelevantHealthCategoriesAsTreeItem());
-        treeTblViewHealth.setRoot(healthRoot);
-        treeTblViewHealth.setShowRoot(false);
+            TreeItem<CategoryEntryModel> healthRoot = new TreeItem<>();
+            healthRoot.getChildren().addAll(model.getRelevantHealthCategoriesAsTreeItem());
+            treeTblViewHealth.setRoot(healthRoot);
+            treeTblViewHealth.setShowRoot(false);
 
-        txtAreaGenInfoMastering.setText(model.getSelectedCitizenTemplateModel().getMastering());
-        txtAreaGenInfoMotivation.setText(model.getSelectedCitizenTemplateModel().getMotivation());
-        txtAreaGenInfoResources.setText(model.getSelectedCitizenTemplateModel().getResources());
-        txtAreaGenInfoRoles.setText(model.getSelectedCitizenTemplateModel().getRoles());
-        txtAreaGenInfoHabits.setText(model.getSelectedCitizenTemplateModel().getHabits());
-        txtAreaGenInfoEduAndJob.setText(model.getSelectedCitizenTemplateModel().getEduAndJob());
-        txtAreaGenInfoLifeStory.setText(model.getSelectedCitizenTemplateModel().getLifeStory());
-        txtAreaGenInfoHealthInfo.setText(model.getSelectedCitizenTemplateModel().getHealthInfo());
-        txtAreaGenInfoAssistiveDevices.setText(model.getSelectedCitizenTemplateModel().getAssistiveDevices());
-        txtAreaGenInfoHomeLayout.setText(model.getSelectedCitizenTemplateModel().getHomeLayout());
-        txtAreaGenInfoNetwork.setText(model.getSelectedCitizenTemplateModel().getNetwork());
+            txtAreaGenInfoMastering.setText(model.getSelectedCitizenTemplateModel().getMastering());
+            txtAreaGenInfoMotivation.setText(model.getSelectedCitizenTemplateModel().getMotivation());
+            txtAreaGenInfoResources.setText(model.getSelectedCitizenTemplateModel().getResources());
+            txtAreaGenInfoRoles.setText(model.getSelectedCitizenTemplateModel().getRoles());
+            txtAreaGenInfoHabits.setText(model.getSelectedCitizenTemplateModel().getHabits());
+            txtAreaGenInfoEduAndJob.setText(model.getSelectedCitizenTemplateModel().getEduAndJob());
+            txtAreaGenInfoLifeStory.setText(model.getSelectedCitizenTemplateModel().getLifeStory());
+            txtAreaGenInfoHealthInfo.setText(model.getSelectedCitizenTemplateModel().getHealthInfo());
+            txtAreaGenInfoAssistiveDevices.setText(model.getSelectedCitizenTemplateModel().getAssistiveDevices());
+            txtAreaGenInfoHomeLayout.setText(model.getSelectedCitizenTemplateModel().getHomeLayout());
+            txtAreaGenInfoNetwork.setText(model.getSelectedCitizenTemplateModel().getNetwork());
+        }
 
     }
 
@@ -347,31 +312,15 @@ public class CitizenTemplateController implements Initializable {
             }
         }
 
+        txtFieldName.setDisable(!editable);
+        txtFieldSurname.setDisable(!editable);
+        txtFieldAge.setDisable(!editable);
+
         listViewCitizenTemplates.setDisable(editable);
 
         btnCitizenTemplateEditOn.setVisible(!editable); //Only visible if not editable
         btnCitizenTemplateEditSave.setVisible(editable); //Only visible if editable
         btnCitizenTemplateEditCancel.setVisible(editable); //Only visible if editable
-    }
-
-    private List<CategoryEntryModel> getTreeItemsFromRoot(TreeItem<CategoryEntryModel> root) {
-        List<CategoryEntryModel> catList = new ArrayList<>(); //List to store the categories
-
-        ObservableList<TreeItem<CategoryEntryModel>> treeItems = root.getChildren(); //Get the children of the root
-
-        if (root.getChildren().size() > 0)
-        {
-            for (TreeItem<CategoryEntryModel> cat : treeItems)
-            {
-                getTreeItemsFromRoot(cat);
-            }
-        }
-        else
-        {
-            catList.add(root.getValue());
-        }
-
-        return catList;
     }
 
 
@@ -392,18 +341,15 @@ public class CitizenTemplateController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            model.getSelectedCitizenTemplateModel().setMastering(txtAreaGenInfoMastering.getText());
-            model.getSelectedCitizenTemplateModel().setMotivation(txtAreaGenInfoMotivation.getText());
-            model.getSelectedCitizenTemplateModel().setResources(txtAreaGenInfoResources.getText());
-            model.getSelectedCitizenTemplateModel().setRoles(txtAreaGenInfoRoles.getText());
-            model.getSelectedCitizenTemplateModel().setHabits(txtAreaGenInfoHabits.getText());
-            model.getSelectedCitizenTemplateModel().setEduAndJob(txtAreaGenInfoEduAndJob.getText());
-            model.getSelectedCitizenTemplateModel().setLifeStory(txtAreaGenInfoLifeStory.getText());
-            model.getSelectedCitizenTemplateModel().setHealthInfo(txtAreaGenInfoHealthInfo.getText());
-            model.getSelectedCitizenTemplateModel().setAssistiveDevices(txtAreaGenInfoAssistiveDevices.getText());
-            model.getSelectedCitizenTemplateModel().setHomeLayout(txtAreaGenInfoHomeLayout.getText());
-            model.getSelectedCitizenTemplateModel().setNetwork(txtAreaGenInfoNetwork.getText());
-
+            if (model.getSelectedCitizenTemplateModel().getName() != txtFieldName.getText() && !txtFieldName.getText().isEmpty()) {
+                model.getSelectedCitizenTemplateModel().setName(txtFieldName.getText());
+            }
+            if (model.getSelectedCitizenTemplateModel().getSurname() != txtFieldSurname.getText() && !txtFieldSurname.getText().isEmpty()) {
+                model.getSelectedCitizenTemplateModel().setName(txtFieldSurname.getText());
+            }
+            if (model.getSelectedCitizenTemplateModel().getAge() != Integer.parseInt(txtFieldAge.getText()) && !txtFieldAge.getText().isEmpty()) {
+                model.getSelectedCitizenTemplateModel().setAge(Integer.parseInt(txtFieldAge.getText()));
+            }
 
             model.saveEditedCitizenTemplate();
             treeTblViewFunc.setRoot(model.getNewRelevantFuncCategoriesAsTreeItem());
