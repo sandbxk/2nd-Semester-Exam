@@ -21,7 +21,7 @@ public class CasesDAO extends TemplatePatternDAO<Case>{
                     """;
 
             try {
-                Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
+                Connection conn = DBConnectionPool.getInstance().checkOut();
                 PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
                 pstmt.setInt(1, input.getInquiry().getId());
                 pstmt.setString(2, input.getInquiryReason());
@@ -77,7 +77,7 @@ public class CasesDAO extends TemplatePatternDAO<Case>{
                     WHERE id = ?
                     """;
         try {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
+            Connection conn = DBConnectionPool.getInstance().checkOut();
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, caseId);
@@ -98,7 +98,7 @@ public class CasesDAO extends TemplatePatternDAO<Case>{
                     VALUES (?, ?)
                     """;
         try {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
+            Connection conn = DBConnectionPool.getInstance().checkOut();
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             for (Account account : accountList) {

@@ -22,7 +22,7 @@ public abstract class AbstractDAO_TP<RETURN_TYPE, PARAM_TYPE>
     public final boolean run(PARAM_TYPE input) {
         try
         {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
+            Connection conn = DBConnectionPool.getInstance().checkOut();
             statement = conn.prepareStatement(getSQLStatement(), PreparedStatement.RETURN_GENERATED_KEYS);
             // statement = setup();
 

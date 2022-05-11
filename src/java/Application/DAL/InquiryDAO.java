@@ -37,7 +37,7 @@ public class InquiryDAO extends TemplatePatternDAO<Inquiry>
 
         try
         {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
+            Connection conn = DBConnectionPool.getInstance().checkOut();
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             ResultSet rs = pstmt.executeQuery();

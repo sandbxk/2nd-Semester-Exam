@@ -22,7 +22,7 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
                 """;
 
         try {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
+            Connection conn = DBConnectionPool.getInstance().checkOut();
             PreparedStatement pstmt = conn.prepareStatement(sqlCreate, PreparedStatement.RETURN_GENERATED_KEYS);
 
             pstmt.setString(1,input.getSchoolName());
@@ -64,7 +64,7 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
                 """;
 
         try {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
+            Connection conn = DBConnectionPool.getInstance().checkOut();
             PreparedStatement psus = conn.prepareStatement(sqlUpdate);
 
             psus.setString(1, input.getSchoolName());
@@ -97,7 +97,7 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
         int id;
 
         try {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
+            Connection conn = DBConnectionPool.getInstance().checkOut();
             PreparedStatement psas = conn.prepareStatement(sqlRead);
 
             ResultSet rs = psas.executeQuery();
@@ -128,7 +128,7 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
                 """;
 
         try {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
+            Connection conn = DBConnectionPool.getInstance().checkOut();
             PreparedStatement psds = conn.prepareStatement(sqlDelete);
 
             psds.setInt(1, id);
