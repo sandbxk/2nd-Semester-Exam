@@ -334,11 +334,17 @@ public class CitizenTemplateController implements Initializable {
         //Set all TextAreas to editable
         editableTextAreas.forEach(ta -> ta.setEditable(editable));
 
-        for (TreeItem<CategoryEntryModel> cat : treeTblViewFunc.getRoot().getChildren()) {
-            cat.getValue().getFuncLevelComboBox().setDisable(!editable);
+        for (CategoryEntryModel cat : model.getTreeItemsFromRoot(treeTblViewFunc.getRoot())) {
+            ComboBox<FunctionalLevels> funcLevelComboBox = cat.getFuncLevelComboBox();
+            if (funcLevelComboBox != null) {
+                funcLevelComboBox.setDisable(!editable);
+            }
         }
-        for (TreeItem<CategoryEntryModel> cat : treeTblViewHealth.getRoot().getChildren()) {
-            cat.getValue().getHealthLevelComboBox().setDisable(!editable);
+        for (CategoryEntryModel cat : model.getTreeItemsFromRoot(treeTblViewHealth.getRoot())) {
+            ComboBox<HealthLevels> healthLevelComboBox = cat.getHealthLevelComboBox();
+            if (healthLevelComboBox != null) {
+                healthLevelComboBox.setDisable(!editable);
+            }
         }
 
         listViewCitizenTemplates.setDisable(editable);
@@ -348,11 +354,32 @@ public class CitizenTemplateController implements Initializable {
         btnCitizenTemplateEditCancel.setVisible(editable); //Only visible if editable
     }
 
+    private List<CategoryEntryModel> getTreeItemsFromRoot(TreeItem<CategoryEntryModel> root) {
+        List<CategoryEntryModel> catList = new ArrayList<>(); //List to store the categories
+
+        ObservableList<TreeItem<CategoryEntryModel>> treeItems = root.getChildren(); //Get the children of the root
+
+        if (root.getChildren().size() > 0)
+        {
+            for (TreeItem<CategoryEntryModel> cat : treeItems)
+            {
+                getTreeItemsFromRoot(cat);
+            }
+        }
+        else
+        {
+            catList.add(root.getValue());
+        }
+
+        return catList;
+    }
+
+
     public void onEditOn(ActionEvent event) {
-        setEditable(true);
         model.savePreEditState();
         treeTblViewFunc.setRoot(model.getAllFuncCategoriesAsTreeItem());
         treeTblViewHealth.setRoot(model.getAllHealthConditionsAsTreeItem());
+        setEditable(true);
 
     }
 
@@ -386,11 +413,11 @@ public class CitizenTemplateController implements Initializable {
     }
 
     public void onEditCancel(ActionEvent event) {
-        setEditable(false);
         ObservableList<CitizenTemplateModel> templateModelObservableList = listViewCitizenTemplates.getItems();
         int index = templateModelObservableList.indexOf(model.getSelectedCitizenTemplateModel());
         listViewCitizenTemplates.getItems().set(index, model.getPreEditState());
         listViewCitizenTemplates.getSelectionModel().select(index);
+        setEditable(false);
     }
 
     //https://www.youtube.com/watch?v=BNvVSU9nHDY

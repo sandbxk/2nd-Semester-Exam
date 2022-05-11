@@ -10,6 +10,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CitizenTemplateControllerModel {
 
@@ -128,5 +130,24 @@ public class CitizenTemplateControllerModel {
 
     public CitizenTemplateModel getPreEditState() {
         return preEditCitizenTemplateModel;
+    }
+
+    public List<CategoryEntryModel> getTreeItemsFromRoot(TreeItem<CategoryEntryModel> root) {
+        List<CategoryEntryModel> catList = new ArrayList<>(); //List to store the categories
+        Thread thread = new Thread(() -> {
+
+            ObservableList<TreeItem<CategoryEntryModel>> treeItems = root.getChildren(); //Get the children of the root
+            for (TreeItem<CategoryEntryModel> treeItem : treeItems) { //For each child
+                if (treeItem.getChildren().size() > 0) { //If the child has children
+                    catList.addAll(getTreeItemsFromRoot(treeItem)); //Get the children of the child
+                } else {
+                    CategoryEntryModel categoryEntryModel = treeItem.getValue(); //Get the value of the child
+                    catList.add(categoryEntryModel); //Add the value to the list
+                }
+
+            }
+        });
+        thread.run();
+        return catList;
     }
 }
