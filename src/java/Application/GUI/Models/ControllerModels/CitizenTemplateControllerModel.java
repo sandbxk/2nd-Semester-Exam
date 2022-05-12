@@ -181,27 +181,5 @@ public class CitizenTemplateControllerModel {
         return preEditCitizenTemplateModel;
     }
 
-    /**
-     * Utility method for unwrapping the CategoryEntryModel from a TreeItem.
-     * @param root
-     * @return a list of CategoryEntryModels present in the TreeItem root.
-     */
-    public List<CategoryEntryModel> getTreeItemsFromRoot(TreeItem<CategoryEntryModel> root) {
-        List<CategoryEntryModel> catList = new ArrayList<>(); //List to store the categories
-        Thread thread = new Thread(() -> {
 
-            ObservableList<TreeItem<CategoryEntryModel>> treeItems = root.getChildren(); //Get the children of the root
-            for (TreeItem<CategoryEntryModel> treeItem : treeItems) { //For each child
-                if (treeItem.getChildren().size() > 0) { //If the child has children
-                    catList.addAll(getTreeItemsFromRoot(treeItem)); //Get the children of the child
-                } else {
-                    CategoryEntryModel categoryEntryModel = treeItem.getValue(); //Get the value of the child
-                    catList.add(categoryEntryModel); //Add the value to the list
-                }
-
-            }
-        });
-        thread.run();
-        return catList;
-    }
 }

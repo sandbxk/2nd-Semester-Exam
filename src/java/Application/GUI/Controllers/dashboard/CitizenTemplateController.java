@@ -6,6 +6,7 @@ import Application.GUI.Models.CitizenTemplateModel;
 import Application.GUI.Models.ControllerModels.CitizenTemplateControllerModel;
 import Application.GUI.Models.FunctionalLevels;
 import Application.GUI.Models.HealthLevels;
+import Application.Utility.GUIUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -112,7 +113,7 @@ public class CitizenTemplateController implements Initializable {
         txtFieldName.setDisable(true);
         txtFieldSurname.setDisable(true);
         txtFieldAge.setDisable(true);
-        txtFieldAge.setTextFormatter(new TextFormatter<>(new IntegerStringConverter(),0, integerFilter()));
+        txtFieldAge.setTextFormatter(new TextFormatter<>(new IntegerStringConverter(),0, GUIUtils.getIntegerFilter()));
     }
 
 
@@ -351,13 +352,13 @@ public class CitizenTemplateController implements Initializable {
         editableTextAreas.forEach(ta -> ta.setEditable(editable));
 
         //Set all ComboBoxes to editable
-        for (CategoryEntryModel cat : model.getTreeItemsFromRoot(treeTblViewFunc.getRoot())) {
+        for (CategoryEntryModel cat : GUIUtils.getTreeItemsFromRoot(treeTblViewFunc.getRoot())) {
             ComboBox<FunctionalLevels> funcLevelComboBox = cat.getFuncLevelComboBox();
             if (funcLevelComboBox != null) {
                 funcLevelComboBox.setDisable(!editable);
             }
         }
-        for (CategoryEntryModel cat : model.getTreeItemsFromRoot(treeTblViewHealth.getRoot())) {
+        for (CategoryEntryModel cat : GUIUtils.getTreeItemsFromRoot(treeTblViewHealth.getRoot())) {
             ComboBox<HealthLevels> healthLevelComboBox = cat.getHealthLevelComboBox();
             if (healthLevelComboBox != null) {
                 healthLevelComboBox.setDisable(!editable);
@@ -486,7 +487,7 @@ public class CitizenTemplateController implements Initializable {
     }
 
     /**
-     * Utility method to get the item from the edit event from onEditCommit and onEditCancel methods.
+     * Small utility method for getting the item from the edit events made from the onEditCommit and onEditCancel methods.
      * @param editEvent
      * @return
      */
@@ -495,23 +496,6 @@ public class CitizenTemplateController implements Initializable {
         return treeItem.getValue();
     }
 
-    /**
-     * And interger TextFormatter to only allow numbers to be entered.
-     * @return
-     */
-    private UnaryOperator<TextFormatter.Change> integerFilter(){
-        UnaryOperator<TextFormatter.Change> integerFilter = change -> {
-            String newText = change.getControlNewText();
-            //if (newText.matches("-?([1-9][0-9]*)?")) {
-            if (newText.matches("-?([1-9][0-9]*)?")) {
-
-                return change;
-            }
-            return null;
-        };
-
-        return integerFilter;
-    }
 
 }
 
