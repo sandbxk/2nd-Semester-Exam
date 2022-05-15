@@ -22,13 +22,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException
     {
-        Parent root = FXMLLoader.load(this.getClass().getResource("/views/Popups/AddToTaskView.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("/views/TeacherView.fxml"));
 
         primaryStage.setTitle("main");
 
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 
-        new DefaultDAO().create(new School(0, "hello", 6800, "Varde"));
+        DefaultDAO.create(new School(0, "hello", 6800, "Varde"));
     }
 }
