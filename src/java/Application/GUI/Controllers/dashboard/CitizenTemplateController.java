@@ -1,6 +1,5 @@
 package Application.GUI.Controllers.dashboard;
 
-import Application.BE.ContactInfo;
 import Application.GUI.Models.CategoryEntryModel;
 import Application.GUI.Models.CitizenTemplateModel;
 import Application.GUI.Models.ControllerModels.CitizenTemplateControllerModel;
@@ -10,24 +9,15 @@ import Application.Utility.GUIUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Side;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
-import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 
-import java.io.IOException;
 import java.net.URL;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.function.UnaryOperator;
 
 public class CitizenTemplateController implements Initializable {
 
@@ -172,7 +162,7 @@ public class CitizenTemplateController implements Initializable {
      * Creates a copy of the selected citizen template.
      */
     private void onCopyCitizenTemplate() {
-        model.copyCitizenTemplate();
+        listViewCitizenTemplates.getItems().add(model.copyCitizenTemplate());
     }
 
 
@@ -401,7 +391,6 @@ public class CitizenTemplateController implements Initializable {
      * @param event
      */
     public void onEditDone(ActionEvent event) {
-        //TODO: Save data
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("Er du sikker på at du gemme ændringerne på denne borger skabelonen?");
         alert.setContentText("Dette kan ikke fortrydes.");
@@ -414,7 +403,7 @@ public class CitizenTemplateController implements Initializable {
                 selected.setName(txtFieldName.getText());
             }
             if (selected.getSurname() != txtFieldSurname.getText() && !txtFieldSurname.getText().isEmpty()) {
-                selected.setName(txtFieldSurname.getText());
+                selected.setSurname(txtFieldSurname.getText());
             }
             if (selected.getAge() != Integer.parseInt(txtFieldAge.getText()) && !txtFieldAge.getText().isEmpty()) {
                 selected.setAge(Integer.parseInt(txtFieldAge.getText()));

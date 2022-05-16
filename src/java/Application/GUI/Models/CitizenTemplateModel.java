@@ -1,31 +1,31 @@
 package Application.GUI.Models;
 
 import Application.BE.CategoryEntry;
-import Application.BE.CitizenBaseData;
 import Application.BE.CitizenTemplate;
-import Application.BE.ContactInfo;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TreeItem;
-
-import java.time.LocalDate;
-import java.util.stream.Collectors;
 
 
 public class CitizenTemplateModel implements Cloneable {
 
-    CitizenTemplate template;
+    private CitizenTemplate template;
 
     private StringProperty name;
     private StringProperty surname;
     private IntegerProperty age;
-    private LocalDate birthDate;
-    private StringProperty helpStatus;
-    private StringProperty civilianStatus;
-    private StringProperty address;
-    private ListProperty<ContactInfo> contactInfo;
 
+    private StringProperty mastering;
+    private StringProperty motivation;
+    private StringProperty resources;
+    private StringProperty roles;
+    private StringProperty habits;
+    private StringProperty eduAndJob;
+    private StringProperty lifeStory;
+    private StringProperty healthInfo;
+    private StringProperty assistiveDevices;
+    private StringProperty homeLayout;
+    private StringProperty network;
 
     private ObservableList<CategoryEntryModel> relevantFunctionalAbilities;
     private ObservableList<CategoryEntryModel> relevantHealthConditions;
@@ -34,27 +34,25 @@ public class CitizenTemplateModel implements Cloneable {
 
 
 
-    public CitizenTemplateModel(String name, String surname, LocalDate birthDate, String helpStatus, String civilianStatus, String address, ObservableList<ContactInfo> contactInfo) {
-        initProperties();
-        this.name.set(name);
-        this.surname.set(surname);
-        this.age.set((LocalDate.now().getYear()) - (birthDate.getYear()));
-        this.helpStatus.set(helpStatus);
-        this.civilianStatus.set(civilianStatus);
-        this.address.set(address);
-        this.contactInfo.set(contactInfo);
-        this.birthDate = birthDate;
-        this.mastering = "";
-        this.motivation = "";
-        this.resources = "";
-        this.roles = "";
-        this.habits = "";
-        this.eduAndJob = "";
-        this.lifeStory = "";
-        this.healthInfo = "";
-        this.assistiveDevices = "";
-        this.homeLayout = "";
-        this.network = "";
+    public CitizenTemplateModel(String name, String surname, int age) {
+        template = new CitizenTemplate();
+
+        this.name = new SimpleStringProperty(name);
+        this.surname = new SimpleStringProperty(surname);
+        this.age = new SimpleIntegerProperty(age);
+
+        this.mastering = new SimpleStringProperty(template.getGeneralInfo().getMastering());
+        this.motivation = new SimpleStringProperty(template.getGeneralInfo().getMotivation());
+        this.resources = new SimpleStringProperty(template.getGeneralInfo().getResources());
+        this.roles = new SimpleStringProperty(template.getGeneralInfo().getRoles());
+        this.habits = new SimpleStringProperty(template.getGeneralInfo().getHabits());
+        this.eduAndJob = new SimpleStringProperty(template.getGeneralInfo().getEduAndJob());
+        this.lifeStory = new SimpleStringProperty(template.getGeneralInfo().getLifeStory());
+        this.healthInfo = new SimpleStringProperty(template.getGeneralInfo().getHealthInfo());
+        this.assistiveDevices = new SimpleStringProperty(template.getGeneralInfo().getAssistiveDevices());
+        this.homeLayout = new SimpleStringProperty(template.getGeneralInfo().getHomeLayout());
+        this.network = new SimpleStringProperty(template.getGeneralInfo().getNetwork());
+        infoBind();
 
         this.relevantFunctionalAbilities = FXCollections.observableArrayList();
         this.relevantHealthConditions = FXCollections.observableArrayList();
@@ -69,19 +67,22 @@ public class CitizenTemplateModel implements Cloneable {
     {
         template = new CitizenTemplate();
 
-        this.name.bindBidirectional(new SimpleStringProperty(template.getBaseData().getName()));
-        initProperties();
+        this.name = new SimpleStringProperty(template.getBaseData().getName());
+        this.surname = new SimpleStringProperty(template.getBaseData().getSurname());
+        this.age = new SimpleIntegerProperty(template.getBaseData().getAge());
 
-        this.name = new SimpleStringProperty();
-        this.surname = new SimpleStringProperty();
-        this.age = new SimpleIntegerProperty();
-        this.helpStatus = new SimpleStringProperty();
-        this.civilianStatus = new SimpleStringProperty();
-        this.address = new SimpleStringProperty();
-        this.contactInfo = new SimpleListProperty<>();
-
-        this.functionalAbilities = null;
-        this.healthConditions = null;
+        this.mastering.set(template.getGeneralInfo().getMastering());
+        this.motivation.set(template.getGeneralInfo().getMotivation());
+        this.resources.set(template.getGeneralInfo().getResources());
+        this.roles.set(template.getGeneralInfo().getRoles());
+        this.habits.set(template.getGeneralInfo().getHabits());
+        this.eduAndJob.set(template.getGeneralInfo().getEduAndJob());
+        this.lifeStory.set(template.getGeneralInfo().getLifeStory());
+        this.healthInfo.set(template.getGeneralInfo().getHealthInfo());
+        this.assistiveDevices.set(template.getGeneralInfo().getAssistiveDevices());
+        this.homeLayout.set(template.getGeneralInfo().getHomeLayout());
+        this.network.set(template.getGeneralInfo().getNetwork());
+        infoBind();
 
         this.relevantFunctionalAbilities = FXCollections.observableArrayList();
         this.relevantHealthConditions = FXCollections.observableArrayList();
@@ -92,15 +93,24 @@ public class CitizenTemplateModel implements Cloneable {
         initHealthConditions();
     }
 
-    private void initProperties() {
-        this.name = new SimpleStringProperty();
-        this.surname = new SimpleStringProperty();
-        this.age = new SimpleIntegerProperty();
-        this.helpStatus = new SimpleStringProperty();
-        this.civilianStatus = new SimpleStringProperty();
-        this.address = new SimpleStringProperty();
-        this.contactInfo = new SimpleListProperty<>();
-    }
+    private void infoBind(){
+        this.name.bindBidirectional(new SimpleStringProperty(template.getBaseData().getName()));
+        this.surname.bindBidirectional(new SimpleStringProperty(template.getBaseData().getSurname()));
+        this.age.bindBidirectional(new SimpleIntegerProperty(template.getBaseData().getAge()));
+
+        this.mastering.bindBidirectional(new SimpleStringProperty(template.getGeneralInfo().getMastering()));
+        this.motivation.bindBidirectional(new SimpleStringProperty(template.getGeneralInfo().getMotivation()));
+        this.resources.bindBidirectional(new SimpleStringProperty(template.getGeneralInfo().getResources()));
+        this.roles.bindBidirectional(new SimpleStringProperty(template.getGeneralInfo().getRoles()));
+        this.habits.bindBidirectional(new SimpleStringProperty(template.getGeneralInfo().getHabits()));
+        this.eduAndJob.bindBidirectional(new SimpleStringProperty(template.getGeneralInfo().getEduAndJob()));
+        this.lifeStory.bindBidirectional(new SimpleStringProperty(template.getGeneralInfo().getLifeStory()));
+        this.healthInfo.bindBidirectional(new SimpleStringProperty(template.getGeneralInfo().getHealthInfo()));
+        this.assistiveDevices.bindBidirectional(new SimpleStringProperty(template.getGeneralInfo().getAssistiveDevices()));
+        this.homeLayout.bindBidirectional(new SimpleStringProperty(template.getGeneralInfo().getHomeLayout()));
+        this.network.bindBidirectional(new SimpleStringProperty(template.getGeneralInfo().getNetwork()));
+
+}
 
     @Override
     public String toString() {
@@ -108,13 +118,6 @@ public class CitizenTemplateModel implements Cloneable {
     }
 
     private void initFunctionalAbilities() {
-
-        functionalAbilities = FXCollections.observableArrayList();
-        functionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Walking", 1, true)));
-        functionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Climbing", 1, true)));
-        functionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Swimming", 1, true)));
-        functionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Bathing", 4, true)));
-
         relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Walking", 1, true, false)));
         relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Climbing", 1, true, false)));
         relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Swimming", 1, true, false)));
@@ -180,65 +183,144 @@ public class CitizenTemplateModel implements Cloneable {
         this.age.set(age);
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public String getMastering() {
+        return mastering.get();
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public StringProperty masteringProperty() {
+        return mastering;
     }
 
-    public String getHelpStatus() {
-        return helpStatus.get();
+    public void setMastering(String mastering) {
+        this.mastering.set(mastering);
     }
 
-    public StringProperty helpStatusProperty() {
-        return helpStatus;
+    public String getMotivation() {
+        return motivation.get();
     }
 
-    public void setHelpStatus(String helpStatus) {
-        this.helpStatus.set(helpStatus);
+    public StringProperty motivationProperty() {
+        return motivation;
     }
 
-    public String getCivilianStatus() {
-        return civilianStatus.get();
+    public void setMotivation(String motivation) {
+        this.motivation.set(motivation);
     }
 
-    public StringProperty civilianStatusProperty() {
-        return civilianStatus;
+    public String getResources() {
+        return resources.get();
     }
 
-    public void setCivilianStatus(String civilStatus) {
-        this.civilianStatus.set(civilStatus);
+    public StringProperty resourcesProperty() {
+        return resources;
     }
 
-    public String getAddress() {
-        return address.get();
+    public void setResources(String resources) {
+        this.resources.set(resources);
     }
 
-    public StringProperty addressProperty() {
-        return address;
+    public String getRoles() {
+        return roles.get();
     }
 
-    public void setAddress(String address) {
-        this.address.set(address);
+    public StringProperty rolesProperty() {
+        return roles;
     }
 
-    public ObservableList<ContactInfo> getContactInfo() {
-        return contactInfo.get();
+    public void setRoles(String roles) {
+        this.roles.set(roles);
     }
 
-    public ListProperty<ContactInfo> contactInfoProperty() {
-        return contactInfo;
+    public String getHabits() {
+        return habits.get();
     }
 
-    public void setContactInfo(ObservableList<ContactInfo> contactInfo) {
-        this.contactInfo.set(contactInfo);
+    public StringProperty habitsProperty() {
+        return habits;
+    }
+
+    public void setHabits(String habits) {
+        this.habits.set(habits);
+    }
+
+    public String getEduAndJob() {
+        return eduAndJob.get();
+    }
+
+    public StringProperty eduAndJobProperty() {
+        return eduAndJob;
+    }
+
+    public void setEduAndJob(String eduAndJob) {
+        this.eduAndJob.set(eduAndJob);
+    }
+
+    public String getLifeStory() {
+        return lifeStory.get();
+    }
+
+    public StringProperty lifeStoryProperty() {
+        return lifeStory;
+    }
+
+    public void setLifeStory(String lifeStory) {
+        this.lifeStory.set(lifeStory);
+    }
+
+    public String getHealthInfo() {
+        return healthInfo.get();
+    }
+
+    public StringProperty healthInfoProperty() {
+        return healthInfo;
+    }
+
+    public void setHealthInfo(String healthInfo) {
+        this.healthInfo.set(healthInfo);
+    }
+
+    public String getAssistiveDevices() {
+        return assistiveDevices.get();
+    }
+
+    public StringProperty assistiveDevicesProperty() {
+        return assistiveDevices;
+    }
+
+    public void setAssistiveDevices(String assistiveDevices) {
+        this.assistiveDevices.set(assistiveDevices);
+    }
+
+    public String getHomeLayout() {
+        return homeLayout.get();
+    }
+
+    public StringProperty homeLayoutProperty() {
+        return homeLayout;
+    }
+
+    public void setHomeLayout(String homeLayout) {
+        this.homeLayout.set(homeLayout);
+    }
+
+    public String getNetwork() {
+        return network.get();
+    }
+
+    public StringProperty networkProperty() {
+        return network;
+    }
+
+    public void setNetwork(String network) {
+        this.network.set(network);
+    }
+
+    public CitizenTemplate getTemplate() {
+        return template;
     }
 
 
-    public ObservableList<CategoryEntryModel> getFunctionalAbilities() {
-        return functionalAbilities;
+
 
     public ObservableList<CategoryEntryModel> getNonRelevantFunctionalAbilities() {
         return nonRelevantFunctionalAbilities;

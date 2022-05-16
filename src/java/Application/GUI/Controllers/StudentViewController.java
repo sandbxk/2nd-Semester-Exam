@@ -1,10 +1,8 @@
 package Application.GUI.Controllers;
 
-import Application.BE.ContactInfo;
 import Application.GUI.Models.CategoryEntryModel;
 import Application.GUI.Models.CitizenModel;
 import Application.GUI.Models.ControllerModels.StudentViewControllerModel;
-import Application.GUI.Models.FunctionalLevels;
 import Application.GUI.Models.HealthLevels;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,13 +11,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class StudentViewController implements Initializable {
@@ -28,7 +22,6 @@ public class StudentViewController implements Initializable {
     @FXML public TextField txtFieldCitizenSearch;
     @FXML public Button btnCitizenSearch;
     @FXML public Label lblCitizenName;
-    @FXML public ListView<ContactInfo> listViewCitizenContactInfo;
     @FXML public Label lblAge;
     @FXML public Label lblBirthdate;
     @FXML public Label lblAddress;
@@ -56,11 +49,10 @@ public class StudentViewController implements Initializable {
 
     private void initTestData() {
         ObservableList<CitizenModel> citizens = FXCollections.observableArrayList();
-        citizens.add(new CitizenModel("John", "Doe", 22, LocalDate.now(), "HelpStatus", "CivilianStatus","Address street", FXCollections.observableArrayList(new ContactInfo("Tlf: 12345678"))));
-        citizens.add(new CitizenModel("Jfeohn", "Dofee", 2245, LocalDate.now(), "Help1Status", "Civili1anStatus","Ad1dress street", FXCollections.observableArrayList(new ContactInfo("Tlf: 12345678"))));
+        citizens.add(new CitizenModel());
+        citizens.add(new CitizenModel());
         listViewCitizens.setItems(citizens);
         //TODO: Fix Scaling
-        //TODO: Make age autofill from birthdate in citizenmodel and citizenTemplateModel
     }
 
     private void initTableViews() {

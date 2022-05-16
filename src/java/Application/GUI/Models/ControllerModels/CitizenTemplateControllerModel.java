@@ -1,15 +1,15 @@
 package Application.GUI.Models.ControllerModels;
 
-import Application.BE.ContactInfo;
+import Application.BE.CategoryEntry;
 import Application.BLL.TeacherDataManager;
 import Application.GUI.Models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CitizenTemplateControllerModel {
 
@@ -29,15 +29,14 @@ public class CitizenTemplateControllerModel {
     public void citizenTemplateSearch() {
     }
 
-
     /**
      * Get all the citizen templates from the DB and put them in a list.
      * @return
      */
     public ObservableList<CitizenTemplateModel> getCitizenTemplates() {
         ObservableList<CitizenTemplateModel> citizenTemplates = FXCollections.observableArrayList();
-        citizenTemplates.add(new CitizenTemplateModel("John", "Jørgensen", LocalDate.now(), "Active", "Single", "Gade 2", FXCollections.observableArrayList(new ContactInfo("Søn Tlf 12 12 12 12"), new ContactInfo("Datter Tlf 12 12 12 12"))));
-        citizenTemplates.add(new CitizenTemplateModel("Mark", "Hansen", LocalDate.now(), "Ikke Aktiv", "Gift", "En anden gade 5", FXCollections.observableArrayList(new ContactInfo("Mor Tlf 12 12 12 12"), new ContactInfo("Far Tlf 12 12 12 12"))));
+        citizenTemplates.add(new CitizenTemplateModel("John", "Jørgensen", 53));
+        citizenTemplates.add(new CitizenTemplateModel("Mark", "Hansen", 9));
         return citizenTemplates;
     }
 
@@ -65,25 +64,6 @@ public class CitizenTemplateControllerModel {
         return listToTreeItem(treeItem, selectedCitizenTemplateModel.getAllHealthConditions());
     }
 
-    /**
-     * All relevant categories after editing the citizenTemplateModel.
-     * @return
-     */
-    public TreeItem<CategoryEntryModel> getNewRelevantFuncCategoriesAsTreeItem() {
-        TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("All Functional Ability Categories"));
-        return listToTreeItem(treeItem, selectedCitizenTemplateModel.getRelevantFunctionalAbilities());
-        //TODO sort the two lists (relevant and non-relevant) and make a new one.
-    }
-
-    /**
-     * All relevant categories after editing the citizenTemplateModel.
-     * @return
-     */
-    public TreeItem<CategoryEntryModel> getNewRelevantHealthCategoriesAsTreeItem() {
-        TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("All Health Categories"));
-        return listToTreeItem(treeItem, selectedCitizenTemplateModel.getRelevantHealthConditions());
-        //TODO sort the two lists (relevant and non-relevant) and make a new one
-    }
 
     public TreeItem<CategoryEntryModel> getRelevantFuncCategoriesAsTreeItem() {
         TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("All Functional Ability Categories"));
@@ -114,9 +94,8 @@ public class CitizenTemplateControllerModel {
      * @return
      */
     public CitizenTemplateModel newCitizenTemplate() {
-        //TODO Write to DB
-        CitizenTemplateModel CitizenTemplateModel = new CitizenTemplateModel("Ny", "Skabelon", LocalDate.now(), "", "", "", FXCollections.observableArrayList());
-        //DataManager.newCitizenTemplate(CitizenTemplateModel);
+        CitizenTemplateModel CitizenTemplateModel = new CitizenTemplateModel("Ny", "Skabelon",0);
+        teacherDataManager.newCitizenTemplate(CitizenTemplateModel.getTemplate());
 
         return CitizenTemplateModel;
     }
@@ -125,8 +104,7 @@ public class CitizenTemplateControllerModel {
      * Delete the selected citizen template.
      **/
     public void deleteCitizenTemplate() {
-        //TODO delete from DB
-        //DataManager.deleteCitizenTemplate(selectedCitizenTemplateModel);
+        teacherDataManager.deleteCitizenTemplate(selectedCitizenTemplateModel.getTemplate());
     }
 
     /**
@@ -134,21 +112,16 @@ public class CitizenTemplateControllerModel {
      */
     public CitizenTemplateModel copyCitizenTemplate() {
         try {
-            return (CitizenTemplateModel) selectedCitizenTemplateModel.clone();
-            //TODO Write to DB
+            CitizenTemplateModel clone = (CitizenTemplateModel) selectedCitizenTemplateModel.clone();
+            teacherDataManager.copyCitizenTemplate(clone.getTemplate());
+
+            return clone;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    /**
-     * Restore the health categories to the pre edit values.
-     * @return
-     */
-    public TreeItem<CategoryEntryModel> getPreEditHealthCategoryEntryModels() {
-        return preEditHealthCategoryEntryModels;
-    }
 
     /**
      * Creates a copy of the citizen template and stores it in the preEditCitizenTemplateModel variable for later user.
@@ -159,14 +132,6 @@ public class CitizenTemplateControllerModel {
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Sets the function categories to the pre edit values.
-     * @param preEditFunctionCategoryEntryModels
-     */
-    public void setPreEditFunctionCategoryEntryModels(TreeItem<CategoryEntryModel> preEditFunctionCategoryEntryModels) {
-        this.preEditFunctionCategoryEntryModels = preEditFunctionCategoryEntryModels;
     }
 
     /**
@@ -239,13 +204,15 @@ public class CitizenTemplateControllerModel {
                 }
             }
 
+            List<CategoryEntry> beHealthConditions = dbWriteHealthConditions.stream().map(categoryEntryModel -> categoryEntryModel.getCategoryEntry()).collect(Collectors.toList());
+            List<CategoryEntry> beFunctionalAbilities = dbWriteFunctionalAbilities.stream().map(categoryEntryModel -> categoryEntryModel.getCategoryEntry()).collect(Collectors.toList());
 
 
-
-            //teacherDataManager.saveCitizenTemplate(selectedCitizenTemplateModel.getBE());
-
+            teacherDataManager.updateCitizenTemplate(selectedCitizenTemplateModel.getTemplate(), beHealthConditions, beFunctionalAbilities);
         }
     }
+
+
 
     /**
      * Gets the pre edit citizen template.

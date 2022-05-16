@@ -33,6 +33,9 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
 
 
     public CategoryEntryModel(CategoryEntry categoryEntry) {
+        this.categoryEntry = categoryEntry;
+        this.id = categoryEntry.getId();
+
         initProperties();
         categoryName.set(categoryEntry.getCategoryName());
         superCategory.set(categoryEntry.getSuperCategory());
@@ -44,9 +47,7 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
         expectedCondition.set(categoryEntry.getExpectedCondition());
         note.set(categoryEntry.getNote());
         isFunctionAbility = categoryEntry.isFunctionAbility();
-
-        this.categoryEntry = categoryEntry;
-        this.id = categoryEntry.getId();
+        initBinds();
 
         levelFuncComboBox = new SimpleObjectProperty<>(new ComboBox<>());
         levelHealthComboBox = new SimpleObjectProperty<>(new ComboBox<>());
@@ -69,10 +70,13 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
 
     public CategoryEntryModel(String categoryName, int level, String note, boolean isFunctionAbility) {
         initProperties();
+        this.categoryEntry = new CategoryEntry(-1, categoryName, level, isFunctionAbility, false);
         this.categoryName.set(categoryName);
         this.level.set(level);
         this.note.set(note);
         this.isFunctionAbility = isFunctionAbility;
+        initBinds();
+
 
         initLevelFuncAndLevelHealth();
     }
@@ -94,6 +98,19 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
         citizenGoals = new SimpleStringProperty();
         expectedCondition = new SimpleStringProperty();
         note = new SimpleStringProperty();
+    }
+
+    private void initBinds() {
+        categoryName.bindBidirectional(new SimpleStringProperty(categoryEntry.getCategoryName()));
+        superCategory.bindBidirectional(new SimpleStringProperty(categoryEntry.getSuperCategory()));
+        level.bindBidirectional(new SimpleIntegerProperty(categoryEntry.getLevel()));
+
+        assessment.bindBidirectional(new SimpleStringProperty(categoryEntry.getAssessment()));
+        cause.bindBidirectional(new SimpleStringProperty(categoryEntry.getCause()));
+        implications.bindBidirectional(new SimpleStringProperty(categoryEntry.getImplications()));
+        citizenGoals.bindBidirectional(new SimpleStringProperty(categoryEntry.getCitizenGoals()));
+        expectedCondition.bindBidirectional(new SimpleStringProperty(categoryEntry.getExpectedCondition()));
+        note.bindBidirectional(new SimpleStringProperty(categoryEntry.getNote()));
     }
 
     /**
