@@ -1,7 +1,9 @@
 package Application.GUI.Models;
 
 import Application.BE.CategoryEntry;
+import Application.BE.CitizenBaseData;
 import Application.BE.CitizenTemplate;
+import Application.BE.GeneralJournal;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,7 +37,7 @@ public class CitizenTemplateModel implements Cloneable {
 
 
     public CitizenTemplateModel(String name, String surname, int age) {
-        template = new CitizenTemplate();
+        template = new CitizenTemplate(-1, new CitizenBaseData(name, surname, age), new GeneralJournal());
 
         this.name = new SimpleStringProperty(name);
         this.surname = new SimpleStringProperty(surname);

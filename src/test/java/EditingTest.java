@@ -11,6 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 
 public class EditingTest {
@@ -61,7 +62,7 @@ public class EditingTest {
         model.savePreEditState(); //Clone the pre-edit state of the selected model for later comparison
     }
 
-
+    //assert that categories are marked as relevant and non-relevant
     @Test
     public void changedCategories(){
         CitizenTemplateModel selected = model.getSelectedCitizenTemplateModel(); //Selected citizen
@@ -79,6 +80,19 @@ public class EditingTest {
         assertEquals(3, selected.getRelevantFunctionalAbilities().size());
     }
 
-    //Next test, assert that changes made to model are reflected in BE
+
+    //assert that changes made to model are reflected in BE
+    @Test
+    public void ModelAndBEFields(){
+        CitizenTemplateModel selected = model.getSelectedCitizenTemplateModel();
+        assertEquals("First Name", selected.getName());
+        assertEquals("First Name", selected.getTemplate().getBaseData().getName());
+
+        selected.setName("New First Name");
+
+        assertEquals("New First Name", selected.getName());
+        assertFalse("Name is changed", !"First Name".equals(selected.getTemplate().getBaseData().getName()));
+
+    }
 
 }
