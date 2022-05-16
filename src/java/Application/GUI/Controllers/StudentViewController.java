@@ -23,10 +23,6 @@ public class StudentViewController implements Initializable {
     @FXML public Button btnCitizenSearch;
     @FXML public Label lblCitizenName;
     @FXML public Label lblAge;
-    @FXML public Label lblBirthdate;
-    @FXML public Label lblAddress;
-    @FXML public Label lblHelpStatus;
-    @FXML public Label lblCivilianStatus;
     @FXML public TableView<CategoryEntryModel> tblViewStudentDashboardHealth;
     @FXML public TableColumn<CategoryEntryModel, String> tblColumnStudentDashboardHealthCategory;
     @FXML public TableColumn<CategoryEntryModel, String> tblColumnStudentDashboardHealthLevel;
@@ -52,7 +48,6 @@ public class StudentViewController implements Initializable {
         citizens.add(new CitizenModel());
         citizens.add(new CitizenModel());
         listViewCitizens.setItems(citizens);
-        //TODO: Fix Scaling
     }
 
     private void initTableViews() {
