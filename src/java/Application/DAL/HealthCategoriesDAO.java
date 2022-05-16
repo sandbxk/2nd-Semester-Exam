@@ -47,7 +47,7 @@ public class HealthCategoriesDAO extends TemplatePatternDAO{
 
             pstmt.close();
 
-
+            return null;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -56,7 +56,6 @@ public class HealthCategoriesDAO extends TemplatePatternDAO{
         finally {
             DBConnectionPool.getInstance().checkIn(conn);
         }
-
     }
 
 

@@ -59,8 +59,8 @@ public class CitizenTemplateModel implements Cloneable {
         this.nonRelevantFunctionalAbilities = FXCollections.observableArrayList();
         this.nonRelevantHealthConditions = FXCollections.observableArrayList();
 
-        initFunctionalAbilities();
-        initHealthConditions();
+        //initFunctionalAbilities();
+        //initHealthConditions();
     }
 
     public CitizenTemplateModel(CitizenTemplate template) {
@@ -88,8 +88,8 @@ public class CitizenTemplateModel implements Cloneable {
         this.nonRelevantFunctionalAbilities = FXCollections.observableArrayList();
         this.nonRelevantHealthConditions = FXCollections.observableArrayList();
 
-        initFunctionalAbilities();
-        initHealthConditions();
+        //initFunctionalAbilities();
+        //initHealthConditions();
     }
 
     public CitizenTemplateModel()
@@ -118,8 +118,8 @@ public class CitizenTemplateModel implements Cloneable {
         this.nonRelevantFunctionalAbilities = FXCollections.observableArrayList();
         this.nonRelevantHealthConditions = FXCollections.observableArrayList();
 
-        initFunctionalAbilities();
-        initHealthConditions();
+        //initFunctionalAbilities();
+        //initHealthConditions();
     }
 
     private void infoBind(){
@@ -356,7 +356,7 @@ public class CitizenTemplateModel implements Cloneable {
     }
 
     public void setNonRelevantFunctionalAbilities(ObservableList<CategoryEntryModel> nonRelevantFunctionalAbilities) {
-        this.nonRelevantFunctionalAbilities = relevantFunctionalAbilities;
+        this.nonRelevantFunctionalAbilities = nonRelevantFunctionalAbilities;
     }
 
     public ObservableList<CategoryEntryModel> getNonRelevantHealthConditions() {
@@ -364,7 +364,7 @@ public class CitizenTemplateModel implements Cloneable {
     }
 
     public void setNonRelevantHealthConditions(ObservableList<CategoryEntryModel> nonRelevantHealthConditions) {
-        this.nonRelevantHealthConditions = relevantHealthConditions;
+        this.nonRelevantHealthConditions = nonRelevantHealthConditions;
     }
     public ObservableList<CategoryEntryModel> getRelevantFunctionalAbilities() {
         return relevantFunctionalAbilities;
@@ -384,15 +384,15 @@ public class CitizenTemplateModel implements Cloneable {
 
     public ObservableList<CategoryEntryModel> getAllFuncCategories() {
         ObservableList<CategoryEntryModel> allFuncConditions = FXCollections.observableArrayList();
-        allFuncConditions.addAll(nonRelevantFunctionalAbilities);
         allFuncConditions.addAll(relevantFunctionalAbilities);
+        allFuncConditions.addAll(nonRelevantFunctionalAbilities);
         return allFuncConditions;
     }
 
     public ObservableList<CategoryEntryModel> getAllHealthConditions() {
         ObservableList<CategoryEntryModel> allHealthConditions = FXCollections.observableArrayList();
-        allHealthConditions.addAll(nonRelevantHealthConditions);
         allHealthConditions.addAll(relevantHealthConditions);
+        allHealthConditions.addAll(nonRelevantHealthConditions);
         return allHealthConditions;
     }
 

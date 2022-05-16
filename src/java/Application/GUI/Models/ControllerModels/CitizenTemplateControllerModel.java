@@ -147,11 +147,9 @@ public class CitizenTemplateControllerModel {
             ObservableList<CategoryEntryModel> newNonRelevantHealthConditions = FXCollections.observableArrayList();
             ObservableList<CategoryEntryModel> newNonRelevantFunctionalAbilities = FXCollections.observableArrayList();
 
-            List<CategoryEntryModel> dbWriteHealthConditions = new ArrayList<>();
-            List<CategoryEntryModel> dbWriteFunctionalAbilities = new ArrayList<>();
-
+            //Put relevant and non-relevant categories into their respective lists.
             for (CategoryEntryModel newHealth : newHealthRoot) {
-                if (newHealth.getLevelHealth() != HealthLevels.NOT_RELEVANT) {
+                if (newHealth.getLevel() != HealthLevels.NOT_RELEVANT.ordinal()) {
                     newRelevantHealthConditions.add(newHealth);
                 }
                 else {
@@ -159,9 +157,9 @@ public class CitizenTemplateControllerModel {
                 }
             }
 
-
+            //Put relevant and non-relevant categories into their respective lists.
             for (CategoryEntryModel newFunc : newFuncRoot) {
-                if (newFunc.getLevelFunc() != FunctionalLevels.LEVEL_9) {
+                if (newFunc.getLevel() != FunctionalLevels.LEVEL_9.ordinal() && newFunc.getLevel() != FunctionalLevels.LEVEL_9.level) {
                     newRelevantFunctionalAbilities.add(newFunc);
                 }
                 else {
@@ -169,10 +167,16 @@ public class CitizenTemplateControllerModel {
                 }
             }
 
-            selectedCitizenTemplateModel.setRelevantHealthConditions(newRelevantHealthConditions);
-            selectedCitizenTemplateModel.setRelevantFunctionalAbilities(newRelevantFunctionalAbilities);
-            selectedCitizenTemplateModel.setNonRelevantHealthConditions(newNonRelevantHealthConditions);
-            selectedCitizenTemplateModel.setNonRelevantFunctionalAbilities(newNonRelevantFunctionalAbilities);
+            selectedCitizenTemplateModel.setRelevantHealthConditions(newRelevantHealthConditions); //Relevant health
+            selectedCitizenTemplateModel.setRelevantFunctionalAbilities(newRelevantFunctionalAbilities); //Relevant Functional
+
+            selectedCitizenTemplateModel.setNonRelevantHealthConditions(newNonRelevantHealthConditions); //Non-Relevant Health
+            selectedCitizenTemplateModel.setNonRelevantFunctionalAbilities(newNonRelevantFunctionalAbilities); //Non-Relevant Functional
+
+
+
+            List<CategoryEntryModel> dbWriteHealthConditions = new ArrayList<>();
+            List<CategoryEntryModel> dbWriteFunctionalAbilities = new ArrayList<>();
 
             //List of changed health conditions
             dbWriteHealthConditions.addAll(newRelevantHealthConditions);
@@ -201,10 +205,11 @@ public class CitizenTemplateControllerModel {
                 }
             }
 
+            //Unwrap BE
             List<CategoryEntry> beHealthConditions = dbWriteHealthConditions.stream().map(categoryEntryModel -> categoryEntryModel.getCategoryEntry()).collect(Collectors.toList());
             List<CategoryEntry> beFunctionalAbilities = dbWriteFunctionalAbilities.stream().map(categoryEntryModel -> categoryEntryModel.getCategoryEntry()).collect(Collectors.toList());
 
-
+            //Write changes to the database
             teacherDataManager.updateCitizenTemplate(selectedCitizenTemplateModel.getTemplate(), beHealthConditions, beFunctionalAbilities);
         }
     }

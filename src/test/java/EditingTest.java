@@ -1,0 +1,83 @@
+
+import Application.GUI.Models.CategoryEntryModel;
+import Application.GUI.Models.CitizenTemplateModel;
+import Application.GUI.Models.ControllerModels.CitizenTemplateControllerModel;
+import Application.GUI.Models.FunctionalLevels;
+import Application.GUI.Models.HealthLevels;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+
+
+public class EditingTest {
+    @Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
+
+
+    CitizenTemplateControllerModel model;
+
+
+    @Before
+    public void setUp(){
+        model = new CitizenTemplateControllerModel();
+
+        //Citizen Template
+        CitizenTemplateModel citizenTemplateModel = new CitizenTemplateModel("First Name", "Last Name", 90);
+
+        //Lists
+        ObservableList<CategoryEntryModel> healthConditionsRelevant = FXCollections.observableArrayList();
+        ObservableList<CategoryEntryModel> funcAbilitiesRelevant = FXCollections.observableArrayList();
+        ObservableList<CategoryEntryModel> healthConditionsNonRelevant = FXCollections.observableArrayList();
+        ObservableList<CategoryEntryModel> funcAbilitiesNonRelevant = FXCollections.observableArrayList();
+
+        healthConditionsRelevant.add(new CategoryEntryModel("condition 1", HealthLevels.RELEVANT.ordinal(), "note", false));
+        healthConditionsRelevant.add(new CategoryEntryModel("condition 2", HealthLevels.RELEVANT.ordinal(), "note", false));
+        healthConditionsRelevant.add(new CategoryEntryModel("condition 3", HealthLevels.RELEVANT.ordinal(), "note", false));
+        healthConditionsRelevant.add(new CategoryEntryModel("condition 4", HealthLevels.RELEVANT.ordinal(), "note", false));
+
+        healthConditionsNonRelevant.add(new CategoryEntryModel("non-condition 1", HealthLevels.NOT_RELEVANT.ordinal(), "note", false));
+        healthConditionsNonRelevant.add(new CategoryEntryModel("non-condition 2", HealthLevels.NOT_RELEVANT.ordinal(), "note", false));
+
+        funcAbilitiesRelevant.add(new CategoryEntryModel("functional ability 1", FunctionalLevels.LEVEL_1.level, "note", true));
+        funcAbilitiesRelevant.add(new CategoryEntryModel("functional ability 2", FunctionalLevels.LEVEL_4.level, "note", true));
+        funcAbilitiesRelevant.add(new CategoryEntryModel("functional ability 3", FunctionalLevels.LEVEL_0.level, "note", true));
+        funcAbilitiesRelevant.add(new CategoryEntryModel("functional ability 4", FunctionalLevels.LEVEL_2.level, "note", true));
+
+        funcAbilitiesNonRelevant.add(new CategoryEntryModel("non-functional ability 1", FunctionalLevels.LEVEL_9.level, "note", true));
+        funcAbilitiesNonRelevant.add(new CategoryEntryModel("non-functional ability 2", FunctionalLevels.LEVEL_9.level, "note", true));
+
+        citizenTemplateModel.setRelevantHealthConditions(healthConditionsRelevant);
+        citizenTemplateModel.setNonRelevantHealthConditions(healthConditionsNonRelevant);
+        citizenTemplateModel.setRelevantFunctionalAbilities(funcAbilitiesRelevant);
+        citizenTemplateModel.setNonRelevantFunctionalAbilities(funcAbilitiesNonRelevant);
+
+        model.setSelectedCitizenTemplateModel(citizenTemplateModel);
+        model.savePreEditState();
+    }
+
+
+    @Test
+    public void changedCategories(){
+        CitizenTemplateModel selected = model.getSelectedCitizenTemplateModel();
+        assertEquals(4, selected.getRelevantFunctionalAbilities().size());
+
+
+        selected.getRelevantFunctionalAbilities().get(1).setLevel(FunctionalLevels.LEVEL_9.level);
+        selected.getNonRelevantFunctionalAbilities().get(1).setLevel(FunctionalLevels.LEVEL_3.level);
+
+        selected.getRelevantHealthConditions().get(1).setNote("A different note");
+
+        selected.getNonRelevantHealthConditions().get(0).setLevel(FunctionalLevels.LEVEL_9.level);
+        selected.getNonRelevantHealthConditions().get(1).setLevel(HealthLevels.POSSIBLE_RELEVANT.ordinal());
+
+        model.saveEditedCitizenTemplate();
+
+        assertEquals(3, selected.getRelevantFunctionalAbilities().size());
+    }
+
+    //Next test, assert that changes made to model are reflected in BE
+
+}
