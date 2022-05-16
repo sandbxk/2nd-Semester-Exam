@@ -14,7 +14,10 @@ import javafx.geometry.Side;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 import javafx.util.converter.IntegerStringConverter;
+import org.controlsfx.control.NotificationPane;
+import org.controlsfx.control.Notifications;
 
 import java.net.URL;
 import java.util.*;
@@ -128,8 +131,10 @@ public class CitizenTemplateController implements Initializable {
         copyCitizenTemplate.setOnAction(event -> onCopyCitizenTemplate());
         MenuItem deleteCitizenTemplate = new MenuItem("Slet Borger Skabelon");
         deleteCitizenTemplate.setOnAction(event -> onDeleteCitizenTemplate());
+        MenuItem newCitizenEntity = new MenuItem("Ny Borger Fra Skabelon");
+        deleteCitizenTemplate.setOnAction(event -> onNewCitizenEntity());
 
-        actionsMenu = new ContextMenu(newCitizenTemplate, copyCitizenTemplate, deleteCitizenTemplate);
+        actionsMenu = new ContextMenu(newCitizenTemplate, copyCitizenTemplate, deleteCitizenTemplate, newCitizenEntity);
         actionsMenu.setAutoHide(true);
     }
 
@@ -164,6 +169,22 @@ public class CitizenTemplateController implements Initializable {
         listViewCitizenTemplates.getItems().add(model.copyCitizenTemplate());
     }
 
+    private void onNewCitizenEntity() {
+        try {
+            model.newCitizenEntity();
+            Notifications notifications = Notifications.create();
+            notifications.title("Ny borger");
+            notifications.text("Borger er oprettet");
+            notifications.showInformation();
+            notifications.hideAfter(Duration.seconds(3));
+        } catch (Exception e) {
+            Notifications notifications = Notifications.create();
+            notifications.title("Ny borger");
+            notifications.text("Borger kunne ikke oprettes");
+            notifications.showError();
+        }
+
+    }
 
     private void setFuncTreeTable() {
         //TODO: Proper table population

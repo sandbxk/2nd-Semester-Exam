@@ -17,7 +17,7 @@ public class CitizenTemplateControllerModel {
 
     private CitizenTemplateModel selectedCitizenTemplateModel;
 
-    //Copies from before the editMode is activated
+    //Copy from before the editMode is activated
     private CitizenTemplateModel preEditCitizenTemplateModel;
 
     public CitizenTemplateControllerModel() {
@@ -225,4 +225,7 @@ public class CitizenTemplateControllerModel {
     }
 
 
+    public void newCitizenEntity() {
+        teacherDataManager.newCitizenEntity(selectedCitizenTemplateModel.getTemplate());
+    }
 }

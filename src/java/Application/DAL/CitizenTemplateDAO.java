@@ -1,8 +1,6 @@
 package Application.DAL;
 
-import Application.BE.Case;
-import Application.BE.CitizenBaseData;
-import Application.BE.CitizenTemplate;
+import Application.BE.*;
 import Application.DAL.DBConnector.DBConnectionPool;
 import Application.GUI.Models.SessionModel;
 
@@ -11,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class CitizenTemplateDAO extends TemplatePatternDAO<CitizenTemplate> {
@@ -90,7 +89,7 @@ public class CitizenTemplateDAO extends TemplatePatternDAO<CitizenTemplate> {
                 String lName = resultSet.getString("cSurname");
                 int age = resultSet.getInt("cAge");
 
-                citizens.add(new CitizenTemplate(id, new CitizenBaseData(fName, lName, age), null));
+                citizens.add(new CitizenTemplate(id, new CitizenBaseData(fName, lName, age), readGeneralInfo(id)));
             }
 
             pstmt.close();
@@ -110,4 +109,54 @@ public class CitizenTemplateDAO extends TemplatePatternDAO<CitizenTemplate> {
     public void delete(int id) {
 
     }
+
+
+    public GeneralJournal readGeneralInfo(int templateID){
+        String sql = """
+                    SELECT * FROM citizens WHERE citizenId = ?
+                    """;
+
+        Connection conn = DBConnectionPool.getInstance().checkOut();
+        GeneralJournal journal = new GeneralJournal();
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            ResultSet resultSet = pstmt.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("citizenId");
+                String fName = resultSet.getString("cFirstName");
+                String lName = resultSet.getString("cSurname");
+                int age = resultSet.getInt("cAge");
+
+
+            }
+
+            pstmt.close();
+
+            return journal;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        finally {
+            DBConnectionPool.getInstance().checkIn(conn);
+        }
+    }
+
+    public void updateGeneralInfo(){
+
+    }
+
+    public HashMap<CategoryEntry, CategoryEntry> readCategoryEntries(){
+        HashMap<CategoryEntry, CategoryEntry> categories = new HashMap<>();
+
+        return categories;
+    }
+
+    public void updateCategoryEntries(){
+
+    }
+
 }
