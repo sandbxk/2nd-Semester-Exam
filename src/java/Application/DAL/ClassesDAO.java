@@ -1,5 +1,6 @@
 package Application.DAL;
 
+import Application.BE.CitizenTemplate;
 import Application.BE.Class;
 
 import java.util.List;

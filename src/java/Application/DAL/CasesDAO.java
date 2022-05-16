@@ -2,6 +2,7 @@ package Application.DAL;
 
 import Application.BE.Account;
 import Application.BE.Case;
+import Application.BE.CitizenTemplate;
 import Application.DAL.DBConnector.DBConnectionPool;
 
 import java.sql.Connection;

@@ -1,5 +1,6 @@
 package Application.Utility;
 
+import Application.GUI.Models.AccountModel;
 import Application.GUI.Models.CategoryEntryModel;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextFormatter;
@@ -10,6 +11,10 @@ import java.util.List;
 import java.util.function.UnaryOperator;
 
 public final class GUIUtils {
+
+    private static AccountModel selectedStudent;
+    private static AccountModel selectedTeacher;
+
 
     private GUIUtils() {
         // Private constructor to prevent instantiation

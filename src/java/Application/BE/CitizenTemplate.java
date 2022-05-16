@@ -5,6 +5,7 @@ import java.util.List;
 
 public class CitizenTemplate {
 
+    int id;
     private CitizenBaseData baseData;
     private GeneralJournal generalInfo;
     private final List<CategoryEntry> functionalAbilities;
@@ -14,14 +15,14 @@ public class CitizenTemplate {
     {
         this.baseData = new CitizenBaseData();
         this.generalInfo = new GeneralJournal();
-
+        this.id = -1;
         this.functionalAbilities = new ArrayList<>();
         this.healthConditions = new ArrayList<>();
     }
 
-    public CitizenTemplate(CitizenBaseData baseData, GeneralJournal generalInfo) {
+    public CitizenTemplate(int id, CitizenBaseData baseData, GeneralJournal generalInfo) {
         this();
-
+        this.id = id;
         this.generalInfo = generalInfo;
         this.baseData = baseData;
     }
@@ -59,5 +60,13 @@ public class CitizenTemplate {
 
     public void setBaseData(CitizenBaseData baseData) {
         this.baseData = baseData;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

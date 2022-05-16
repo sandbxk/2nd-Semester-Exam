@@ -4,9 +4,7 @@ import Application.BE.Case;
 import Application.BE.CategoryEntry;
 import Application.BE.CitizenTemplate;
 import Application.BE.Inquiry;
-import Application.DAL.CasesDAO;
-import Application.DAL.InquiryDAO;
-import Application.DAL.TemplatePatternDAO;
+import Application.DAL.*;
 
 import java.util.List;
 
@@ -16,12 +14,16 @@ public class TeacherDataManager
     TemplatePatternDAO caseDAO;
     TemplatePatternDAO healthCategoryDAO;
     TemplatePatternDAO functionalAbilityDAO;
+    TemplatePatternDAO citizenDAO;
+    TemplatePatternDAO citizenTemplateDAO;
+    TemplatePatternDAO generalInfoDAO;
 
     public TeacherDataManager()
     {
         inquiryDAO = new InquiryDAO();
         caseDAO = new CasesDAO();
-
+        citizenTemplateDAO = new CitizenTemplateDAO();
+        generalInfoDAO = new GeneralInfoCitizenTemplateDAO();
     }
 
     public Case createCase(int id, String inquiryReason, String medicalDiagnose, Inquiry inquiry)
@@ -35,12 +37,22 @@ public class TeacherDataManager
     }
 
     public List getAllCitizenTemplates() {
+        List<CitizenTemplate> citizenTemplates = citizenTemplateDAO.readAll();
+
+
         return null;
     }
 
-    public void newCitizenTemplate(CitizenTemplate template) {
-        //set categories
+    public CitizenTemplate newCitizenTemplate() {
+        //Template
+        CitizenTemplate newTemplate = (CitizenTemplate) citizenTemplateDAO.create(new CitizenTemplate());
 
+        //General Info
+
+
+        //Set categories
+
+        return newTemplate;
     }
 
     public void deleteCitizenTemplate(CitizenTemplate template) {

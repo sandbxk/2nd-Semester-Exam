@@ -73,10 +73,6 @@ public class StudentViewController implements Initializable {
     private void updateCitizenInfo(CitizenModel citizen) {
         lblCitizenName.setText(citizen.getName() + " " + citizen.getSurname());
         lblAge.setText(citizen.getAge() + "");
-        lblBirthdate.setText(citizen.getBirthDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-        lblAddress.setText(citizen.getAddress());
-        lblHelpStatus.setText(citizen.getHelpStatus());
-        lblCivilianStatus.setText(citizen.getCivilianStatus());
 
         tblViewStudentDashboardHealth.setItems(model.getSelectedCitizen().getAllHealthConditions());
         tblViewStudentDashboardFunc.setItems(model.getSelectedCitizen().getRelevantFunctionalAbilities());

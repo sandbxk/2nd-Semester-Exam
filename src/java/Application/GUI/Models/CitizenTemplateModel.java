@@ -63,6 +63,35 @@ public class CitizenTemplateModel implements Cloneable {
         initHealthConditions();
     }
 
+    public CitizenTemplateModel(CitizenTemplate template) {
+        this.template = template;
+
+        this.name = new SimpleStringProperty(template.getBaseData().getName());
+        this.surname = new SimpleStringProperty(template.getBaseData().getSurname());
+        this.age = new SimpleIntegerProperty(template.getBaseData().getAge());
+
+        this.mastering.set(template.getGeneralInfo().getMastering());
+        this.motivation.set(template.getGeneralInfo().getMotivation());
+        this.resources.set(template.getGeneralInfo().getResources());
+        this.roles.set(template.getGeneralInfo().getRoles());
+        this.habits.set(template.getGeneralInfo().getHabits());
+        this.eduAndJob.set(template.getGeneralInfo().getEduAndJob());
+        this.lifeStory.set(template.getGeneralInfo().getLifeStory());
+        this.healthInfo.set(template.getGeneralInfo().getHealthInfo());
+        this.assistiveDevices.set(template.getGeneralInfo().getAssistiveDevices());
+        this.homeLayout.set(template.getGeneralInfo().getHomeLayout());
+        this.network.set(template.getGeneralInfo().getNetwork());
+        infoBind();
+
+        this.relevantFunctionalAbilities = FXCollections.observableArrayList();
+        this.relevantHealthConditions = FXCollections.observableArrayList();
+        this.nonRelevantFunctionalAbilities = FXCollections.observableArrayList();
+        this.nonRelevantHealthConditions = FXCollections.observableArrayList();
+
+        initFunctionalAbilities();
+        initHealthConditions();
+    }
+
     public CitizenTemplateModel()
     {
         template = new CitizenTemplate();

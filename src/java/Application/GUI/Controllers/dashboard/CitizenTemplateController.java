@@ -138,7 +138,6 @@ public class CitizenTemplateController implements Initializable {
      */
     private void onNewCitizenTemplate() {
         listViewCitizenTemplates.getItems().add(model.newCitizenTemplate());
-        model.newCitizenTemplate();
     }
 
     /**
@@ -291,7 +290,7 @@ public class CitizenTemplateController implements Initializable {
             txtFieldSurname.setText(model.getSelectedCitizenTemplateModel().getSurname());
             txtFieldAge.setText(String.valueOf(model.getSelectedCitizenTemplateModel().getAge()));
 
-            //set the functionl abilities TreeTableView to the values of the selected citizen template
+            //set the functional abilities TreeTableView to the values of the selected citizen template
             TreeItem<CategoryEntryModel> funcRoot = new TreeItem<>();
             funcRoot.getChildren().addAll(model.getRelevantFuncCategoriesAsTreeItem());
             treeTblViewFunc.setRoot(funcRoot);

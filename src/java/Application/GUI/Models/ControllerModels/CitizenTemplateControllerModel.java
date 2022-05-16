@@ -18,8 +18,6 @@ public class CitizenTemplateControllerModel {
     private CitizenTemplateModel selectedCitizenTemplateModel;
 
     //Copies from before the editMode is activated
-    private TreeItem<CategoryEntryModel> preEditHealthCategoryEntryModels;
-    private TreeItem<CategoryEntryModel> preEditFunctionCategoryEntryModels;
     private CitizenTemplateModel preEditCitizenTemplateModel;
 
     public CitizenTemplateControllerModel() {
@@ -94,8 +92,7 @@ public class CitizenTemplateControllerModel {
      * @return
      */
     public CitizenTemplateModel newCitizenTemplate() {
-        CitizenTemplateModel CitizenTemplateModel = new CitizenTemplateModel("Ny", "Skabelon",0);
-        teacherDataManager.newCitizenTemplate(CitizenTemplateModel.getTemplate());
+        CitizenTemplateModel CitizenTemplateModel = new CitizenTemplateModel(teacherDataManager.newCitizenTemplate());
 
         return CitizenTemplateModel;
     }
