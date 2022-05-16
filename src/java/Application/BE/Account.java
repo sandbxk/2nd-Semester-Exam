@@ -77,7 +77,7 @@ public class Account {
 
     public String getFullName()
     {
-        return this.firstName + this.lastName;
+        return this.firstName + " " + this.lastName;
     }
 
     @SQLGetter(name = "email")

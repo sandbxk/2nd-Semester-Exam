@@ -1,68 +1,63 @@
 package Application.DAL;
 
-import Application.BE.Inquiry;
+import Application.BE.Case;
 import Application.DAL.DBConnector.DBConnectionPool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-public class InquiryDAO extends TemplatePatternDAO<Inquiry>
-{
-
+public class HealthCategoriesDAO extends TemplatePatternDAO{
     @Override
-    public Inquiry create(Inquiry input) {
+    public Object create(Object input) {
         return null;
     }
 
     @Override
-    public void update(Inquiry input) {
+    public void update(Object input) {
 
     }
 
     @Override
-    public Inquiry read(int id) {
+    public Object read(int id) {
         return null;
     }
 
     @Override
-    public List<Inquiry> readAll() {
+    public List readAll() {
         String sql = """
-                    SELECT * FROM inquiry
+                    SELECT * cases dbo.functionalCatgories
                     """;
-        List<Inquiry> inquiryList = new ArrayList<>();
 
         Connection conn = DBConnectionPool.getInstance().checkOut();
-        try
-        {
+        
+        try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet resultSet = pstmt.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("funCatId");
+                int superId = resultSet.getInt("funSuperCat");
+                String name = resultSet.getString("funCatName");
 
-            ResultSet rs = pstmt.executeQuery();
 
-            while (rs.next()) {
-
-                Inquiry inquiry = new Inquiry(
-                        rs.getInt("inquiryId"),
-                        rs.getString("inquiry")
-                        );
-
-                inquiryList.add(inquiry);
             }
+
 
             pstmt.close();
 
+
+
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
         finally {
             DBConnectionPool.getInstance().checkIn(conn);
         }
-
-        return inquiryList;
     }
+
 
     @Override
     public void delete(int id) {

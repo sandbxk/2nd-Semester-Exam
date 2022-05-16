@@ -6,6 +6,7 @@ import Application.BE.Inquiry;
 import Application.BE.School;
 import Application.DAL.CasesDAO;
 import Application.GUI.Models.AccountModel;
+import Application.GUI.Models.CaseModel;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -53,7 +54,7 @@ public class AddToTaskViewController implements Initializable {
     @FXML
     public TextField txtAccountSearch;
     @FXML
-    public ComboBox<Case> comboBoxCases;
+    public ComboBox<CaseModel> comboBoxCases;
     @FXML
     public ComboBox<Class> comboBoxClasses;
 
@@ -73,7 +74,6 @@ public class AddToTaskViewController implements Initializable {
     public void onSave(ActionEvent actionEvent)
     {
         // FIXME: 06-05-2022 Change getAccountList to list of added users
-        casesDAO.assignToCase(accountDAO.getAccountList(), comboBoxCases.getSelectionModel().getSelectedItem());
 
         Stage stage = (Stage) btnSave.getScene().getWindow();
         stage.close();
@@ -139,15 +139,15 @@ public class AddToTaskViewController implements Initializable {
     }
 
     // FIXME: 06-05-2022 Mock data, hook up to DAO
-    private ObservableList<Case> mockCases()
+    private ObservableList<CaseModel> mockCases()
         {
-            ObservableList<Case> mockCaseList = FXCollections.observableArrayList();
+            ObservableList<CaseModel> mockCaseList = FXCollections.observableArrayList();
 
-            mockCaseList.add(new Case(1, "This is the reason", "1234", new Inquiry(1, "Læge")));
-            mockCaseList.add(new Case(2, "This is the reason", "1234", new Inquiry(2, "Mor")));
-            mockCaseList.add(new Case(3, "This is the reason", "1234", new Inquiry(3, "Bror")));
-            mockCaseList.add(new Case(4, "This is the reason", "1234", new Inquiry(4, "Far")));
-            mockCaseList.add(new Case(5, "This is the reason", "1234", new Inquiry(5, "Dolf")));
+            mockCaseList.add(new CaseModel(new Case(1, "This is the reason", "1234", new Inquiry(1, "Læge"))));
+            mockCaseList.add(new CaseModel(new Case (2, "This is the reason", "1234", new Inquiry(2, "Mor"))));
+            mockCaseList.add(new CaseModel(new Case (3, "This is the reason", "1234", new Inquiry(3, "Bror"))));
+            mockCaseList.add(new CaseModel(new Case (4, "This is the reason", "1234", new Inquiry(4, "Far"))));
+            mockCaseList.add(new CaseModel(new Case (5, "This is the reason", "1234", new Inquiry(5, "Dolf"))));
 
             return mockCaseList;
         }
@@ -160,7 +160,7 @@ public class AddToTaskViewController implements Initializable {
         School school = new School(1, "EASV", 6700, "Esbjerg");
 
         mockAccountList.add(new AccountModel(new Account(1, "", "", "Kasper", "Rasmussen", "", school, 0)));
-        mockAccountList.add(new AccountModel(new Account(1, "", "", "Rasmus", "Remøs", "", school, 0)));
+        mockAccountList.add(new AccountModel(new Account(1, "", "", "Rasmus", "Sandbæk", "", school, 0)));
         mockAccountList.add(new AccountModel(new Account(1, "", "", "Philip", "Zadeh", "", school, 0)));
         mockAccountList.add(new AccountModel(new Account(1, "", "", "Mads", "Bath", "", school, 0)));
 

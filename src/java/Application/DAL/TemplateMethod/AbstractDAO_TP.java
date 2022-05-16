@@ -20,9 +20,9 @@ public abstract class AbstractDAO_TP<RETURN_TYPE, PARAM_TYPE>
      * @param input may be null
      * */
     public final boolean run(PARAM_TYPE input) {
+        Connection conn = DBConnectionPool.getInstance().checkOut();
         try
         {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
             statement = conn.prepareStatement(getSQLStatement(), PreparedStatement.RETURN_GENERATED_KEYS);
             // statement = setup();
 
@@ -39,6 +39,9 @@ public abstract class AbstractDAO_TP<RETURN_TYPE, PARAM_TYPE>
         } catch (Exception e) {
             this.LastException = e;
             return false;
+        }
+        finally {
+            DBConnectionPool.getInstance().checkIn(conn);
         }
     }
 

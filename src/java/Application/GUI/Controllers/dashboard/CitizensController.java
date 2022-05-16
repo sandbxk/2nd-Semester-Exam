@@ -12,7 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Citizens implements Initializable
+public class CitizensController implements Initializable
 {
     public AnchorPane anchorPaneCitizensDashboard;
 
@@ -41,7 +41,7 @@ public class Citizens implements Initializable
         // TODO: 09-05-2022 abstract to a model
 
         CitizenDAO dao = new CitizenDAO();
-        citizens = FXCollections.observableList(dao.readAll(0));
+        //citizens = FXCollections.observableList(dao.readAll(0));
 
         AvailableCitizens = new ListView<>();
         AvailableCitizens.getSelectionModel().selectFirst();

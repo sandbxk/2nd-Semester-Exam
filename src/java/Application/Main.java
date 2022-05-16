@@ -28,7 +28,5 @@ public class Main extends Application {
 
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-
-        DefaultDAO.create(new School(0, "hello", 6800, "Varde"));
     }
 }

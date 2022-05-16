@@ -1,6 +1,6 @@
 package Application.GUI.Controllers;
 
-import Application.GUI.Models.ControllerModels.TeacherViewModel;
+
 import Application.GUI.Models.AccountModel;
 
 import Application.Utility.StateMachine.State;
@@ -37,7 +37,6 @@ public class TeacherViewController implements Initializable {
 
     private ToggleGroup toggleGroupViews;
     private StateMachine<ToggleButton> stateMachine = new StateMachine<>();
-    private TeacherViewModel teacherViewModel = new TeacherViewModel();
 
     @FXML public BorderPane TeacherScene;
 
