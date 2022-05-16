@@ -33,6 +33,7 @@ public class EditingTest {
         ObservableList<CategoryEntryModel> healthConditionsNonRelevant = FXCollections.observableArrayList();
         ObservableList<CategoryEntryModel> funcAbilitiesNonRelevant = FXCollections.observableArrayList();
 
+        //Categories
         healthConditionsRelevant.add(new CategoryEntryModel("condition 1", HealthLevels.RELEVANT.ordinal(), "note", false));
         healthConditionsRelevant.add(new CategoryEntryModel("condition 2", HealthLevels.RELEVANT.ordinal(), "note", false));
         healthConditionsRelevant.add(new CategoryEntryModel("condition 3", HealthLevels.RELEVANT.ordinal(), "note", false));
@@ -49,28 +50,28 @@ public class EditingTest {
         funcAbilitiesNonRelevant.add(new CategoryEntryModel("non-functional ability 1", FunctionalLevels.LEVEL_9.level, "note", true));
         funcAbilitiesNonRelevant.add(new CategoryEntryModel("non-functional ability 2", FunctionalLevels.LEVEL_9.level, "note", true));
 
+        //Set the categories
         citizenTemplateModel.setRelevantHealthConditions(healthConditionsRelevant);
         citizenTemplateModel.setNonRelevantHealthConditions(healthConditionsNonRelevant);
         citizenTemplateModel.setRelevantFunctionalAbilities(funcAbilitiesRelevant);
         citizenTemplateModel.setNonRelevantFunctionalAbilities(funcAbilitiesNonRelevant);
 
+        //Set the selected citizen like in the actual gui
         model.setSelectedCitizenTemplateModel(citizenTemplateModel);
-        model.savePreEditState();
+        model.savePreEditState(); //Clone the pre-edit state of the selected model for later comparison
     }
 
 
     @Test
     public void changedCategories(){
-        CitizenTemplateModel selected = model.getSelectedCitizenTemplateModel();
+        CitizenTemplateModel selected = model.getSelectedCitizenTemplateModel(); //Selected citizen
         assertEquals(4, selected.getRelevantFunctionalAbilities().size());
 
-
+        //Edits
+        selected.getRelevantFunctionalAbilities().get(0).setLevel(FunctionalLevels.LEVEL_9.level);
         selected.getRelevantFunctionalAbilities().get(1).setLevel(FunctionalLevels.LEVEL_9.level);
         selected.getNonRelevantFunctionalAbilities().get(1).setLevel(FunctionalLevels.LEVEL_3.level);
-
         selected.getRelevantHealthConditions().get(1).setNote("A different note");
-
-        selected.getNonRelevantHealthConditions().get(0).setLevel(FunctionalLevels.LEVEL_9.level);
         selected.getNonRelevantHealthConditions().get(1).setLevel(HealthLevels.POSSIBLE_RELEVANT.ordinal());
 
         model.saveEditedCitizenTemplate();

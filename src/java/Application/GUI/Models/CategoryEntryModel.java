@@ -314,6 +314,15 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
     }
 
     public void setLevel(int level) {
+        if (isFunctionAbility && levelFunc != null) {
+            if (level == 9)
+                levelFunc.set(FunctionalLevels.LEVEL_9);
+            else levelFunc.set(FunctionalLevels.values()[level]);
+        }
+        if (!isFunctionAbility && levelHealth != null) {
+            levelHealth.set(HealthLevels.values()[level]);
+        }
+
         this.level.set(level);
     }
 
