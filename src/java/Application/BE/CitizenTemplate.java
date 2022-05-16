@@ -1,10 +1,5 @@
 package Application.BE;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleStringProperty;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +19,10 @@ public class CitizenTemplate {
         this.healthConditions = new ArrayList<>();
     }
 
-    public CitizenTemplate(CitizenBaseData baseData) {
+    public CitizenTemplate(CitizenBaseData baseData, GeneralJournal generalInfo) {
         this();
 
+        this.generalInfo = generalInfo;
         this.baseData = baseData;
     }
 
@@ -49,4 +45,19 @@ public class CitizenTemplate {
         healthConditions.add(entry);
     }
 
+    public GeneralJournal getGeneralInfo() {
+        return generalInfo;
+    }
+
+    public void setGeneralInfo(GeneralJournal generalInfo) {
+        this.generalInfo = generalInfo;
+    }
+
+    public CitizenBaseData getBaseData() {
+        return baseData;
+    }
+
+    public void setBaseData(CitizenBaseData baseData) {
+        this.baseData = baseData;
+    }
 }

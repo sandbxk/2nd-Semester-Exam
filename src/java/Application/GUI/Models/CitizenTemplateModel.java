@@ -1,6 +1,7 @@
 package Application.GUI.Models;
 
 import Application.BE.CategoryEntry;
+import Application.BE.CitizenBaseData;
 import Application.BE.CitizenTemplate;
 import Application.BE.ContactInfo;
 import javafx.beans.property.*;
@@ -22,23 +23,16 @@ public class CitizenTemplateModel
     private StringProperty address;
     private ListProperty<ContactInfo> contactInfo;
 
-    private String mastering;
-    private String motivation;
-    private String resources;
-    private String roles;
-    private String habits;
-    private String eduAndJob;
-    private String lifeStory;
-    private String healthInfo;
-    private String assistiveDevices;
-    private String homeLayout;
-    private String network;
 
     private ObservableList<CategoryEntryModel> functionalAbilities;
     private ObservableList<CategoryEntryModel> healthConditions;
 
     public CitizenTemplateModel()
     {
+        template = new CitizenTemplate();
+
+        this.name.bindBidirectional(new SimpleStringProperty(template.getBaseData().getName()));
+
         this.name = new SimpleStringProperty();
         this.surname = new SimpleStringProperty();
         this.age = new SimpleIntegerProperty();
@@ -47,17 +41,6 @@ public class CitizenTemplateModel
         this.civilianStatus = new SimpleStringProperty();
         this.address = new SimpleStringProperty();
         this.contactInfo = new SimpleListProperty<>();
-        this.mastering = "";
-        this.motivation = "";
-        this.resources = "";
-        this.roles = "";
-        this.habits = "";
-        this.eduAndJob = "";
-        this.lifeStory = "";
-        this.healthInfo = "";
-        this.assistiveDevices = "";
-        this.homeLayout = "";
-        this.network = "";
         this.functionalAbilities = null;
         this.healthConditions = null;
 
@@ -67,6 +50,8 @@ public class CitizenTemplateModel
 
 
     private void initFunctionalAbilities() {
+
+
         functionalAbilities = FXCollections.observableArrayList();
         functionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Walking", 1, true)));
         functionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Climbing", 1, true)));
@@ -176,94 +161,6 @@ public class CitizenTemplateModel
 
     public void setContactInfo(ObservableList<ContactInfo> contactInfo) {
         this.contactInfo.set(contactInfo);
-    }
-
-    public String getMastering() {
-        return mastering;
-    }
-
-    public void setMastering(String mastering) {
-        this.mastering = mastering;
-    }
-
-    public String getMotivation() {
-        return motivation;
-    }
-
-    public void setMotivation(String motivation) {
-        this.motivation = motivation;
-    }
-
-    public String getResources() {
-        return resources;
-    }
-
-    public void setResources(String resources) {
-        this.resources = resources;
-    }
-
-    public String getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles;
-    }
-
-    public String getHabits() {
-        return habits;
-    }
-
-    public void setHabits(String habits) {
-        this.habits = habits;
-    }
-
-    public String getEduAndJob() {
-        return eduAndJob;
-    }
-
-    public void setEduAndJob(String eduAndJob) {
-        this.eduAndJob = eduAndJob;
-    }
-
-    public String getLifeStory() {
-        return lifeStory;
-    }
-
-    public void setLifeStory(String lifeStory) {
-        this.lifeStory = lifeStory;
-    }
-
-    public String getHealthInfo() {
-        return healthInfo;
-    }
-
-    public void setHealthInfo(String healthInfo) {
-        this.healthInfo = healthInfo;
-    }
-
-    public String getAssistiveDevices() {
-        return assistiveDevices;
-    }
-
-    public void setAssistiveDevices(String assistiveDevices) {
-        this.assistiveDevices = assistiveDevices;
-    }
-
-    public String getHomeLayout() {
-        return homeLayout;
-    }
-
-    public void setHomeLayout(String homeLayout) {
-        this.homeLayout = homeLayout;
-    }
-
-    public String getNetwork() {
-        return network;
-    }
-
-    public void setNetwork(String network) {
-        this.network = network;
     }
 
     public ObservableList<CategoryEntryModel> getFunctionalAbilities() {
