@@ -83,13 +83,13 @@ public final class SQLHelper
 
     public static void createInsertStatement(String tableName, List<String> columns)
     {
-
+        
+        String parameters = "?, ".repeat(columns.size());
+        System.out.println("INSERT INTO " + tableName + " (" + columns + ") VALUES (" + a.substring(0, a.length() - 2) + ")");
         /*
         String csv = ;
 
-        String a = "?, ".repeat((int) csv.codePoints().filter(value -> value == ',').count() + 1);
 
-        System.out.println("INSERT INTO " +  + " (" + csv + ") VALUES (" + a.substring(0, a.length() - 2) + ")");
 
          */
     }

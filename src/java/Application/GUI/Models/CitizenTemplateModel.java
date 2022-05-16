@@ -1,6 +1,7 @@
 package Application.GUI.Models;
 
 import Application.BE.CategoryEntry;
+import Application.BE.CitizenTemplate;
 import Application.BE.ContactInfo;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -8,7 +9,9 @@ import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
 
-public class CitizenTemplateModel {
+public class CitizenTemplateModel
+{
+    CitizenTemplate template;
 
     private StringProperty name;
     private StringProperty surname;
@@ -34,7 +37,8 @@ public class CitizenTemplateModel {
     private ObservableList<CategoryEntryModel> functionalAbilities;
     private ObservableList<CategoryEntryModel> healthConditions;
 
-    public CitizenTemplateModel() {
+    public CitizenTemplateModel()
+    {
         this.name = new SimpleStringProperty();
         this.surname = new SimpleStringProperty();
         this.age = new SimpleIntegerProperty();
