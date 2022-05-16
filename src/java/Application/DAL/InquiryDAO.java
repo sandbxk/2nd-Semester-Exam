@@ -35,9 +35,9 @@ public class InquiryDAO extends TemplatePatternDAO<Inquiry>
                     """;
         List<Inquiry> inquiryList = new ArrayList<>();
 
+        Connection conn = DBConnectionPool.getInstance().checkOut();
         try
         {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             ResultSet rs = pstmt.executeQuery();
@@ -56,6 +56,9 @@ public class InquiryDAO extends TemplatePatternDAO<Inquiry>
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        finally {
+            DBConnectionPool.getInstance().checkIn(conn);
         }
 
         return inquiryList;

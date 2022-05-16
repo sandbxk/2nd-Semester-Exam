@@ -20,7 +20,7 @@
                   <children>
                       <BorderPane prefHeight="523.0" prefWidth="333.0" styleClass="panel">
                           <top>
-                              <TableView fx:id="tblAccountTable" prefHeight="521.0" prefWidth="345.0" styleClass="tab" BorderPane.alignment="CENTER">
+                              <TableView fx:id="tblAccountTable" prefHeight="521.0" prefWidth="345.0" BorderPane.alignment="CENTER">
                                   <columns>
                                       <TableColumn fx:id="tblClmAccountName" editable="false" prefWidth="161.59997940063477" text="Navn" />
                                       <TableColumn fx:id="tblClmAccountClass" editable="false" prefWidth="209.6000213623047" text="Klasse" />
@@ -37,7 +37,7 @@
                       </VBox>
                       <BorderPane prefHeight="521.0" prefWidth="332.0" styleClass="panel">
                           <top>
-                              <TableView fx:id="tblAddedAccountsTable" prefHeight="521.0" prefWidth="253.0" BorderPane.alignment="CENTER">
+                              <TableView fx:id="tblAddedAccountsTable" prefHeight="521.0" prefWidth="253.0" styleClass="customTableView" BorderPane.alignment="CENTER">
                                   <columns>
                                       <TableColumn fx:id="clmAddedAccountName" editable="false" prefWidth="160.79998475313187" text="Navn" />
                                       <TableColumn fx:id="clmAddedAccountClass" prefWidth="163.20008850097656" text="Klasse" />
@@ -52,29 +52,41 @@
               </HBox>
          </center>
          <top>
-              <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="703.0" BorderPane.alignment="CENTER">
+              <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="703.0" BorderPane.alignment="CENTER">
                   <children>
                       <TextField fx:id="txtAccountSearch" prefHeight="26.0" prefWidth="281.0">
                           <HBox.margin>
                               <Insets left="15.0" />
                           </HBox.margin>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                       </TextField>
                       <Button fx:id="btnSearch" mnemonicParsing="false" prefHeight="23.0" prefWidth="36.0">
                           <HBox.margin>
                               <Insets />
                           </HBox.margin>
                   </Button>
-                  <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="310.0">
+                  <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="310.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-fieldBase" text="Klasse:" textAlignment="CENTER" wrappingWidth="50.244140625">
                            <HBox.margin>
                               <Insets left="50.0" right="10.0" />
                            </HBox.margin>
                         </Text>
-                        <ComboBox fx:id="comboBoxClasses" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="26.0" prefWidth="200.0" styleClass="customCombo-box" />
+                        <ComboBox fx:id="comboBoxClasses" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="26.0" prefWidth="200.0" styleClass="customCombo-box">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin></ComboBox>
                      </children>
                   </HBox>
                   </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <BorderPane.margin>
+                  <Insets bottom="5.0" />
+               </BorderPane.margin>
               </HBox>
          </top>
          <bottom>

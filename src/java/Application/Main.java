@@ -1,5 +1,8 @@
 package Application;
 
+import Application.BE.School;
+import Application.DAL.TemplateMethod.DefaultDAO;
+import Application.DAL.TemplateMethod.SchoolDAO2;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,11 +22,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException
     {
-        Parent root = FXMLLoader.load(this.getClass().getResource("/views/Popups/AddToTaskView.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("/Views/TeacherView.fxml"));
 
         primaryStage.setTitle("main");
 
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+
+        new DefaultDAO().create(new School(0, "hello", 6800, "Varde"));
     }
 }

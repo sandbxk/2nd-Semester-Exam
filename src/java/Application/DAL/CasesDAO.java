@@ -20,8 +20,8 @@ public class CasesDAO extends TemplatePatternDAO<Case>{
                     VALUES (?, ?, ?)
                     """;
 
-            try {
-                Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
+        Connection conn = DBConnectionPool.getInstance().checkOut();
+        try {
                 PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
                 pstmt.setInt(1, input.getInquiry().getId());
                 pstmt.setString(2, input.getInquiryReason());
@@ -48,6 +48,9 @@ public class CasesDAO extends TemplatePatternDAO<Case>{
             } catch (SQLException e) {
                 e.printStackTrace();
                 return null;
+            }
+            finally {
+                DBConnectionPool.getInstance().checkIn(conn);
             }
     }
 
@@ -76,8 +79,8 @@ public class CasesDAO extends TemplatePatternDAO<Case>{
                     DELETE FROM cases
                     WHERE id = ?
                     """;
+        Connection conn = DBConnectionPool.getInstance().checkOut();
         try {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, caseId);
@@ -89,6 +92,9 @@ public class CasesDAO extends TemplatePatternDAO<Case>{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            DBConnectionPool.getInstance().checkIn(conn);
+        }
     }
 
     public void assignToCase(List<Account> accountList, Case caseInput)
@@ -97,8 +103,8 @@ public class CasesDAO extends TemplatePatternDAO<Case>{
                     INSERT INTO caseAssigned (accountId, caseId)
                     VALUES (?, ?)
                     """;
+        Connection conn = DBConnectionPool.getInstance().checkOut();
         try {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             for (Account account : accountList) {
@@ -114,6 +120,9 @@ public class CasesDAO extends TemplatePatternDAO<Case>{
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        finally {
+            DBConnectionPool.getInstance().checkIn(conn);
         }
     }
 

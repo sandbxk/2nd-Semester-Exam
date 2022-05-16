@@ -5,12 +5,10 @@ import Application.BE.ContactInfo;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TreeItem;
 
 import java.time.LocalDate;
-import java.util.stream.Collectors;
 
-public class CitizenTemplateModel implements Cloneable {
+public class CitizenModel {
 
     private StringProperty name;
     private StringProperty surname;
@@ -39,11 +37,11 @@ public class CitizenTemplateModel implements Cloneable {
     private ObservableList<CategoryEntryModel> nonRelevantHealthConditions;
 
 
-    public CitizenTemplateModel(String name, String surname, LocalDate birthDate, String helpStatus, String civilianStatus, String address, ObservableList<ContactInfo> contactInfo) {
+    public CitizenModel(String name, String surname, int age, LocalDate birthDate, String helpStatus, String civilianStatus, String address, ObservableList<ContactInfo> contactInfo) {
         initProperties();
         this.name.set(name);
         this.surname.set(surname);
-        this.age.set((LocalDate.now().getYear()) - (birthDate.getYear()));
+        this.age.set(age);
         this.helpStatus.set(helpStatus);
         this.civilianStatus.set(civilianStatus);
         this.address.set(address);
@@ -70,7 +68,7 @@ public class CitizenTemplateModel implements Cloneable {
         initHealthConditions();
     }
 
-    public CitizenTemplateModel() {
+    public CitizenModel() {
         initProperties();
         this.name = new SimpleStringProperty();
         this.surname = new SimpleStringProperty();
@@ -126,9 +124,6 @@ public class CitizenTemplateModel implements Cloneable {
         nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Sleeping", 0, true)));
         nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Eating", 0, true)));
         nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Toileting", 0, true)));
-
-        relevantFunctionalAbilities.add(new CategoryEntryModel("Other", 2, "note", true));
-        nonRelevantFunctionalAbilities.add(new CategoryEntryModel("Other", 0, "note", true));
     }
 
     private void initHealthConditions() {
@@ -142,8 +137,6 @@ public class CitizenTemplateModel implements Cloneable {
 
         nonRelevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "None", 0, false)));
 
-        relevantHealthConditions.add(new CategoryEntryModel("Other", 1, "note", false));
-        nonRelevantHealthConditions.add(new CategoryEntryModel("Other", 0, "note", false));
     }
 
 
@@ -370,10 +363,5 @@ public class CitizenTemplateModel implements Cloneable {
         allHealthConditions.addAll(nonRelevantHealthConditions);
         allHealthConditions.addAll(relevantHealthConditions);
         return allHealthConditions;
-    }
-
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
     }
 }

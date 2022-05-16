@@ -2,7 +2,7 @@ package Application.GUI.Controllers.dashboard;
 
 import javafx.scene.control.ScrollPane;
 
-public class Default {
+public class DefaultController {
     public ScrollPane scrollPaneDashboard;
 
 }

@@ -25,8 +25,8 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
                     VALUES (?, ?, ?, ?, ?, ?, ?)
                     """;
 
+        Connection conn = DBConnectionPool.getInstance().checkOut();
         try {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, input.getLogin());
             pstmt.setString(2, input.getPassword());
@@ -61,6 +61,9 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
             e.printStackTrace();
             return null;
         }
+        finally {
+            DBConnectionPool.getInstance().checkIn(conn);
+        }
     }
 
 
@@ -75,8 +78,8 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
                     WHERE id = ?
                     """;
 
+        Connection conn = DBConnectionPool.getInstance().checkOut();
         try {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setInt(1, accountid);
@@ -87,6 +90,9 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        finally {
+            DBConnectionPool.getInstance().checkIn(conn);
         }
     }
 
@@ -107,8 +113,8 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
         School school = null;
         Account account = null;
 
+        Connection conn = DBConnectionPool.getInstance().checkOut();
         try {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
@@ -140,6 +146,9 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            DBConnectionPool.getInstance().checkIn(conn);
+        }
 
         return account;
     }
@@ -163,9 +172,9 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
                     """;
         List<Account> studentsList = new ArrayList<>();
 
+        Connection conn = DBConnectionPool.getInstance().checkOut();
         try
         {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             ResultSet rs = pstmt.executeQuery();
@@ -197,6 +206,9 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            DBConnectionPool.getInstance().checkIn(conn);
+        }
 
         return studentsList;
     }
@@ -214,8 +226,8 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
                      """;
 
         Account account = input;
+        Connection conn = DBConnectionPool.getInstance().checkOut();
         try {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setString(1, account.getFirstName());
@@ -229,6 +241,9 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        finally {
+            DBConnectionPool.getInstance().checkIn(conn);
         }
     }
 }

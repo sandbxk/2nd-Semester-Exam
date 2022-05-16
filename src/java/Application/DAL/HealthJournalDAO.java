@@ -39,8 +39,8 @@ public class HealthJournalDAO extends TemplatePatternDAO
 
         List<HealthJournal> healthJournalList = FXCollections.observableArrayList();
 
+        Connection conn = DBConnectionPool.getInstance().checkOut();
         try {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             ResultSet rs = pstmt.executeQuery();
@@ -60,6 +60,9 @@ public class HealthJournalDAO extends TemplatePatternDAO
         {
             e.printStackTrace();
             return healthJournalList;
+        }
+        finally {
+            DBConnectionPool.getInstance().checkIn(conn);
         }
     }
 

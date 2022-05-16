@@ -1,7 +1,10 @@
 package Application.BE;
 
-import javafx.collections.ObservableList;
+import Application.DAL.Annotations.SQLGetter;
+import Application.DAL.Annotations.SQLSetter;
+import Application.DAL.Annotations.SQLTable;
 
+@SQLTable(name = "cases")
 public class Case
 {
     private int id;
@@ -18,34 +21,42 @@ public class Case
 
     }
 
+    @SQLGetter(name = "classId")
     public int getId() {
         return id;
     }
 
+    @SQLSetter(name = "classId")
     public void setId(int id) {
         this.id = id;
     }
 
+    @SQLGetter(name = "classId")
     public String getInquiryReason() {
         return inquiryReason;
     }
 
+    @SQLSetter(name = "classId")
     public void setInquiryReason(String inquiryReason) {
         this.inquiryReason = inquiryReason;
     }
 
+    @SQLGetter(name = "classId")
     public String getMedicalDiagnose() {
         return medicalDiagnose;
     }
 
+    @SQLSetter(name = "classId")
     public void setMedicalDiagnose(String medicalDiagnose) {
         this.medicalDiagnose = medicalDiagnose;
     }
 
+    @SQLGetter(name = "classId")
     public Inquiry getInquiry() {
         return inquiry;
     }
 
+    @SQLSetter(name = "classId")
     public void setInquiry(Inquiry inquiry) {
         this.inquiry = inquiry;
     }

@@ -21,9 +21,10 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
                 VALUES (?, ?)
                 """;
 
+        Connection conn = DBConnectionPool.getInstance().checkOut();
         try {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sqlCreate, PreparedStatement.RETURN_GENERATED_KEYS);
+
             pstmt.setString(1,input.getSchoolName());
             pstmt.setInt(2,input.getZipCode());
 
@@ -37,6 +38,7 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
             }
 
             pstmt.close();
+
             return new School(
                     id,
                     input.getSchoolName(),
@@ -51,6 +53,9 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
             throwables.printStackTrace();
             return null;
         }
+        finally {
+            DBConnectionPool.getInstance().checkIn(conn);
+        }
     }
 
     @Override
@@ -61,8 +66,8 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
                 WHERE id = ?
                 """;
 
+        Connection conn = DBConnectionPool.getInstance().checkOut();
         try {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
             PreparedStatement psus = conn.prepareStatement(sqlUpdate);
 
             psus.setString(1, input.getSchoolName());
@@ -74,6 +79,9 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
             throwables.printStackTrace();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }
+        finally {
+            DBConnectionPool.getInstance().checkIn(conn);
         }
     }
 
@@ -94,8 +102,8 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
         int zipCode;
         int id;
 
+        Connection conn = DBConnectionPool.getInstance().checkOut();
         try {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
             PreparedStatement psas = conn.prepareStatement(sqlRead);
 
             ResultSet rs = psas.executeQuery();
@@ -106,7 +114,7 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
                 zipCode = rs.getInt("zipCode");
                 id = rs.getInt("id");
                 School school = new School(id, name, zipCode, city);
-                schoolList.add(school);
+                    schoolList.add(school);
             }
             psas.close();
             return schoolList;
@@ -114,6 +122,9 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
         {
             e.printStackTrace();
             return null;
+        }
+        finally {
+            DBConnectionPool.getInstance().checkIn(conn);
         }
     }
 
@@ -125,8 +136,8 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
                 WHERE id = ?
                 """;
 
+        Connection conn = DBConnectionPool.getInstance().checkOut();
         try {
-            Connection conn = DBConnectionPool.getInstance().checkOut().getConnection();
             PreparedStatement psds = conn.prepareStatement(sqlDelete);
 
             psds.setInt(1, id);
@@ -137,6 +148,9 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
             throwables.printStackTrace();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }
+        finally {
+            DBConnectionPool.getInstance().checkIn(conn);
         }
     }
 }
