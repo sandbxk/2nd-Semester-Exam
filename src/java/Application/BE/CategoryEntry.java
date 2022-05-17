@@ -19,6 +19,11 @@ public class CategoryEntry {
         this.level = level;
     }
 
+    public CategoryEntry(int id, Category category) {
+        this.id = id;
+        this.category = category;
+    }
+
     public int getId() {
         return id;
     }
