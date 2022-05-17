@@ -15,6 +15,10 @@ import static org.junit.Assert.assertFalse;
 
 
 public class EditingTest {
+    /*
+    Cannot test classes which contain JavaFX components, such as the CategoryEntryModel. The test needs to
+    use a JavaFX thread, for which the below rule is required.
+     */
     @Rule public JavaFXThreadingRule javafxRule = new JavaFXThreadingRule();
 
 
@@ -35,21 +39,21 @@ public class EditingTest {
         ObservableList<CategoryEntryModel> funcAbilitiesNonRelevant = FXCollections.observableArrayList();
 
         //Categories
-        healthConditionsRelevant.add(new CategoryEntryModel("condition 1", HealthLevels.RELEVANT.ordinal(), "note", false));
-        healthConditionsRelevant.add(new CategoryEntryModel("condition 2", HealthLevels.RELEVANT.ordinal(), "note", false));
-        healthConditionsRelevant.add(new CategoryEntryModel("condition 3", HealthLevels.RELEVANT.ordinal(), "note", false));
-        healthConditionsRelevant.add(new CategoryEntryModel("condition 4", HealthLevels.RELEVANT.ordinal(), "note", false));
+        healthConditionsRelevant.add(new CategoryEntryModel("condition 1", HealthLevels.RELEVANT.ordinal(), "note"));
+        healthConditionsRelevant.add(new CategoryEntryModel("condition 2", HealthLevels.RELEVANT.ordinal(), "note"));
+        healthConditionsRelevant.add(new CategoryEntryModel("condition 3", HealthLevels.RELEVANT.ordinal(), "note"));
+        healthConditionsRelevant.add(new CategoryEntryModel("condition 4", HealthLevels.RELEVANT.ordinal(), "note"));
 
-        healthConditionsNonRelevant.add(new CategoryEntryModel("non-condition 1", HealthLevels.NOT_RELEVANT.ordinal(), "note", false));
-        healthConditionsNonRelevant.add(new CategoryEntryModel("non-condition 2", HealthLevels.NOT_RELEVANT.ordinal(), "note", false));
+        healthConditionsNonRelevant.add(new CategoryEntryModel("non-condition 1", HealthLevels.NOT_RELEVANT.ordinal(), "note"));
+        healthConditionsNonRelevant.add(new CategoryEntryModel("non-condition 2", HealthLevels.NOT_RELEVANT.ordinal(), "note"));
 
-        funcAbilitiesRelevant.add(new CategoryEntryModel("functional ability 1", FunctionalLevels.LEVEL_1.level, "note", true));
-        funcAbilitiesRelevant.add(new CategoryEntryModel("functional ability 2", FunctionalLevels.LEVEL_4.level, "note", true));
-        funcAbilitiesRelevant.add(new CategoryEntryModel("functional ability 3", FunctionalLevels.LEVEL_0.level, "note", true));
-        funcAbilitiesRelevant.add(new CategoryEntryModel("functional ability 4", FunctionalLevels.LEVEL_2.level, "note", true));
+        funcAbilitiesRelevant.add(new CategoryEntryModel("functional ability 1", FunctionalLevels.LEVEL_1.level, "note"));
+        funcAbilitiesRelevant.add(new CategoryEntryModel("functional ability 2", FunctionalLevels.LEVEL_4.level, "note"));
+        funcAbilitiesRelevant.add(new CategoryEntryModel("functional ability 3", FunctionalLevels.LEVEL_0.level, "note"));
+        funcAbilitiesRelevant.add(new CategoryEntryModel("functional ability 4", FunctionalLevels.LEVEL_2.level, "note"));
 
-        funcAbilitiesNonRelevant.add(new CategoryEntryModel("non-functional ability 1", FunctionalLevels.LEVEL_9.level, "note", true));
-        funcAbilitiesNonRelevant.add(new CategoryEntryModel("non-functional ability 2", FunctionalLevels.LEVEL_9.level, "note", true));
+        funcAbilitiesNonRelevant.add(new CategoryEntryModel("non-functional ability 1", FunctionalLevels.LEVEL_9.level, "note"));
+        funcAbilitiesNonRelevant.add(new CategoryEntryModel("non-functional ability 2", FunctionalLevels.LEVEL_9.level, "note"));
 
         //Set the categories
         citizenTemplateModel.setRelevantHealthConditions(healthConditionsRelevant);

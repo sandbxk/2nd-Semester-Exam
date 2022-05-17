@@ -68,9 +68,9 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
         this.categoryName.set(categoryName);
     }
 
-    public CategoryEntryModel(String categoryName, int level, String note, boolean isFunctionAbility) {
+    public CategoryEntryModel(String categoryName, int level, String note) {
         initProperties();
-        this.categoryEntry = new CategoryEntry(-1, new Category(categoryName), level, isFunctionAbility, false);
+        this.categoryEntry = new CategoryEntry(-1, new Category(categoryName), level);
         this.categoryName.set(categoryName);
         this.level.set(level);
         assessment.set(" ");

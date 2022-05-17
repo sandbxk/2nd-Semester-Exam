@@ -96,26 +96,26 @@ public class CitizenModel {
     }
 
     private void initFunctionalAbilities() {
-        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Walking"), 1, true, false)));
-        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Climbing"), 1, true, false)));
-        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Swimming"), 1, true, false)));
-        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Bathing"), 4, true, false)));
+        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Walking"), 1)));
+        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Climbing"), 1)));
+        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Swimming"), 1)));
+        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Bathing"), 4)));
 
-        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Sleeping"), 0, true, false)));
-        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Eating"), 0, true, false)));
-        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Toileting"), 0, true, false)));
+        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Sleeping"), 0)));
+        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Eating"), 0)));
+        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Toileting"), 0)));
     }
 
     private void initHealthConditions() {
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Diabetes"), 1, false, false)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("High Blood Pressure"), 1, false, false)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Heart Disease"), 1, false, false)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Asthma"), 1, false, false)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Epilepsy"), 1, false, false)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Allergies"), 1, false, false)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Other"), 1, false, false)));
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Diabetes"), 1)));
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("High Blood Pressure"), 1)));
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Heart Disease"), 1)));
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Asthma"), 1)));
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Epilepsy"), 1)));
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Allergies"), 1)));
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Other"), 1)));
 
-        nonRelevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("None"), 0, false, false)));
+        nonRelevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("None"), 0)));
 
     }
 

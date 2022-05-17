@@ -60,9 +60,9 @@ public class StudentViewController implements Initializable {
 
         tblViewStudentDashboardHealth.setFixedCellSize(50);
 
-        tblViewStudentDashboardHealth.getItems().add(new CategoryEntryModel("Health", HealthLevels.RELEVANT.ordinal(), "", false));
+        tblViewStudentDashboardHealth.getItems().add(new CategoryEntryModel("Health", HealthLevels.RELEVANT.ordinal(), ""));
 
-        tblViewStudentDashboardFunc.getItems().add(new CategoryEntryModel("FUNCY", HealthLevels.RELEVANT.ordinal(), "", true));
+        tblViewStudentDashboardFunc.getItems().add(new CategoryEntryModel("FUNCY", HealthLevels.RELEVANT.ordinal(), ""));
     }
 
     private void updateCitizenInfo(CitizenModel citizen) {

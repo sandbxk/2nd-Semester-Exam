@@ -36,6 +36,16 @@ public class CitizenTemplate {
         return healthConditions;
     }
 
+    public void setFunctionalAbilities(List<CategoryEntry> functionalAbilities) {
+        this.functionalAbilities.clear();
+        this.functionalAbilities.addAll(functionalAbilities);
+    }
+
+    public void setHealthConditions(List<CategoryEntry> healthConditions) {
+        this.healthConditions.clear();
+        this.healthConditions.addAll(healthConditions);
+    }
+
     public void addFunctionalAbility(CategoryEntry entry)
     {
         functionalAbilities.add(entry);
