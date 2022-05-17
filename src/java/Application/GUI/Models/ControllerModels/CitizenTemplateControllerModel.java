@@ -183,9 +183,9 @@ public class CitizenTemplateControllerModel {
             dbWriteHealthConditions.addAll(newNonRelevantHealthConditions);
             for (CategoryEntryModel health : dbWriteHealthConditions) {
                 int index = allOldHealth.indexOf(health);
-                if (index != -1) {
+                if (index != -1) { //if the category is in the list
                     int compare = health.compareTo(allOldHealth.get(index));
-                    if (compare != 0) {
+                    if (compare != 0 && !health.isRelevant()) { //if the category is not relevant and has changed
                         dbWriteHealthConditions.remove(health);
                     }
                 }
@@ -197,9 +197,9 @@ public class CitizenTemplateControllerModel {
             dbWriteFunctionalAbilities.addAll(newNonRelevantFunctionalAbilities);
             for (CategoryEntryModel func : dbWriteFunctionalAbilities) {
                 int index = allOldFunc.indexOf(func);
-                if (index != -1) {
+                if (index != -1) { //If the category is in the list
                     int compare = func.compareTo(allOldHealth.get(index));
-                    if (compare != 0) {
+                    if (compare != 0 && !func.isRelevant()) { //If the category is not the same and is not relevant
                         dbWriteHealthConditions.remove(func);
                     }
                 }

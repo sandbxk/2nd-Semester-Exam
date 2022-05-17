@@ -313,6 +313,16 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
         this.level.set(level);
     }
 
+    public boolean isRelevant() {
+        if (this.type == CategoryType.FUNCTIONAL_ABILITY && level.get() == FunctionalLevels.LEVEL_9.level ||
+                this.type == CategoryType.FUNCTIONAL_ABILITY && level.get() == FunctionalLevels.LEVEL_9.ordinal())
+            return false;
+        if (this.type == CategoryType.HEALTH_CONDITION && level.get() == 0)
+            return false;
+
+        return true;
+    }
+
     public String getAssessment() {
         if (assessment.get() == null)
             return "";
