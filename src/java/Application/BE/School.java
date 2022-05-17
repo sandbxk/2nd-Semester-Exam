@@ -14,10 +14,10 @@ public class School {
     private String schoolName;
 
     @SQLColumn(name = "FK_Zipcode")
-    private Object location;
+    private City location;
 
 
-    public School(int schoolID, String schoolName, Object location)
+    public School(int schoolID, String schoolName, City location)
     {
         this.schoolID = schoolID;
         this.schoolName = schoolName;
@@ -40,11 +40,12 @@ public class School {
         this.schoolName = schoolName;
     }
 
-    public Object getLocation() {
+
+    public City getLocation() {
         return location;
     }
 
-    public void setLocation(Object location) {
+    public void setLocation(City location) {
         this.location = location;
     }
 }

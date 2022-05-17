@@ -21,8 +21,8 @@ public class SchoolModel {
     public SchoolModel(School school)
     {
         name.setValue(school.getSchoolName());
-        zipCode.setValue((Number) school.getLocation());
-        city.setValue((String) school.getLocation());
+        zipCode.setValue(school.getLocation().getZipCode());
+        city.setValue(school.getLocation().getCityName());
     }
 
     public SchoolModel() {

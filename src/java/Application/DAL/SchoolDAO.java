@@ -1,6 +1,7 @@
 package Application.DAL;
 
 import Application.BE.CitizenTemplate;
+import Application.BE.City;
 import Application.BE.School;
 import Application.DAL.DBConnector.DBConnectionPool;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -27,7 +28,7 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
             PreparedStatement pstmt = conn.prepareStatement(sqlCreate, PreparedStatement.RETURN_GENERATED_KEYS);
 
             pstmt.setString(1,input.getSchoolName());
-            pstmt.setInt(2, (Integer) input.getLocation());
+            pstmt.setInt(2, input.getLocation().getZipCode());
 
             pstmt.execute();
 
@@ -43,7 +44,7 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
             return new School(
                     id,
                     input.getSchoolName(),
-                    new Object() // location
+                    new City(input.getLocation().getZipCode())
             );
 
         } catch (SQLServerException throwables) {
@@ -61,9 +62,9 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
     @Override
     public void update(School input) {
         String sqlUpdate = """
-                UPDATE school 
-                SET schoolName =  ?, zipCode = ?
-                WHERE id = ?
+                UPDATE school
+                SET schoolName =  ?, FK_Zipcode = ?
+                WHERE SID = ?
                 """;
 
         Connection conn = DBConnectionPool.getInstance().checkOut();
@@ -71,7 +72,7 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
             PreparedStatement psus = conn.prepareStatement(sqlUpdate);
 
             psus.setString(1, input.getSchoolName());
-            psus.setInt(2, (Integer) input.getLocation());
+            psus.setInt(2, input.getLocation().getZipCode());
             psus.setInt(3, input.getSchoolID());
             psus.executeUpdate();
             psus.close();
@@ -94,7 +95,7 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
     public List<School> readAll() {
         String sqlRead = """
                      SELECT * FROM school 
-                     JOIN zipCodes ON school.zipCode = zipCodes.zipCode
+                     JOIN Zipcode ON school.FK_Zipcode = ZipCode.Zip
                      """;
         List<School> schoolList = new ArrayList<>();
         String name;
@@ -113,8 +114,10 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
                 city = rs.getString("cityName");
                 zipCode = rs.getInt("zipCode");
                 id = rs.getInt("id");
-                School school = new School(id, name, new Object() /* location */);
-                    schoolList.add(school);
+
+                School school = new School(id, name, new City(zipCode, city));
+
+                schoolList.add(school);
             }
             psas.close();
             return schoolList;
@@ -133,7 +136,7 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
     {
         String sqlDelete = """
                 DELETE FROM School 
-                WHERE id = ?
+                WHERE SID = ?
                 """;
 
         Connection conn = DBConnectionPool.getInstance().checkOut();

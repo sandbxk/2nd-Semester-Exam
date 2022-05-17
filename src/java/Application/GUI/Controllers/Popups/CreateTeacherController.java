@@ -1,5 +1,6 @@
 package Application.GUI.Controllers.Popups;
 
+import Application.BE.City;
 import Application.BE.School;
 import Application.GUI.Models.AccountModel;
 import javafx.event.ActionEvent;
@@ -20,7 +21,7 @@ public class CreateTeacherController
     public void onSaveCreateTeacher(ActionEvent actionEvent) {
 
         // FIXME: 03/05/2022 -- Dummy School
-        School school = new School(1, "Dummy School", new Object());
+        School school = new School(1, "Dummy School", new City(6800, "Varde"));
 
         accountDAO.createAccount(
                 txtFieldLogin.getText(),

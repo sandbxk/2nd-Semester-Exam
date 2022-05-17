@@ -1,9 +1,6 @@
 package Application.GUI.Controllers.Popups;
 
-import Application.BE.Account;
-import Application.BE.Case;
-import Application.BE.Inquiry;
-import Application.BE.School;
+import Application.BE.*;
 import Application.DAL.CasesDAO;
 import Application.GUI.Models.AccountModel;
 import Application.GUI.Models.CaseModel;
@@ -21,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 
+import java.lang.Class;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -157,7 +155,7 @@ public class AddToTaskViewController implements Initializable {
     {
         ObservableList<AccountModel> mockAccountList = FXCollections.observableArrayList();
 
-        School school = new School(1, "EASV", new Object());
+        School school = new School(1, "EASV", new City(0));
 
         mockAccountList.add(new AccountModel(new Account(1, "", "", "Kasper", "Rasmussen", "", school, 0)));
         mockAccountList.add(new AccountModel(new Account(1, "", "", "Rasmus", "Sandbæk", "", school, 0)));
