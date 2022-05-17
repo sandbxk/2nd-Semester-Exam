@@ -1,6 +1,7 @@
 package Application.GUI.Models;
 
 import Application.BE.Account;
+import Application.BE.School;
 import Application.BLL.AccountManager;
 import Application.Utility.Strings;
 import at.favre.lib.crypto.bcrypt.BCrypt;
@@ -37,4 +38,8 @@ public class SessionModel {
         return this.account != null;
     }
 
+    public static School getSchool()
+    {
+        return null;
+    }
 }

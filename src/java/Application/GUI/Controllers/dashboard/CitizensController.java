@@ -17,7 +17,6 @@ public class CitizensController implements Initializable
     public AnchorPane anchorPaneCitizensDashboard;
 
     public ListView<Citizen> AvailableCitizens;
-    public ListView listViewContactInfo;
     public ListView listViewStudentsForCitizen;
 
     public Button btnRemoveStudentToCitizen;
@@ -26,10 +25,7 @@ public class CitizensController implements Initializable
     public Button btnCitizensSearch;
     public Label lblCitizenName;
     public Label lblAge;
-    public Label lblBirthdateYear;
-    public Label lblAddress;
-    public Label lblHelpStatus;
-    public Label lblCivilianStatus;
+
     public Button btnGeneralInfo;
     public Button btnJournal;
 

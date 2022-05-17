@@ -1,6 +1,6 @@
 package Application.DAL;
 
-import Application.BE.Case;
+import Application.BE.CitizenTemplate;
 import Application.DAL.DBConnector.DBConnectionPool;
 
 import java.sql.Connection;
@@ -45,7 +45,7 @@ public class HealthCategoriesDAO extends TemplatePatternDAO{
 
             pstmt.close();
 
-
+            return null;
 
         } catch (SQLException e) {
             e.printStackTrace();

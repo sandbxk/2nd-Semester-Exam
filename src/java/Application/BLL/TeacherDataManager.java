@@ -1,10 +1,7 @@
 package Application.BLL;
 
-import Application.BE.Case;
-import Application.BE.Inquiry;
-import Application.DAL.CasesDAO;
-import Application.DAL.InquiryDAO;
-import Application.DAL.TemplatePatternDAO;
+import Application.BE.*;
+import Application.DAL.*;
 
 import java.util.List;
 
@@ -12,11 +9,18 @@ public class TeacherDataManager
 {
     TemplatePatternDAO inquiryDAO;
     TemplatePatternDAO caseDAO;
+    TemplatePatternDAO healthCategoryDAO;
+    TemplatePatternDAO functionalAbilityDAO;
+    TemplatePatternDAO citizenDAO;
+    TemplatePatternDAO citizenTemplateDAO;
+    TemplatePatternDAO generalInfoDAO;
 
     public TeacherDataManager()
     {
         inquiryDAO = new InquiryDAO();
         caseDAO = new CasesDAO();
+        citizenDAO = new CitizenDAO();
+        citizenTemplateDAO = new CitizenTemplateDAO();
     }
 
     public Case createCase(int id, String inquiryReason, String medicalDiagnose, Inquiry inquiry)
@@ -30,7 +34,46 @@ public class TeacherDataManager
     }
 
     public List getAllCitizenTemplates() {
-        return null;
+        List<CitizenTemplate> citizenTemplates = citizenTemplateDAO.readAll();
+
+
+        return citizenTemplates;
     }
 
+    public CitizenTemplate newCitizenTemplate() {
+        //Template
+        CitizenTemplate newTemplate = (CitizenTemplate) citizenTemplateDAO.create(new CitizenTemplate());
+
+        //General Info
+
+
+        //Set categories
+
+        return newTemplate;
+    }
+
+    public void deleteCitizenTemplate(CitizenTemplate template) {
+    }
+
+    public void copyCitizenTemplate(CitizenTemplate template) {
+    }
+
+    public void updateCitizenTemplate(CitizenTemplate template, List<CategoryEntry> beHealthConditions, List<CategoryEntry> beFunctionalAbilities) {
+    }
+
+    public void newCitizenEntity(CitizenTemplate template) {
+        citizenDAO.create(new Citizen(template));
+    }
+
+    public void updateCitizenEntity(Citizen citizen) {
+        citizenDAO.update(citizen);
+    }
+
+    public void deleteCitizenEntity(Citizen citizen) {
+        citizenDAO.delete(citizen.getId());
+    }
+
+    public List getAllCitizens() {
+        return citizenDAO.readAll();
+    }
 }

@@ -1,6 +1,7 @@
 package Application.DAL;
 
 import Application.BE.Account;
+import Application.BE.CitizenTemplate;
 import Application.BE.School;
 import Application.DAL.DBConnector.DBConnectionPool;
 
