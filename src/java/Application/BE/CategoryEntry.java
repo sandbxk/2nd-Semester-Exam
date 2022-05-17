@@ -9,7 +9,7 @@ public class CategoryEntry {
     private String cause = "";
     private String implications = "";
     private String citizenGoals = "";
-    private String expectedCondition = "";
+    private int expectedCondition;
     private String note = "";
 
 
@@ -79,11 +79,11 @@ public class CategoryEntry {
         this.citizenGoals = citizenGoals;
     }
 
-    public String getExpectedCondition() {
+    public int getExpectedCondition() {
         return expectedCondition;
     }
 
-    public void setExpectedCondition(String expectedCondition) {
+    public void setExpectedCondition(int expectedCondition) {
         this.expectedCondition = expectedCondition;
     }
 
