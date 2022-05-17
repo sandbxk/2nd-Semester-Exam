@@ -13,7 +13,7 @@ public class CitizenTemplateModel implements Cloneable {
 
     private CitizenTemplate template;
 
-    private StringProperty name;
+    private StringProperty name = new SimpleStringProperty();
     private StringProperty surname;
     private IntegerProperty age;
 
@@ -75,7 +75,7 @@ public class CitizenTemplateModel implements Cloneable {
         this.mastering.set(template.getGeneralInfo().getMastering());
         this.motivation.set(template.getGeneralInfo().getMotivation());
         this.resources.set(template.getGeneralInfo().getResources());
-        this.roles.set(template.getGeneralInfo().getRoles());
+        this.roles.settemplate.getGeneralInfo().getRoles());
         this.habits.set(template.getGeneralInfo().getHabits());
         this.eduAndJob.set(template.getGeneralInfo().getEduAndJob());
         this.lifeStory.set(template.getGeneralInfo().getLifeStory());
@@ -98,6 +98,7 @@ public class CitizenTemplateModel implements Cloneable {
     {
         template = new CitizenTemplate();
 
+
         this.name = new SimpleStringProperty(template.getBaseData().getName());
         this.surname = new SimpleStringProperty(template.getBaseData().getSurname());
         this.age = new SimpleIntegerProperty(template.getBaseData().getAge());
@@ -115,10 +116,13 @@ public class CitizenTemplateModel implements Cloneable {
         this.network.set(template.getGeneralInfo().getNetwork());
         infoBind();
 
+
         this.relevantFunctionalAbilities = FXCollections.observableArrayList();
         this.relevantHealthConditions = FXCollections.observableArrayList();
+
         this.nonRelevantFunctionalAbilities = FXCollections.observableArrayList();
         this.nonRelevantHealthConditions = FXCollections.observableArrayList();
+
 
         //initFunctionalAbilities();
         //initHealthConditions();
@@ -143,6 +147,7 @@ public class CitizenTemplateModel implements Cloneable {
 
 }
 
+
     @Override
     public String toString() {
         return name.get() + " " + surname.get();
@@ -153,6 +158,7 @@ public class CitizenTemplateModel implements Cloneable {
         relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Climbing", 1, true, false)));
         relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Swimming", 1, true, false)));
         relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Bathing", 4, true, false)));
+
 
         nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Sleeping", 0, true, false)));
         nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Eating", 0, true, false)));
@@ -351,7 +357,6 @@ public class CitizenTemplateModel implements Cloneable {
     public CitizenTemplate getTemplate() {
         return template;
     }
-
 
 
 
