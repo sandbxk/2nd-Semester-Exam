@@ -3,8 +3,7 @@ package Application.BE;
 public class CategoryEntry {
 
     private int id;
-    private String categoryName;
-    private String superCategory;
+    private Category category;
     private int level;
     private String assessment;
     private String cause;
@@ -15,9 +14,9 @@ public class CategoryEntry {
     private boolean isFunctionAbility;
     private boolean isSuperCategory;
 
-    public CategoryEntry(int id, String categoryName, int level, boolean isFunctionAbility, boolean isSuperCategory) {
+    public CategoryEntry(int id, Category category, int level, boolean isFunctionAbility, boolean isSuperCategory) {
         this.id = id;
-        this.categoryName = categoryName;
+        this.category = category;
         this.level = level;
         this.isFunctionAbility = isFunctionAbility;
     }
@@ -30,20 +29,16 @@ public class CategoryEntry {
         this.id = id;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public String getSuperCategory() {
-        return superCategory;
-    }
-
-    public void setSuperCategory(String superCategory) {
-        this.superCategory = superCategory;
+        return category.getName();
     }
 
     public int getLevel() {

@@ -1,5 +1,6 @@
 package Application.GUI.Models;
 
+import Application.BE.Category;
 import Application.BE.CategoryEntry;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -95,26 +96,26 @@ public class CitizenModel {
     }
 
     private void initFunctionalAbilities() {
-        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Walking", 1, true, false)));
-        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Climbing", 1, true, false)));
-        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Swimming", 1, true, false)));
-        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Bathing", 4, true, false)));
+        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Walking"), 1, true, false)));
+        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Climbing"), 1, true, false)));
+        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Swimming"), 1, true, false)));
+        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Bathing"), 4, true, false)));
 
-        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Sleeping", 0, true, false)));
-        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Eating", 0, true, false)));
-        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Toileting", 0, true, false)));
+        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Sleeping"), 0, true, false)));
+        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Eating"), 0, true, false)));
+        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Toileting"), 0, true, false)));
     }
 
     private void initHealthConditions() {
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Diabetes", 1, false, false)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "High Blood Pressure", 1, false, false)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Heart Disease", 1, false, false)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Asthma", 1, false, false)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Epilepsy", 1, false, false)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Allergies", 1, false, false)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "Other", 1, false, false)));
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Diabetes"), 1, false, false)));
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("High Blood Pressure"), 1, false, false)));
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Heart Disease"), 1, false, false)));
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Asthma"), 1, false, false)));
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Epilepsy"), 1, false, false)));
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Allergies"), 1, false, false)));
+        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Other"), 1, false, false)));
 
-        nonRelevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, "None", 0, false, false)));
+        nonRelevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("None"), 0, false, false)));
 
     }
 

@@ -147,7 +147,7 @@ public class CitizenTemplateModel implements Cloneable {
     public String toString() {
         return name.get() + " " + surname.get();
     }
-
+/*
     private void initFunctionalAbilities() {
         relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Walking", 1, true, false)));
         relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, "Climbing", 1, true, false)));
@@ -176,6 +176,8 @@ public class CitizenTemplateModel implements Cloneable {
         relevantHealthConditions.add(new CategoryEntryModel("Other", 1, "note", false));
         nonRelevantHealthConditions.add(new CategoryEntryModel("Other", 0, "note", false));
     }
+
+ */
 
 
     public String getName() {
