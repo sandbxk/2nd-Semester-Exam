@@ -27,7 +27,7 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
             PreparedStatement pstmt = conn.prepareStatement(sqlCreate, PreparedStatement.RETURN_GENERATED_KEYS);
 
             pstmt.setString(1,input.getSchoolName());
-            pstmt.setInt(2,input.getZipCode());
+            pstmt.setInt(2, (Integer) input.getLocation());
 
             pstmt.execute();
 
@@ -43,8 +43,7 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
             return new School(
                     id,
                     input.getSchoolName(),
-                    input.getZipCode(),
-                    input.getCityName()
+                    new Object() // location
             );
 
         } catch (SQLServerException throwables) {
@@ -72,7 +71,7 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
             PreparedStatement psus = conn.prepareStatement(sqlUpdate);
 
             psus.setString(1, input.getSchoolName());
-            psus.setInt(2, input.getZipCode());
+            psus.setInt(2, (Integer) input.getLocation());
             psus.setInt(3, input.getSchoolID());
             psus.executeUpdate();
             psus.close();
@@ -114,7 +113,7 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
                 city = rs.getString("cityName");
                 zipCode = rs.getInt("zipCode");
                 id = rs.getInt("id");
-                School school = new School(id, name, zipCode, city);
+                School school = new School(id, name, new Object() /* location */);
                     schoolList.add(school);
             }
             psas.close();

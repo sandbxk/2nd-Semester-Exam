@@ -3,6 +3,7 @@ package Application.BE;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class CitizenTemplate {
 
     int id;

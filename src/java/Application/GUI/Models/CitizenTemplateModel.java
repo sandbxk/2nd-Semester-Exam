@@ -75,7 +75,7 @@ public class CitizenTemplateModel implements Cloneable {
         this.mastering.set(template.getGeneralInfo().getMastering());
         this.motivation.set(template.getGeneralInfo().getMotivation());
         this.resources.set(template.getGeneralInfo().getResources());
-        this.roles.settemplate.getGeneralInfo().getRoles());
+        this.roles.set(template.getGeneralInfo().getRoles());
         this.habits.set(template.getGeneralInfo().getHabits());
         this.eduAndJob.set(template.getGeneralInfo().getEduAndJob());
         this.lifeStory.set(template.getGeneralInfo().getLifeStory());

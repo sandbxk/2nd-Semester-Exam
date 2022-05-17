@@ -20,7 +20,7 @@ public class CreateTeacherController
     public void onSaveCreateTeacher(ActionEvent actionEvent) {
 
         // FIXME: 03/05/2022 -- Dummy School
-        School school = new School(1, "Dummy School", 6715, "NotARealCity");
+        School school = new School(1, "Dummy School", new Object());
 
         accountDAO.createAccount(
                 txtFieldLogin.getText(),

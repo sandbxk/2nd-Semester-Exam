@@ -4,6 +4,7 @@ import Application.DAL.TemplateMethod.Annotations.SQLGetter;
 import Application.DAL.TemplateMethod.Annotations.SQLSetter;
 import Application.DAL.TemplateMethod.Annotations.SQLTable;
 
+@Deprecated
 @SQLTable(name = "cases")
 public class Case
 {

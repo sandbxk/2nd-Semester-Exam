@@ -1,7 +1,6 @@
 package Application.DAL;
 
 import Application.BE.Account;
-import Application.BE.CitizenTemplate;
 import Application.BE.School;
 import Application.DAL.DBConnector.DBConnectionPool;
 
@@ -29,7 +28,7 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
         Connection conn = DBConnectionPool.getInstance().checkOut();
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1, input.getLogin());
+            pstmt.setString(1, input.getUsername());
             pstmt.setString(2, input.getPassword());
             pstmt.setString(3, input.getFirstName());
             pstmt.setString(4, input.getLastName());
@@ -49,7 +48,7 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
             pstmt.close();
             return new Account(
                     id,
-                    input.getLogin(),
+                    input.getUsername(),
                     input.getPassword(),
                     input.getFirstName(),
                     input.getLastName(),
@@ -127,8 +126,7 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
                 school = new School(
                         rs.getInt("schoolId"),
                         rs.getString("schoolName"),
-                        rs.getInt("schoolZipCode"),
-                        rs.getString("cityName")
+                        new Object() // location
                 );
 
                 account = new Account(
@@ -185,8 +183,7 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
                 School school = new School(
                         rs.getInt("schoolID"),
                         rs.getString("schoolName"),
-                        rs.getInt("zipCode"),
-                        rs.getString("cityName")
+                        new Object() // location
                 );
 
                 Account student = new Account(

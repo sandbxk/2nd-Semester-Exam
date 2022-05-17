@@ -41,7 +41,7 @@ public class AdminDataManager {
 
     public School createSchool(String schoolName, int zipCode)
     {
-        return (School) schoolDAO.create(new School(-1, schoolName, zipCode, ""));
+        return (School) schoolDAO.create(new School(-1, schoolName, new Object()));
     }
 
 }

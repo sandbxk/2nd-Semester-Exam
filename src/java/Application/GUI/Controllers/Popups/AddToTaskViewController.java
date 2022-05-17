@@ -157,7 +157,7 @@ public class AddToTaskViewController implements Initializable {
     {
         ObservableList<AccountModel> mockAccountList = FXCollections.observableArrayList();
 
-        School school = new School(1, "EASV", 6700, "Esbjerg");
+        School school = new School(1, "EASV", new Object());
 
         mockAccountList.add(new AccountModel(new Account(1, "", "", "Kasper", "Rasmussen", "", school, 0)));
         mockAccountList.add(new AccountModel(new Account(1, "", "", "Rasmus", "Sandbæk", "", school, 0)));

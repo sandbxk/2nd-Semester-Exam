@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class CitizenBaseData
 {
     private String name;
