@@ -3,23 +3,20 @@ package Application.BE;
 public class CategoryEntry {
 
     private int id;
-    private String categoryName;
-    private String superCategory;
+    private Category category;
     private int level;
-    private String assessment;
-    private String cause;
-    private String implications;
-    private String citizenGoals;
-    private String expectedCondition;
-    private String note;
-    private boolean isFunctionAbility;
-    private boolean isSuperCategory;
+    private String assessment = "";
+    private String cause = "";
+    private String implications = "";
+    private String citizenGoals = "";
+    private String expectedCondition = "";
+    private String note = "";
 
-    public CategoryEntry(int id, String categoryName, int level, boolean isFunctionAbility, boolean isSuperCategory) {
+
+    public CategoryEntry(int id, Category category, int level) {
         this.id = id;
-        this.categoryName = categoryName;
+        this.category = category;
         this.level = level;
-        this.isFunctionAbility = isFunctionAbility;
     }
 
     public int getId() {
@@ -30,20 +27,16 @@ public class CategoryEntry {
         this.id = id;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public String getSuperCategory() {
-        return superCategory;
-    }
-
-    public void setSuperCategory(String superCategory) {
-        this.superCategory = superCategory;
+        return category.getName();
     }
 
     public int getLevel() {
@@ -102,11 +95,4 @@ public class CategoryEntry {
         this.note = note;
     }
 
-    public boolean isFunctionAbility() {
-        return isFunctionAbility;
-    }
-
-    public void setFunctionAbility(boolean isFunctionAbility) {
-        this.isFunctionAbility = isFunctionAbility;
-    }
 }

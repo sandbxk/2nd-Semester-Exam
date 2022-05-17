@@ -1,5 +1,7 @@
 package Application.DAL;
 
+import Application.BE.CitizenTemplate;
+
 import java.util.List;
 
 public abstract class TemplatePatternDAO<T>

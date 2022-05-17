@@ -1,6 +1,8 @@
 package Application.GUI.Models;
 
+import Application.BE.Category;
 import Application.BE.CategoryEntry;
+import Application.BE.CategoryType;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +17,6 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
 
     private int id;
     private StringProperty categoryName;
-    private StringProperty superCategory;
     private IntegerProperty level;
     private ObjectProperty<ComboBox<FunctionalLevels>> levelFuncComboBox;
     private ObjectProperty<ComboBox<HealthLevels>> levelHealthComboBox;
@@ -27,15 +28,17 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
     private StringProperty citizenGoals;
     private StringProperty expectedCondition;
     private StringProperty note;
-    private boolean isFunctionAbility;
+    private CategoryType type;
     private CategoryEntry categoryEntry;
 
 
 
     public CategoryEntryModel(CategoryEntry categoryEntry) {
+        this.categoryEntry = categoryEntry;
+        this.id = categoryEntry.getId();
+
         initProperties();
         categoryName.set(categoryEntry.getCategoryName());
-        superCategory.set(categoryEntry.getSuperCategory());
         level.set(categoryEntry.getLevel());
         assessment.set(categoryEntry.getAssessment());
         cause.set(categoryEntry.getCause());
@@ -43,10 +46,8 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
         citizenGoals.set(categoryEntry.getCitizenGoals());
         expectedCondition.set(categoryEntry.getExpectedCondition());
         note.set(categoryEntry.getNote());
-        isFunctionAbility = categoryEntry.isFunctionAbility();
-
-        this.categoryEntry = categoryEntry;
-        this.id = categoryEntry.getId();
+        type = categoryEntry.getCategory().getType();
+        initBinds();
 
         levelFuncComboBox = new SimpleObjectProperty<>(new ComboBox<>());
         levelHealthComboBox = new SimpleObjectProperty<>(new ComboBox<>());
@@ -67,33 +68,53 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
         this.categoryName.set(categoryName);
     }
 
-    public CategoryEntryModel(String categoryName, int level, String note, boolean isFunctionAbility) {
+    public CategoryEntryModel(String categoryName, int level, String note) {
         initProperties();
+        this.categoryEntry = new CategoryEntry(-1, new Category(categoryName), level);
         this.categoryName.set(categoryName);
         this.level.set(level);
+        assessment.set(" ");
+        cause.set(" ");
+        implications.set(" ");
+        citizenGoals.set(" ");
+        expectedCondition.set(" ");
         this.note.set(note);
-        this.isFunctionAbility = isFunctionAbility;
+        this.type = categoryEntry.getCategory().getType();
+        initBinds();
+
 
         initLevelFuncAndLevelHealth();
     }
+
 
     /**
      * Initializes the property objects of this model.
      */
     private void initProperties() {
-        categoryName = new SimpleStringProperty();
-        superCategory = new SimpleStringProperty();
+        categoryName = new SimpleStringProperty("");
         level = new SimpleIntegerProperty();
         levelFuncComboBox = new SimpleObjectProperty<>();
         levelHealthComboBox = new SimpleObjectProperty<>();
         levelFunc = new SimpleObjectProperty<>();
         levelHealth = new SimpleObjectProperty<>();
-        assessment = new SimpleStringProperty();
-        cause = new SimpleStringProperty();
-        implications = new SimpleStringProperty();
-        citizenGoals = new SimpleStringProperty();
-        expectedCondition = new SimpleStringProperty();
-        note = new SimpleStringProperty();
+        assessment = new SimpleStringProperty("");
+        cause = new SimpleStringProperty("");
+        implications = new SimpleStringProperty("");
+        citizenGoals = new SimpleStringProperty("");
+        expectedCondition = new SimpleStringProperty("");
+        note = new SimpleStringProperty("");
+    }
+
+    private void initBinds() {
+        categoryName.bindBidirectional(new SimpleStringProperty(categoryEntry.getCategoryName()));
+        level.bindBidirectional(new SimpleIntegerProperty(categoryEntry.getLevel()));
+
+        assessment.bindBidirectional(new SimpleStringProperty(categoryEntry.getAssessment()));
+        cause.bindBidirectional(new SimpleStringProperty(categoryEntry.getCause()));
+        implications.bindBidirectional(new SimpleStringProperty(categoryEntry.getImplications()));
+        citizenGoals.bindBidirectional(new SimpleStringProperty(categoryEntry.getCitizenGoals()));
+        expectedCondition.bindBidirectional(new SimpleStringProperty(categoryEntry.getExpectedCondition()));
+        note.bindBidirectional(new SimpleStringProperty(categoryEntry.getNote()));
     }
 
     /**
@@ -116,7 +137,7 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
         levelHealthComboBox.get().setButtonCell(comboBoxHealthDescCell());
         levelHealthComboBox.get().setDisable(true);
 
-        if (isFunctionAbility) {
+        if (this.type == CategoryType.FUNCTIONAL_ABILITY) {
             if (level.get() == 9){
                 levelFuncComboBox.get().setValue(FunctionalLevels.LEVEL_9);
             } else levelFuncComboBox.get().setValue(FunctionalLevels.values()[level.get()]);
@@ -207,8 +228,10 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
      * Sets the level of this category entry entity to the value of the selected item in the combo box
      **/
     private void initLevelFuncAndLevelHealth(){
-        if (isFunctionAbility){
-            this.levelFunc.set(FunctionalLevels.values()[level.get()]);
+        if (this.type == CategoryType.FUNCTIONAL_ABILITY){
+            if (level.get() == 9)
+                this.levelFunc.set(FunctionalLevels.LEVEL_9);
+            else this.levelFunc.set(FunctionalLevels.values()[level.get()]);
         }
         else {
             this.levelHealth.set(HealthLevels.values()[level.get()]);
@@ -268,17 +291,6 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
         this.categoryName.set(categoryName);
     }
 
-    public String getSuperCategory() {
-        return superCategory.get();
-    }
-
-    public StringProperty superCategoryProperty() {
-        return superCategory;
-    }
-
-    public void setSuperCategory(String superCategory) {
-        this.superCategory.set(superCategory);
-    }
 
     public int getLevel() {
         return level.get();
@@ -289,11 +301,32 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
     }
 
     public void setLevel(int level) {
+        if (this.type == CategoryType.FUNCTIONAL_ABILITY && levelFunc != null) {
+            if (level == 9)
+                levelFunc.set(FunctionalLevels.LEVEL_9);
+            else levelFunc.set(FunctionalLevels.values()[level]);
+        }
+        if (this.type == CategoryType.HEALTH_CONDITION && levelHealth != null) {
+            levelHealth.set(HealthLevels.values()[level]);
+        }
+
         this.level.set(level);
     }
 
+    public boolean isRelevant() {
+        if (this.type == CategoryType.FUNCTIONAL_ABILITY && level.get() == FunctionalLevels.LEVEL_9.level ||
+                this.type == CategoryType.FUNCTIONAL_ABILITY && level.get() == FunctionalLevels.LEVEL_9.ordinal())
+            return false;
+        if (this.type == CategoryType.HEALTH_CONDITION && level.get() == 0)
+            return false;
+
+        return true;
+    }
+
     public String getAssessment() {
-        return assessment.get();
+        if (assessment.get() == null)
+            return "";
+        else return assessment.get();
     }
 
     public StringProperty assessmentProperty() {
@@ -309,7 +342,9 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
     }
 
     public String getCause() {
-        return cause.get();
+        if (cause.get() == null)
+            return "";
+        else return cause.get();
     }
 
     public StringProperty causeProperty() {
@@ -325,7 +360,9 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
     }
 
     public String getImplications() {
-        return implications.get();
+        if (implications.get() == null)
+            return "";
+        else return implications.get();
     }
 
     public StringProperty implicationsProperty() {
@@ -341,7 +378,9 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
     }
 
     public String getCitizenGoals() {
-        return citizenGoals.get();
+        if (citizenGoals.get() == null)
+            return "";
+        else return citizenGoals.get();
     }
 
     public StringProperty citizenGoalsProperty() {
@@ -357,7 +396,9 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
     }
 
     public String getExpectedCondition() {
-        return expectedCondition.get();
+        if (expectedCondition.get() == null)
+            return "";
+        else return expectedCondition.get();
     }
 
     public StringProperty expectedConditionProperty() {
@@ -373,7 +414,9 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
     }
 
     public String getNote() {
-        return note.get();
+        if (note.get() == null)
+            return "";
+        else return note.get();
     }
 
     public StringProperty noteProperty() {
@@ -387,12 +430,12 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
         this.note = note;
     }
 
-    public boolean isFunctionAbility() {
-        return isFunctionAbility;
+    public CategoryType getType() {
+        return type;
     }
 
-    public void setFunctionAbility(boolean functionAbility) {
-        isFunctionAbility = functionAbility;
+    public void setType(CategoryType type) {
+        this.type = type;
     }
 
     public CategoryEntry getCategoryEntry() {

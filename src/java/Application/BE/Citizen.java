@@ -5,6 +5,8 @@ import Application.DAL.TemplateMethod.Annotations.SQLGetter;
 import Application.DAL.TemplateMethod.Annotations.SQLSetter;
 import Application.DAL.TemplateMethod.Annotations.SQLTable;
 
+import java.util.HashMap;
+
 @SQLTable(name = "citizen")
 public class Citizen
 {
@@ -32,6 +34,11 @@ public class Citizen
     @SQLColumn(name = "cSchool")
     private int schoolID;
 
+    private CitizenBaseData citizenBaseData;
+    private GeneralJournal generalJournal;
+    private HashMap<CategoryEntry, CategoryEntry> healthCategoryEntries;
+    private HashMap<CategoryEntry, CategoryEntry> funcCategoryEntries;
+
     public Citizen(int id, String firstname, String lastname, int age, int streetID, int streetNumber, int zipCode, int schoolID) {
         this.id = id;
         this.firstname = firstname;
@@ -41,6 +48,15 @@ public class Citizen
         this.streetNumber = streetNumber;
         this.zipCode = zipCode;
         this.schoolID = schoolID;
+    }
+
+    public Citizen(CitizenTemplate template) {
+        this.id = -1;
+        this.citizenBaseData = template.getBaseData();
+        this.generalJournal = template.getGeneralInfo();
+        this.healthCategoryEntries = new HashMap<>();
+        this.funcCategoryEntries = new HashMap<>();
+
     }
 
 

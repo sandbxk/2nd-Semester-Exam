@@ -1,5 +1,6 @@
 package Application.DAL;
 
+import Application.BE.CitizenTemplate;
 import Application.BE.School;
 import Application.DAL.DBConnector.DBConnectionPool;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
