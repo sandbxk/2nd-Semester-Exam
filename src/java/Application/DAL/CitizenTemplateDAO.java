@@ -77,7 +77,7 @@ public class CitizenTemplateDAO extends TemplatePatternDAO<CitizenTemplate> {
         try {
             //General info transaction
             PreparedStatement genInfoPSTMT = conn.prepareStatement(genInfoSQL, PreparedStatement.RETURN_GENERATED_KEYS);
-            genInfoPSTMT.setString(1, genInfo.getMastering());
+            genInfoPSTMT.setString(1, genInfo.getCoping());
             genInfoPSTMT.setString(2, genInfo.getMotivation());
             genInfoPSTMT.setString(3, genInfo.getResources());
             genInfoPSTMT.setString(4, genInfo.getRoles());
@@ -273,7 +273,7 @@ public class CitizenTemplateDAO extends TemplatePatternDAO<CitizenTemplate> {
             ResultSet resultSet = pstmt.executeQuery();
 
             while (resultSet.next()) {
-                journal.setMastering(resultSet.getString("mastering"));
+                journal.setCoping(resultSet.getString("mastering"));
                 journal.setMotivation(resultSet.getString("motivation"));
                 journal.setResources(resultSet.getString("resources"));
                 journal.setRoles(resultSet.getString("roles"));

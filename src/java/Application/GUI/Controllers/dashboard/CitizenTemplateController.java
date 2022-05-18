@@ -16,7 +16,6 @@ import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import javafx.util.converter.IntegerStringConverter;
-import org.controlsfx.control.NotificationPane;
 import org.controlsfx.control.Notifications;
 
 import java.net.URL;
@@ -322,7 +321,7 @@ public class CitizenTemplateController implements Initializable {
             treeTblViewHealth.setShowRoot(false);
 
             //set the general information section to that of the selected citizen template
-            txtAreaGenInfoMastering.setText(model.getSelectedCitizenTemplateModel().getTemplate().getGeneralInfo().getMastering());
+            txtAreaGenInfoMastering.setText(model.getSelectedCitizenTemplateModel().getTemplate().getGeneralInfo().getCoping());
             txtAreaGenInfoMotivation.setText(model.getSelectedCitizenTemplateModel().getTemplate().getGeneralInfo().getMotivation());
             txtAreaGenInfoResources.setText(model.getSelectedCitizenTemplateModel().getTemplate().getGeneralInfo().getResources());
             txtAreaGenInfoRoles.setText(model.getSelectedCitizenTemplateModel().getTemplate().getGeneralInfo().getRoles());
@@ -435,7 +434,7 @@ public class CitizenTemplateController implements Initializable {
                 selected.setAge(Integer.parseInt(txtFieldAge.getText()));
             }
 
-            selected.getTemplate().getGeneralInfo().setMastering(txtAreaGenInfoMastering.getText());
+            selected.getTemplate().getGeneralInfo().setCoping(txtAreaGenInfoMastering.getText());
             selected.getTemplate().getGeneralInfo().setMotivation(txtAreaGenInfoMotivation.getText());
             selected.getTemplate().getGeneralInfo().setResources(txtAreaGenInfoResources.getText());
             selected.getTemplate().getGeneralInfo().setRoles(txtAreaGenInfoRoles.getText());

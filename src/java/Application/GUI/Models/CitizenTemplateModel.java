@@ -1,6 +1,5 @@
 package Application.GUI.Models;
 
-import Application.BE.CategoryEntry;
 import Application.BE.CitizenBaseData;
 import Application.BE.CitizenTemplate;
 import Application.BE.GeneralJournal;
@@ -43,7 +42,7 @@ public class CitizenTemplateModel implements Cloneable {
         this.surname = new SimpleStringProperty(surname);
         this.age = new SimpleIntegerProperty(age);
 
-        this.mastering = new SimpleStringProperty(template.getGeneralInfo().getMastering());
+        this.mastering = new SimpleStringProperty(template.getGeneralInfo().getCoping());
         this.motivation = new SimpleStringProperty(template.getGeneralInfo().getMotivation());
         this.resources = new SimpleStringProperty(template.getGeneralInfo().getResources());
         this.roles = new SimpleStringProperty(template.getGeneralInfo().getRoles());
@@ -72,7 +71,7 @@ public class CitizenTemplateModel implements Cloneable {
         this.surname = new SimpleStringProperty(template.getBaseData().getSurname());
         this.age = new SimpleIntegerProperty(template.getBaseData().getAge());
 
-        this.mastering.set(template.getGeneralInfo().getMastering());
+        this.mastering.set(template.getGeneralInfo().getCoping());
         this.motivation.set(template.getGeneralInfo().getMotivation());
         this.resources.set(template.getGeneralInfo().getResources());
         this.roles.set(template.getGeneralInfo().getRoles());
@@ -103,7 +102,7 @@ public class CitizenTemplateModel implements Cloneable {
         this.surname = new SimpleStringProperty(template.getBaseData().getSurname());
         this.age = new SimpleIntegerProperty(template.getBaseData().getAge());
 
-        this.mastering.set(template.getGeneralInfo().getMastering());
+        this.mastering.set(template.getGeneralInfo().getCoping());
         this.motivation.set(template.getGeneralInfo().getMotivation());
         this.resources.set(template.getGeneralInfo().getResources());
         this.roles.set(template.getGeneralInfo().getRoles());
@@ -133,7 +132,7 @@ public class CitizenTemplateModel implements Cloneable {
         this.surname.bindBidirectional(new SimpleStringProperty(template.getBaseData().getSurname()));
         this.age.bindBidirectional(new SimpleIntegerProperty(template.getBaseData().getAge()));
 
-        this.mastering.bindBidirectional(new SimpleStringProperty(template.getGeneralInfo().getMastering()));
+        this.mastering.bindBidirectional(new SimpleStringProperty(template.getGeneralInfo().getCoping()));
         this.motivation.bindBidirectional(new SimpleStringProperty(template.getGeneralInfo().getMotivation()));
         this.resources.bindBidirectional(new SimpleStringProperty(template.getGeneralInfo().getResources()));
         this.roles.bindBidirectional(new SimpleStringProperty(template.getGeneralInfo().getRoles()));
