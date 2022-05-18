@@ -4,66 +4,48 @@ import Application.DAL.TemplateMethod.Annotations.SQLGetter;
 import Application.DAL.TemplateMethod.Annotations.SQLSetter;
 import Application.DAL.TemplateMethod.Annotations.SQLTable;
 
-@SQLTable(name = "schools")
+@SQLTable(name = "School")
 public class School {
 
-    @SQLColumn(name = "schoolId")
+    @SQLColumn(name = "SID")
     private int schoolID;
 
     @SQLColumn(name = "schoolName")
     private String schoolName;
 
-    @SQLColumn(name = "schoolZipCode")
-    private int zipCode;
+    @SQLColumn(name = "FK_Zipcode")
+    private City location;
 
-    @SQLColumn(name = "cityName")
-    private String cityName;
 
-    public School(int schoolID, String schoolName, int zipCode, String cityName)
+    public School(int schoolID, String schoolName, City location)
     {
         this.schoolID = schoolID;
         this.schoolName = schoolName;
-        this.zipCode = zipCode;
-        this.cityName = cityName;
+        this.location = location;
     }
 
-    @SQLGetter(name = "schoolId")
     public int getSchoolID() {
         return schoolID;
     }
 
-    @SQLSetter(name = "schoolId")
     public void setSchoolID(int schoolID) {
         this.schoolID = schoolID;
     }
 
-    @SQLGetter(name = "schoolName")
     public String getSchoolName() {
         return schoolName;
     }
 
-    @SQLSetter(name = "schoolName")
     public void setSchoolName(String schoolName) {
         this.schoolName = schoolName;
     }
 
-    @SQLGetter(name = "schoolZipCode")
-    public int getZipCode() {
-        return zipCode;
+
+    public City getLocation() {
+        return location;
     }
 
-    @SQLSetter(name = "schoolZipCode")
-    public void setZipCode(int zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    @SQLGetter(name = "cityName")
-    public String getCityName() {
-        return cityName;
-    }
-
-    @SQLSetter(name = "cityName")
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setLocation(City location) {
+        this.location = location;
     }
 }

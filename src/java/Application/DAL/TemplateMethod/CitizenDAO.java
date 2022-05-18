@@ -1,6 +1,8 @@
 package Application.DAL.TemplateMethod;
 
 import Application.BE.Citizen;
+import Application.BE.CitizenBaseData;
+import Application.BE.GeneralJournal;
 import Application.DAL.TemplateMethod.AbstractDAO_TP;
 
 import java.sql.PreparedStatement;
@@ -19,9 +21,6 @@ public class CitizenDAO
                 statement.setString(1, input.getFirstname());
                 statement.setString(2, input.getLastname());
                 statement.setInt(3, input.getAge());
-                statement.setInt(4, input.getStreetID());
-                statement.setInt(5, input.getStreetNumber());
-                statement.setInt(6, input.getZipCode());
                 statement.setInt(7, input.getSchoolID());
 
                 statement.executeUpdate();
@@ -59,13 +58,12 @@ public class CitizenDAO
                 {
                     Citizen citizen = new Citizen(
                             result.getInt("citizenId"),
+                            new CitizenBaseData(
                             result.getString("cFirstName"),
                             result.getString("cSurname"),
-                            result.getInt("cAge"),
-                            result.getInt("cStreet"),
-                            result.getInt("cStreetNumber"),
-                            result.getInt("cZipCode"),
-                            result.getInt("cSchool")
+                            result.getInt("cAge")),
+                            result.getInt("cSchool"),
+                            new GeneralJournal()
                     );
 
                     array.add(citizen);

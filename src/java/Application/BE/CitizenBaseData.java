@@ -4,38 +4,24 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class CitizenBaseData
 {
     private String name;
     private String surname;
     private int age;
-    private LocalDate birthDate;
-    private String helpStatus;
-    private String civilianStatus;
-    private String address;
-    private List<ContactInfo> contactInfo;
 
     public CitizenBaseData()
     {
-        this.name = "";
-        this.surname = "";
+        this.name = "Ny Borger";
+        this.surname = "Skabelon";
         this.age = 0;
-        this.birthDate = LocalDate.now();
-        this.helpStatus = "";
-        this.civilianStatus = "";
-        this.address = "";
-        this.contactInfo = new ArrayList<>();
     }
 
-    public CitizenBaseData(String name, String surname, int age, LocalDate birthDate, String helpStatus, String civilianStatus, String address, List<ContactInfo> contactInfo) {
+    public CitizenBaseData(String name, String surname, int age) {
         this.name = name;
         this.surname = surname;
         this.age = age;
-        this.birthDate = birthDate;
-        this.helpStatus = helpStatus;
-        this.civilianStatus = civilianStatus;
-        this.address = address;
-        this.contactInfo = contactInfo;
     }
 
     public String getName() {
@@ -62,43 +48,4 @@ public class CitizenBaseData
         this.age = age;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public String getHelpStatus() {
-        return helpStatus;
-    }
-
-    public void setHelpStatus(String helpStatus) {
-        this.helpStatus = helpStatus;
-    }
-
-    public String getCivilianStatus() {
-        return civilianStatus;
-    }
-
-    public void setCivilianStatus(String civilianStatus) {
-        this.civilianStatus = civilianStatus;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public List<ContactInfo> getContactInfo() {
-        return contactInfo;
-    }
-
-    public void setContactInfo(List<ContactInfo> contactInfo) {
-        this.contactInfo = contactInfo;
-    }
 }

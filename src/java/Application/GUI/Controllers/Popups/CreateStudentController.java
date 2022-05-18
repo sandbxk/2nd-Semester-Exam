@@ -1,5 +1,6 @@
 package Application.GUI.Controllers.Popups;
 
+import Application.BE.City;
 import Application.BE.School;
 import Application.BLL.AdminDataManager;
 import javafx.event.ActionEvent;
@@ -37,7 +38,7 @@ public class CreateStudentController implements Initializable {
         String password = passwordField.getText();
 
         // FIXME: 03/05/2022 -- Dummy School
-        School school = new School(1, "Dummy School", 6715, "NotARealCity");
+        School school = new School(1, "Dummy School", new City(0));
 
         adminDataManager.createAccount(login, password, firstName, lastName, email, school, 0);
         //TODO: add getSchool() and implement salt for hashing
