@@ -1,7 +1,6 @@
 package Application.DAL;
 
-import Application.BE.CitizenTemplate;
-import Application.BE.City;
+import Application.BE.Location;
 import Application.BE.School;
 import Application.DAL.DBConnector.DBConnectionPool;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -44,7 +43,7 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
             return new School(
                     id,
                     input.getSchoolName(),
-                    new City(input.getLocation().getZipCode())
+                    new Location(input.getLocation().getZipCode())
             );
 
         } catch (SQLServerException throwables) {
@@ -115,7 +114,7 @@ public class SchoolDAO extends TemplatePatternDAO<School>{
                 zipCode = rs.getInt("zipCode");
                 id = rs.getInt("id");
 
-                School school = new School(id, name, new City(zipCode, city));
+                School school = new School(id, name, new Location(zipCode, city));
 
                 schoolList.add(school);
             }

@@ -1,7 +1,5 @@
 package Application.BE;
 import Application.DAL.TemplateMethod.Annotations.SQLColumn;
-import Application.DAL.TemplateMethod.Annotations.SQLGetter;
-import Application.DAL.TemplateMethod.Annotations.SQLSetter;
 import Application.DAL.TemplateMethod.Annotations.SQLTable;
 
 @SQLTable(name = "School")
@@ -14,10 +12,10 @@ public class School {
     private String schoolName;
 
     @SQLColumn(name = "FK_Zipcode")
-    private City location;
+    private Location location;
 
 
-    public School(int schoolID, String schoolName, City location)
+    public School(int schoolID, String schoolName, Location location)
     {
         this.schoolID = schoolID;
         this.schoolName = schoolName;
@@ -41,11 +39,11 @@ public class School {
     }
 
 
-    public City getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(City location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 }

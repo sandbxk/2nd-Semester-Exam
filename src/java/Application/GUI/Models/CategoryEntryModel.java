@@ -170,8 +170,8 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
             } else exConFuncComboBox.get().setValue(FunctionalLevels.values()[expectedCondition.get()]);
         }
         else {
-            levelHealthComboBox.get().setValue(HealthLevels.values()[level.get()]);
-            exConHealthComboBox.get().setValue(HealthLevels.values()[expectedCondition.get()]);
+           // levelHealthComboBox.get().setValue(HealthLevels.values()[level.get()]);
+           // exConHealthComboBox.get().setValue(HealthLevels.values()[expectedCondition.get()]);
         }
     }
 
@@ -285,7 +285,7 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
             else this.levelFunc.set(FunctionalLevels.values()[level.get()]);
         }
         else {
-            this.levelHealth.set(HealthLevels.values()[level.get()]);
+           // this.levelHealth.set(HealthLevels.values()[level.get()]);
         }
     }
 
@@ -299,7 +299,7 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
             else this.exConFunc.set(FunctionalLevels.values()[level.get()]);
         }
         else {
-            this.exConHealth.set(HealthLevels.values()[level.get()]);
+            //this.exConHealth.set(HealthLevels.values()[level.get()]);
         }
     }
 

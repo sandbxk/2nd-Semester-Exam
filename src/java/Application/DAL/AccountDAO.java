@@ -1,7 +1,7 @@
 package Application.DAL;
 
 import Application.BE.Account;
-import Application.BE.City;
+import Application.BE.Location;
 import Application.BE.School;
 import Application.DAL.DBConnector.DBConnectionPool;
 
@@ -127,7 +127,7 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
                 school = new School(
                         rs.getInt("schoolId"),
                         rs.getString("schoolName"),
-                        new City(rs.getInt("zipCode"), rs.getString("cityName"))
+                        new Location(rs.getInt("zipCode"), rs.getString("cityName"))
                 );
 
                 account = new Account(
@@ -184,7 +184,7 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
                 School school = new School(
                         rs.getInt("schoolID"),
                         rs.getString("schoolName"),
-                        new City(rs.getInt("zipCode"), rs.getString("cityName"))
+                        new Location(rs.getInt("zipCode"), rs.getString("cityName"))
                 );
 
                 Account student = new Account(

@@ -1,8 +1,6 @@
 package Application.GUI.Controllers;
 
-import Application.GUI.Models.AccountModel;
 import Application.GUI.Models.SessionModel;
-import Application.GUI.Models.UserType;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,21 +34,17 @@ public class LoginController implements Initializable
     @FXML
     public Button btnSubmit;
 
-    @FXML
-    public ComboBox<UserType> cbUserTypeSelect;
 
     public LoginController()
     {
         this.txtUsername = new TextField();
         this.txtPwd = new TextField();
         this.btnSubmit = new Button();
-        this.cbUserTypeSelect = new ComboBox<>();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-        cbUserTypeSelect.setItems(FXCollections.observableArrayList(UserType.values()));
     }
 
     private ResourceBundle createResourceBundle()

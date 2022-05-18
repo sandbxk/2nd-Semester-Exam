@@ -34,7 +34,6 @@ public class Citizen
     @SQLColumn(name = "cSchool")
     private int schoolID;
 
-    private CitizenBaseData citizenBaseData;
     private GeneralJournal generalJournal;
     private HashMap<CategoryEntry, CategoryEntry> healthCategoryEntries;
     private HashMap<CategoryEntry, CategoryEntry> funcCategoryEntries;
@@ -50,14 +49,7 @@ public class Citizen
         this.schoolID = schoolID;
     }
 
-    public Citizen(CitizenTemplate template) {
-        this.id = -1;
-        this.citizenBaseData = template.getBaseData();
-        this.generalJournal = template.getGeneralInfo();
-        this.healthCategoryEntries = new HashMap<>();
-        this.funcCategoryEntries = new HashMap<>();
 
-    }
 
 
     @SQLGetter(name = "cStreetNumber")

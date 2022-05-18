@@ -1,14 +1,10 @@
 package Application.DAL.TemplateMethod;
 
-import Application.BE.City;
+import Application.BE.Location;
 import Application.BE.School;
-import Application.DAL.DBConnector.DBConnectionPool;
-import Application.DAL.TemplateMethod.AbstractDAO_TP;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.SQLInput;
 
 public class SchoolDAO2
 {
@@ -51,7 +47,7 @@ public class SchoolDAO2
         return new School(
                 (int) query.getResultID(),
                 input.getSchoolName(),
-                new City(input.getLocation().getZipCode()) // location
+                new Location(input.getLocation().getZipCode()) // location
         );
     }
 
