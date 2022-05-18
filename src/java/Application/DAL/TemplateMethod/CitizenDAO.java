@@ -1,9 +1,7 @@
 package Application.DAL.TemplateMethod;
 
 import Application.BE.Citizen;
-import Application.BE.CitizenBaseData;
 import Application.BE.GeneralJournal;
-import Application.DAL.TemplateMethod.AbstractDAO_TP;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -18,10 +16,9 @@ public class CitizenDAO
             @Override
             protected Citizen execute(PreparedStatement statement, Citizen input) throws SQLException {
 
-                statement.setString(1, input.getFirstname());
-                statement.setString(2, input.getLastname());
+                statement.setString(1, input.getName());
+                statement.setString(2, input.getSurname());
                 statement.setInt(3, input.getAge());
-                statement.setInt(7, input.getSchoolID());
 
                 statement.executeUpdate();
 
@@ -57,12 +54,10 @@ public class CitizenDAO
                 while (result.next())
                 {
                     Citizen citizen = new Citizen(
-                            result.getInt("citizenId"),
-                            new CitizenBaseData(
+                            result.getInt("cID"),
                             result.getString("cFirstName"),
                             result.getString("cSurname"),
-                            result.getInt("cAge")),
-                            result.getInt("cSchool"),
+                            result.getInt("cAge"),
                             new GeneralJournal()
                     );
 

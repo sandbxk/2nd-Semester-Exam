@@ -12,15 +12,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class CitizenTemplateDAO extends TemplatePatternDAO<CitizenTemplate> {
+public class CitizenTemplateDAO extends TemplatePatternDAO<Citizen> {
 
 
     @Override
-    public CitizenTemplate create(CitizenTemplate input)
+    public Citizen create(Citizen input)
     {
-        String fName = input.getBaseData().getName();
-        String lName = input.getBaseData().getSurname();
-        int age = input.getBaseData().getAge();
+        String fName = input.getName();
+        String lName = input.getSurname();
+        int age = input.getAge();
         int schoolID = SessionModel.getSchool().getSchoolID();
 
         String baseDataSQL = """
@@ -108,7 +108,7 @@ public class CitizenTemplateDAO extends TemplatePatternDAO<CitizenTemplate> {
         }
     }
 
-    public void insertCategories(CitizenTemplate input){
+    public void insertCategories(Citizen input){
         String contentSQL = """
                     INSERT INTO Content (FK_citizenID, FK_JournalEntry) 
                     VALUES (?, ?);
@@ -173,7 +173,7 @@ public class CitizenTemplateDAO extends TemplatePatternDAO<CitizenTemplate> {
     }
 
     @Override
-    public void update(CitizenTemplate input) {
+    public void update(Citizen input) {
 
     }
 
@@ -183,7 +183,7 @@ public class CitizenTemplateDAO extends TemplatePatternDAO<CitizenTemplate> {
     }
 
     @Override
-    public CitizenTemplate read(int id) {
+    public Citizen read(int id) {
         return null;
     }
 
@@ -195,7 +195,7 @@ public class CitizenTemplateDAO extends TemplatePatternDAO<CitizenTemplate> {
                     """;
 
         Connection conn = DBConnectionPool.getInstance().checkOut();
-        List<CitizenTemplate> citizens = new ArrayList<>();
+        List<Citizen> citizensTemplate = new ArrayList<>();
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet resultSet = pstmt.executeQuery();
@@ -206,15 +206,15 @@ public class CitizenTemplateDAO extends TemplatePatternDAO<CitizenTemplate> {
                 String lName = resultSet.getString("cSurname");
                 int age = resultSet.getInt("cAge");
 
-                CitizenTemplate citizen = new CitizenTemplate(id, new CitizenBaseData(fName, lName, age), readGeneralInfo(id));
-                citizens.add(citizen);
+                Citizen citizen = new Citizen(id, fName, lName, age, readGeneralInfo(id));
+                citizensTemplate.add(citizen);
                 citizen.setFunctionalAbilities(readFunctionalAbilities(id));
                 citizen.setHealthConditions(readHealthConditions(id));
             }
 
             pstmt.close();
 
-            return citizens;
+            return citizensTemplate;
 
         } catch (SQLException e) {
             e.printStackTrace();

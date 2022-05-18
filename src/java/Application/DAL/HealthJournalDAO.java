@@ -1,6 +1,5 @@
 package Application.DAL;
 
-import Application.BE.CitizenTemplate;
 import Application.BE.HealthJournal;
 import Application.DAL.DBConnector.DBConnectionPool;
 import javafx.collections.FXCollections;

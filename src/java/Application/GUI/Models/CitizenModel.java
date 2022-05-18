@@ -32,11 +32,11 @@ public class CitizenModel {
 
 
     public CitizenModel(String name, String surname, int age) {
-        this.beCitizen = new Citizen(-1, new CitizenBaseData(name, surname, age), new GeneralJournal());
+        this.beCitizen = new Citizen(-1, name, surname, age, new GeneralJournal());
 
-        this.name = new SimpleStringProperty(beCitizen.getCitizenBaseData().getName());
-        this.surname = new SimpleStringProperty(beCitizen.getCitizenBaseData().getSurname());
-        this.age = new SimpleIntegerProperty(beCitizen.getCitizenBaseData().getAge());
+        this.name = new SimpleStringProperty(beCitizen.getName());
+        this.surname = new SimpleStringProperty(beCitizen.getSurname());
+        this.age = new SimpleIntegerProperty(beCitizen.getAge());
 
         this.mastering = new SimpleStringProperty(beCitizen.getGeneralInfo().getCoping());
         this.motivation = new SimpleStringProperty(beCitizen.getGeneralInfo().getMotivation());
@@ -63,9 +63,9 @@ public class CitizenModel {
     public CitizenModel(Citizen citizen) {
         this.beCitizen = citizen;
 
-        this.name = new SimpleStringProperty(beCitizen.getCitizenBaseData().getName());
-        this.surname = new SimpleStringProperty(beCitizen.getCitizenBaseData().getSurname());
-        this.age = new SimpleIntegerProperty(beCitizen.getCitizenBaseData().getAge());
+        this.name = new SimpleStringProperty(beCitizen.getName());
+        this.surname = new SimpleStringProperty(beCitizen.getSurname());
+        this.age = new SimpleIntegerProperty(beCitizen.getAge());
 
         this.mastering = new SimpleStringProperty(beCitizen.getGeneralInfo().getCoping());
         this.motivation = new SimpleStringProperty(beCitizen.getGeneralInfo().getMotivation());
@@ -106,9 +106,9 @@ public class CitizenModel {
 
 
     private void initBindings() {
-        this.name.bindBidirectional(new SimpleStringProperty(beCitizen.getCitizenBaseData().getName()));
-        this.surname.bindBidirectional(new SimpleStringProperty(beCitizen.getCitizenBaseData().getSurname()));
-        this.age.bindBidirectional(new SimpleIntegerProperty(beCitizen.getCitizenBaseData().getAge()));
+        this.name.bindBidirectional(new SimpleStringProperty(beCitizen.getName()));
+        this.surname.bindBidirectional(new SimpleStringProperty(beCitizen.getSurname()));
+        this.age.bindBidirectional(new SimpleIntegerProperty(beCitizen.getAge()));
 
         this.mastering.bindBidirectional(new SimpleStringProperty(beCitizen.getGeneralInfo().getCoping()));
         this.motivation.bindBidirectional(new SimpleStringProperty(beCitizen.getGeneralInfo().getMotivation()));

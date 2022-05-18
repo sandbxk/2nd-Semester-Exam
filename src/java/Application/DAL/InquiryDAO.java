@@ -1,6 +1,5 @@
 package Application.DAL;
 
-import Application.BE.CitizenTemplate;
 import Application.BE.Inquiry;
 import Application.DAL.DBConnector.DBConnectionPool;
 

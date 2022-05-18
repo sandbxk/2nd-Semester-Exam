@@ -1,7 +1,6 @@
 package Application.GUI.Models;
 
-import Application.BE.CitizenBaseData;
-import Application.BE.CitizenTemplate;
+import Application.BE.Citizen;
 import Application.BE.GeneralJournal;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -10,7 +9,7 @@ import javafx.collections.ObservableList;
 
 public class CitizenTemplateModel implements Cloneable {
 
-    private CitizenTemplate template;
+    private Citizen template;
 
     private StringProperty name;
     private StringProperty surname;
@@ -36,7 +35,7 @@ public class CitizenTemplateModel implements Cloneable {
 
 
     public CitizenTemplateModel(String name, String surname, int age) {
-        template = new CitizenTemplate(-1, new CitizenBaseData(name, surname, age), new GeneralJournal());
+        template = new Citizen(-1, name, surname, age, new GeneralJournal());
 
         this.name = new SimpleStringProperty(name);
         this.surname = new SimpleStringProperty(surname);
@@ -64,12 +63,12 @@ public class CitizenTemplateModel implements Cloneable {
         //initHealthConditions();
     }
 
-    public CitizenTemplateModel(CitizenTemplate template) {
+    public CitizenTemplateModel(Citizen template) {
         this.template = template;
 
-        this.name = new SimpleStringProperty(template.getBaseData().getName());
-        this.surname = new SimpleStringProperty(template.getBaseData().getSurname());
-        this.age = new SimpleIntegerProperty(template.getBaseData().getAge());
+        this.name = new SimpleStringProperty(template.getName());
+        this.surname = new SimpleStringProperty(template.getSurname());
+        this.age = new SimpleIntegerProperty(template.getAge());
 
         this.mastering.set(template.getGeneralInfo().getCoping());
         this.motivation.set(template.getGeneralInfo().getMotivation());
@@ -95,12 +94,12 @@ public class CitizenTemplateModel implements Cloneable {
 
     public CitizenTemplateModel()
     {
-        template = new CitizenTemplate();
+        template = new Citizen();
 
 
-        this.name = new SimpleStringProperty(template.getBaseData().getName());
-        this.surname = new SimpleStringProperty(template.getBaseData().getSurname());
-        this.age = new SimpleIntegerProperty(template.getBaseData().getAge());
+        this.name = new SimpleStringProperty(template.getName());
+        this.surname = new SimpleStringProperty(template.getSurname());
+        this.age = new SimpleIntegerProperty(template.getAge());
 
         this.mastering.set(template.getGeneralInfo().getCoping());
         this.motivation.set(template.getGeneralInfo().getMotivation());
@@ -128,9 +127,9 @@ public class CitizenTemplateModel implements Cloneable {
     }
 
     private void infoBind(){
-        this.name.bindBidirectional(new SimpleStringProperty(template.getBaseData().getName()));
-        this.surname.bindBidirectional(new SimpleStringProperty(template.getBaseData().getSurname()));
-        this.age.bindBidirectional(new SimpleIntegerProperty(template.getBaseData().getAge()));
+        this.name.bindBidirectional(new SimpleStringProperty(template.getName()));
+        this.surname.bindBidirectional(new SimpleStringProperty(template.getSurname()));
+        this.age.bindBidirectional(new SimpleIntegerProperty(template.getAge()));
 
         this.mastering.bindBidirectional(new SimpleStringProperty(template.getGeneralInfo().getCoping()));
         this.motivation.bindBidirectional(new SimpleStringProperty(template.getGeneralInfo().getMotivation()));
@@ -353,7 +352,7 @@ public class CitizenTemplateModel implements Cloneable {
         this.network.set(network);
     }
 
-    public CitizenTemplate getTemplate() {
+    public Citizen getTemplate() {
         return template;
     }
 

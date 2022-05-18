@@ -37,31 +37,35 @@ public class TeacherDataManager
     }
 
     public List getAllCitizenTemplates() {
-        List<CitizenTemplate> citizenTemplates = citizenTemplateDAO.readAll();
+        List<Citizen> citizenTemplates = citizenTemplateDAO.readAll();
 
 
         return citizenTemplates;
     }
 
-    public CitizenTemplate newCitizenTemplate() {
+    public Citizen newCitizenTemplate() {
         //Template
-        CitizenTemplate newTemplate = new CitizenTemplate();
+        Citizen newTemplate = new Citizen();
         generateCategoryEntries(newTemplate);
 
-        return (CitizenTemplate) citizenTemplateDAO.create(newTemplate);
+        return (Citizen) citizenTemplateDAO.create(newTemplate);
     }
 
-    public void deleteCitizenTemplate(CitizenTemplate template) {
+    public void deleteCitizenTemplate(Citizen template) {
     }
 
-    public void copyCitizenTemplate(CitizenTemplate template) {
+    public void copyCitizenTemplate(Citizen template) {
     }
 
-    public void updateCitizenTemplate(CitizenTemplate template, List<CategoryEntry> beHealthConditions, List<CategoryEntry> beFunctionalAbilities) {
+    public void updateCitizenTemplate(Citizen template, List<CategoryEntry> beHealthConditions, List<CategoryEntry> beFunctionalAbilities) {
     }
 
-    public void newCitizenEntity(CitizenTemplate template) {
-        citizenDAO.create(new Citizen(template));
+    public void newCitizenEntity(Citizen template) {
+        try {
+            citizenDAO.create(template.clone());
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void updateCitizenEntity(Citizen citizen) {
@@ -80,7 +84,7 @@ public class TeacherDataManager
      * Utility method to insert blank entries to the template
      * @param template
      */
-    private void generateCategoryEntries(CitizenTemplate template) {
+    private void generateCategoryEntries(Citizen template) {
         List<Category> categories = categoryDAO.readAll();
         List<CategoryEntry> healthConditions = new ArrayList<>();
         List<CategoryEntry> functionalAbilities = new ArrayList<>();

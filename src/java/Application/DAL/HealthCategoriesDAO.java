@@ -1,6 +1,5 @@
 package Application.DAL;
 
-import Application.BE.CitizenTemplate;
 import Application.DAL.DBConnector.DBConnectionPool;
 
 import java.sql.Connection;

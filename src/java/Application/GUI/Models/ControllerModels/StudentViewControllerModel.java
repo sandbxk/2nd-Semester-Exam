@@ -26,9 +26,6 @@ public class StudentViewControllerModel {
         //TODO
     }
 
-    public void onViewCases() {
-        //TODO
-    }
 
     public void onAddObservation() {
         //TODO
