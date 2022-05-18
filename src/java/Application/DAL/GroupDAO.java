@@ -91,7 +91,7 @@ public class GroupDAO extends TemplatePatternDAO<Group>
             return new Group( rs.getInt("GID"),
                     rs.getString("groupName"),
                     null,
-                    new Citizen(rs.getInt("Zip")));
+                    new Citizen(rs.getInt("FK_Citizen")));
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -122,7 +122,7 @@ public class GroupDAO extends TemplatePatternDAO<Group>
                                 rs.getInt("GID"),
                                 rs.getString("groupName"),
                                 null,
-                                new Citizen(rs.getInt("Zip"))
+                                new Citizen(rs.getInt("FK_Citizen"))
                         )
                 );
             }

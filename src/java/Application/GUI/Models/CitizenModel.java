@@ -1,7 +1,7 @@
 package Application.GUI.Models;
 
 import Application.BE.Category;
-import Application.BE.CategoryEntry;
+import Application.BE.ContentEntry;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -84,6 +84,7 @@ public class CitizenModel {
         initHealthConditions();
     }
 
+
     private void initProperties() {
         this.name = new SimpleStringProperty();
         this.surname = new SimpleStringProperty();
@@ -96,26 +97,26 @@ public class CitizenModel {
     }
 
     private void initFunctionalAbilities() {
-        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Walking"), 1)));
-        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Climbing"), 1)));
-        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Swimming"), 1)));
-        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Bathing"), 4)));
+        relevantFunctionalAbilities.add(new CategoryEntryModel(new ContentEntry(0, new Category("Walking"), 1)));
+        relevantFunctionalAbilities.add(new CategoryEntryModel(new ContentEntry(0, new Category("Climbing"), 1)));
+        relevantFunctionalAbilities.add(new CategoryEntryModel(new ContentEntry(0, new Category("Swimming"), 1)));
+        relevantFunctionalAbilities.add(new CategoryEntryModel(new ContentEntry(0, new Category("Bathing"), 4)));
 
-        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Sleeping"), 0)));
-        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Eating"), 0)));
-        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Toileting"), 0)));
+        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new ContentEntry(0, new Category("Sleeping"), 0)));
+        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new ContentEntry(0, new Category("Eating"), 0)));
+        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new ContentEntry(0, new Category("Toileting"), 0)));
     }
 
     private void initHealthConditions() {
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Diabetes"), 1)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("High Blood Pressure"), 1)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Heart Disease"), 1)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Asthma"), 1)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Epilepsy"), 1)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Allergies"), 1)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Other"), 1)));
+        relevantHealthConditions.add(new CategoryEntryModel(new ContentEntry(0, new Category("Diabetes"), 1)));
+        relevantHealthConditions.add(new CategoryEntryModel(new ContentEntry(0, new Category("High Blood Pressure"), 1)));
+        relevantHealthConditions.add(new CategoryEntryModel(new ContentEntry(0, new Category("Heart Disease"), 1)));
+        relevantHealthConditions.add(new CategoryEntryModel(new ContentEntry(0, new Category("Asthma"), 1)));
+        relevantHealthConditions.add(new CategoryEntryModel(new ContentEntry(0, new Category("Epilepsy"), 1)));
+        relevantHealthConditions.add(new CategoryEntryModel(new ContentEntry(0, new Category("Allergies"), 1)));
+        relevantHealthConditions.add(new CategoryEntryModel(new ContentEntry(0, new Category("Other"), 1)));
 
-        nonRelevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("None"), 0)));
+        nonRelevantHealthConditions.add(new CategoryEntryModel(new ContentEntry(0, new Category("None"), 0)));
 
     }
 

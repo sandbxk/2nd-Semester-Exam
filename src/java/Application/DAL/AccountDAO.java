@@ -240,4 +240,9 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
             DBConnectionPool.getInstance().checkIn(conn);
         }
     }
+
+    public Account read(String username)
+    {
+        return null;
+    }
 }

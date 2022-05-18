@@ -1,25 +1,28 @@
 package Application.BE;
 
-public class CategoryEntry {
+public class ContentEntry {
+
+    private Category category;
 
     private int id;
-    private Category category;
-    private int level;
+
     private String assessment = "";
     private String cause = "";
     private String implications = "";
+    private int currentStatus;
+    private int expectedStatus;
+
     private String citizenGoals = "";
-    private int expectedCondition;
     private String note = "";
 
 
-    public CategoryEntry(int id, Category category, int level) {
+    public ContentEntry(int id, Category category, int level) {
         this.id = id;
         this.category = category;
-        this.level = level;
+        this.currentStatus = level;
     }
 
-    public CategoryEntry(int id, Category category) {
+    public ContentEntry(int id, Category category) {
         this.id = id;
         this.category = category;
     }
@@ -44,12 +47,12 @@ public class CategoryEntry {
         return category.getName();
     }
 
-    public int getLevel() {
-        return level;
+    public int getCurrentStatus() {
+        return currentStatus;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public void setCurrentStatus(int currentStatus) {
+        this.currentStatus = currentStatus;
     }
 
     public String getAssessment() {
@@ -84,12 +87,12 @@ public class CategoryEntry {
         this.citizenGoals = citizenGoals;
     }
 
-    public int getExpectedCondition() {
-        return expectedCondition;
+    public int getExpectedStatus() {
+        return expectedStatus;
     }
 
-    public void setExpectedCondition(int expectedCondition) {
-        this.expectedCondition = expectedCondition;
+    public void setExpectedStatus(int expectedStatus) {
+        this.expectedStatus = expectedStatus;
     }
 
     public String getNote() {

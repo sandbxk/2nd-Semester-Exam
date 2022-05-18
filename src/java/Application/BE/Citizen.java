@@ -17,8 +17,8 @@ public class Citizen
     private int schoolID;
 
     private GeneralJournal generalJournal;
-    private HashMap<CategoryEntry, CategoryEntry> healthCategoryEntries;
-    private HashMap<CategoryEntry, CategoryEntry> funcCategoryEntries;
+    private HashMap<ContentEntry, ContentEntry> healthCategoryEntries;
+    private HashMap<ContentEntry, ContentEntry> funcCategoryEntries;
 
     public Citizen(int id)
     {
@@ -35,7 +35,6 @@ public class Citizen
         this.zipCode = zipCode;
         this.schoolID = schoolID;
     }
-
 
 
 

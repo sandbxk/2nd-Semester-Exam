@@ -1,6 +1,6 @@
 package Application.GUI.Models.ControllerModels;
 
-import Application.BE.CategoryEntry;
+import Application.BE.ContentEntry;
 import Application.BLL.TeacherDataManager;
 import Application.GUI.Models.*;
 import javafx.collections.FXCollections;
@@ -197,8 +197,8 @@ public class CitizenTemplateControllerModel {
             }
 
             //Unwrap BE
-            List<CategoryEntry> beHealthConditions = dbWriteHealthConditions.stream().map(categoryEntryModel -> categoryEntryModel.getCategoryEntry()).collect(Collectors.toList());
-            List<CategoryEntry> beFunctionalAbilities = dbWriteFunctionalAbilities.stream().map(categoryEntryModel -> categoryEntryModel.getCategoryEntry()).collect(Collectors.toList());
+            List<ContentEntry> beHealthConditions = dbWriteHealthConditions.stream().map(categoryEntryModel -> categoryEntryModel.getCategoryEntry()).collect(Collectors.toList());
+            List<ContentEntry> beFunctionalAbilities = dbWriteFunctionalAbilities.stream().map(categoryEntryModel -> categoryEntryModel.getCategoryEntry()).collect(Collectors.toList());
 
             //Write changes to the database
           //  teacherDataManager.updateCitizenTemplate(selectedCitizenTemplateModel.getTemplate(), beHealthConditions, beFunctionalAbilities);
