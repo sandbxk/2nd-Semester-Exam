@@ -8,12 +8,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
+import java.util.ListResourceBundle;
 import java.util.ResourceBundle;
 
 public class StudentViewController implements Initializable {
@@ -32,6 +38,7 @@ public class StudentViewController implements Initializable {
     @FXML public TableColumn<CategoryEntryModel, ImageView> tblColumnStudentDashboardFuncLevel;
     @FXML public TableColumn<CategoryEntryModel, String> tblColumnStudentDashboardFuncNote;
 
+    public Button btnOpenDetails;
 
 
     private StudentViewControllerModel model = new StudentViewControllerModel();
@@ -41,6 +48,13 @@ public class StudentViewController implements Initializable {
         initTableViews();
         initListViewCitizens();
         initTestData();
+        initBundle(resources);
+    }
+
+    private void initBundle(ResourceBundle bundle) {
+        if (bundle.getObject("selectedCitizen") != null){
+            listViewCitizens.getSelectionModel().select((CitizenModel) bundle.getObject("selectedCitizen"));
+        }
     }
 
     private void initTestData() {
@@ -88,13 +102,29 @@ public class StudentViewController implements Initializable {
         model.onStudentCitizensSearch();
     }
 
-    public void onOpenJournal(ActionEvent event) {
-        model.onOpenJournal();
+    public void onOpenDetails(ActionEvent event) {
+        Stage stage = (Stage) btnOpenDetails.getScene().getWindow();
+        Parent root = null;
+
+        try {
+            ResourceBundle resources = new ListResourceBundle()
+            {
+                @Override
+                protected Object[][] getContents()
+                {
+                    return new Object[][]{  {"selectedCitizen", model.getSelectedCitizen()}};
+                }
+            };
+
+            root = FXMLLoader.load(getClass().getResource("/Views/Popups/CitizenDetailsView.fxml"), resources);
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void onViewCases(ActionEvent event) {
-        model.onViewCases();
-    }
 
     public void onAddObservation(ActionEvent event) {
         model.onAddObservation();

@@ -49,14 +49,9 @@
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <HBox maxWidth="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="438.0" GridPane.halignment="CENTER">
+                  <HBox maxWidth="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="290.0" GridPane.halignment="CENTER">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#onOpenJournal" prefHeight="50.0" prefWidth="135.0" styleClass="studentBackgroundButton" text="Åben Journal">
-                           <HBox.margin>
-                              <Insets right="15.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#onViewCases" prefHeight="50.0" prefWidth="135.0" styleClass="studentBackgroundButton" text="Tilgå Sager">
+                        <Button fx:id="btnOpenDetails" mnemonicParsing="false" onAction="#onOpenDetails" prefHeight="50.0" prefWidth="135.0" styleClass="studentBackgroundButton" text="Åben Detaljer">
                            <HBox.margin>
                               <Insets right="15.0" />
                            </HBox.margin>

@@ -5,7 +5,9 @@ import Application.DAL.TemplateMethod.Annotations.SQLGetter;
 import Application.DAL.TemplateMethod.Annotations.SQLSetter;
 import Application.DAL.TemplateMethod.Annotations.SQLTable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @SQLTable(name = "citizen")
 public class Citizen
@@ -13,111 +15,50 @@ public class Citizen
     @SQLColumn(name = "citizenId")
     private int id;
 
-    @SQLColumn(name = "cFirstName")
-    private String firstname;
 
-    @SQLColumn(name = "cSurname")
-    private String lastname;
-
-    @SQLColumn(name = "cAge")
-    private int age;
-
-    @SQLColumn(name = "cStreet")
-    private int streetID;
-
-    @SQLColumn(name = "cStreetNumber")
-    private int streetNumber;
-
-    @SQLColumn(name = "cZipCode")
-    private int zipCode;
-
-    @SQLColumn(name = "cSchool")
-    private int schoolID;
 
     private CitizenBaseData citizenBaseData;
     private GeneralJournal generalJournal;
-    private HashMap<CategoryEntry, CategoryEntry> healthCategoryEntries;
-    private HashMap<CategoryEntry, CategoryEntry> funcCategoryEntries;
+    private final List<CategoryEntry> functionalAbilities;
+    private final List<CategoryEntry> healthConditions;
 
-    public Citizen(int id, String firstname, String lastname, int age, int streetID, int streetNumber, int zipCode, int schoolID) {
+    public Citizen(int id, CitizenBaseData baseData, GeneralJournal generalJournal) {
         this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.age = age;
-        this.streetID = streetID;
-        this.streetNumber = streetNumber;
-        this.zipCode = zipCode;
-        this.schoolID = schoolID;
+        this.citizenBaseData = baseData;
+        this.generalJournal = generalJournal;
+
+        this.functionalAbilities = new ArrayList<>();
+        this.healthConditions = new ArrayList<>();
     }
 
     public Citizen(CitizenTemplate template) {
         this.id = -1;
         this.citizenBaseData = template.getBaseData();
         this.generalJournal = template.getGeneralInfo();
-        this.healthCategoryEntries = new HashMap<>();
-        this.funcCategoryEntries = new HashMap<>();
-
+        this.functionalAbilities = new ArrayList<>(template.getFunctionalAbilities());
+        this.healthConditions = new ArrayList<>(template.getHealthConditions());
     }
 
 
-    @SQLGetter(name = "cStreetNumber")
-    public int getStreetNumber() {
-        return streetNumber;
-    }
-
-    @SQLSetter(name = "cStreetNumber")
-    public void setStreetNumber(int streetNumber) {
-        this.streetNumber = streetNumber;
-    }
-
-    @SQLGetter(name = "cZipCode")
-    public int getZipCode() {
-        return zipCode;
-    }
-
-    @SQLSetter(name = "cZipCode")
-    public void setZipCode(int zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    @SQLGetter(name = "cSchool")
-    public int getSchoolID() {
-        return schoolID;
-    }
-
-    @SQLSetter(name = "cSchool")
-    public void setSchoolID(int schoolID) {
-        this.schoolID = schoolID;
-    }
-
-    @SQLGetter(name = "cStreet")
-    public int getStreetID() {
-        return streetID;
-    }
-
-    @SQLSetter(name = "cStreet")
-    public void setStreetID(int streetID) {
-        this.streetID = streetID;
-    }
 
     @SQLGetter(name = "cAge")
     public int getAge() {
-        return age;
+        return this.citizenBaseData.getAge();
     }
 
     @SQLSetter(name = "cAge")
     public void setAge(int age) {
-        this.age = age;
+        this.citizenBaseData.setAge(age);
     }
 
     @SQLGetter(name = "cFirstName")
     public String getFirstname() {
-        return firstname;
+        return citizenBaseData.getName();
     }
 
     @SQLSetter(name = "cFirstName")
     public void setFirstname(String firstname) {
-        this.firstname = firstname;
+        this.citizenBaseData.setName(firstname);
     }
 
     @SQLGetter(name = "citizenId")
@@ -132,13 +73,35 @@ public class Citizen
 
     @SQLGetter(name = "cSurname")
     public String getLastname() {
-        return lastname;
+        return this.citizenBaseData.getSurname();
     }
 
     @SQLSetter(name = "cSurname")
     public void setLastname(String lastname) {
-        this.lastname = lastname;
+        this.citizenBaseData.setSurname(lastname);
     }
 
+    public CitizenBaseData getCitizenBaseData() {
+        return citizenBaseData;
+    }
 
+    public void setCitizenBaseData(CitizenBaseData citizenBaseData) {
+        this.citizenBaseData = citizenBaseData;
+    }
+
+    public GeneralJournal getGeneralInfo() {
+        return generalJournal;
+    }
+
+    public void setGeneralInfo(GeneralJournal generalJournal) {
+        this.generalJournal = generalJournal;
+    }
+
+    public List<CategoryEntry> getFunctionalAbilities() {
+        return functionalAbilities;
+    }
+
+    public List<CategoryEntry> getHealthConditions() {
+        return healthConditions;
+    }
 }

@@ -2,7 +2,7 @@ package Application.BE;
 
 public class GeneralJournal
 {
-    private String mastering;
+    private String coping;
     private String motivation;
     private String resources;
     private String roles;
@@ -16,7 +16,7 @@ public class GeneralJournal
 
     public GeneralJournal()
     {
-        this.mastering = "";
+        this.coping = "";
         this.motivation = "";
         this.resources = "";
         this.roles = "";
@@ -29,8 +29,8 @@ public class GeneralJournal
         this.network = "";
     }
 
-    public GeneralJournal(String mastering, String motivation, String resources, String roles, String habits, String eduAndJob, String lifeStory, String healthInfo, String assistiveDevices, String homeLayout, String network) {
-        this.mastering = mastering;
+    public GeneralJournal(String coping, String motivation, String resources, String roles, String habits, String eduAndJob, String lifeStory, String healthInfo, String assistiveDevices, String homeLayout, String network) {
+        this.coping = coping;
         this.motivation = motivation;
         this.resources = resources;
         this.roles = roles;
@@ -43,12 +43,14 @@ public class GeneralJournal
         this.network = network;
     }
 
-    public String getMastering() {
-        return mastering;
+    public String getCoping() {
+        return coping;
     }
 
-    public void setMastering(String mastering) {
-        this.mastering = mastering;
+    public void setCoping(String coping) {
+        if (coping == null)
+            this.coping = "";
+        else this.coping = coping;
     }
 
     public String getMotivation() {
@@ -56,7 +58,9 @@ public class GeneralJournal
     }
 
     public void setMotivation(String motivation) {
-        this.motivation = motivation;
+        if (motivation == null)
+            this.motivation = "";
+        else this.motivation = motivation;
     }
 
     public String getResources() {
@@ -64,7 +68,9 @@ public class GeneralJournal
     }
 
     public void setResources(String resources) {
-        this.resources = resources;
+        if (resources == null)
+            this.resources = "";
+        else this.resources = resources;
     }
 
     public String getRoles() {
@@ -72,7 +78,9 @@ public class GeneralJournal
     }
 
     public void setRoles(String roles) {
-        this.roles = roles;
+        if (roles == null)
+            this.roles = "";
+        else this.roles = roles;
     }
 
     public String getHabits() {
@@ -80,7 +88,9 @@ public class GeneralJournal
     }
 
     public void setHabits(String habits) {
-        this.habits = habits;
+        if (habits == null)
+            this.habits = "";
+        else this.habits = habits;
     }
 
     public String getEduAndJob() {
@@ -88,7 +98,9 @@ public class GeneralJournal
     }
 
     public void setEduAndJob(String eduAndJob) {
-        this.eduAndJob = eduAndJob;
+        if (eduAndJob == null)
+            this.eduAndJob = "";
+        else this.eduAndJob = eduAndJob;
     }
 
     public String getLifeStory() {
@@ -96,7 +108,9 @@ public class GeneralJournal
     }
 
     public void setLifeStory(String lifeStory) {
-        this.lifeStory = lifeStory;
+        if (lifeStory == null)
+            this.lifeStory = "";
+        else this.lifeStory = lifeStory;
     }
 
     public String getHealthInfo() {
@@ -104,7 +118,9 @@ public class GeneralJournal
     }
 
     public void setHealthInfo(String healthInfo) {
-        this.healthInfo = healthInfo;
+        if (healthInfo == null)
+            this.healthInfo = "";
+        else this.healthInfo = healthInfo;
     }
 
     public String getAssistiveDevices() {
@@ -112,7 +128,9 @@ public class GeneralJournal
     }
 
     public void setAssistiveDevices(String assistiveDevices) {
-        this.assistiveDevices = assistiveDevices;
+        if (assistiveDevices == null)
+            this.assistiveDevices = "";
+        else this.assistiveDevices = assistiveDevices;
     }
 
     public String getHomeLayout() {
@@ -120,7 +138,9 @@ public class GeneralJournal
     }
 
     public void setHomeLayout(String homeLayout) {
-        this.homeLayout = homeLayout;
+        if (homeLayout == null)
+            this.homeLayout = "";
+        else this.homeLayout = homeLayout;
     }
 
     public String getNetwork() {
@@ -128,6 +148,8 @@ public class GeneralJournal
     }
 
     public void setNetwork(String network) {
-        this.network = network;
+        if (network == null)
+            this.network = "";
+        else this.network = network;
     }
 }
