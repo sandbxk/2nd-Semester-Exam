@@ -34,8 +34,10 @@ public class StudentViewControllerModel {
         //TODO
     }
 
-    public ObservableList<CitizenModel> getAllCitizens() {
-        return studentDataManager.getAllCitizens();
+    public ObservableList<CitizenModel> getAllCitizens()
+    {
+      //  return studentDataManager.getAllCitizens();
+        return null;
     }
 
     public CitizenModel getSelectedCitizen() {

@@ -1,6 +1,6 @@
 package Application.GUI.Models.ControllerModels;
 
-import Application.BE.CategoryEntry;
+import Application.BE.ContentEntry;
 import Application.BLL.TeacherDataManager;
 import Application.GUI.Models.*;
 import javafx.collections.FXCollections;
@@ -15,10 +15,10 @@ public class CitizenTemplateControllerModel {
 
     private TeacherDataManager teacherDataManager;
 
-    private CitizenTemplateModel selectedCitizenTemplateModel;
+    private CitizenModel selectedCitizenTemplateModel;
 
     //Copy from before the editMode is activated
-    private CitizenTemplateModel preEditCitizenTemplateModel;
+    private CitizenModel preEditCitizenTemplateModel;
 
     public CitizenTemplateControllerModel() {
         teacherDataManager = new TeacherDataManager();
@@ -31,24 +31,24 @@ public class CitizenTemplateControllerModel {
      * Get all the citizen templates from the DB and put them in a list.
      * @return
      */
-    public ObservableList<CitizenTemplateModel> getCitizenTemplates() {
-        ObservableList<CitizenTemplateModel> citizenTemplates = FXCollections.observableArrayList();
-        citizenTemplates.add(new CitizenTemplateModel("John", "Jørgensen", 53));
-        citizenTemplates.add(new CitizenTemplateModel("Mark", "Hansen", 9));
+    public ObservableList<CitizenModel> getCitizenTemplates() {
+        ObservableList<CitizenModel> citizenTemplates = FXCollections.observableArrayList();
+        citizenTemplates.add(new CitizenModel("John", "Jørgensen", 53));
+        citizenTemplates.add(new CitizenModel("Mark", "Hansen", 9));
         return citizenTemplates;
     }
 
     /**
      * Set the selected citizen template.
      **/
-    public void setSelectedCitizenTemplateModel(CitizenTemplateModel selectedCitizenTemplateModel) {
+    public void setSelectedCitizenTemplateModel(CitizenModel selectedCitizenTemplateModel) {
         this.selectedCitizenTemplateModel = selectedCitizenTemplateModel;
     }
 
     /**
      * Get the selected citizen template.
      **/
-    public CitizenTemplateModel getSelectedCitizenTemplateModel() {
+    public CitizenModel getSelectedCitizenTemplateModel() {
         return selectedCitizenTemplateModel;
     }
 
@@ -91,8 +91,8 @@ public class CitizenTemplateControllerModel {
      * Returns the instance for it to be added to the list in the GUI.
      * @return
      */
-    public CitizenTemplateModel newCitizenTemplate() {
-        CitizenTemplateModel CitizenTemplateModel = new CitizenTemplateModel(teacherDataManager.newCitizenTemplate());
+    public CitizenModel newCitizenTemplate() {
+        CitizenModel CitizenTemplateModel = new CitizenModel();
 
         return CitizenTemplateModel;
     }
@@ -101,22 +101,17 @@ public class CitizenTemplateControllerModel {
      * Delete the selected citizen template.
      **/
     public void deleteCitizenTemplate() {
-        teacherDataManager.deleteCitizenTemplate(selectedCitizenTemplateModel.getTemplate());
+        //teacherDataManager.deleteCitizen(selectedCitizenTemplateModel.getTemplate());
     }
 
     /**
      * Creates a copy of the citizen template and writes it to the DB.
      */
-    public CitizenTemplateModel copyCitizenTemplate() {
-        try {
-            CitizenTemplateModel clone = (CitizenTemplateModel) selectedCitizenTemplateModel.clone();
-            teacherDataManager.copyCitizenTemplate(clone.getTemplate());
+    public CitizenModel copyCitizenTemplate() {
+        //CitizenModel clone = (CitizenModel) selectedCitizenTemplateModel.clone();
+        //teacherDataManager.copyTemplate(clone.getTemplate());
 
-            return clone;
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return null; //clone;
     }
 
 
@@ -124,11 +119,7 @@ public class CitizenTemplateControllerModel {
      * Creates a copy of the citizen template and stores it in the preEditCitizenTemplateModel variable for later user.
      */
     public void savePreEditState() {
-        try {
-            this.preEditCitizenTemplateModel = (CitizenTemplateModel) selectedCitizenTemplateModel.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        //  this.preEditCitizenTemplateModel = (CitizenModel) selectedCitizenTemplateModel.clone();
     }
 
     /**
@@ -206,11 +197,11 @@ public class CitizenTemplateControllerModel {
             }
 
             //Unwrap BE
-            List<CategoryEntry> beHealthConditions = dbWriteHealthConditions.stream().map(categoryEntryModel -> categoryEntryModel.getCategoryEntry()).collect(Collectors.toList());
-            List<CategoryEntry> beFunctionalAbilities = dbWriteFunctionalAbilities.stream().map(categoryEntryModel -> categoryEntryModel.getCategoryEntry()).collect(Collectors.toList());
+            List<ContentEntry> beHealthConditions = dbWriteHealthConditions.stream().map(categoryEntryModel -> categoryEntryModel.getCategoryEntry()).collect(Collectors.toList());
+            List<ContentEntry> beFunctionalAbilities = dbWriteFunctionalAbilities.stream().map(categoryEntryModel -> categoryEntryModel.getCategoryEntry()).collect(Collectors.toList());
 
             //Write changes to the database
-            teacherDataManager.updateCitizenTemplate(selectedCitizenTemplateModel.getTemplate(), beHealthConditions, beFunctionalAbilities);
+          //  teacherDataManager.updateCitizenTemplate(selectedCitizenTemplateModel.getTemplate(), beHealthConditions, beFunctionalAbilities);
         }
     }
 
@@ -219,13 +210,14 @@ public class CitizenTemplateControllerModel {
     /**
      * Gets the pre edit citizen template.
      * @return
+     *
      */
-    public CitizenTemplateModel getPreEditState() {
+    public CitizenModel getPreEditState() {
         return preEditCitizenTemplateModel;
     }
 
 
     public void newCitizenEntity() {
-        teacherDataManager.newCitizenEntity(selectedCitizenTemplateModel.getTemplate());
+        //teacherDataManager.newCitizenEntity(selectedCitizenTemplateModel.getTemplate());
     }
 }

@@ -1,9 +1,8 @@
 package Application.DAL;
 
-import Application.BE.Location;
-import Application.BE.School;
+import Application.BE.Citizen;
+import Application.BE.Group;
 import Application.DAL.DBConnector.DBConnectionPool;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,11 +11,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SchoolDAO extends TemplatePatternDAO<School>
+public class GroupDAO extends TemplatePatternDAO<Group>
 {
+
     @Override
-    public School create(School input) {
-        String sql = "INSERT INTO School (schoolName, FK_Zipcode) VALUES (?, ?)";
+    public Group create(Group input)
+    {
+        String sql = "INSERT INTO 'Group' (groupName, FK_Citizen) VALUES (?, ?)";
 
         Connection conn = DBConnectionPool.getInstance().checkOut();
 
@@ -24,8 +25,9 @@ public class SchoolDAO extends TemplatePatternDAO<School>
         {
             PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
-            pstmt.setString(1,input.getSchoolName());
-            pstmt.setInt(2, input.getLocation().getZipCode());
+            pstmt.setString(1,input.getGroupName());
+            pstmt.setInt(2, input.getAssignedCitizen().getId());
+
             pstmt.execute();
 
             int id = -1;
@@ -37,7 +39,9 @@ public class SchoolDAO extends TemplatePatternDAO<School>
 
             pstmt.close();
 
-            return new School(id, input.getSchoolName(), new Location(input.getLocation().getZipCode()));
+            input.setId(id);
+
+            return input;
 
         }
         catch (SQLException throwable)
@@ -52,16 +56,17 @@ public class SchoolDAO extends TemplatePatternDAO<School>
     }
 
     @Override
-    public void update(School input) {
-        String sql = "UPDATE school SET schoolName =  ?, FK_Zipcode = ? WHERE SID = ?";
+    public void update(Group input) {
+        String sql = "UPDATE [Group] SET groupName =  ?, FK_Citizen = ? WHERE GID = ?";
 
         Connection conn = DBConnectionPool.getInstance().checkOut();
+
         try {
             PreparedStatement psus = conn.prepareStatement(sql);
 
-            psus.setString(1, input.getSchoolName());
-            psus.setInt(2, input.getLocation().getZipCode());
-            psus.setInt(3, input.getSchoolID());
+            psus.setString(1, input.getGroupName());
+            psus.setInt(2, input.getAssignedCitizen().getId());
+            psus.setInt(3, input.getId());
             psus.executeUpdate();
             psus.close();
         } catch (SQLException throwable) {
@@ -72,36 +77,57 @@ public class SchoolDAO extends TemplatePatternDAO<School>
     }
 
     @Override
-    public School read(int id) {
-        return null;
+    public Group read(int id) {
+        String sqlRead = "SELECT * FROM [Group] WHERE GID = ?";
+
+
+        Connection conn = DBConnectionPool.getInstance().checkOut();
+
+        try {
+            PreparedStatement psas = conn.prepareStatement(sqlRead);
+
+            ResultSet rs = psas.executeQuery();
+            rs.next();
+            return new Group( rs.getInt("GID"),
+                    rs.getString("groupName"),
+                    null,
+                    new Citizen(rs.getInt("FK_Citizen")));
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        finally {
+            DBConnectionPool.getInstance().checkIn(conn);
+        }
     }
 
     @Override
-    public List<School> readAll() {
-        String sqlRead = "SELECT * FROM school JOIN Zipcode ON school.FK_Zipcode = ZipCode.Zip";
+    public List<Group> readAll()
+    {
+        String sqlRead = "SELECT * FROM [Group]";
 
-        List<School> schoolList = new ArrayList<>();
+        List<Group> groups = new ArrayList<>();
 
         Connection conn = DBConnectionPool.getInstance().checkOut();
+
         try {
             PreparedStatement psas = conn.prepareStatement(sqlRead);
 
             ResultSet rs = psas.executeQuery();
 
             while (rs.next()) {
-                schoolList.add(
-                        new School(
-                                rs.getInt("id"),
-                                rs.getString("schoolName"),
-                                new Location(
-                                        rs.getInt("Zip"),
-                                        rs.getString("city")
-                                )
+                groups.add(
+                        new Group(
+                                rs.getInt("GID"),
+                                rs.getString("groupName"),
+                                null,
+                                new Citizen(rs.getInt("FK_Citizen"))
                         )
                 );
             }
 
-            return schoolList;
+            return groups;
         } catch (Exception e)
         {
             e.printStackTrace();
@@ -115,7 +141,7 @@ public class SchoolDAO extends TemplatePatternDAO<School>
     @Override
     public void delete(int id)
     {
-        String sql = "DELETE FROM School WHERE SID = ?";
+        String sql = "DELETE FROM [Group] WHERE GID = ?";
 
         Connection conn = DBConnectionPool.getInstance().checkOut();
 

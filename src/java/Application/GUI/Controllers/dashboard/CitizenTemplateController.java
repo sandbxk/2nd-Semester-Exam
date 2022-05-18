@@ -2,7 +2,7 @@ package Application.GUI.Controllers.dashboard;
 
 import Application.BE.GeneralJournal;
 import Application.GUI.Models.CategoryEntryModel;
-import Application.GUI.Models.CitizenTemplateModel;
+import Application.GUI.Models.CitizenModel;
 import Application.GUI.Models.ControllerModels.CitizenTemplateControllerModel;
 import Application.GUI.Models.FunctionalLevels;
 import Application.GUI.Models.HealthLevels;
@@ -25,7 +25,7 @@ import java.util.*;
 public class CitizenTemplateController implements Initializable {
 
     public AnchorPane anchorPaneCitizenTemplateDashboard;
-    public ListView<CitizenTemplateModel> listViewCitizenTemplates;
+    public ListView<CitizenModel> listViewCitizenTemplates;
     public TextField txtFieldCitizenTemplateSearch;
     public Button btnCitizenTemplateSearch;
     public TextField txtFieldName;
@@ -70,7 +70,7 @@ public class CitizenTemplateController implements Initializable {
     public TextArea txtAreaGenInfoHomeLayout;
     public TextArea txtAreaGenInfoNetwork;
 
-    private CitizenTemplateControllerModel model = new CitizenTemplateControllerModel();
+   // private CitizenTemplateControllerModel model = new CitizenTemplateControllerModel();
     private ContextMenu actionsMenu = new ContextMenu();
     private List<TreeTableColumn<CategoryEntryModel, String>> editableTreeTableColumns = new ArrayList<>();
     private List<TextArea> editableTextAreas = new ArrayList<>();
@@ -94,7 +94,7 @@ public class CitizenTemplateController implements Initializable {
 
 
     public void onCitizenTemplateSearch(ActionEvent event) {
-        model.citizenTemplateSearch();
+       // model.citizenTemplateSearch();
         //TODO: Implement search
     }
 
@@ -142,7 +142,7 @@ public class CitizenTemplateController implements Initializable {
      * Creates a new blank citizen template.
      */
     private void onNewCitizenTemplate() {
-        listViewCitizenTemplates.getItems().add(model.newCitizenTemplate());
+        listViewCitizenTemplates.getItems().add(null);
     }
 
     /**
@@ -158,7 +158,7 @@ public class CitizenTemplateController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             listViewCitizenTemplates.getItems().remove(listViewCitizenTemplates.getSelectionModel().getSelectedItem());
-            model.deleteCitizenTemplate();
+            // model.deleteCitizenTemplate();
         }
     }
 
@@ -166,12 +166,12 @@ public class CitizenTemplateController implements Initializable {
      * Creates a copy of the selected citizen template.
      */
     private void onCopyCitizenTemplate() {
-        listViewCitizenTemplates.getItems().add(model.copyCitizenTemplate());
+        listViewCitizenTemplates.getItems().add(null);
     }
 
     private void onNewCitizenEntity() {
         try {
-            model.newCitizenEntity();
+            //model.newCitizenEntity();
             Notifications notifications = Notifications.create();
             notifications.title("Ny borger");
             notifications.text("Borger er oprettet");
@@ -189,7 +189,7 @@ public class CitizenTemplateController implements Initializable {
     private void setFuncTreeTable() {
         //TODO: Proper table population
         // Set up the table
-        CitizenTemplateModel citizenTemplateModel = new CitizenTemplateModel();
+        CitizenModel citizenTemplateModel = new CitizenModel();
 
         ObservableList<CategoryEntryModel> func = citizenTemplateModel.getRelevantFunctionalAbilities();
         ObservableList<CategoryEntryModel> health = citizenTemplateModel.getRelevantHealthConditions();
@@ -288,20 +288,20 @@ public class CitizenTemplateController implements Initializable {
      * which calls the setDataToCitizenTemplatesList() method when the selected citizenTemplate changes.
      */
     private void initCitizenTemplatesList() {
-        listViewCitizenTemplates.setItems(model.getCitizenTemplates());
+        listViewCitizenTemplates.setItems(null);
 
         listViewCitizenTemplates.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            model.setSelectedCitizenTemplateModel((CitizenTemplateModel) newValue);
-            setDataToCitizenTemplateView();
+            // model.setSelectedCitizenTemplateModel((CitizenTemplateModel) newValue);
+            //setDataToCitizenTemplateView();
         });
 
         listViewCitizenTemplates.getSelectionModel().select(0);
     }
 
-
+/*
     /**
      * sets every compononent of the citizen template view to the values of the selected citizen template.
-     */
+     *
     private void setDataToCitizenTemplateView() {
         if (model.getSelectedCitizenTemplateModel() != null) {
             //set the base data of name, surname and age to that of the selected citizen template
@@ -338,6 +338,7 @@ public class CitizenTemplateController implements Initializable {
         }
 
     }
+    */
 
     /**
      * Sets the tables and relevant columns to editable or not. The same applies to the combo boxes within the level columns.
@@ -404,9 +405,9 @@ public class CitizenTemplateController implements Initializable {
      * @param event
      */
     public void onEditOn(ActionEvent event) {
-        model.savePreEditState();
-        treeTblViewFunc.setRoot(model.getAllFuncCategoriesAsTreeItem());
-        treeTblViewHealth.setRoot(model.getAllHealthConditionsAsTreeItem());
+       //model.savePreEditState();
+       //treeTblViewFunc.setRoot(model.getAllFuncCategoriesAsTreeItem());
+       //treeTblViewHealth.setRoot(model.getAllHealthConditionsAsTreeItem());
         setEditable(true);
 
     }
@@ -426,6 +427,7 @@ public class CitizenTemplateController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
+            /*
             CitizenTemplateModel selected = model.getSelectedCitizenTemplateModel();
             if (selected.getName() != txtFieldName.getText() && !txtFieldName.getText().isEmpty()) {
                 selected.setName(txtFieldName.getText());
@@ -455,6 +457,8 @@ public class CitizenTemplateController implements Initializable {
             treeTblViewFunc.setRoot(model.getRelevantFuncCategoriesAsTreeItem());
             treeTblViewHealth.setRoot(model.getRelevantHealthCategoriesAsTreeItem());
             setEditable(false);
+
+             */
         }
     }
 
@@ -464,11 +468,14 @@ public class CitizenTemplateController implements Initializable {
      * @param event
      */
     public void onEditCancel(ActionEvent event) {
+        /*
         ObservableList<CitizenTemplateModel> templateModelObservableList = listViewCitizenTemplates.getItems();
         int index = templateModelObservableList.indexOf(model.getSelectedCitizenTemplateModel());
         listViewCitizenTemplates.getItems().set(index, model.getPreEditState());
         listViewCitizenTemplates.getSelectionModel().select(index);
         setEditable(false);
+
+         */
     }
 
     /**
