@@ -8,13 +8,12 @@ import java.util.HashMap;
 public class Citizen
 {
     private int id;
+    private GeneralJournal journal;
+    private School school;
     private String firstname;
     private String lastname;
     private int age;
-    private int streetID;
-    private int streetNumber;
     private int zipCode;
-    private int schoolID;
 
     private GeneralJournal generalJournal;
     private HashMap<ContentEntry, ContentEntry> healthCategoryEntries;
@@ -25,28 +24,16 @@ public class Citizen
         this.id = id;
     }
 
-    public Citizen(int id, GeneralJournal journal, School school, String firstname, String lastname, int age) {
+    public Citizen(int id, GeneralJournal journal, School school, String firstname, String lastname, int age)
+    {
         this.id = id;
+        this.journal = journal;
+        this.school = school;
         this.firstname = firstname;
         this.lastname = lastname;
         this.age = age;
-        this.streetID = streetID;
-        this.streetNumber = streetNumber;
-        this.zipCode = zipCode;
-        this.schoolID = schoolID;
     }
 
-
-
-    @SQLGetter(name = "cStreetNumber")
-    public int getStreetNumber() {
-        return streetNumber;
-    }
-
-    @SQLSetter(name = "cStreetNumber")
-    public void setStreetNumber(int streetNumber) {
-        this.streetNumber = streetNumber;
-    }
 
     @SQLGetter(name = "cZipCode")
     public int getZipCode() {
@@ -58,34 +45,9 @@ public class Citizen
         this.zipCode = zipCode;
     }
 
-    @SQLGetter(name = "cSchool")
-    public int getSchoolID() {
-        return schoolID;
-    }
-
-    @SQLSetter(name = "cSchool")
-    public void setSchoolID(int schoolID) {
-        this.schoolID = schoolID;
-    }
-
-    @SQLGetter(name = "cStreet")
-    public int getStreetID() {
-        return streetID;
-    }
-
-    @SQLSetter(name = "cStreet")
-    public void setStreetID(int streetID) {
-        this.streetID = streetID;
-    }
-
     @SQLGetter(name = "cAge")
     public int getAge() {
         return age;
-    }
-
-    @SQLSetter(name = "cAge")
-    public void setAge(int age) {
-        this.age = age;
     }
 
     @SQLGetter(name = "cFirstName")
@@ -113,10 +75,23 @@ public class Citizen
         return lastname;
     }
 
-    @SQLSetter(name = "cSurname")
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public GeneralJournal getJournal()
+    {
+        return journal;
     }
 
+    public void setJournal(GeneralJournal journal)
+    {
+        this.journal = journal;
+    }
 
+    public School getSchool()
+    {
+        return school;
+    }
+
+    public void setSchool(School school)
+    {
+        this.school = school;
+    }
 }
