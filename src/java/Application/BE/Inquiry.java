@@ -1,5 +1,6 @@
 package Application.BE;
 
+@Deprecated
 public class Inquiry
 {
     private int id;

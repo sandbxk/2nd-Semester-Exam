@@ -1,7 +1,7 @@
 package Application.DAL;
 
 import Application.BE.Account;
-import Application.BE.CitizenTemplate;
+import Application.BE.City;
 import Application.BE.School;
 import Application.DAL.DBConnector.DBConnectionPool;
 
@@ -22,14 +22,14 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
     @Override
     public Account create(Account input) {
         String sql = """
-                    INSERT INTO accounts (login, password, firstName, surname, email, school, auth) 
+                    INSERT INTO Account (username, hashed_pwd, firstName, lastname, email, FK_AccountSchool, privilegeLevel) 
                     VALUES (?, ?, ?, ?, ?, ?, ?)
                     """;
 
         Connection conn = DBConnectionPool.getInstance().checkOut();
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1, input.getLogin());
+            pstmt.setString(1, input.getUsername());
             pstmt.setString(2, input.getPassword());
             pstmt.setString(3, input.getFirstName());
             pstmt.setString(4, input.getLastName());
@@ -49,7 +49,7 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
             pstmt.close();
             return new Account(
                     id,
-                    input.getLogin(),
+                    input.getUsername(),
                     input.getPassword(),
                     input.getFirstName(),
                     input.getLastName(),
@@ -76,7 +76,7 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
     public void delete(int accountid){
         String sql = """
                     DELETE FROM account
-                    WHERE id = ?
+                    WHERE AID = ?
                     """;
 
         Connection conn = DBConnectionPool.getInstance().checkOut();
@@ -105,10 +105,10 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
     @Override
     public Account read(int accountID){
         String sql = """
-                    SELECT * FROM accounts
-                    JOIN schools ON accounts.school = schools.schoolId
-                    JOIN zipCode ON schools.schoolZipCode = zipCode.zipCode
-                    WHERE accountId = ?
+                    SELECT * FROM Account
+                    JOIN School ON Account.FK_AccountSchool = School.SID
+                    JOIN zipCode ON School.FK_Zipcode = zipCode.Zip
+                    WHERE AID = ?
                     """;
 
         School school = null;
@@ -127,8 +127,7 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
                 school = new School(
                         rs.getInt("schoolId"),
                         rs.getString("schoolName"),
-                        rs.getInt("schoolZipCode"),
-                        rs.getString("cityName")
+                        new City(rs.getInt("zipCode"), rs.getString("cityName"))
                 );
 
                 account = new Account(
@@ -167,9 +166,9 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
     @Override
     public List<Account> readAll() {
         String sql = """
-                    SELECT * FROM accounts
-                    JOIN schools ON accounts.school = schools.schoolId
-                    JOIN zipCodes ON schools.schoolZipCode = zipCodes.zipCode
+                    SELECT * FROM Account
+                    JOIN School ON Account.FK_AccountSchool = School.SID
+                    JOIN ZipCode ON School.FK_Zipcode = ZipCode.Zip
                     """;
         List<Account> studentsList = new ArrayList<>();
 
@@ -185,8 +184,7 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
                 School school = new School(
                         rs.getInt("schoolID"),
                         rs.getString("schoolName"),
-                        rs.getInt("zipCode"),
-                        rs.getString("cityName")
+                        new City(rs.getInt("zipCode"), rs.getString("cityName"))
                 );
 
                 Account student = new Account(
@@ -221,9 +219,9 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
     @Override
     public void update(Account input) {
         String sql = """
-                     UPDATE accounts 
-                     SET firstName = ?, surname = ?, email = ? 
-                     WHERE accountId = ?
+                     UPDATE Account
+                     SET firstName = ?, lastname = ?, email = ? 
+                     WHERE AID = ?
                      """;
 
         Account account = input;

@@ -2,6 +2,7 @@ package Application.BE;
 
 public class GeneralJournal
 {
+    private int id;
     private String coping;
     private String motivation;
     private String resources;
@@ -16,6 +17,7 @@ public class GeneralJournal
 
     public GeneralJournal()
     {
+        this.id = -1;
         this.coping = "";
         this.motivation = "";
         this.resources = "";
@@ -29,7 +31,9 @@ public class GeneralJournal
         this.network = "";
     }
 
-    public GeneralJournal(String coping, String motivation, String resources, String roles, String habits, String eduAndJob, String lifeStory, String healthInfo, String assistiveDevices, String homeLayout, String network) {
+  
+    public GeneralJournal(int generalID, String coping, String motivation, String resources, String roles, String habits, String eduAndJob, String lifeStory, String healthInfo, String assistiveDevices, String homeLayout, String network) {
+        this.id = generalID;
         this.coping = coping;
         this.motivation = motivation;
         this.resources = resources;
@@ -51,6 +55,7 @@ public class GeneralJournal
         if (coping == null)
             this.coping = "";
         else this.coping = coping;
+
     }
 
     public String getMotivation() {
@@ -151,5 +156,13 @@ public class GeneralJournal
         if (network == null)
             this.network = "";
         else this.network = network;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

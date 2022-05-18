@@ -124,6 +124,9 @@ GO
 
 CREATE TABLE Citizen(
 	CID int IDENTITY(1,1) NOT NULL,
+	firstName nvarchar(50) NULL,
+	lastName nvarchar(50) NULL,
+	age int NULL,
 	FK_Info int NULL,
 	FK_SchoolOwner int NULL,
  CONSTRAINT PK_Citizen PRIMARY KEY CLUSTERED (CID))

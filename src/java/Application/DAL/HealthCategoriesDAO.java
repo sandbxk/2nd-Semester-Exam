@@ -55,7 +55,7 @@ public class HealthCategoriesDAO extends TemplatePatternDAO{
             DBConnectionPool.getInstance().checkIn(conn);
         }
 
-        return null;
+
     }
 
 

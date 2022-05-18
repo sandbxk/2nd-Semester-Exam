@@ -1,6 +1,7 @@
 package Application.BLL;
 
 import Application.BE.Account;
+import Application.BE.City;
 import Application.BE.School;
 import Application.DAL.AccountDAO;
 import Application.DAL.SchoolDAO;
@@ -41,7 +42,7 @@ public class AdminDataManager {
 
     public School createSchool(String schoolName, int zipCode)
     {
-        return (School) schoolDAO.create(new School(-1, schoolName, zipCode, ""));
+        return (School) schoolDAO.create(new School(-1, schoolName, new City(zipCode)));
     }
 
 }

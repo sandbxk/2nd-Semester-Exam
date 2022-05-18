@@ -437,6 +437,7 @@ public class CitizenTemplateController implements Initializable {
                 selected.setAge(Integer.parseInt(txtFieldAge.getText()));
             }
 
+
             selected.getTemplate().getGeneralInfo().setCoping(txtAreaGenInfoCoping.getText());
             selected.getTemplate().getGeneralInfo().setMotivation(txtAreaGenInfoMotivation.getText());
             selected.getTemplate().getGeneralInfo().setResources(txtAreaGenInfoResources.getText());

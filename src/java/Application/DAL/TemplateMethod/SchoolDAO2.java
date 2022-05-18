@@ -1,5 +1,6 @@
 package Application.DAL.TemplateMethod;
 
+import Application.BE.City;
 import Application.BE.School;
 import Application.DAL.DBConnector.DBConnectionPool;
 import Application.DAL.TemplateMethod.AbstractDAO_TP;
@@ -28,7 +29,7 @@ public class SchoolDAO2
             @Override
             protected School execute(PreparedStatement statement, School input) throws SQLException {
                 statement.setString(1,input.getSchoolName());
-                statement.setInt(2,input.getZipCode());
+                statement.setInt(2, input.getLocation().getZipCode() );
 
                 statement.execute();
 
@@ -50,8 +51,7 @@ public class SchoolDAO2
         return new School(
                 (int) query.getResultID(),
                 input.getSchoolName(),
-                input.getZipCode(),
-                input.getCityName()
+                new City(input.getLocation().getZipCode()) // location
         );
     }
 
