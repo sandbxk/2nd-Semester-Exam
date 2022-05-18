@@ -153,11 +153,6 @@ public class AccountDAO extends TemplatePatternDAO<Account> {
         return account;
     }
 
-    public Account read(String accountName)
-    {
-        Account account = null;
-        return null;
-    }
 
     /**
      * Returns a list of all accounts.

@@ -1,42 +1,29 @@
 package Application.BE;
 
-import Application.DAL.TemplateMethod.Annotations.SQLColumn;
 import Application.DAL.TemplateMethod.Annotations.SQLGetter;
 import Application.DAL.TemplateMethod.Annotations.SQLSetter;
-import Application.DAL.TemplateMethod.Annotations.SQLTable;
 
 import java.util.HashMap;
 
-@SQLTable(name = "citizen")
 public class Citizen
 {
-    @SQLColumn(name = "citizenId")
     private int id;
-
-    @SQLColumn(name = "cFirstName")
     private String firstname;
-
-    @SQLColumn(name = "cSurname")
     private String lastname;
-
-    @SQLColumn(name = "cAge")
     private int age;
-
-    @SQLColumn(name = "cStreet")
     private int streetID;
-
-    @SQLColumn(name = "cStreetNumber")
     private int streetNumber;
-
-    @SQLColumn(name = "cZipCode")
     private int zipCode;
-
-    @SQLColumn(name = "cSchool")
     private int schoolID;
 
     private GeneralJournal generalJournal;
     private HashMap<CategoryEntry, CategoryEntry> healthCategoryEntries;
     private HashMap<CategoryEntry, CategoryEntry> funcCategoryEntries;
+
+    public Citizen(int id)
+    {
+        this.id = id;
+    }
 
     public Citizen(int id, String firstname, String lastname, int age, int streetID, int streetNumber, int zipCode, int schoolID) {
         this.id = id;

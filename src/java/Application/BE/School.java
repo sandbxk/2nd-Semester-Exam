@@ -2,18 +2,11 @@ package Application.BE;
 import Application.DAL.TemplateMethod.Annotations.SQLColumn;
 import Application.DAL.TemplateMethod.Annotations.SQLTable;
 
-@SQLTable(name = "School")
 public class School {
 
-    @SQLColumn(name = "SID")
     private int schoolID;
-
-    @SQLColumn(name = "schoolName")
     private String schoolName;
-
-    @SQLColumn(name = "FK_Zipcode")
     private Location location;
-
 
     public School(int schoolID, String schoolName, Location location)
     {
