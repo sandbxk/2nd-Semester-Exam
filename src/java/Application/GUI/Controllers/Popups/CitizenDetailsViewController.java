@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ListResourceBundle;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CitizenDetailsViewController implements Initializable {
@@ -117,16 +118,65 @@ public class CitizenDetailsViewController implements Initializable {
 
     }
 
+    
     public void onAddObservation(ActionEvent event) {
-
+        openObservationView(false, null);
     }
 
+    /**
+     * opens the observation view with the given parameters.
+     * editing is true, the view is opened in edit mode, automatically navigating
+     * to the observation selected in this view and autofilling the user inputs to the existing data.
+     * @param event
+     */
     public void onEditObservation(ActionEvent event) {
-        TreeItem selectedItem = treeTblViewFunc.getSelectionModel().getSelectedItem();
-        if (selectedItem != null) {
+        TreeItem<CategoryEntryModel> selectedFuncItem = treeTblViewFunc.getSelectionModel().getSelectedItem();
+        TreeItem<CategoryEntryModel> selectedHealthItem = treeTblViewHealth.getSelectionModel().getSelectedItem();
+        if (selectedFuncItem == null && selectedHealthItem == null || selectedFuncItem != null && selectedHealthItem != null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Fejl");
-            alert.setHeaderText("Vælg");
+            alert.setHeaderText("Vælg venligst én tilstandskategori, hvis observationen skal redigeres");
+            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/Styles/MainStylesheet.css")).toExternalForm());
+            alert.show();
+        }
+        TreeItem<CategoryEntryModel> selectedItem = null;
+
+        if (selectedFuncItem != null) {
+            selectedItem = selectedFuncItem;
+        }
+        else if (selectedHealthItem != null) {
+            selectedItem = selectedHealthItem;
+        }
+
+        openObservationView(true, selectedItem);
+    }
+
+    private void openObservationView(boolean editing, TreeItem<CategoryEntryModel> selectedItem) {
+        Parent root = null;
+        Stage stage = new Stage();
+
+        try {
+            ResourceBundle resources = new ListResourceBundle()
+            {
+                @Override
+                protected Object[][] getContents()
+                {
+                    return new Object[][]{
+                            {"selectedCitizen", model.getSelectedCitizen()},
+                            {"selectedCategoryEntryModel", selectedItem},
+                            {"isEditing", editing}
+                    };
+                }
+            };
+
+
+            root = FXMLLoader.load(getClass().getResource("/Views/Popups/ObservationView.fxml"), resources);
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
