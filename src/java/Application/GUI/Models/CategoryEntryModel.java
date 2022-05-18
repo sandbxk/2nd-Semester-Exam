@@ -308,12 +308,13 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
     }
 
     public ObjectProperty<ImageView> levelFuncProperty() {
-        Image image = levelFunc.get().image;
-        ImageView imageView = new ImageView(levelFunc.get().image);
-        imageView.setFitWidth(60);
-        imageView.setFitHeight(50);
+       // Image image = levelFunc.get().image;
+       // ImageView imageView = new ImageView(levelFunc.get().image);
+       // imageView.setFitWidth(60);
+        //imageView.setFitHeight(50);
 
-        return new SimpleObjectProperty<ImageView>(imageView);
+        //return new SimpleObjectProperty<ImageView>(imageView);
+        return new SimpleObjectProperty<>();
     }
 
     public void setLevelFunc(FunctionalLevels levelFunc) {

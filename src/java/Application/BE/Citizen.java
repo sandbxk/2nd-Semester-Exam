@@ -25,7 +25,7 @@ public class Citizen
         this.id = id;
     }
 
-    public Citizen(int id, String firstname, String lastname, int age, int streetID, int streetNumber, int zipCode, int schoolID) {
+    public Citizen(int id, GeneralJournal journal, School school, String firstname, String lastname, int age) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
