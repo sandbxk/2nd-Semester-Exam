@@ -1,6 +1,7 @@
 package Application.GUI.Controllers;
 
 import Application.BE.Account;
+import Application.BLL.AdminDataManager;
 import Application.GUI.Models.SchoolModel;
 import Application.GUI.Models.StudentModel;
 import javafx.event.ActionEvent;
@@ -42,6 +43,12 @@ public class AdminViewController implements Initializable {
     private TableColumn<SchoolModel, Number> tblClmSchoolZipCode;
     @FXML
     private TableColumn<SchoolModel, String> tblClmSchoolCity;
+
+
+
+    AdminDataManager dataManager = new AdminDataManager();
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initTableViews();

@@ -1,5 +1,6 @@
 package Application.GUI.Controllers;
 
+import Application.BLL.StudentDataManager;
 import Application.GUI.Models.CategoryEntryModel;
 import Application.GUI.Models.CitizenModel;
 import Application.GUI.Models.ControllerModels.StudentViewControllerModel;
@@ -40,6 +41,7 @@ public class StudentViewController implements Initializable {
 
     public Button btnOpenDetails;
 
+    private StudentDataManager dataManager = new StudentDataManager();
 
     private StudentViewControllerModel model = new StudentViewControllerModel();
 

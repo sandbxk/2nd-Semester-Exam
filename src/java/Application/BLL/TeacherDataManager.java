@@ -25,6 +25,58 @@ public class TeacherDataManager
 
 
 
+
+
+
+    // Create/Read/Update/Delete - student (AccountDAO)
+        // single / all
+
+    // Create/Read/Update/Delete - citizen (template) (CitizenDAO)
+        // single / all
+
+    // copy citizen (clone template - new ID)
+
+    // Create/Read/Update/Delete - group (GroupDAO)
+        // [delete/archive citizen]
+        // single / all
+
+    // get student(s) in a group (members)
+
+    // get all groups that contains a specific student
+
+    public void assignToGroup(Citizen citizen, Group group)
+    {
+    // assign citizen to group (GroupDAO)
+        // create clone of template (CitizenDAO)
+    }
+
+    public void assignToGroup(Account student, Group group)
+    {
+       // assign student to group (GroupDAO)
+    }
+
+    public void unassignFromGroup(Account student, Group group)
+    {
+       // unassign student to group (GroupDAO)
+    }
+
+
+    // utility:
+        // generate random names / data
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
     public List getAllInquiries()
     {
         return inquiryDAO.readAll();

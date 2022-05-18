@@ -26,6 +26,11 @@ public class StudentDataManager {
         return dao.readAll().stream().filter(group -> group.getMembers().contains(studentID)).toList();
     }
 
+
+    // update assigned citizen
+        // add observation
+            // journal entry!!! CRUD
+
     public List<Citizen> getAssignedCitizens(int studentID)
     {
         var groups = getAssignedGroups(studentID);

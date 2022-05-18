@@ -20,6 +20,20 @@ public class AdminDataManager {
         schoolDAO = new SchoolDAO();
     }
 
+
+    // CREATE/READ/UPDATE/DELETE school
+        // read single / all
+
+    // CREATE/READ/UPDATE/DELETE teacher
+        // read one / all
+
+
+    // access to Teacher data operations
+
+
+
+
+
     public Account createAccount(String username, String password, String firstName, String lastName, String email, School school, int auth) {
         return (Account) accountDAO.create(new Account(-1, username, password, firstName, lastName, email, school, auth));
     }
