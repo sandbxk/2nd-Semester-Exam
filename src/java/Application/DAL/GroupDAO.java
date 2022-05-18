@@ -1,9 +1,6 @@
 package Application.DAL;
 
-import Application.BE.Account;
-import Application.BE.Citizen;
-import Application.BE.Group;
-import Application.BE.School;
+import Application.BE.*;
 import Application.DAL.DBConnector.DBConnectionPool;
 
 import java.sql.Connection;
@@ -15,6 +12,7 @@ import java.util.List;
 
 public class GroupDAO {
 
+    CitizenDAO citizenDAO = new CitizenDAO();
     private long return_id = -1;
 
     public Boolean create(Group input) {
@@ -116,25 +114,35 @@ public class GroupDAO {
         return worked;
     }
 
-    public Group read(int id) {
+    public Group read(int groupID) {
+        Group group = new Group();
         String sqlread = """
                 SELECT 
-                GID, groupName, FK_Citizen
+                groupName, FK_Citizen
                 FROM [Group]
                 WHERE GID = ?,
                 """;
         Connection conn = DBConnectionPool.getInstance().checkOut();
         try {
             PreparedStatement psrg = conn.prepareStatement(sqlread);
-            psrg.setInt(1, id);
+            psrg.setInt(1, groupID);
 
             ResultSet rs = psrg.executeQuery();
             while (rs.next())
             {
-                int id = rs.getInt("GID");
-                String groupName = rs.getString("groupName")
+                String groupName = rs.getString("groupName");
+                int citizenID = rs.getInt("FK_Citizen");
+                Citizen citizen = citizenDAO.read(citizenID);
+                List<Account> members = readMembers(groupID);
+                group.setGroupName(groupName);
+                group.setId(groupID);
+                group.setGroupMembers(members);
+                group.setCitizen(citizen);
             }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
+        return group;
     }
 
     private List<Account> readMembers(int groupID)
@@ -168,8 +176,10 @@ public class GroupDAO {
                 String schoolName = rs.getString("schoolName");
                 int zipCode = rs.getInt("School.FK_Zipcode");
                 int SID = rs.getInt("School.SID");
-                String cityName = rs.getString("Zipcode.city");
-                School school = new School(SID, schoolName, zipCode, cityName);
+                String name = rs.getString("Zipcode.city");
+
+                City city = new City(zipCode, name);
+                School school = new School(SID, schoolName, city);
                 Account account = new Account(id, username, hashed_pwd, firstname, lastname, email, school, privilegeLevel);
                 members.add(account);
             }

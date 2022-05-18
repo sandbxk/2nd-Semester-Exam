@@ -14,6 +14,11 @@ public class Group {
         this.id = id;
     }
 
+    public Group()
+    {
+
+    }
+
     public List<Account> getGroupMembers() {
         return groupMembers;
     }
@@ -24,6 +29,10 @@ public class Group {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setGroupMembers(List<Account> groupMembers) {
