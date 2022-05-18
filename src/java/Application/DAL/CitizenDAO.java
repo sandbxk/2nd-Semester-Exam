@@ -4,7 +4,8 @@ import Application.BE.Citizen;
 
 import java.util.List;
 
-public class CitizenDAO extends TemplatePatternDAO<Citizen> {
+public class CitizenDAO extends TemplatePatternDAO<Citizen>
+{
     @Override
     public Citizen create(Citizen input) {
         return null;
