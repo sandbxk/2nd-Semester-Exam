@@ -1,9 +1,13 @@
 package Application.GUI.Models.ControllerModels;
 
 import Application.BLL.StudentDataManager;
+import Application.GUI.Models.CategoryEntryModel;
 import Application.GUI.Models.CitizenModel;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.control.TreeItem;
+
+import java.util.Collection;
 
 public class StudentViewControllerModel {
 
@@ -40,5 +44,13 @@ public class StudentViewControllerModel {
 
     public void setSelectedCitizen(CitizenModel selectedCitizen) {
         this.selectedCitizen = selectedCitizen;
+    }
+
+    public TreeItem<CategoryEntryModel> getRelevantHealthCategoriesAsTreeItem(CitizenModel selectedCitizen) {
+        return new TreeItem<>();
+    }
+
+    public TreeItem<CategoryEntryModel> getRelevantFuncCategoriesAsTreeItem(CitizenModel selectedCitizen) {
+        return new TreeItem<>();
     }
 }

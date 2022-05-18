@@ -12,7 +12,7 @@ public class CitizenTemplateModel implements Cloneable {
 
     private CitizenTemplate template;
 
-    private StringProperty name = new SimpleStringProperty();
+    private StringProperty name;
     private StringProperty surname;
     private IntegerProperty age;
 

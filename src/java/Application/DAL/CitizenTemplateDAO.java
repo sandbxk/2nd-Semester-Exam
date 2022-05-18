@@ -314,5 +314,11 @@ public class CitizenTemplateDAO extends TemplatePatternDAO<CitizenTemplate> {
     public void updateCategoryEntries(){
 
     }
+
+    public List<Category> readCategories(){
+        List<Category> categories = new ArrayList<>();
+
+        return categories;
+    }
     
 }

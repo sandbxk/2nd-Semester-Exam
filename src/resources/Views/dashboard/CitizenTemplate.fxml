@@ -97,7 +97,7 @@
                                                       <Insets />
                                                    </HBox.margin>
                                                                     </GridPane>
-                                                                    <TextArea fx:id="txtAreaGenInfoMastering" minHeight="100.0" prefWidth="498.0">
+                                                                    <TextArea fx:id="txtAreaGenInfoCoping" minHeight="100.0" prefWidth="498.0">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
