@@ -1,6 +1,7 @@
 package Application.GUI.Controllers.dashboard;
 
 import Application.BE.Citizen;
+import Application.DAL.CitizenDAO;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
