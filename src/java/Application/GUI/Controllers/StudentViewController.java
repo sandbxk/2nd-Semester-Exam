@@ -52,7 +52,7 @@ public class StudentViewController implements Initializable {
     }
 
     private void initBundle(ResourceBundle bundle) {
-        if (bundle.getObject("selectedCitizen") != null){
+        if (bundle != null && bundle.getObject("selectedCitizen") != null){
             listViewCitizens.getSelectionModel().select((CitizenModel) bundle.getObject("selectedCitizen"));
         }
     }
