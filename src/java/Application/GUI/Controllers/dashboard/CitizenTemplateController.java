@@ -1,14 +1,13 @@
 package Application.GUI.Controllers.dashboard;
 
 import Application.BE.GeneralJournal;
-import Application.GUI.Models.CategoryEntryModel;
-import Application.GUI.Models.CitizenTemplateModel;
+import Application.GUI.Models.*;
 import Application.GUI.Models.ControllerModels.CitizenTemplateControllerModel;
-import Application.GUI.Models.FunctionalLevels;
-import Application.GUI.Models.HealthLevels;
 import Application.Utility.GUIUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.geometry.Side;
@@ -91,6 +90,38 @@ public class CitizenTemplateController implements Initializable {
         initTextFields();
 
     }
+/*
+    private void search()
+    {
+        //Wrap ObservableList of UserInfo in a FilteredList.
+        FilteredList<StudentModel> filteredData = new FilteredList<>(mockUp(), b -> true);
+
+        //Sets the filter predict when filter changes.
+        txtFieldStudentsSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(data -> {
+
+                //If filter is empty, display all accounts.
+                if (newValue == null || newValue.isEmpty())
+                {
+                    return true;
+                }
+
+                //Compare Account name with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (data.getFullName().toLowerCase().indexOf(lowerCaseFilter) != -1)
+                {
+                    return true;
+                } else return false;
+            });
+        });
+
+        SortedList<StudentModel> sortedUsers = new SortedList<>(filteredData);
+
+        listViewStudents.setItems(sortedUsers);
+    }
+    
+ */
 
 
     public void onCitizenTemplateSearch(ActionEvent event) {
