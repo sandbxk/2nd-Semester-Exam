@@ -1,9 +1,6 @@
 package Application.DAL;
 
-import Application.BE.Account;
-import Application.BE.City;
 import Application.BE.GeneralJournal;
-import Application.BE.School;
 import Application.DAL.DBConnector.DBConnectionPool;
 
 import java.sql.Connection;
@@ -11,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class GeneralDAO extends TemplatePatternDAO<GeneralJournal> {
