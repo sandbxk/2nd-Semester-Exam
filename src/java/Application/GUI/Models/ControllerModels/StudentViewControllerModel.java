@@ -3,6 +3,8 @@ package Application.GUI.Models.ControllerModels;
 import Application.BLL.StudentDataManager;
 import Application.GUI.Models.CategoryEntryModel;
 import Application.GUI.Models.CitizenModel;
+import Application.GUI.Models.FunctionalLevels;
+import Application.GUI.Models.HealthLevels;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TreeItem;
@@ -80,4 +82,21 @@ public class StudentViewControllerModel {
     public void updateObservation(CategoryEntryModel value) {
         studentDataManager.updateObservation(selectedCitizen, value);
     }
+
+    public void recalculateRelevantCategories() {
+        ObservableList<CategoryEntryModel> nonRelevantFuncCat = selectedCitizen.getNonRelevantFunctionalAbilities();
+        ObservableList<CategoryEntryModel> nonRelevantHealthCat = selectedCitizen.getNonRelevantHealthConditions();
+
+        for (CategoryEntryModel categoryEntryModel : nonRelevantFuncCat) {
+            if (categoryEntryModel.getLevelFunc() != FunctionalLevels.LEVEL_9) {
+                selectedCitizen.getRelevantFunctionalAbilities().add(categoryEntryModel);
+            }
+        }
+        for (CategoryEntryModel categoryEntryModel : nonRelevantHealthCat) {
+            if (categoryEntryModel.getLevelHealth() != HealthLevels.NOT_RELEVANT) {
+                selectedCitizen.getRelevantHealthConditions().add(categoryEntryModel);
+            }
+        }
+    }
+    
 }

@@ -49,7 +49,8 @@ public class ObservationViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initIsEditing(resources);
-        initBundle(resources);
+        initCitizenBundle(resources);
+        initSelectionListener();
         if (isEditing) {
             goToCategory(resources);
             initAutoFillListener();
@@ -57,7 +58,7 @@ public class ObservationViewController implements Initializable {
         initTreeTableViews();
     }
 
-    private void initBundle(ResourceBundle bundle) {
+    private void initCitizenBundle(ResourceBundle bundle) {
         if (bundle.getObject("selectedCitizen") != null){
             model.setSelectedCitizen((CitizenModel) bundle.getObject("selectedCitizen"));
         }
@@ -85,7 +86,6 @@ public class ObservationViewController implements Initializable {
     private void initAutoFillListener(){
         treeTableViewHealth.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null){
-                observation = newValue;
                 if (newValue.getValue().getType() == CategoryType.HEALTH_CONDITION){
                     comboBoxHealthLevel.getSelectionModel().select(newValue.getValue().getLevelHealth());
                     txtAreaHealthCause.setText(newValue.getValue().getCause());
@@ -101,6 +101,14 @@ public class ObservationViewController implements Initializable {
                     comboBoxFuncExpectedCondition.getSelectionModel().select(newValue.getValue().getExConFunc());
                     txtAreaFuncNote.setText(newValue.getValue().getNote());
                 }
+            }
+        });
+    }
+
+    private void initSelectionListener(){
+        treeTableViewHealth.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                observation = newValue;
             }
         });
     }

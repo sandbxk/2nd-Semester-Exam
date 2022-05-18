@@ -118,7 +118,7 @@ public class CitizenDetailsViewController implements Initializable {
 
     }
 
-    
+
     public void onAddObservation(ActionEvent event) {
         openObservationView(false, null);
     }
@@ -178,6 +178,23 @@ public class CitizenDetailsViewController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        stage.setOnHiding(event -> {
+            //refresh the data in the table and add any newly relevant categories
+            model.recalculateRelevantCategories();
+
+            //set the functional abilities TreeTableView to the values of the selected citizen template
+            TreeItem<CategoryEntryModel> funcRoot = new TreeItem<>();
+            funcRoot.getChildren().addAll(model.getRelevantFuncCategoriesAsTreeItem());
+            treeTblViewFunc.setRoot(funcRoot);
+            treeTblViewFunc.setShowRoot(false);
+
+            //set the health categories to the health categories of the selected citizen template
+            TreeItem<CategoryEntryModel> healthRoot = new TreeItem<>();
+            healthRoot.getChildren().addAll(model.getRelevantHealthCategoriesAsTreeItem());
+            treeTblViewHealth.setRoot(healthRoot);
+            treeTblViewHealth.setShowRoot(false);
+        });
     }
 
     public void onBackToDashboard(ActionEvent event) {
