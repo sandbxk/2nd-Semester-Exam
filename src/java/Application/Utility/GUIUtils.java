@@ -136,6 +136,7 @@ public final class GUIUtils {
 
             //Sort alphabetically
             for(TreeItem<CategoryEntryModel> treeCategoryEntryModel : parentMap.values()){
+                //TODO: Sort super categories alphabetically --> Test fails at Conditions 1 expected, when actual is either 3 or 4
                 treeCategoryEntryModel.getChildren().sort(Comparator.comparing(o -> o.getValue().getCategoryName()));
             }
 
