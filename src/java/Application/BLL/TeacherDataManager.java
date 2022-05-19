@@ -94,7 +94,6 @@ public class TeacherDataManager
             if (category.getDepth() == 0)
                 continue;
 
-
             if (category.getType() == CategoryType.HEALTH_CONDITION) {
                 if (category.getDepth() == 1)
                 healthConditions.add(new CategoryEntry(-1,category));

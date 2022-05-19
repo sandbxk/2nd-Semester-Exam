@@ -127,6 +127,20 @@ public class ObservationViewController implements Initializable {
 
     public void onSaveHealthObservation(ActionEvent event) {
         if (observation != null){
+
+
+            //Obligatory fields for health conditions
+            if (observation.getValue().getCategoryName() == null || observation.getValue().getCategoryEntry().getCategory().getDepth() <= 1){
+                showAlert();
+                return;
+            }
+            if (txtAreaHealthAssessment.getText().isEmpty() || txtAreaHealthAssessment.getText().isBlank() ||
+                    txtAreaHealthAssessment.getText().equals(" ") || txtAreaHealthCause.getText() == null) {
+                showAlert();
+                return;
+            }
+
+
             if (observation.getValue().getType() == CategoryType.HEALTH_CONDITION){
                 observation.getValue().setLevelHealth(comboBoxHealthLevel.getSelectionModel().getSelectedItem());
                 observation.getValue().setCause(txtAreaHealthCause.getText());
@@ -138,11 +152,7 @@ public class ObservationViewController implements Initializable {
             }
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Fejl");
-            alert.setHeaderText("Vælg venligst den tilstands kategori du ønsker at opdatere en observation for");
-            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/Styles/MainStylesheet.css")).toExternalForm());
-            alert.showAndWait();
+            showAlert();
         }
     }
 
@@ -152,6 +162,17 @@ public class ObservationViewController implements Initializable {
 
     public void onSaveFuncObservation(ActionEvent event) {
         if (observation != null){
+
+            //Obligatory fields for functional abilities
+            if (observation.getValue().getCategoryName() == null || observation.getValue().getCategoryEntry().getCategory().getDepth() <= 1){
+                showAlert();
+                return;
+            }
+            else if (comboBoxFuncLevel.getSelectionModel().getSelectedItem() == null){
+                showAlert();
+                return;
+            }
+
             if (observation.getValue().getType() == CategoryType.FUNCTIONAL_ABILITY){
                 observation.getValue().setLevelFunc(comboBoxFuncLevel.getSelectionModel().getSelectedItem());
                 observation.getValue().setCause(txtAreaFuncCause.getText());
@@ -164,11 +185,15 @@ public class ObservationViewController implements Initializable {
             }
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Fejl");
-            alert.setHeaderText("Vælg venligst den tilstands kategori du ønsker at opdatere en observation for");
-            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/Styles/MainStylesheet.css")).toExternalForm());
-            alert.showAndWait();
+            showAlert();
         }
+    }
+
+    private void showAlert(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Fejl");
+        alert.setHeaderText("Vælg venligst den tilstands kategori du ønsker at opdatere en observation for, og udfyld venligst alle obligatoriske felter.");
+        alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/Styles/MainStylesheet.css")).toExternalForm());
+        alert.showAndWait();
     }
 }

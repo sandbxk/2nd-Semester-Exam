@@ -6,8 +6,6 @@ import Application.GUI.Models.ControllerModels.CitizenTemplateControllerModel;
 import Application.Utility.GUIUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.geometry.Side;
@@ -26,7 +24,6 @@ public class CitizenTemplateController implements Initializable {
     public AnchorPane anchorPaneCitizenTemplateDashboard;
     public ListView<CitizenTemplateModel> listViewCitizenTemplates;
     public TextField txtFieldCitizenTemplateSearch;
-    public Button btnCitizenTemplateSearch;
     public TextField txtFieldName;
     public TextField txtFieldSurname;
     public TextField txtFieldAge;
@@ -79,55 +76,18 @@ public class CitizenTemplateController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         initColumnList();
         initTextAreaList();
-        setFuncTreeTable();
+        setTreeTables();
         initTreeTableClmns();
         initTreeTblColumnEdit();
 
-        //setFuncTreeTable();
 
         initCitizenTemplatesList();
         initActionsMenu();
         initTextFields();
-
+        GUIUtils.searchListener(txtFieldCitizenTemplateSearch, listViewCitizenTemplates);
     }
-/*
-    private void search()
-    {
-        //Wrap ObservableList of UserInfo in a FilteredList.
-        FilteredList<StudentModel> filteredData = new FilteredList<>(mockUp(), b -> true);
-
-        //Sets the filter predict when filter changes.
-        txtFieldStudentsSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(data -> {
-
-                //If filter is empty, display all accounts.
-                if (newValue == null || newValue.isEmpty())
-                {
-                    return true;
-                }
-
-                //Compare Account name with filter text.
-                String lowerCaseFilter = newValue.toLowerCase();
-
-                if (data.getFullName().toLowerCase().indexOf(lowerCaseFilter) != -1)
-                {
-                    return true;
-                } else return false;
-            });
-        });
-
-        SortedList<StudentModel> sortedUsers = new SortedList<>(filteredData);
-
-        listViewStudents.setItems(sortedUsers);
-    }
-    
- */
 
 
-    public void onCitizenTemplateSearch(ActionEvent event) {
-        model.citizenTemplateSearch();
-        //TODO: Implement search
-    }
 
     /**
      * Sets the textFields containing the citizen template base information to disabled and applies
@@ -217,7 +177,7 @@ public class CitizenTemplateController implements Initializable {
 
     }
 
-    private void setFuncTreeTable() {
+    private void setTreeTables() {
         //TODO: Proper table population
         // Set up the table
         CitizenTemplateModel citizenTemplateModel = new CitizenTemplateModel();

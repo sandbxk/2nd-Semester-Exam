@@ -4,6 +4,7 @@ import Application.GUI.Models.CategoryEntryModel;
 import Application.GUI.Models.CitizenModel;
 import Application.GUI.Models.ControllerModels.StudentViewControllerModel;
 import Application.GUI.Models.HealthLevels;
+import Application.Utility.GUIUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,7 +27,6 @@ public class StudentViewController implements Initializable {
 
     @FXML public ListView<CitizenModel> listViewCitizens;
     @FXML public TextField txtFieldCitizenSearch;
-    @FXML public Button btnCitizenSearch;
     @FXML public Label lblCitizenName;
     @FXML public Label lblAge;
     @FXML public TableView<CategoryEntryModel> tblViewStudentDashboardHealth;
@@ -49,6 +49,7 @@ public class StudentViewController implements Initializable {
         initListViewCitizens();
         initTestData();
         initBundle(resources);
+        GUIUtils.searchListener(txtFieldCitizenSearch, listViewCitizens);
     }
 
     private void initBundle(ResourceBundle bundle) {

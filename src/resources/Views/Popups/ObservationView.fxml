@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-
 <BorderPane stylesheets="@../../Styles/MainStylesheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.GUI.Controllers.Popups.ObservationViewController">
    <center>
       <TabPane fx:id="tabPaneContainer" prefHeight="468.0" prefWidth="590.0" styleClass="tab-label" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
@@ -25,7 +24,7 @@
                      <children>
                         <TreeTableView fx:id="treeTableViewHealth" layoutX="25.0" layoutY="11.0" minWidth="165.0" prefHeight="335.0" prefWidth="174.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="11.0">
                           <columns>
-                            <TreeTableColumn fx:id="treeTblColumnHealthCatName" minWidth="165.0" prefWidth="-1.0" text="Tilstands kategorier" />
+                            <TreeTableColumn fx:id="treeTblColumnHealthCatName" minWidth="165.0" prefWidth="-1.0" text="Tilstands kategorier*" />
                           </columns>
                            <styleClass>
                               <String fx:value="healthTable" />
@@ -49,7 +48,7 @@
                               </VBox>
                               <VBox layoutX="262.0" layoutY="16.0" prefHeight="66.0" prefWidth="111.0" AnchorPane.leftAnchor="260.0" AnchorPane.topAnchor="8.0">
                                  <children>
-                                    <Label styleClass="lblBackgroundBold" text="Vurdering" />
+                                    <Label styleClass="lblBackgroundBold" text="Vurdering*" />
                                     <TextArea fx:id="txtAreaHealthAssessment" prefHeight="51.0" prefWidth="111.0" wrapText="true" />
                                  </children>
                               </VBox>
@@ -85,7 +84,7 @@
                      <children>
                         <TreeTableView fx:id="treeTableViewFunc" layoutX="14.0" layoutY="11.0" minWidth="165.0" prefHeight="335.0" prefWidth="174.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="11.0">
                            <columns>
-                              <TreeTableColumn fx:id="treeTblColumnFuncCatName" minWidth="160.99999380111694" prefWidth="165.99999380111694" text="Tilstands kategorier" />
+                              <TreeTableColumn fx:id="treeTblColumnFuncCatName" minWidth="160.99999380111694" prefWidth="165.99999380111694" text="Tilstands kategorier*" />
                            </columns>
                            <styleClass>
                               <String fx:value="funcTable" />
@@ -97,7 +96,7 @@
                            <children>
                               <VBox layoutX="14.0" layoutY="9.0" prefHeight="37.0" prefWidth="118.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="8.0">
                                  <children>
-                                    <Label styleClass="lblBackgroundBold" text="Niveau" />
+                                    <Label styleClass="lblBackgroundBold" text="Niveau*" />
                                     <ComboBox fx:id="comboBoxFuncLevel" prefHeight="22.0" prefWidth="150.0" />
                                  </children>
                               </VBox>
@@ -147,6 +146,7 @@
                         <Line endX="277.0" endY="-257.0" fill="BLACK" layoutX="305.0" layoutY="378.0" startX="-106.0" startY="-257.0" stroke="#0000004a" AnchorPane.leftAnchor="198.5" AnchorPane.topAnchor="120.5" />
                         <Button layoutX="445.0" layoutY="389.0" mnemonicParsing="false" onAction="#onSaveFuncObservation" styleClass="backgroundButton" text="Gem" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="30.0" />
                         <Button layoutX="352.0" layoutY="389.0" mnemonicParsing="false" onAction="#onCancel" styleClass="backgroundButton" text="Annuller" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="100.0" />
+                        <Label layoutX="198.0" layoutY="409.0" text="*Obligatoriske felter" AnchorPane.leftAnchor="198.0" AnchorPane.topAnchor="409.0" />
                      </children>
                   </AnchorPane>
                </content>

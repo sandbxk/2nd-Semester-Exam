@@ -26,8 +26,7 @@
                     <ListView fx:id="listViewCitizenTemplates" layoutX="18.0" layoutY="70.0" prefHeight="272.0" prefWidth="163.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="16.80000000000001" AnchorPane.topAnchor="70.0" />
                     <HBox layoutX="20.0" layoutY="26.0" prefHeight="26.0" prefWidth="163.0" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="24.0">
                         <children>
-                            <TextField fx:id="txtFieldCitizenTemplateSearch" prefHeight="26.0" prefWidth="141.0" promptText="Søg" styleClass="text-fieldBase" />
-                            <Button fx:id="btnCitizenTemplateSearch" mnemonicParsing="false" onAction="#onCitizenTemplateSearch" prefHeight="26.0" prefWidth="34.0" styleClass="searchBtn" />
+                            <TextField fx:id="txtFieldCitizenTemplateSearch" prefHeight="30.0" prefWidth="171.0" promptText="Søg" styleClass="text-fieldBase" />
                         </children>
                     </HBox>
                     <Button fx:id="btnActions" layoutX="21.0" layoutY="777.0" maxHeight="52.0" maxWidth="159.0" minHeight="52.0" minWidth="159.0" mnemonicParsing="false" onAction="#onActions" prefHeight="52.0" prefWidth="159.0" styleClass="outlineBtn" text="Handlinger" AnchorPane.bottomAnchor="29.200000000000045" />
