@@ -1,6 +1,7 @@
 package Application.Utility;
 
 import Application.BE.Category;
+import Application.BE.CategoryEntry;
 import Application.GUI.Models.AccountModel;
 import Application.GUI.Models.CategoryEntryModel;
 import javafx.collections.ObservableList;
@@ -122,31 +123,32 @@ public final class GUIUtils {
                 Category child = categoryEntryModel.getCategoryEntry().getCategory();
                 Category parent = child.getParent();
 
-                if(parent == null){
+                if(parent == null){ //If the parent is null, the category is a super category.
                     parentMap.put(child, new TreeItem<>(categoryEntryModel));
                     continue;
                 }
-                if (!parentMap.containsKey(parent)){
+                if (!parentMap.containsKey(parent)){ 
                     parentMap.put(parent, new TreeItem<>(categoryEntryModel));
                 }
                 else if (parentMap.containsKey(parent)){
                     parentMap.get(parent).getChildren().add(new TreeItem<>(categoryEntryModel));
                 }
+
+                //TODO Fix first real entry being super category.
             }
 
-            //Sort alphabetically
-            for(TreeItem<CategoryEntryModel> treeCategoryEntryModel : parentMap.values()){
-                //TODO: Sort super categories alphabetically --> Test fails at Conditions 1 expected, when actual is either 3 or 4
-                treeCategoryEntryModel.getChildren().sort(Comparator.comparing(o -> o.getValue().getCategoryName()));
-            }
 
             //Add the categories to the root.
-            for(Category parents : parentMap.keySet()){
-                if(parents.getParent() == null){
-                    root.getChildren().add(parentMap.get(parents));
+            for(Category category : parentMap.keySet()){
+                if(category.getParent() == null){
+                    root.getChildren().add(parentMap.get(category));
                 }
-                else if (parentMap.containsKey(parents.getParent())){
-                    parentMap.get(parents.getParent()).getChildren().add(parentMap.get(parents));
+                else if (parentMap.containsKey(category.getParent())){
+                    parentMap.get(category.getParent())
+                            .getChildren().add(parentMap.get(category));
+
+
+                    parentMap.get(category.getParent()).getChildren().sort(Comparator.comparing(o -> o.getValue().getCategoryName()));
                 }
             }
 
