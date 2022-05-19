@@ -28,11 +28,6 @@ public class AdminDataManager {
         return (School) schoolDAO.create(new School(-1, schoolName, new Location(zipCode)));
     }
 
-    public void updateSchool(School school)
-    {
-        schoolDAO.update(school);
-    }
-
     public School getSchool(int id)
     {
         return (School) schoolDAO.read(id);
@@ -40,42 +35,47 @@ public class AdminDataManager {
 
     public List<School> getAllSchools()
     {
-        schoolDAO.readAll();
+        return schoolDAO.readAll();
+    }
+
+    public void updateSchool(School school)
+    {
+        schoolDAO.update(school);
     }
 
     public void deleteSchool(int id)
     {
         schoolDAO.delete(id);
     }
-    
+
     // CREATE/READ/UPDATE/DELETE teacher
         // read one / all
 
-
-    // access to Teacher data operations
-
-
-
-
-
-    public Account createAccount(String username, String password, String firstName, String lastName, String email, School school, int auth) {
+    public Account createAccount(String username, String password, String firstName, String lastName, String email, School school, int auth)
+    {
         return (Account) accountDAO.create(new Account(-1, username, password, firstName, lastName, email, school, auth));
     }
 
-    public void updateAccount(Account student){
-        accountDAO.update(student);
-    }
-
-    public void deleteAccount(Account student){
-        accountDAO.delete(student.getId());
-    }
-
-    public Account getStudent(int id) {
+    public Account getStudent(int id)
+    {
         return (Account) accountDAO.read(id);
     }
 
-    public List<Account> getAllStudents(){
+    public List<Account> getAllStudents()
+    {
         return accountDAO.readAll();
     }
+
+    public void updateAccount(Account account)
+    {
+        accountDAO.update(account);
+    }
+
+    public void deleteAccount(int id)
+    {
+        accountDAO.delete(id);
+    }
+
+    // access to Teacher data operations
 
 }
