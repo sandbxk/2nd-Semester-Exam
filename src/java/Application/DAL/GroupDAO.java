@@ -108,6 +108,7 @@ public class GroupDAO {
                     worked = psng.execute();
                 }
             }
+            psng.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -190,10 +191,60 @@ public class GroupDAO {
     }
 
     public List<Group> readAll() {
-        return null;
+        List<Group> groups = new ArrayList<Group>();
+        Group group = new Group();
+        String sqlread = """
+                SELECT 
+                groupName, FK_Citizen, GID
+                FROM [Group]
+                """;
+        Connection conn = DBConnectionPool.getInstance().checkOut();
+        try {
+            PreparedStatement psrg = conn.prepareStatement(sqlread);
+
+            ResultSet rs = psrg.executeQuery();
+            while (rs.next())
+            {
+                String groupName = rs.getString("groupName");
+                int citizenID = rs.getInt("FK_Citizen");
+                int GID = rs.getInt("GID");
+                Citizen citizen = citizenDAO.read(citizenID);
+                List<Account> members = readMembers(GID);
+                group.setGroupName(groupName);
+                group.setId(GID);
+                group.setGroupMembers(members);
+                group.setCitizen(citizen);
+                groups.add(group);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return groups;
     }
 
     public void delete(int id) {
+
+        String sqlDelete = """
+                DELETE 
+                FROM AccountGroup
+                WHERE FK_GroupID = ?
+                
+                DELETE 
+                FROM [Group]
+                WHERE GID = ?
+                """;
+        Connection conn = DBConnectionPool.getInstance().checkOut();
+        try {
+            PreparedStatement psdg = conn.prepareStatement(sqlDelete);
+
+            psdg.setInt(1,id);
+            psdg.setInt(2, id);
+            psdg.execute();
+            psdg.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
 
     }
 }
