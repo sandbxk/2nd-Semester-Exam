@@ -67,10 +67,10 @@ public class TreeHierachyTest {
         categoryEntryModels.add(new CategoryEntryModel(new CategoryEntry(-1, new Category(-1, "Condition 3.4", subCategory3))));
 
         categoryEntryModels.add(new CategoryEntryModel(new CategoryEntry(-1, new Category(-1, "Conditions 4", superCategory4))));
-        categoryEntryModels.add(new CategoryEntryModel(new CategoryEntry(-1, new Category(-1, "Condition 3.1", subCategory4))));
-        categoryEntryModels.add(new CategoryEntryModel(new CategoryEntry(-1, new Category(-1, "Condition 3.2", subCategory4))));
-        categoryEntryModels.add(new CategoryEntryModel(new CategoryEntry(-1, new Category(-1, "Condition 3.3", subCategory4))));
-        categoryEntryModels.add(new CategoryEntryModel(new CategoryEntry(-1, new Category(-1, "Condition 3.4", subCategory4))));
+        categoryEntryModels.add(new CategoryEntryModel(new CategoryEntry(-1, new Category(-1, "Condition 4.1", subCategory4))));
+        categoryEntryModels.add(new CategoryEntryModel(new CategoryEntry(-1, new Category(-1, "Condition 4.2", subCategory4))));
+        categoryEntryModels.add(new CategoryEntryModel(new CategoryEntry(-1, new Category(-1, "Condition 4.3", subCategory4))));
+        categoryEntryModels.add(new CategoryEntryModel(new CategoryEntry(-1, new Category(-1, "Condition 4.4", subCategory4))));
 
     }
 
@@ -83,6 +83,11 @@ public class TreeHierachyTest {
         TreeItem<CategoryEntryModel> superSuperCategory = root.getChildren().get(0);
         TreeItem<CategoryEntryModel> superCategory = superSuperCategory.getChildren().get(0);
         TreeItem<CategoryEntryModel> subCategory = superCategory.getChildren().get(0);
+
+        System.out.println(rootValue.getCategoryName());
+        System.out.println(superSuperCategory.getValue().getCategoryName());
+        System.out.println(superCategory.getValue().getCategoryName());
+        System.out.println(subCategory.getValue().getCategoryName());
 
         assertEquals("Tilstande", rootValue.getCategoryName());
         assertEquals("All Conditions", superSuperCategory.getValue().getCategoryName());

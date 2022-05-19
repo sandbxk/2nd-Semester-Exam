@@ -136,9 +136,7 @@ public final class GUIUtils {
 
             //Sort alphabetically
             for(TreeItem<CategoryEntryModel> treeCategoryEntryModel : parentMap.values()){
-                //ObservableList<TreeItem<CategoryEntryModel>> children = treeCategoryEntryModel.getChildren();
                 treeCategoryEntryModel.getChildren().sort(Comparator.comparing(o -> o.getValue().getCategoryName()));
-                //treeCategoryEntryModel.getChildren().sort(
             }
 
             //Add the categories to the root.
