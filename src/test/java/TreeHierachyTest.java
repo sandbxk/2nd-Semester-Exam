@@ -83,7 +83,7 @@ public class TreeHierachyTest {
         TreeItem<CategoryEntryModel> superSuperCategory = root.getChildren().get(0);
         TreeItem<CategoryEntryModel> superCategory = superSuperCategory.getChildren().get(0);
         TreeItem<CategoryEntryModel> subCategory = superCategory.getChildren().get(0);
-        TreeItem<CategoryEntryModel> subSubCategory = subCategory.getChildren().get(0);
+        //TreeItem<CategoryEntryModel> subSubCategory = subCategory.getChildren().get(0);
 
 
         System.out.println(rootValue.getCategoryName());
@@ -91,12 +91,12 @@ public class TreeHierachyTest {
         System.out.println(superCategory.getValue().getCategoryName());
         System.out.println(subCategory.getValue().getCategoryName());
         System.out.println(subCategory.getChildren().size());
-        System.out.println(subSubCategory.getChildren().size());
+        //System.out.println(subSubCategory.getChildren().size());
 
         assertEquals("Tilstande", rootValue.getCategoryName());
         assertEquals("All Conditions", superSuperCategory.getValue().getCategoryName());
         assertEquals("Conditions A", superCategory.getValue().getCategoryName());
         assertEquals("Condition A.1", subCategory.getValue().getCategoryName());
-        assertNull(subSubCategory);
+        assertNull(subCategory.getChildren());
     }
 }

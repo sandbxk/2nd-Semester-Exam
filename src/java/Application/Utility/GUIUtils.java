@@ -127,8 +127,9 @@ public final class GUIUtils {
                     parentMap.put(child, new TreeItem<>(categoryEntryModel));
                     continue;
                 }
-                if (!parentMap.containsKey(parent)){ 
-                    parentMap.put(parent, new TreeItem<>(categoryEntryModel));
+                if (!parentMap.containsKey(parent)){
+                    parentMap.put(parent, new TreeItem<>(new CategoryEntryModel(parent.getName())));
+                    parentMap.get(parent).getChildren().add(new TreeItem<>(categoryEntryModel));
                 }
                 else if (parentMap.containsKey(parent)){
                     parentMap.get(parent).getChildren().add(new TreeItem<>(categoryEntryModel));
