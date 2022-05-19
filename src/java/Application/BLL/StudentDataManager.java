@@ -23,7 +23,7 @@ public class StudentDataManager {
     {
         GroupDAO dao = new GroupDAO();
 
-        return dao.readAll().stream().filter(group -> group.getMembers().contains(studentID)).toList();
+        return dao.readAll().stream().filter(group -> group.getGroupMembers().contains(studentID)).toList();
     }
 
 
@@ -41,7 +41,7 @@ public class StudentDataManager {
 
         for (var group : groups)
         {
-            citizens.add(dao.read(group.getAssignedCitizen().getId()));
+            citizens.add(dao.read(group.getCitizen().getId()));
         }
 
         return citizens;

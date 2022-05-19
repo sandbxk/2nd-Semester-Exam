@@ -1,6 +1,6 @@
 package Application.DAL;
 
-import Application.BE.City;
+import Application.BE.Location;
 import Application.DAL.DBConnector.DBConnectionPool;
 
 import java.sql.Connection;
@@ -12,9 +12,9 @@ import java.util.List;
 
 public class ZipcodeDAO {
 
-    public List<City> readAllCity()
+    public List<Location> readAllCity()
     {
-        List<City> cityList = new ArrayList<City>();
+        List<Location> cityList = new ArrayList<Location>();
         String sqlreadAll = """
                 SELECT * FROM Zipcode
                 """;
@@ -27,7 +27,7 @@ public class ZipcodeDAO {
             while (rs.next()) {
                 String cityName = rs.getString("city");
                 int zipCode = rs.getInt("Zip");
-                City city = new City(cityName, zipCode);
+                Location city = new Location(zipCode, cityName);
                 cityList.add(city);
             }
         } catch (SQLException throwables) {
@@ -36,25 +36,21 @@ public class ZipcodeDAO {
         return cityList;
     }
 
-    public City readCity(int zipCode) throws SQLException {
-        City city = new City();
-        String cityName = null;
-        String sqlRead = """
-                Select city FROM Zipcode
-                where Zip = ?
-                """;
+    public Location readCity(int zipCode) throws SQLException
+    {
+        String sql = "Select city FROM Zipcode WHERE Zip = ?";
+
         Connection conn = DBConnectionPool.getInstance().checkOut();
         try {
-            PreparedStatement psrc = conn.prepareStatement(sqlRead);
+            PreparedStatement psrc = conn.prepareStatement(sql);
 
-            ResultSet rs = psrc.executeQuery();
-            cityName = rs.getString("city");
+            ResultSet rs = psrc.executeQuery();;
+
+            return new Location(zipCode, rs.getString("city"));
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            return null;
         }
-        city.setZipCode(zipCode);
-        city.setCityName(cityName);
-        return city;
     }
 }

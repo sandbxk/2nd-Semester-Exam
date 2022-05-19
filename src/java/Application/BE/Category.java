@@ -68,4 +68,16 @@ public class Category {
     public void setParent(Category parent) {
         this.parent = parent;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", parentID=" + (parent != null ? parent.id : "NULL")  +
+                ", parentName=" + (parent != null ? parent.name : "NULL") +
+                ", type=" + type +
+                ", depth=" + depth +
+                '}';
+    }
 }
