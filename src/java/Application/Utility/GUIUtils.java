@@ -197,6 +197,7 @@ public final class GUIUtils {
         HashMap<Category, TreeItem<CategoryEntryModel>> parentMap = new HashMap<>();
 
 
+
         //Create a set for all the parent categories. Sets do not allow duplicates.
         Set<Category> categoryParents = new HashSet<>();
         categoryParents.addAll(categoryEntryModels.stream() //Add all the parent categories to the set.
@@ -257,6 +258,82 @@ public final class GUIUtils {
 
         while (thread.isAlive()){
         //Wait for the thread to finish
+        }
+        return root;
+    }
+
+
+    public static TreeItem<CategoryEntryModel> setCategoryHierachy3(List<CategoryEntryModel> categoryEntryModels){
+        TreeItem<CategoryEntryModel> root = new TreeItem<>(new CategoryEntryModel("Tilstande"));
+
+
+        Thread thread = new Thread(() -> {
+            HashMap<Category, TreeItem<CategoryEntryModel>> parentMap = new HashMap<>();
+
+
+
+            //Create a set for all the parent categories. Sets do not allow duplicates.
+            Set<Category> categoryParents = new HashSet<>();
+            categoryParents.addAll(categoryEntryModels.stream() //Add all the parent categories to the set.
+                    .map(CategoryEntryModel::getCategoryEntry)
+                    .map(CategoryEntry::getCategory)
+                    .map(Category::getParent)
+                    .collect(Collectors.toList()));
+            categoryParents.forEach(category -> { parentMap.put(category, null);}); //Put all the parent categories in the map with null as value to be replaced later
+
+
+
+            //Get the hierarchy of the categories by their parent category.
+            for(CategoryEntryModel categoryEntryModel : categoryEntryModels){
+                Category child = categoryEntryModel.getCategoryEntry().getCategory();
+                Category parent = child.getParent();
+
+
+                if(child.getDepth() == 0){ //If the parent is null, the category is the highest level super category.
+                    parentMap.put(child, new TreeItem<>(categoryEntryModel));
+                }
+                else if (child.getDepth() == 1)
+                    parentMap.put(child, new TreeItem<>(categoryEntryModel));
+                else if (child.getDepth() == 2) {
+                    if (parentMap.get(parent) == null)
+                        parentMap.put(parent, new TreeItem<>(categoryEntryModel));
+                    else if (parentMap.containsKey(parent)){
+                        parentMap.get(parent).getChildren().add(new TreeItem<>(categoryEntryModel));
+                    }
+                }
+                else if (child.getDepth() == 3) {
+                    if (parentMap.get(parent) == null)
+                        parentMap.put(parent, new TreeItem<>(categoryEntryModel));
+                    else if (parentMap.containsKey(parent)){
+                        parentMap.get(parent).getChildren().add(new TreeItem<>(categoryEntryModel));
+                    }
+
+                }
+
+            }
+
+            //Add the categories to the root.
+            for(Category category : parentMap.keySet()){
+                if (category == null)
+                    continue;
+
+                if(category.getParent() == null){
+                    root.getChildren().add(parentMap.get(category));
+                }
+                else if (parentMap.containsKey(category.getParent())){
+                    parentMap.get(category.getParent())
+                            .getChildren().add(parentMap.get(category));
+
+
+                    parentMap.get(category.getParent()).getChildren().sort(Comparator.comparing(o -> o.getValue().getCategoryName()));
+                }
+            }
+
+        });
+        thread.run();
+
+        while (thread.isAlive()){
+            //Wait for the thread to finish
         }
         return root;
     }
