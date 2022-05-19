@@ -1,7 +1,6 @@
 package Application.Utility;
 
 import Application.BE.Category;
-import Application.BE.CategoryEntry;
 import Application.GUI.Models.AccountModel;
 import Application.GUI.Models.CategoryEntryModel;
 import javafx.collections.ObservableList;
@@ -13,6 +12,7 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TreeItem;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.UnaryOperator;
 
 public final class GUIUtils {
@@ -79,7 +79,7 @@ public final class GUIUtils {
      */
     public static <T> void searchListener(TextField searchField, ListView<T> listView) {
         //Wrap ObservableList of UserInfo in a FilteredList.
-        FilteredList<T> filteredData = new FilteredList<T>(listView.getItems(), b -> true);
+        FilteredList<T> filteredData = new FilteredList<>(listView.getItems(), b -> true);
 
         //Make sure the filtered list always contains the same elements as the original list.
         listView.itemsProperty().addListener((observable, oldValue, newValue) -> {
@@ -117,27 +117,50 @@ public final class GUIUtils {
 
         //Thread thread = new Thread(() -> {
             HashMap<Category, TreeItem<CategoryEntryModel>> parentMap = new HashMap<>();
+            HashMap<Category, Integer> categories = new HashMap<>();
+            List<CategoryEntryModel> inserted = new ArrayList<>();
+
+            for (CategoryEntryModel categoryEntryModel : categoryEntryModels) {
+                categories.put(categoryEntryModel.getCategoryEntry().getCategory(), categoryEntryModels.indexOf(categoryEntryModel));
+
+
+            }
+
 
             //Get the hierarchy of the categories by their parent category.
             for(CategoryEntryModel categoryEntryModel : categoryEntryModels){
                 Category child = categoryEntryModel.getCategoryEntry().getCategory();
                 Category parent = child.getParent();
 
+                if (inserted.contains(categoryEntryModel))
+                    continue;
+
+
                 if(parent == null){ //If the parent is null, the category is a super category.
                     parentMap.put(child, new TreeItem<>(categoryEntryModel));
                     continue;
                 }
-                if (!parentMap.containsKey(parent)){
-                    parentMap.put(parent, new TreeItem<>(new CategoryEntryModel(parent.getName())));
-                    parentMap.get(parent).getChildren().add(new TreeItem<>(categoryEntryModel));
+
+                if (!parentMap.containsKey(parent)){ //If the parent is not in the map, add it, and get the parent category and add the child category to it.
+                    for (Category cat : categories.keySet()){
+                        if(cat.equals(parent)){
+                            parentMap.put(parent, new TreeItem<>(categoryEntryModels.get(categories.get(cat))));
+                            parentMap.get(parent).getChildren().add(new TreeItem<>(categoryEntryModel));
+                            inserted.add(categoryEntryModels.get(categories.get(cat)));
+                        }
+
+                    }
+                    //parentMap.put(parent, new TreeItem<>(categoryEntryModel));
+                    //parentMap.get(parent).getChildren().add(new TreeItem<>(categoryEntryModel));
+
                 }
-                else if (parentMap.containsKey(parent)){
+                else { //If the table contains the parent category, get the parent category and add the child category to it.
                     parentMap.get(parent).getChildren().add(new TreeItem<>(categoryEntryModel));
+                    inserted.add(categoryEntryModel);
                 }
 
                 //TODO Fix first real entry being super category.
             }
-
 
             //Add the categories to the root.
             for(Category category : parentMap.keySet()){
@@ -158,6 +181,61 @@ public final class GUIUtils {
 
         //while (thread.isAlive()){
             //Wait for the thread to finish
+        //}
+        return root;
+    }
+
+
+
+    public static TreeItem<CategoryEntryModel> setCategoryHierachy2(List<CategoryEntryModel> categoryEntryModels){
+        TreeItem<CategoryEntryModel> root = new TreeItem<>(new CategoryEntryModel("Tilstande"));
+
+        //Thread thread = new Thread(() -> {
+        HashMap<Category, TreeItem<CategoryEntryModel>> parentMap = new HashMap<>();
+
+        //Get the hierarchy of the categories by their parent category.
+        for(CategoryEntryModel categoryEntryModel : categoryEntryModels){
+            Category child = categoryEntryModel.getCategoryEntry().getCategory();
+            Category parent = child.getParent();
+
+
+            if(parent == null){ //If the parent is null, the category is a super category.
+                parentMap.put(child, new TreeItem<>(categoryEntryModel));
+                continue;
+            }
+
+            if (!parentMap.containsKey(parent)){ //If the parent is not in the map, add it, and get the parent category and add the child category to it.
+                parentMap.put(parent, new TreeItem<>(categoryEntryModel)); //PROBLEM: Condition A is added, as it's parent is already there, but A.1 does not have a parent, and is thus added AS a parent
+
+
+            }
+            else { //If the table contains the parent category, get the parent category and add the child category to it.
+                parentMap.get(parent).getChildren().add(new TreeItem<>(categoryEntryModel));
+        
+            }
+
+            //TODO Fix first real entry being super category.
+        }
+
+        //Add the categories to the root.
+        for(Category category : parentMap.keySet()){
+            if(category.getParent() == null){
+                root.getChildren().add(parentMap.get(category));
+            }
+            else if (parentMap.containsKey(category.getParent())){
+                parentMap.get(category.getParent())
+                        .getChildren().add(parentMap.get(category));
+
+
+                parentMap.get(category.getParent()).getChildren().sort(Comparator.comparing(o -> o.getValue().getCategoryName()));
+            }
+        }
+
+        //});
+        //thread.run();
+
+        //while (thread.isAlive()){
+        //Wait for the thread to finish
         //}
         return root;
     }
