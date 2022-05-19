@@ -1,41 +1,30 @@
 package Application.BE;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Category {
-    private int id;
+
+    private Integer id = null;
+
     private String name;
-    private Category parent;
+
+    private List<Category> children = new ArrayList<>();
+
+    private Integer parentID = null;
+
     private CategoryType type;
-    private int depth;
 
     public Category(String name) {
         this.name = name;
     }
 
-    public Category(int id, String name, Category parent) {
+    public Category(int id, String name, int parent) {
         this.id = id;
         this.name = name;
-        this.parent = parent;
-        this.depth = 0;
-        this.initTypeIndicator();
-        this.initDepth();
+        this.parentID = parent;
     }
 
-    private void initTypeIndicator() {
-        if (this.getParent() != null) {
-            this.type = this.getParent().getType();
-        }
-    }
-
-    private void initDepth() {
-        if (this.getParent() != null) {
-            this.depth = this.getParent().getDepth() + 1;
-        }
-        else depth = 0;
-    }
-
-    public int getDepth() {
-        return this.depth;
-    }
 
     public CategoryType getType() {
         return type;
@@ -61,23 +50,20 @@ public class Category {
         this.name = name;
     }
 
-    public Category getParent() {
-        return parent;
-    }
-
-    public void setParent(Category parent) {
-        this.parent = parent;
-    }
-
     @Override
     public String toString() {
         return "Category{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", parentID=" + (parent != null ? parent.id : "NULL")  +
-                ", parentName=" + (parent != null ? parent.name : "NULL") +
-                ", type=" + type +
-                ", depth=" + depth +
+                ", children=" + children +
                 '}';
+    }
+
+    public int getParentID() {
+        return parentID;
+    }
+
+    public List<Category> getChildren() {
+        return children;
     }
 }

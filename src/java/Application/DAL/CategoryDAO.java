@@ -46,7 +46,7 @@ public class CategoryDAO extends TemplatePatternDAO<Category> {
             ResultSet rs = psas.executeQuery();
             rs.next();
 
-            return new Category(rs.getInt("CatID"), rs.getString("catName"), new Category(rs.getInt("ParentID"), rs.getString("parentName"), null));
+            return new Category(rs.getInt("CatID"), rs.getString("catName"), rs.getInt("ParentID"));
 
         } catch (Exception e)
         {
@@ -79,7 +79,7 @@ public class CategoryDAO extends TemplatePatternDAO<Category> {
 
             while (rs.next())
             {
-                categories.add(new Category(rs.getInt("CatID"), rs.getString("catName"), new Category(rs.getInt("ParentID"), rs.getString("parentName"), null)));
+                categories.add(new Category(rs.getInt("CatID"), rs.getString("catName"), rs.getInt("ParentID")));
             }
 
             return categories;
