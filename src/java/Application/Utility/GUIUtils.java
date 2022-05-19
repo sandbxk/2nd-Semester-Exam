@@ -1,6 +1,7 @@
 package Application.Utility;
 
 import Application.BE.Category;
+import Application.BE.CategoryEntry;
 import Application.GUI.Models.AccountModel;
 import Application.GUI.Models.CategoryEntryModel;
 import javafx.collections.ObservableList;
@@ -14,6 +15,7 @@ import javafx.scene.control.TreeItem;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
 
 public final class GUIUtils {
 
@@ -190,8 +192,21 @@ public final class GUIUtils {
     public static TreeItem<CategoryEntryModel> setCategoryHierachy2(List<CategoryEntryModel> categoryEntryModels){
         TreeItem<CategoryEntryModel> root = new TreeItem<>(new CategoryEntryModel("Tilstande"));
 
-        //Thread thread = new Thread(() -> {
+
+        Thread thread = new Thread(() -> {
         HashMap<Category, TreeItem<CategoryEntryModel>> parentMap = new HashMap<>();
+
+
+        //Create a set for all the parent categories. Sets do not allow duplicates.
+        Set<Category> categoryParents = new HashSet<>();
+        categoryParents.addAll(categoryEntryModels.stream() //Add all the parent categories to the set.
+                .map(CategoryEntryModel::getCategoryEntry)
+                .map(CategoryEntry::getCategory)
+                .map(Category::getParent)
+                .collect(Collectors.toList()));
+        categoryParents.forEach(category -> { parentMap.put(category, null);}); //Put all the parent categories in the map with null as value to be replaced later
+
+
 
         //Get the hierarchy of the categories by their parent category.
         for(CategoryEntryModel categoryEntryModel : categoryEntryModels){
@@ -199,26 +214,32 @@ public final class GUIUtils {
             Category parent = child.getParent();
 
 
-            if(parent == null){ //If the parent is null, the category is a super category.
+            if(parent == null){ //If the parent is null, the category is the highest level super category.
                 parentMap.put(child, new TreeItem<>(categoryEntryModel));
                 continue;
             }
 
             if (!parentMap.containsKey(parent)){ //If the parent is not in the map, add it, and get the parent category and add the child category to it.
-                parentMap.put(parent, new TreeItem<>(categoryEntryModel)); //PROBLEM: Condition A is added, as it's parent is already there, but A.1 does not have a parent, and is thus added AS a parent
-
+                if (parentMap.get(parent) == null)
+                    parentMap.put(parent, new TreeItem<>(categoryEntryModel)); //This will not be used, as all parents are present in the map.
 
             }
             else { //If the table contains the parent category, get the parent category and add the child category to it.
-                parentMap.get(parent).getChildren().add(new TreeItem<>(categoryEntryModel));
-        
+                if (parentMap.get(parent) == null)
+                    parentMap.put(parent, new TreeItem<>(categoryEntryModel));
+                else {
+                    parentMap.put(child, new TreeItem<>(categoryEntryModel));
+                }
+
             }
 
-            //TODO Fix first real entry being super category.
         }
 
         //Add the categories to the root.
         for(Category category : parentMap.keySet()){
+            if (category == null)
+                continue;
+
             if(category.getParent() == null){
                 root.getChildren().add(parentMap.get(category));
             }
@@ -231,12 +252,12 @@ public final class GUIUtils {
             }
         }
 
-        //});
-        //thread.run();
+        });
+        thread.run();
 
-        //while (thread.isAlive()){
+        while (thread.isAlive()){
         //Wait for the thread to finish
-        //}
+        }
         return root;
     }
 }

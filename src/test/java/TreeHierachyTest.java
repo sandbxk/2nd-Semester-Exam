@@ -98,7 +98,7 @@ public class TreeHierachyTest {
     @Test
     public void setTreeStructureHierachy(){
         //Collections.shuffle(categoryEntryModels);
-        TreeItem<CategoryEntryModel> root = GUIUtils.setCategoryHierachy(categoryEntryModels);
+        TreeItem<CategoryEntryModel> root = GUIUtils.setCategoryHierachy2(categoryEntryModels);
 
         CategoryEntryModel rootValue = root.getValue();
         TreeItem<CategoryEntryModel> superSuperCategory = root.getChildren().get(0);
@@ -106,18 +106,16 @@ public class TreeHierachyTest {
         TreeItem<CategoryEntryModel> subCategory = superCategory.getChildren().get(0);
 
         System.out.println(rootValue.getCategoryName() + " SIZE: " + root.getChildren().size());
+        System.out.println("");
         System.out.println(superSuperCategory.getValue().getCategoryName() + " SIZE: " + superSuperCategory.getChildren().size());
         System.out.println(superCategory.getValue().getCategoryName() + " SIZE: " + superCategory.getChildren().size());
         System.out.println(subCategory.getValue().getCategoryName() + " SIZE: " + subCategory.getChildren().size());
-
-        for (TreeItem<CategoryEntryModel> item : superSuperCategory.getChildren())
-        System.out.println(item.getValue().getCategoryName());
 
 
         assertEquals("Tilstande", rootValue.getCategoryName());
         assertEquals("All Conditions", superSuperCategory.getValue().getCategoryName());
         assertEquals("Conditions A", superCategory.getValue().getCategoryName());
-        //assertEquals("Condition A.1", subCategory.getValue().getCategoryName());
-        //assertNull(subCategory.getChildren());
+        assertEquals("Condition A.1", subCategory.getValue().getCategoryName());
+        assertEquals(0, subCategory.getChildren().size());
     }
 }
