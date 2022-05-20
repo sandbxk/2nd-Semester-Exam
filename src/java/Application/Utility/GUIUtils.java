@@ -13,7 +13,6 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TreeItem;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.UnaryOperator;
 
 public final class GUIUtils {
@@ -114,38 +113,46 @@ public final class GUIUtils {
     }
 
     public static TreeItem<CategoryEntryModel> mapToTreeItem(Map<Category, CategoryEntryModel> map){
-        AtomicReference<TreeItem<CategoryEntryModel>> root = new AtomicReference<>(new TreeItem<>());
-        List<Category> inserted = new ArrayList<>();
-
-        AtomicReference<CategoryEntryModel> rootModel = null;
-
-
-        map.forEach((k, v) -> {
-            if (k.getParent() == null) {
-                root.set(new TreeItem<>(v));
-                inserted.add(k);
+        //Find the root category
+        Category rootCategory = null;
+        for(Map.Entry<Category, CategoryEntryModel> entry : map.entrySet()){
+            if(entry.getKey().getParent() == null){
+                rootCategory = entry.getKey();
             }
+        }
 
-            if (k.getParent() != null) {
-                root.get().getChildren().add(new TreeItem<>(map.get(k.getParent())));
-                inserted.add(k.getParent());
+        TreeItem<CategoryEntryModel> treeRoot = new TreeItem<>(map.get(rootCategory));
+
+        TreeItem<CategoryEntryModel> returnRoot = null;
+        if (rootCategory != null) {
+            returnRoot = getChildrenToTreeItem(map, treeRoot, rootCategory.getChildren());
+            returnRoot = sortTreeItem(returnRoot);
+        }
+
+        return returnRoot;
+    }
+
+    private static TreeItem<CategoryEntryModel> getChildrenToTreeItem(Map<Category, CategoryEntryModel> map, TreeItem<CategoryEntryModel> parent, List<Category> children){
+        if (children.size() != 0) {
+            for (Category child : children) {
+                TreeItem<CategoryEntryModel> childTreeItem = new TreeItem<>(map.get(child));
+                parent.getChildren().add(childTreeItem);
+                getChildrenToTreeItem(map, childTreeItem, child.getChildren());
             }
+        }
+        return parent;
+    }
 
-
-            else {
-
+    private static TreeItem<CategoryEntryModel> sortTreeItem(TreeItem<CategoryEntryModel> treeItem){
+        if(treeItem.getChildren().size() > 0){
+            treeItem.getChildren().sort(Comparator.comparing(o -> o.getValue().getCategoryName()));
+            for(TreeItem<CategoryEntryModel> child : treeItem.getChildren()){
+                sortTreeItem(child);
             }
-
-            TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(v);
-            root.get().getChildren().add(treeItem);
-            if (k.getChildren().size() > 0) {
-                HashMap<Category, CategoryEntryModel> children = new HashMap<>();
-                children.keySet().addAll(k.getChildren());
-                k.getChildren().forEach(c -> { children.put(c, map.get(c)); });
-                mapToTreeItem(children, treeItem);
-            }
-        });
-        return root.get();
+        }
+        return treeItem;
     }
 
 }
+
+

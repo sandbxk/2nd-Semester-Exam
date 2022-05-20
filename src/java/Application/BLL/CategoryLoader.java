@@ -35,6 +35,7 @@ public class CategoryLoader
             if (element.getParentID() <= 0)
             {
                 content.getChildren().add(element);
+                element.setParent(content);
             }
 
             getImmediateChildren(element, allCategories);
@@ -46,6 +47,8 @@ public class CategoryLoader
     public static void main(String[] args) {
 
         CategoryLoader loader = new CategoryLoader();
+
+        System.out.println("/t/t/t" + " : " + loader.load());
 
         for (var Level0 : loader.load().getChildren()) {
             System.out.println(Level0.getName());

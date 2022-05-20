@@ -26,6 +26,7 @@ public class Category {
         this.id = id;
         this.name = name;
         this.parentID = parentID;
+        initType();
     }
 
     private void initType() {
@@ -33,15 +34,10 @@ public class Category {
             this.type = this.parent.getType();
         }
         else switch (this.name) {
-            case "Generelle Oplysninger":
-                this.type = CategoryType.GENERAL_INFORMATION;
-                break;
-            case "Funktionsevnetilstande":
-                this.type = CategoryType.FUNCTIONAL_ABILITY;
-                break;
-            case "Helbredstilstande":
-                this.type = CategoryType.HEALTH_CONDITION;
-                break;
+            case "Helbredstilstande" -> this.type = CategoryType.HEALTH_CONDITION;
+            case "Funktionsevnetilstande" -> this.type = CategoryType.FUNCTIONAL_ABILITY;
+            case "Generelle Oplysninger" -> this.type = CategoryType.GENERAL_INFORMATION;
+            default -> this.type = CategoryType.UNKNOWN;
         }
     }
 
@@ -56,6 +52,10 @@ public class Category {
 
     public int getId() {
         return id;
+    }
+
+    public Integer getIntegerID(){
+        return this.id;
     }
 
     public void setId(int id) {
@@ -95,4 +95,13 @@ public class Category {
     public List<Category> getChildren() {
         return children;
     }
+
+    public void addChild(Category child){
+        this.children.add(child);
+    }
+
+    public void removeChild(Category child){
+        this.children.remove(child);
+    }
+
 }

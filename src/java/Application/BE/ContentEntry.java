@@ -21,19 +21,24 @@ public class ContentEntry {
 
     public ContentEntry(Category category)
     {
+        this.id = category.getId();
         this.category = category;
+        initRelevance();
     }
 
     public ContentEntry(int id, Category category, int level) {
         this.id = id;
         this.category = category;
         this.currentStatus = level;
+        this.expectedStatus = -1;
         initRelevance();
     }
 
     public ContentEntry(int id, Category category) {
         this.id = id;
         this.category = category;
+        this.currentStatus = -1;
+
     }
 
 
@@ -57,7 +62,7 @@ public class ContentEntry {
         return category.getName();
     }
 
-    public int getCurrentStatus() {
+    public Integer getCurrentStatus() {
         return currentStatus;
     }
 
@@ -98,7 +103,7 @@ public class ContentEntry {
         this.citizenGoals = citizenGoals;
     }
 
-    public int getExpectedStatus() {
+    public Integer getExpectedStatus() {
         return expectedStatus;
     }
 
@@ -123,9 +128,11 @@ public class ContentEntry {
     }
 
     private void initRelevance() {
-        switch (getCategory().getType()){
+        if (this.currentStatus == -1)
+            this.relevant = false;
+        else switch (getCategory().getType()){
             case FUNCTIONAL_ABILITY -> {
-                if (getCurrentStatus() != 9) {
+                if (this.currentStatus != 9) {
                     setRelevant(true);
                 }
                 else {
@@ -133,7 +140,7 @@ public class ContentEntry {
                 }
             }
             case HEALTH_CONDITION -> {
-                if (getCurrentStatus() != 0) {
+                if (this.currentStatus != 0) {
                     setRelevant(true);
                 }
                 else {
