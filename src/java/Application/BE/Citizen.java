@@ -4,6 +4,7 @@ import Application.DAL.TemplateMethod.Annotations.SQLGetter;
 import Application.DAL.TemplateMethod.Annotations.SQLSetter;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Citizen
 {
@@ -93,5 +94,10 @@ public class Citizen
     public void setSchool(School school)
     {
         this.school = school;
+    }
+
+    public void setContent(List<ContentEntry> content)
+    {
+        // populate lists (healthCategoryEntries, funcCategoryEntries)
     }
 }
