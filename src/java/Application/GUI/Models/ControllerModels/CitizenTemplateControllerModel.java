@@ -24,8 +24,6 @@ public class CitizenTemplateControllerModel {
         teacherDataManager = new TeacherDataManager();
     }
 
-    public void citizenTemplateSearch() {
-    }
 
     /**
      * Get all the citizen templates from the DB and put them in a list.
@@ -108,10 +106,14 @@ public class CitizenTemplateControllerModel {
      * Creates a copy of the citizen template and writes it to the DB.
      */
     public CitizenModel copyCitizenTemplate() {
-        //CitizenModel clone = (CitizenModel) selectedCitizenTemplateModel.clone();
+        CitizenModel clone = null;
+        try {
+            clone = (CitizenModel) selectedCitizenTemplateModel.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
         //teacherDataManager.copyTemplate(clone.getTemplate());
-
-        return null; //clone;
+        return clone;
     }
 
 
@@ -119,7 +121,11 @@ public class CitizenTemplateControllerModel {
      * Creates a copy of the citizen template and stores it in the preEditCitizenTemplateModel variable for later user.
      */
     public void savePreEditState() {
-        //  this.preEditCitizenTemplateModel = (CitizenModel) selectedCitizenTemplateModel.clone();
+        try {
+            this.preEditCitizenTemplateModel = (CitizenModel) selectedCitizenTemplateModel.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
