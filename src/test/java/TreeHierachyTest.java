@@ -146,19 +146,15 @@ public class TreeHierachyTest {
         TreeItem<CategoryEntryModel> root = GUIUtils.mapToTreeItem(categoryEntryModelHashMap);
 
         CategoryEntryModel rootValue = root.getValue();
-        TreeItem<CategoryEntryModel> superSuperCategory = root.getChildren().get(0);
-        TreeItem<CategoryEntryModel> superCategory = superSuperCategory.getChildren().get(0);
+        TreeItem<CategoryEntryModel> superCategory = root.getChildren().get(0);
         TreeItem<CategoryEntryModel> subCategory = superCategory.getChildren().get(0);
 
         System.out.println(rootValue.getCategoryName() + " SIZE: " + root.getChildren().size());
-        System.out.println("");
-        System.out.println(superSuperCategory.getValue().getCategoryName() + " SIZE: " + superSuperCategory.getChildren().size());
         System.out.println(superCategory.getValue().getCategoryName() + " SIZE: " + superCategory.getChildren().size());
         System.out.println(subCategory.getValue().getCategoryName() + " SIZE: " + subCategory.getChildren().size());
 
 
-        assertEquals("Tilstande", rootValue.getCategoryName());
-        assertEquals("All Conditions", superSuperCategory.getValue().getCategoryName());
+        assertEquals("All Conditions", rootValue.getCategoryName());
         assertEquals("Conditions A", superCategory.getValue().getCategoryName());
         assertEquals("Condition A.1", subCategory.getValue().getCategoryName());
         assertEquals(0, subCategory.getChildren().size());
