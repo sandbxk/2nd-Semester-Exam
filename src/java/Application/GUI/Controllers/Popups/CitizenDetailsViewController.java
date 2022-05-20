@@ -84,8 +84,8 @@ public class CitizenDetailsViewController implements Initializable {
     private void setDataToCitizenTemplateView() {
         if (model.getSelectedCitizen() != null) {
             //set the base data of name, surname and age to that of the selected citizen template
-            lblCitizenFirstName.setText(model.getSelectedCitizen().getName());
-            lblCitizenSurname.setText(model.getSelectedCitizen().getSurname());
+            lblCitizenFirstName.setText(model.getSelectedCitizen().getFirstName());
+            lblCitizenSurname.setText(model.getSelectedCitizen().getLastName());
             lblCitizenAge.setText(String.valueOf(model.getSelectedCitizen().getAge()));
 
             //set the functional abilities TreeTableView to the values of the selected citizen template

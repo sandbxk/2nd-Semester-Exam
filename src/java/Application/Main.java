@@ -1,8 +1,5 @@
 package Application;
 
-import Application.BE.School;
-import Application.DAL.TemplateMethod.DefaultDAO;
-import Application.DAL.TemplateMethod.SchoolDAO2;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

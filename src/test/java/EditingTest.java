@@ -1,6 +1,6 @@
 
 import Application.GUI.Models.CategoryEntryModel;
-import Application.GUI.Models.CitizenTemplateModel;
+import Application.GUI.Models.CitizenModel;
 import Application.GUI.Models.ControllerModels.CitizenTemplateControllerModel;
 import Application.GUI.Models.FunctionalLevels;
 import Application.GUI.Models.HealthLevels;
@@ -30,7 +30,7 @@ public class EditingTest {
         model = new CitizenTemplateControllerModel();
 
         //Citizen Template
-        CitizenTemplateModel citizenTemplateModel = new CitizenTemplateModel("First Name", "Last Name", 90);
+        CitizenModel citizenTemplateModel = new CitizenModel("First Name", "Last Name", 90);
 
         //Lists
         ObservableList<CategoryEntryModel> healthConditionsRelevant = FXCollections.observableArrayList();
@@ -69,7 +69,7 @@ public class EditingTest {
     //assert that categories are marked as relevant and non-relevant
     @Test
     public void changedCategories(){
-        CitizenTemplateModel selected = model.getSelectedCitizenTemplateModel(); //Selected citizen
+        CitizenModel selected = model.getSelectedCitizenTemplateModel(); //Selected citizen
         assertEquals(4, selected.getRelevantFunctionalAbilities().size());
 
         //Edits
@@ -88,14 +88,15 @@ public class EditingTest {
     //assert that changes made to model are reflected in BE
     @Test
     public void ModelAndBEFields(){
-        CitizenTemplateModel selected = model.getSelectedCitizenTemplateModel();
-        assertEquals("First Name", selected.getName());
-        assertEquals("First Name", selected.getTemplate().getName());
+        CitizenModel selected = model.getSelectedCitizenTemplateModel();
+        assertEquals("First Name", selected.getFirstName());
+        assertEquals("First Name", selected.getFirstName());
+        assertEquals("First Name", selected.getBeCitizen().getFirstname());
 
-        selected.setName("New First Name");
 
-        assertEquals("New First Name", selected.getName());
-        assertFalse("Name is changed", !"First Name".equals(selected.getTemplate().getName()));
+        selected.setFirstName("New First Name");
+        assertEquals("New First Name", selected.getFirstName());
+        assertFalse("Name is changed", !"First Name".equals(selected.getFirstName()));
 
     }
 

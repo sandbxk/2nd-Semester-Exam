@@ -5,31 +5,15 @@ import Application.DAL.TemplateMethod.Annotations.SQLGetter;
 import Application.DAL.TemplateMethod.Annotations.SQLSetter;
 import Application.DAL.TemplateMethod.Annotations.SQLTable;
 
-@SQLTable(name = "Account")
 public class Account {
 
-    @SQLColumn(name = "AID")
     private int id;
-
-    @SQLColumn(name = "username")
     private String username;
-
-    @SQLColumn(name = "hashed_pwd")
     private String password;
-
-    @SQLColumn(name = "firstName")
     private String firstName;
-
-    @SQLColumn(name = "lastName")
     private String lastName;
-
-    @SQLColumn(name = "email")
     private String email;
-
-    @SQLColumn(name = "FK_AccountSchool")
     private School school;
-
-    @SQLColumn(name = "privilegeLevel")
     private int authorization;
 
     public Account(int id, String login, String password, String firstName, String lastName, String email, School school, int authorization) {

@@ -20,22 +20,22 @@ public class SessionModel {
         accountManager = new AccountManager();
     }
 
-    private Account account;
+    private static Account account;
 
     /**
      * @return the currently logged-in user, may be null.
      * */
     public Account getCurrent()
     {
-        return this.account;
+        return account;
     }
 
 
     public boolean authenticate(String username, String password)
     {
-        this.account = accountManager.authenticate(username, generateAccessToken(username, password));
+        account = accountManager.authenticate(username, generateAccessToken(username, password));
 
-        return this.account != null;
+        return account != null;
     }
 
     public static School getSchool()

@@ -1,17 +1,21 @@
 package Application.GUI.Models;
 
-import Application.BE.*;
+import Application.BE.Category;
+import Application.BE.Citizen;
+import Application.BE.ContentEntry;
+import Application.BE.GeneralJournal;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class CitizenModel {
 
-    private StringProperty name;
-    private StringProperty surname;
+    private StringProperty firstName;
+    private StringProperty lastName;
     private IntegerProperty age;
 
-    private StringProperty mastering;
+
+    private StringProperty coping;
     private StringProperty motivation;
     private StringProperty resources;
     private StringProperty roles;
@@ -31,14 +35,14 @@ public class CitizenModel {
     private ObservableList<CategoryEntryModel> nonRelevantHealthConditions;
 
 
-    public CitizenModel(String name, String surname, int age) {
-        this.beCitizen = new Citizen(-1, name, surname, age, new GeneralJournal());
+    public CitizenModel(String firstName, String lastName, int age) {
+        this.beCitizen = new Citizen(-1, new GeneralJournal(), SessionModel.getSchool(), firstName, lastName, age);
 
-        this.name = new SimpleStringProperty(beCitizen.getName());
-        this.surname = new SimpleStringProperty(beCitizen.getSurname());
+        this.firstName = new SimpleStringProperty(beCitizen.getFirstname());
+        this.lastName = new SimpleStringProperty(beCitizen.getLastname());
         this.age = new SimpleIntegerProperty(beCitizen.getAge());
 
-        this.mastering = new SimpleStringProperty(beCitizen.getGeneralInfo().getCoping());
+        this.coping = new SimpleStringProperty(beCitizen.getGeneralInfo().getCoping());
         this.motivation = new SimpleStringProperty(beCitizen.getGeneralInfo().getMotivation());
         this.resources = new SimpleStringProperty(beCitizen.getGeneralInfo().getResources());
         this.roles = new SimpleStringProperty(beCitizen.getGeneralInfo().getRoles());
@@ -63,11 +67,11 @@ public class CitizenModel {
     public CitizenModel(Citizen citizen) {
         this.beCitizen = citizen;
 
-        this.name = new SimpleStringProperty(beCitizen.getName());
-        this.surname = new SimpleStringProperty(beCitizen.getSurname());
+        this.firstName = new SimpleStringProperty(beCitizen.getFirstname());
+        this.lastName = new SimpleStringProperty(beCitizen.getLastname());
         this.age = new SimpleIntegerProperty(beCitizen.getAge());
 
-        this.mastering = new SimpleStringProperty(beCitizen.getGeneralInfo().getCoping());
+        this.coping = new SimpleStringProperty(beCitizen.getGeneralInfo().getCoping());
         this.motivation = new SimpleStringProperty(beCitizen.getGeneralInfo().getMotivation());
         this.resources = new SimpleStringProperty(beCitizen.getGeneralInfo().getResources());
         this.roles = new SimpleStringProperty(beCitizen.getGeneralInfo().getRoles());
@@ -80,6 +84,7 @@ public class CitizenModel {
         this.network = new SimpleStringProperty(beCitizen.getGeneralInfo().getNetwork());
         initBindings();
 
+
         this.relevantFunctionalAbilities = FXCollections.observableArrayList();
         this.relevantHealthConditions = FXCollections.observableArrayList();
         this.nonRelevantFunctionalAbilities = FXCollections.observableArrayList();
@@ -90,9 +95,21 @@ public class CitizenModel {
     }
 
     public CitizenModel() {
-        this.name = new SimpleStringProperty();
-        this.surname = new SimpleStringProperty();
+        this.firstName = new SimpleStringProperty();
+        this.lastName = new SimpleStringProperty();
         this.age = new SimpleIntegerProperty();
+        this.coping = new SimpleStringProperty(beCitizen.getGeneralInfo().getCoping());
+        this.motivation = new SimpleStringProperty(beCitizen.getGeneralInfo().getMotivation());
+        this.resources = new SimpleStringProperty(beCitizen.getGeneralInfo().getResources());
+        this.roles = new SimpleStringProperty(beCitizen.getGeneralInfo().getRoles());
+        this.habits = new SimpleStringProperty(beCitizen.getGeneralInfo().getHabits());
+        this.eduAndJob = new SimpleStringProperty(beCitizen.getGeneralInfo().getEduAndJob());
+        this.lifeStory = new SimpleStringProperty(beCitizen.getGeneralInfo().getLifeStory());
+        this.healthInfo = new SimpleStringProperty(beCitizen.getGeneralInfo().getHealthInfo());
+        this.assistiveDevices = new SimpleStringProperty(beCitizen.getGeneralInfo().getAssistiveDevices());
+        this.homeLayout = new SimpleStringProperty(beCitizen.getGeneralInfo().getHomeLayout());
+        this.network = new SimpleStringProperty(beCitizen.getGeneralInfo().getNetwork());
+
 
 
         this.relevantFunctionalAbilities = FXCollections.observableArrayList();
@@ -106,11 +123,11 @@ public class CitizenModel {
 
 
     private void initBindings() {
-        this.name.bindBidirectional(new SimpleStringProperty(beCitizen.getName()));
-        this.surname.bindBidirectional(new SimpleStringProperty(beCitizen.getSurname()));
+        this.firstName.bindBidirectional(new SimpleStringProperty(beCitizen.getFirstname()));
+        this.lastName.bindBidirectional(new SimpleStringProperty(beCitizen.getLastname()));
         this.age.bindBidirectional(new SimpleIntegerProperty(beCitizen.getAge()));
 
-        this.mastering.bindBidirectional(new SimpleStringProperty(beCitizen.getGeneralInfo().getCoping()));
+        this.coping.bindBidirectional(new SimpleStringProperty(beCitizen.getGeneralInfo().getCoping()));
         this.motivation.bindBidirectional(new SimpleStringProperty(beCitizen.getGeneralInfo().getMotivation()));
         this.resources.bindBidirectional(new SimpleStringProperty(beCitizen.getGeneralInfo().getResources()));
         this.roles.bindBidirectional(new SimpleStringProperty(beCitizen.getGeneralInfo().getRoles()));
@@ -125,56 +142,56 @@ public class CitizenModel {
 
     @Override
     public String toString() {
-        return name.get() + " " + surname.get();
+        return firstName.get() + " " + lastName.get();
     }
 
     private void initFunctionalAbilities() {
-        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Walking"), 1)));
-        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Climbing"), 1)));
-        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Swimming"), 1)));
-        relevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Bathing"), 4)));
+        relevantFunctionalAbilities.add(new CategoryEntryModel(new ContentEntry(0, new Category("Walking"), 1)));
+        relevantFunctionalAbilities.add(new CategoryEntryModel(new ContentEntry(0, new Category("Climbing"), 1)));
+        relevantFunctionalAbilities.add(new CategoryEntryModel(new ContentEntry(0, new Category("Swimming"), 1)));
+        relevantFunctionalAbilities.add(new CategoryEntryModel(new ContentEntry(0, new Category("Bathing"), 4)));
 
-        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Sleeping"), 0)));
-        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Eating"), 0)));
-        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Toileting"), 0)));
+        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new ContentEntry(0, new Category("Sleeping"), 0)));
+        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new ContentEntry(0, new Category("Eating"), 0)));
+        nonRelevantFunctionalAbilities.add(new CategoryEntryModel(new ContentEntry(0, new Category("Toileting"), 0)));
     }
 
     private void initHealthConditions() {
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Diabetes"), 1)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("High Blood Pressure"), 1)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Heart Disease"), 1)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Asthma"), 1)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Epilepsy"), 1)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Allergies"), 1)));
-        relevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("Other"), 1)));
+        relevantHealthConditions.add(new CategoryEntryModel(new ContentEntry(0, new Category("Diabetes"), 1)));
+        relevantHealthConditions.add(new CategoryEntryModel(new ContentEntry(0, new Category("High Blood Pressure"), 1)));
+        relevantHealthConditions.add(new CategoryEntryModel(new ContentEntry(0, new Category("Heart Disease"), 1)));
+        relevantHealthConditions.add(new CategoryEntryModel(new ContentEntry(0, new Category("Asthma"), 1)));
+        relevantHealthConditions.add(new CategoryEntryModel(new ContentEntry(0, new Category("Epilepsy"), 1)));
+        relevantHealthConditions.add(new CategoryEntryModel(new ContentEntry(0, new Category("Allergies"), 1)));
+        relevantHealthConditions.add(new CategoryEntryModel(new ContentEntry(0, new Category("Other"), 1)));
 
-        nonRelevantHealthConditions.add(new CategoryEntryModel(new CategoryEntry(0, new Category("None"), 0)));
+        nonRelevantHealthConditions.add(new CategoryEntryModel(new ContentEntry(0, new Category("None"), 0)));
 
     }
 
 
-    public String getName() {
-        return name.get();
+    public String getFirstName() {
+        return firstName.get();
     }
 
-    public StringProperty nameProperty() {
-        return name;
+    public StringProperty firstNameProperty() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name.set(name);
+    public void setFirstName(String name) {
+        this.firstName.set(name);
     }
 
-    public String getSurname() {
-        return surname.get();
+    public String getLastName() {
+        return lastName.get();
     }
 
-    public StringProperty surnameProperty() {
-        return surname;
+    public StringProperty lastNameProperty() {
+        return lastName;
     }
 
-    public void setSurname(String surname) {
-        this.surname.set(surname);
+    public void setLastName(String lastName) {
+        this.lastName.set(lastName);
     }
 
     public int getAge() {
@@ -189,28 +206,29 @@ public class CitizenModel {
         this.age.set(age);
     }
 
-    public String getMastering() {
-        return mastering.get();
+
+    public String getCoping() {
+        return coping.get();
     }
 
-    public StringProperty masteringProperty() {
-        return mastering;
-    }
-
-    public void setMastering(String mastering) {
-        this.mastering.set(mastering);
+    public void setCoping(String coping) {
+        this.coping.set(coping);
     }
 
     public String getMotivation() {
         return motivation.get();
     }
 
-    public StringProperty motivationProperty() {
-        return motivation;
-    }
-
     public void setMotivation(String motivation) {
         this.motivation.set(motivation);
+    }
+
+    public StringProperty copingProperty() {
+        return coping;
+    }
+
+    public StringProperty motivationProperty() {
+        return motivation;
     }
 
     public String getResources() {
@@ -321,6 +339,14 @@ public class CitizenModel {
         this.network.set(network);
     }
 
+    public Citizen getBeCitizen() {
+        return beCitizen;
+    }
+
+    public void setBeCitizen(Citizen beCitizen) {
+        this.beCitizen = beCitizen;
+    }
+
     public ObservableList<CategoryEntryModel> getNonRelevantFunctionalAbilities() {
         return nonRelevantFunctionalAbilities;
     }
@@ -364,13 +390,5 @@ public class CitizenModel {
         allHealthConditions.addAll(nonRelevantHealthConditions);
         allHealthConditions.addAll(relevantHealthConditions);
         return allHealthConditions;
-    }
-
-    public Citizen getBeCitizen() {
-        return beCitizen;
-    }
-
-    public void setBeCitizen(Citizen beCitizen) {
-        this.beCitizen = beCitizen;
     }
 }

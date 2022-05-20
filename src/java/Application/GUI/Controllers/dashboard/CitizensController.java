@@ -1,6 +1,7 @@
 package Application.GUI.Controllers.dashboard;
 
 import Application.BE.Citizen;
+
 import Application.DAL.TemplateMethod.CitizenDAO;
 import Application.Utility.GUIUtils;
 import javafx.collections.FXCollections;

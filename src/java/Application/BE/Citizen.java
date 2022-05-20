@@ -1,122 +1,145 @@
 package Application.BE;
 
-import Application.DAL.TemplateMethod.Annotations.SQLColumn;
 import Application.DAL.TemplateMethod.Annotations.SQLGetter;
 import Application.DAL.TemplateMethod.Annotations.SQLSetter;
-import Application.DAL.TemplateMethod.Annotations.SQLTable;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Citizen implements Cloneable {
-
-
+public class Citizen implements Cloneable
+{
     private int id;
-    private String name;
-    private String surname;
+    private GeneralJournal journal;
+    private School school;
+    private String firstname;
+    private String lastname;
     private int age;
-    private GeneralJournal generalInfo;
-    private final List<CategoryEntry> functionalAbilities;
-    private final List<CategoryEntry> healthConditions;
+    private int zipCode;
 
+    private GeneralJournal generalJournal;
+    private HashMap<Category, ContentEntry> healthCategoryEntries;
+    private HashMap<Category, ContentEntry> funcCategoryEntries;
 
-    public Citizen(int id, String name, String surname, int age, GeneralJournal generalInfo)
+    public Citizen(int id)
+    {
+
+        this.id = id;
+    }
+
+    public Citizen(int id, GeneralJournal journal, School school, String firstname, String lastname, int age)
     {
         this.id = id;
-        this.name = name;
-        this.surname = surname;
+        this.journal = journal;
+        this.school = school;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.age = age;
 
-        this.generalInfo = new GeneralJournal();
-        this.functionalAbilities = new ArrayList<>();
-        this.healthConditions = new ArrayList<>();
+        funcCategoryEntries = new HashMap<>();
+        healthCategoryEntries = new HashMap<>();
     }
 
-    /**
-     * Constructor for blank citizen template
 
-     */
-    public Citizen()
-    {
-        this.id = -1;
-        this.name = "Ny Borger";
-        this.surname = "Skabelon";
-        this.age = 0;
-
-        this.generalInfo = new GeneralJournal();
-        this.functionalAbilities = new ArrayList<>();
-        this.healthConditions = new ArrayList<>();
+    @SQLGetter(name = "cZipCode")
+    public int getZipCode() {
+        return zipCode;
     }
 
-    public List<CategoryEntry> getFunctionalAbilities () {
-        return functionalAbilities;
+    @SQLSetter(name = "cZipCode")
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
     }
 
-    public List<CategoryEntry> getHealthConditions ()
-    {
-        return healthConditions;
-    }
-
-    public void setFunctionalAbilities (List < CategoryEntry > functionalAbilities) {
-        this.functionalAbilities.clear();
-        this.functionalAbilities.addAll(functionalAbilities);
-    }
-
-    public void setHealthConditions (List < CategoryEntry > healthConditions) {
-        this.healthConditions.clear();
-        this.healthConditions.addAll(healthConditions);
-    }
-
-    public void addFunctionalAbility (CategoryEntry entry)
-    {
-        functionalAbilities.add(entry);
-    }
-
-    public void addHealthConditions (CategoryEntry entry)
-    {
-        healthConditions.add(entry);
-    }
-
-    public GeneralJournal getGeneralInfo () {
-        return generalInfo;
-    }
-
-    public void setGeneralInfo (GeneralJournal generalInfo){
-        this.generalInfo = generalInfo;
-    }
-
-    public int getId () {
-        return id;
-    }
-
-    public void setId ( int id){
-        this.id = id;
-    }
-
-    public String getName () {
-        return name;
-    }
-
-    public void setName (String name){
-        this.name = name;
-    }
-
-    public String getSurname () {
-        return surname;
-    }
-
-    public void setSurname (String surname){
-        this.surname = surname;
-    }
-
-    public int getAge () {
+    @SQLGetter(name = "cAge")
+    public int getAge() {
         return age;
     }
 
-    public void setAge ( int age){
-        this.age = age;
+    @SQLGetter(name = "cFirstName")
+    public String getFirstname() {
+        return firstname;
     }
+
+    @SQLSetter(name = "cFirstName")
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    @SQLGetter(name = "citizenId")
+    public int getId() {
+        return id;
+    }
+
+    @SQLSetter(name = "citizenId")
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @SQLGetter(name = "cSurname")
+    public String getLastname() {
+        return lastname;
+    }
+
+    public GeneralJournal getJournal()
+    {
+        return journal;
+    }
+
+    public void setJournal(GeneralJournal journal)
+    {
+        this.journal = journal;
+    }
+
+    public School getSchool()
+    {
+        return school;
+    }
+
+    public void setSchool(School school)
+    {
+        this.school = school;
+    }
+
+    public void setFunctionalAbilities (List<ContentEntry> functionalAbilities) {
+        funcCategoryEntries.clear();
+        for (ContentEntry entry : functionalAbilities) {
+            funcCategoryEntries.put(entry.getCategory(), entry);
+        };
+    }
+
+    public void setHealthConditions (List < ContentEntry > healthConditions) {
+        healthCategoryEntries.clear();
+        for (ContentEntry entry : healthConditions) {
+            healthCategoryEntries.put(entry.getCategory(), entry);
+        };
+    }
+
+    public HashMap<Category, ContentEntry> getFunctionalAbilities() {
+        return funcCategoryEntries;
+    }
+
+    public HashMap<Category, ContentEntry> getHealthConditions() {
+        return healthCategoryEntries;
+    }
+
+    public void addFunctionalAbility (ContentEntry entry)
+    {
+        funcCategoryEntries.put(entry.getCategory(), entry);
+    }
+
+    public void addHealthConditions (ContentEntry entry)
+    {
+        healthCategoryEntries.put(entry.getCategory(), entry);
+    }
+
+    public GeneralJournal getGeneralInfo () {
+        return generalJournal;
+    }
+
+    public void setGeneralInfo (GeneralJournal generalInfo){
+        this.generalJournal = generalInfo;
+    }
+
 
     @Override
     public Object clone() throws CloneNotSupportedException {

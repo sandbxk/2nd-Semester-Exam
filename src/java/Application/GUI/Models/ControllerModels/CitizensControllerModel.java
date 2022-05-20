@@ -1,9 +1,5 @@
 package Application.GUI.Models.ControllerModels;
 
-import Application.GUI.Models.CitizenTemplateModel;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 public class CitizensControllerModel {
 
 

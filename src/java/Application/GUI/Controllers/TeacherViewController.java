@@ -1,6 +1,7 @@
 package Application.GUI.Controllers;
 
 
+import Application.BLL.TeacherDataManager;
 import Application.GUI.Models.AccountModel;
 
 import Application.Utility.StateMachine.State;
@@ -16,7 +17,8 @@ import javafx.scene.layout.BorderPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TeacherViewController implements Initializable {
+public class TeacherViewController implements Initializable
+{
     @FXML public AnchorPane anchorPaneDashboard;
     @FXML public AnchorPane anchorPaneStudents;
     @FXML public AnchorPane anchorPaneCitizenTemplate;
@@ -37,6 +39,8 @@ public class TeacherViewController implements Initializable {
 
     private ToggleGroup toggleGroupViews;
     private StateMachine<ToggleButton> stateMachine = new StateMachine<>();
+    private TeacherDataManager dataManager = new TeacherDataManager();
+
 
     @FXML public BorderPane TeacherScene;
 

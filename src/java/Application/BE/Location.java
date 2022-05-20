@@ -1,16 +1,19 @@
 package Application.BE;
 
-public class City {
+public class Location {
     private String CityName;
     private int zipCode;
 
-    public City(int zipCode, String cityName)
+    public Location(int zipCode, String cityName)
     {
         this.zipCode = zipCode;
         this.CityName = cityName;
     }
+    public Location()
+    {
+    }
 
-    public City(int zipCode)
+    public Location(int zipCode)
     {
         this.zipCode = zipCode;
     }
@@ -19,15 +22,9 @@ public class City {
         return CityName;
     }
 
-    public void setCityName(String cityName) {
-        CityName = cityName;
-    }
 
     public int getZipCode() {
         return zipCode;
     }
-
-    public void setZipCode(int zipCode) {
-        this.zipCode = zipCode;
-    }
+    
 }
