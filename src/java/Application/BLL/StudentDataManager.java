@@ -1,7 +1,9 @@
 package Application.BLL;
 
+
 import Application.BE.Account;
 import Application.BE.Citizen;
+import Application.BE.ContentEntry;
 import Application.BE.Group;
 import Application.DAL.CitizenDAO;
 import Application.DAL.GroupDAO;
@@ -52,5 +54,8 @@ public class StudentDataManager {
 
         manager.getAssignedCitizens(1);
 
+    }
+
+    public void updateObservation(Citizen selectedCitizen, ContentEntry value) {
     }
 }

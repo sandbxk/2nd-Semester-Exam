@@ -1,11 +1,8 @@
 package Application.GUI.Controllers.dashboard;
 
 import Application.BE.GeneralJournal;
-import Application.GUI.Models.CategoryEntryModel;
-import Application.GUI.Models.CitizenModel;
+import Application.GUI.Models.*;
 import Application.GUI.Models.ControllerModels.CitizenTemplateControllerModel;
-import Application.GUI.Models.FunctionalLevels;
-import Application.GUI.Models.HealthLevels;
 import Application.Utility.GUIUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,7 +24,6 @@ public class CitizenTemplateController implements Initializable {
     public AnchorPane anchorPaneCitizenTemplateDashboard;
     public ListView<CitizenModel> listViewCitizenTemplates;
     public TextField txtFieldCitizenTemplateSearch;
-    public Button btnCitizenTemplateSearch;
     public TextField txtFieldName;
     public TextField txtFieldSurname;
     public TextField txtFieldAge;
@@ -80,22 +76,15 @@ public class CitizenTemplateController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         initColumnList();
         initTextAreaList();
-        setFuncTreeTable();
+        setTreeTables();
         initTreeTableClmns();
         initTreeTblColumnEdit();
 
-        //setFuncTreeTable();
 
         initCitizenTemplatesList();
         initActionsMenu();
         initTextFields();
-
-    }
-
-
-    public void onCitizenTemplateSearch(ActionEvent event) {
-       // model.citizenTemplateSearch();
-        //TODO: Implement search
+        GUIUtils.searchListener(txtFieldCitizenTemplateSearch, listViewCitizenTemplates);
     }
 
     /**
@@ -186,7 +175,7 @@ public class CitizenTemplateController implements Initializable {
 
     }
 
-    private void setFuncTreeTable() {
+    private void setTreeTables() {
         //TODO: Proper table population
         // Set up the table
         CitizenModel citizenTemplateModel = new CitizenModel();

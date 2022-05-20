@@ -1,7 +1,10 @@
 package Application.GUI.Controllers.dashboard;
 
 import Application.BE.Citizen;
-import Application.DAL.CitizenDAO;
+
+import Application.DAL.TemplateMethod.CitizenDAO;
+import Application.Utility.GUIUtils;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -40,6 +43,7 @@ public class CitizensController implements Initializable
 
         AvailableCitizens = new ListView<>();
         AvailableCitizens.getSelectionModel().selectFirst();
+        GUIUtils.searchListener(txtFieldCitizensSearch, AvailableCitizens);
 
        // lblCitizenName.textProperty().bindBidirectional(AvailableCitizens.getSelectionModel().getSelectedItem().getFirstname());
     }
