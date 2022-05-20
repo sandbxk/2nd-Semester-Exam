@@ -6,7 +6,7 @@ import Application.DAL.TemplateMethod.Annotations.SQLSetter;
 import java.util.HashMap;
 import java.util.List;
 
-public class Citizen
+public class Citizen implements Cloneable
 {
     private int id;
     private GeneralJournal journal;
@@ -17,11 +17,12 @@ public class Citizen
     private int zipCode;
 
     private GeneralJournal generalJournal;
-    private HashMap<ContentEntry, ContentEntry> healthCategoryEntries;
-    private HashMap<ContentEntry, ContentEntry> funcCategoryEntries;
+    private HashMap<Category, ContentEntry> healthCategoryEntries;
+    private HashMap<Category, ContentEntry> funcCategoryEntries;
 
     public Citizen(int id)
     {
+
         this.id = id;
     }
 
@@ -33,6 +34,9 @@ public class Citizen
         this.firstname = firstname;
         this.lastname = lastname;
         this.age = age;
+
+        funcCategoryEntries = new HashMap<>();
+        healthCategoryEntries = new HashMap<>();
     }
 
 
@@ -100,4 +104,52 @@ public class Citizen
     {
         // populate lists (healthCategoryEntries, funcCategoryEntries)
     }
+    
+    public void setFunctionalAbilities (List<ContentEntry> functionalAbilities) {
+        funcCategoryEntries.clear();
+        for (ContentEntry entry : functionalAbilities) {
+            funcCategoryEntries.put(entry.getCategory(), entry);
+        };
+    }
+
+    public void setHealthConditions (List < ContentEntry > healthConditions) {
+        healthCategoryEntries.clear();
+        for (ContentEntry entry : healthConditions) {
+            healthCategoryEntries.put(entry.getCategory(), entry);
+        };
+    }
+
+    public HashMap<Category, ContentEntry> getFunctionalAbilities() {
+        return funcCategoryEntries;
+    }
+
+    public HashMap<Category, ContentEntry> getHealthConditions() {
+        return healthCategoryEntries;
+    }
+
+    public void addFunctionalAbility (ContentEntry entry)
+    {
+        funcCategoryEntries.put(entry.getCategory(), entry);
+    }
+
+    public void addHealthConditions (ContentEntry entry)
+    {
+        healthCategoryEntries.put(entry.getCategory(), entry);
+    }
+
+    public GeneralJournal getGeneralInfo () {
+        return generalJournal;
+    }
+
+    public void setGeneralInfo (GeneralJournal generalInfo){
+        this.generalJournal = generalInfo;
+    }
+
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }
+
+

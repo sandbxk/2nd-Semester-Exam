@@ -22,7 +22,6 @@
             <HBox layoutX="20.0" layoutY="26.0" prefHeight="31.0" prefWidth="152.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.400000000000006" AnchorPane.topAnchor="24.0">
                <children>
                   <TextField fx:id="txtFieldCitizenSearch" prefHeight="26.0" prefWidth="141.0" promptText="Søg" styleClass="text-fieldBase" />
-                  <Button fx:id="btnCitizenSearch" mnemonicParsing="false" onAction="#onStudentCitizensSearch" prefHeight="26.0" prefWidth="34.0" styleClass="searchBtn" />
                </children>
             </HBox>
          </children>

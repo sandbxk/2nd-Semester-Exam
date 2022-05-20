@@ -26,5 +26,5 @@ public class Location {
     public int getZipCode() {
         return zipCode;
     }
-    
+
 }

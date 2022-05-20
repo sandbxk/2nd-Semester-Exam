@@ -64,14 +64,6 @@ public class TeacherDataManager
     // utility:
         // generate random names / data
 
-    
-
-
-
-
-
-
-
 
 
 
@@ -82,6 +74,37 @@ public class TeacherDataManager
         return inquiryDAO.readAll();
     }
 
+    public List getAllCitizenTemplates() {
+        List<Citizen> citizenTemplates = citizenTemplateDAO.readAll();
+
+
+        return citizenTemplates;
+    }
+
+    public Citizen newCitizenTemplate() {
+        //Template
+        Citizen newTemplate = new Citizen(-1);
+        //Generate blank category entries?
+
+        return (Citizen) citizenTemplateDAO.create(newTemplate);
+    }
+
+    public void deleteCitizenTemplate(Citizen template) {
+    }
+
+    public void copyCitizenTemplate(Citizen template) {
+    }
+
+    public void updateCitizenTemplate(Citizen template, List<ContentEntry> beHealthConditions, List<ContentEntry> beFunctionalAbilities) {
+    }
+
+    public void newCitizenEntity(Citizen template) {
+        try {
+            citizenDAO.create(template.clone());
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void updateCitizenEntity(Citizen citizen) {
         citizenDAO.update(citizen);
@@ -94,6 +117,7 @@ public class TeacherDataManager
     public List getAllCitizens() {
         return citizenDAO.readAll();
     }
+
 
 
 
