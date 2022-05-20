@@ -17,7 +17,11 @@ public class CategoryLoader
             if (category.getParentID() == root.getId())
             {
                 root.getChildren().add(category);
+                category.setParent(root);
             }
+
+
+
         }
     }
 

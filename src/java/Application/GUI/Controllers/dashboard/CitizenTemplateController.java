@@ -11,6 +11,8 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Side;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.control.skin.TableHeaderRow;
+import javafx.scene.control.skin.TableViewSkinBase;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import javafx.util.converter.IntegerStringConverter;
@@ -241,6 +243,7 @@ public class CitizenTemplateController implements Initializable {
         editableTreeTableColumns.add(treeTblColumnHealthAssessment);
         editableTreeTableColumns.add(treeTblColumnHealthCause);
         editableTreeTableColumns.add(treeTblColumnHealthNote);
+
     }
 
     /**

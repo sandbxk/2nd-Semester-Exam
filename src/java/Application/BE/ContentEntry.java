@@ -15,17 +15,21 @@ public class ContentEntry {
     private String citizenGoals = "";
     private String note = "";
 
+    private boolean relevant;
+
 
     public ContentEntry(int id, Category category, int level) {
         this.id = id;
         this.category = category;
         this.currentStatus = level;
+        initRelevance();
     }
 
     public ContentEntry(int id, Category category) {
         this.id = id;
         this.category = category;
     }
+
 
     public int getId() {
         return id;
@@ -53,6 +57,7 @@ public class ContentEntry {
 
     public void setCurrentStatus(int currentStatus) {
         this.currentStatus = currentStatus;
+        initRelevance();
     }
 
     public String getAssessment() {
@@ -102,5 +107,37 @@ public class ContentEntry {
     public void setNote(String note) {
         this.note = note;
     }
+
+    public void setRelevant(boolean relevant) {
+        this.relevant = relevant;
+    }
+
+    public boolean getRelevant() {
+        return relevant;
+    }
+
+    private void initRelevance() {
+        switch (getCategory().getType()){
+            case FUNCTIONAL_ABILITY -> {
+                if (getCurrentStatus() != 9) {
+                    setRelevant(true);
+                }
+                else {
+                    setRelevant(false);
+                }
+            }
+            case HEALTH_CONDITION -> {
+                if (getCurrentStatus() != 0) {
+                    setRelevant(true);
+                }
+                else {
+                    setRelevant(false);
+                }
+            }
+            case GENERAL_INFORMATION -> setRelevant(true);
+            }
+    }
+
+
 
 }

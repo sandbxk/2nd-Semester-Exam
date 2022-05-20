@@ -1,5 +1,6 @@
 package Application.GUI.Models.ControllerModels;
 
+import Application.BE.Category;
 import Application.BE.ContentEntry;
 import Application.BLL.TeacherDataManager;
 import Application.GUI.Models.*;
@@ -8,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -133,34 +135,35 @@ public class CitizenTemplateControllerModel {
      */
     public void saveEditedCitizenTemplate() {
         if (preEditCitizenTemplateModel != null) {
-            ObservableList<CategoryEntryModel> newHealthRoot = selectedCitizenTemplateModel.getAllHealthConditions();
-            ObservableList<CategoryEntryModel> newFuncRoot = selectedCitizenTemplateModel.getAllFuncCategories();
-            List<CategoryEntryModel> allOldHealth = new ArrayList<>(preEditCitizenTemplateModel.getAllHealthConditions());
-            List<CategoryEntryModel> allOldFunc = new ArrayList<>(preEditCitizenTemplateModel.getAllFuncCategories());
 
+            HashMap<Category, CategoryEntryModel> newHealthRoot = new HashMap<>();
+            newHealthRoot.putAll(selectedCitizenTemplateModel.getAllHealthConditions());
 
-            ObservableList<CategoryEntryModel> newRelevantHealthConditions = FXCollections.observableArrayList();
-            ObservableList<CategoryEntryModel> newRelevantFunctionalAbilities = FXCollections.observableArrayList();
-            ObservableList<CategoryEntryModel> newNonRelevantHealthConditions = FXCollections.observableArrayList();
-            ObservableList<CategoryEntryModel> newNonRelevantFunctionalAbilities = FXCollections.observableArrayList();
+            HashMap<Category, CategoryEntryModel> newFuncRoot = new HashMap<>();
+            newFuncRoot.putAll(selectedCitizenTemplateModel.getAllFuncCategories());
 
-            //Put relevant and non-relevant categories into their respective lists.
-            for (CategoryEntryModel newHealth : newHealthRoot) {
+            HashMap<Category, CategoryEntryModel> newRelevantHealthConditions = new HashMap<>();
+            HashMap<Category, CategoryEntryModel> newRelevantFunctionalAbilities = new HashMap<>();
+            HashMap<Category, CategoryEntryModel> newNonRelevantHealthConditions = new HashMap<>();
+            HashMap<Category, CategoryEntryModel> newNonRelevantFunctionalAbilities = new HashMap<>();
+
+            //Put relevant and non-relevant health categories into their respective lists.
+            for (CategoryEntryModel newHealth : newHealthRoot.values()) {
                 if (newHealth.getLevel() != HealthLevels.NOT_RELEVANT.ordinal()) {
-                    newRelevantHealthConditions.add(newHealth);
+                    newRelevantHealthConditions.put(newHealth.getContentEntry().getCategory(), newHealth);
                 }
                 else {
-                    newNonRelevantHealthConditions.add(newHealth);
+                    newNonRelevantHealthConditions.put(newHealth.getContentEntry().getCategory(), newHealth);
                 }
             }
 
-            //Put relevant and non-relevant categories into their respective lists.
-            for (CategoryEntryModel newFunc : newFuncRoot) {
+            //Put relevant and non-relevant functional categories into their respective lists.
+            for (CategoryEntryModel newFunc : newFuncRoot.values()) {
                 if (newFunc.getLevel() != FunctionalLevels.LEVEL_9.ordinal() && newFunc.getLevel() != FunctionalLevels.LEVEL_9.level) {
-                    newRelevantFunctionalAbilities.add(newFunc);
+                    newRelevantFunctionalAbilities.put(newFunc.getContentEntry().getCategory(), newFunc);
                 }
                 else {
-                    newNonRelevantFunctionalAbilities.add(newFunc);
+                    newNonRelevantFunctionalAbilities.put(newFunc.getContentEntry().getCategory(), newFunc);
                 }
             }
 
@@ -170,19 +173,24 @@ public class CitizenTemplateControllerModel {
             selectedCitizenTemplateModel.setNonRelevantHealthConditions(newNonRelevantHealthConditions); //Non-Relevant Health
             selectedCitizenTemplateModel.setNonRelevantFunctionalAbilities(newNonRelevantFunctionalAbilities); //Non-Relevant Functional
 
+            HashMap<Category, CategoryEntryModel> allOldHealth = new HashMap<>();
+            allOldHealth.putAll(preEditCitizenTemplateModel.getAllHealthConditions());
+            HashMap<Category, CategoryEntryModel> allOldFunc = new HashMap<>();
+            allOldFunc.putAll(preEditCitizenTemplateModel.getAllFuncCategories());
 
 
-            List<CategoryEntryModel> dbWriteHealthConditions = new ArrayList<>();
-            List<CategoryEntryModel> dbWriteFunctionalAbilities = new ArrayList<>();
+            HashMap<Category, CategoryEntryModel> dbWriteHealthConditions = new HashMap<>();
+            dbWriteHealthConditions.putAll(selectedCitizenTemplateModel.getAllHealthConditions());
+            HashMap<Category, CategoryEntryModel> dbWriteFunctionalAbilities = new HashMap<>();
+            dbWriteFunctionalAbilities.putAll(selectedCitizenTemplateModel.getAllFuncCategories());
 
             //List of changed health conditions
-            dbWriteHealthConditions.addAll(newRelevantHealthConditions);
-            dbWriteHealthConditions.addAll(newNonRelevantHealthConditions);
-            for (CategoryEntryModel health : dbWriteHealthConditions) {
-                int index = allOldHealth.indexOf(health);
-                if (index != -1) { //if the category is in the list
-                    int compare = health.compareTo(allOldHealth.get(index));
-                    if (compare != 0 && !health.isRelevant()) { //if the category is not relevant and has changed
+            for (Category health : dbWriteHealthConditions.keySet()) {
+                CategoryEntryModel oldIndex = allOldHealth.get(health);
+                CategoryEntryModel newIndex = dbWriteHealthConditions.get(health);
+                if (oldIndex != null && newIndex != null) {
+                    int compare = oldIndex.compareTo(newIndex);
+                    if (compare == 0) {
                         dbWriteHealthConditions.remove(health);
                     }
                 }
@@ -190,22 +198,30 @@ public class CitizenTemplateControllerModel {
 
 
             //List of changed functional abilities
-            dbWriteFunctionalAbilities.addAll(newRelevantFunctionalAbilities);
-            dbWriteFunctionalAbilities.addAll(newNonRelevantFunctionalAbilities);
-            for (CategoryEntryModel func : dbWriteFunctionalAbilities) {
-                int index = allOldFunc.indexOf(func);
-                if (index != -1) { //If the category is in the list
-                    int compare = func.compareTo(allOldHealth.get(index));
-                    if (compare != 0 && !func.isRelevant()) { //If the category is not the same and is not relevant
+            for (Category func : dbWriteFunctionalAbilities.keySet()) {
+                CategoryEntryModel oldIndex = allOldFunc.get(func);
+                CategoryEntryModel newIndex = dbWriteFunctionalAbilities.get(func);
+                if (oldIndex != null && newIndex != null) {
+                    int compare = oldIndex.compareTo(newIndex);
+                    if (compare == 0) {
                         dbWriteHealthConditions.remove(func);
                     }
                 }
             }
 
             //Unwrap BE
-            List<ContentEntry> beHealthConditions = dbWriteHealthConditions.stream().map(categoryEntryModel -> categoryEntryModel.getContentEntry()).collect(Collectors.toList());
-            List<ContentEntry> beFunctionalAbilities = dbWriteFunctionalAbilities.stream().map(categoryEntryModel -> categoryEntryModel.getContentEntry()).collect(Collectors.toList());
+            HashMap<Category, ContentEntry> beHealthConditions = new HashMap<>();
+            for (Category cat : dbWriteHealthConditions.keySet()) {
+                ContentEntry entry = dbWriteHealthConditions.get(cat).getContentEntry();
+                beHealthConditions.put(cat, entry);
+            }
 
+            HashMap<Category, ContentEntry> beFunchConditions = new HashMap<>();
+            for (Category cat : dbWriteFunctionalAbilities.keySet()) {
+                ContentEntry entry = dbWriteFunctionalAbilities.get(cat).getContentEntry();
+                beFunchConditions.put(cat, entry);
+            }
+            
             //Write changes to the database
           //  teacherDataManager.updateCitizenTemplate(selectedCitizenTemplateModel.getTemplate(), beHealthConditions, beFunctionalAbilities);
         }

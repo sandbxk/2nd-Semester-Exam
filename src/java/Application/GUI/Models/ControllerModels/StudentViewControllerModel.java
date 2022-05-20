@@ -1,5 +1,6 @@
 package Application.GUI.Models.ControllerModels;
 
+import Application.BE.Category;
 import Application.BLL.StudentDataManager;
 import Application.GUI.Models.CategoryEntryModel;
 import Application.GUI.Models.CitizenModel;
@@ -7,6 +8,8 @@ import Application.GUI.Models.FunctionalLevels;
 import Application.GUI.Models.HealthLevels;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
+
+import java.util.HashMap;
 
 public class StudentViewControllerModel {
 
@@ -83,19 +86,42 @@ public class StudentViewControllerModel {
     }
 
     public void recalculateRelevantCategories() {
-        ObservableList<CategoryEntryModel> nonRelevantFuncCat = selectedCitizen.getNonRelevantFunctionalAbilities();
-        ObservableList<CategoryEntryModel> nonRelevantHealthCat = selectedCitizen.getNonRelevantHealthConditions();
+        HashMap<Category, CategoryEntryModel> functionalAbilities = new HashMap<>(selectedCitizen.getAllFuncCategories());
+        HashMap<Category, CategoryEntryModel> healthConditions = new HashMap<>(selectedCitizen.getAllHealthConditions());
 
-        for (CategoryEntryModel categoryEntryModel : nonRelevantFuncCat) {
-            if (categoryEntryModel.getLevelFunc() != FunctionalLevels.LEVEL_9) {
-                selectedCitizen.getRelevantFunctionalAbilities().add(categoryEntryModel);
+        HashMap<Category, CategoryEntryModel> relevantFunctionalAbilities = new HashMap<>();
+        HashMap<Category, CategoryEntryModel> relevantHealthConditions = new HashMap<>();
+        HashMap<Category, CategoryEntryModel> nonRelevantFunctionalAbilities = new HashMap<>();
+        HashMap<Category, CategoryEntryModel> nonRelevantHealthConditions = new HashMap<>();
+
+        Thread thread = new Thread(() -> {
+            for (CategoryEntryModel categoryEntryModel : functionalAbilities.values()) {
+                    if (categoryEntryModel.getContentEntry().getRelevant()) {
+                        relevantFunctionalAbilities.put(categoryEntryModel.getContentEntry().getCategory(), categoryEntryModel);
+                    }
+                    else {
+                        nonRelevantFunctionalAbilities.put(categoryEntryModel.getContentEntry().getCategory(), categoryEntryModel);
+                    }
             }
-        }
-        for (CategoryEntryModel categoryEntryModel : nonRelevantHealthCat) {
-            if (categoryEntryModel.getLevelHealth() != HealthLevels.NOT_RELEVANT) {
-                selectedCitizen.getRelevantHealthConditions().add(categoryEntryModel);
+            for (CategoryEntryModel categoryEntryModel : healthConditions.values()) {
+                if (categoryEntryModel.getContentEntry().getRelevant()) {
+                    relevantHealthConditions.put(categoryEntryModel.getContentEntry().getCategory(), categoryEntryModel);
+                }
+                else {
+                    nonRelevantHealthConditions.put(categoryEntryModel.getContentEntry().getCategory(), categoryEntryModel);
+                }
             }
+        });
+        thread.start();
+        while (thread.isAlive()) {
+            //wait for the thread to finish
         }
+
+        selectedCitizen.setRelevantFunctionalAbilities(relevantFunctionalAbilities);
+        selectedCitizen.setRelevantHealthConditions(relevantHealthConditions);
+        selectedCitizen.setNonRelevantFunctionalAbilities(nonRelevantFunctionalAbilities);
+        selectedCitizen.setNonRelevantHealthConditions(nonRelevantHealthConditions);
+
     }
     
 }

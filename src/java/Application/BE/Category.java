@@ -11,18 +11,38 @@ public class Category {
 
     private List<Category> children = new ArrayList<>();
 
-    private Integer parentID = null;
+    private int parentID;
+
+    private Category parent;
 
     private CategoryType type;
+
 
     public Category(String name) {
         this.name = name;
     }
 
-    public Category(int id, String name, int parent) {
+    public Category(int id, String name, int parentID) {
         this.id = id;
         this.name = name;
-        this.parentID = parent;
+        this.parentID = parentID;
+    }
+
+    private void initType() {
+        if (this.parent != null) {
+            this.type = this.parent.getType();
+        }
+        else switch (this.name) {
+            case "Generelle Oplysninger":
+                this.type = CategoryType.GENERAL_INFORMATION;
+                break;
+            case "Funktionsevnetilstande":
+                this.type = CategoryType.FUNCTIONAL_ABILITY;
+                break;
+            case "Helbredstilstande":
+                this.type = CategoryType.HEALTH_CONDITION;
+                break;
+        }
     }
 
 
@@ -61,6 +81,15 @@ public class Category {
 
     public int getParentID() {
         return parentID;
+    }
+
+    public Category getParent() {
+        return parent;
+    }
+
+    public void setParent(Category parent) {
+        this.parent = parent;
+        initType();
     }
 
     public List<Category> getChildren() {
