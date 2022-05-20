@@ -49,23 +49,23 @@ public class StudentViewControllerModel {
 
     public TreeItem<CategoryEntryModel> getAllFuncCategoriesAsTreeItem() {
         TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("Alle Funktionsevene tilstande"));
-        return listToTreeItem(treeItem, selectedCitizen.getAllFuncCategories());
+        return null;//listToTreeItem(treeItem, selectedCitizen.getAllFuncCategories());
     }
 
     public TreeItem<CategoryEntryModel> getAllHealthConditionsAsTreeItem() {
         TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("Alle Helbredstilstande"));
-        return listToTreeItem(treeItem, selectedCitizen.getAllHealthConditions());
+        return null;//listToTreeItem(treeItem, selectedCitizen.getAllHealthConditions());
     }
 
 
     public TreeItem<CategoryEntryModel> getRelevantFuncCategoriesAsTreeItem() {
         TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("Alle relevante Helbredstilstande"));
-        return listToTreeItem(treeItem, selectedCitizen.getRelevantFunctionalAbilities());
+        return null;//listToTreeItem(treeItem, selectedCitizen.getRelevantFunctionalAbilities());
     }
 
     public TreeItem<CategoryEntryModel> getRelevantHealthCategoriesAsTreeItem() {
         TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("Alle relevante Funktionsevene tilstande"));
-        return listToTreeItem(treeItem, selectedCitizen.getRelevantHealthConditions());
+        return null;//listToTreeItem(treeItem, selectedCitizen.getRelevantHealthConditions());
     }
 
     /**

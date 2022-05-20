@@ -14,14 +14,12 @@ public class CategoryLoader
     {
         for (var category : completeList)
         {
+
             if (category.getParentID() == root.getId())
             {
                 root.getChildren().add(category);
                 category.setParent(root);
             }
-
-
-
         }
     }
 
@@ -57,6 +55,7 @@ public class CategoryLoader
 
                 for (var Level2 : Level1.getChildren()) {
                     System.out.println("\t\t" + Level2.getName());
+                    System.out.println("\t\t\t" + Level2.getParent().getName());
                 }
             }
         }

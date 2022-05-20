@@ -13,8 +13,8 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TreeItem;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.UnaryOperator;
-import java.util.stream.Collectors;
 
 public final class GUIUtils {
 
@@ -113,14 +113,27 @@ public final class GUIUtils {
         listView.setItems(sortedUsers);
     }
 
-    public static mapToTreeItem(Map<Category, CategoryEntryModel> map, TreeItem<CategoryEntryModel> root){
+    public static TreeItem<CategoryEntryModel> mapToTreeItem(Map<Category, CategoryEntryModel> map){
+        AtomicReference<TreeItem<CategoryEntryModel>> root = new AtomicReference<>(new TreeItem<>());
+
+        CategoryEntryModel rootModel = null;
+
+
         map.forEach((k, v) -> {
+            if (k.getParent() == null) {
+                root.set(new TreeItem<>(v));
+            }
+            else {
+
+            }
+
             TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(v);
-            root.getChildren().add(treeItem);
+            root.get().getChildren().add(treeItem);
             if (k.getChildren().size() > 0) {
-                mapToTreeItem(k.getChildren(), treeItem);
+                //mapToTreeItem(k.getChildren(), treeItem);
             }
         });
+        return root.get();
     }
 
 }

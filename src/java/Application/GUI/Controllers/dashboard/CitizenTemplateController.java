@@ -178,7 +178,7 @@ public class CitizenTemplateController implements Initializable {
 
     }
 
-    private void setTreeTables() {
+    private void setTreeTables() {/*
         //TODO: Proper table population
         // Set up the table
         CitizenModel citizenTemplateModel = new CitizenModel();
@@ -203,6 +203,7 @@ public class CitizenTemplateController implements Initializable {
         }
         funcRoot.getChildren().addAll(funcTree);
         healthRoot.getChildren().addAll(healthTree);
+        */
 
     }
 

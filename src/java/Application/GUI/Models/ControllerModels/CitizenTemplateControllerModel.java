@@ -54,23 +54,23 @@ public class CitizenTemplateControllerModel {
 
     public TreeItem<CategoryEntryModel> getAllFuncCategoriesAsTreeItem() {
         TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("All Functional Ability Categories"));
-        return listToTreeItem(treeItem, selectedCitizenTemplateModel.getAllFuncCategories());
+        return null;//istToTreeItem(treeItem, selectedCitizenTemplateModel.getAllFuncCategories());
     }
 
     public TreeItem<CategoryEntryModel> getAllHealthConditionsAsTreeItem() {
         TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("All Health Categories"));
-        return listToTreeItem(treeItem, selectedCitizenTemplateModel.getAllHealthConditions());
+        return null;//listToTreeItem(treeItem, selectedCitizenTemplateModel.getAllHealthConditions());
     }
 
 
     public TreeItem<CategoryEntryModel> getRelevantFuncCategoriesAsTreeItem() {
         TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("All Functional Ability Categories"));
-        return listToTreeItem(treeItem, selectedCitizenTemplateModel.getRelevantFunctionalAbilities());
+        return null;//listToTreeItem(treeItem, selectedCitizenTemplateModel.getRelevantFunctionalAbilities());
     }
 
     public TreeItem<CategoryEntryModel> getRelevantHealthCategoriesAsTreeItem() {
         TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("All Health Categories"));
-        return listToTreeItem(treeItem, selectedCitizenTemplateModel.getRelevantHealthConditions());
+        return null;//listToTreeItem(treeItem, selectedCitizenTemplateModel.getRelevantHealthConditions());
     }
 
     /**
