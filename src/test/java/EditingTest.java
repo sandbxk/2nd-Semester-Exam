@@ -82,7 +82,7 @@ public class EditingTest {
         model.saveEditedCitizenTemplate();
 
         assertEquals(3, selected.getRelevantFunctionalAbilities().size());
-        
+
  */
     }
 

@@ -115,14 +115,23 @@ public final class GUIUtils {
 
     public static TreeItem<CategoryEntryModel> mapToTreeItem(Map<Category, CategoryEntryModel> map){
         AtomicReference<TreeItem<CategoryEntryModel>> root = new AtomicReference<>(new TreeItem<>());
+        List<Category> inserted = new ArrayList<>();
 
-        CategoryEntryModel rootModel = null;
+        AtomicReference<CategoryEntryModel> rootModel = null;
 
 
         map.forEach((k, v) -> {
             if (k.getParent() == null) {
                 root.set(new TreeItem<>(v));
+                inserted.add(k);
             }
+
+            if (k.getParent() != null) {
+                root.get().getChildren().add(new TreeItem<>(map.get(k.getParent())));
+                inserted.add(k.getParent());
+            }
+
+
             else {
 
             }
@@ -130,7 +139,10 @@ public final class GUIUtils {
             TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(v);
             root.get().getChildren().add(treeItem);
             if (k.getChildren().size() > 0) {
-                //mapToTreeItem(k.getChildren(), treeItem);
+                HashMap<Category, CategoryEntryModel> children = new HashMap<>();
+                children.keySet().addAll(k.getChildren());
+                k.getChildren().forEach(c -> { children.put(c, map.get(c)); });
+                mapToTreeItem(children, treeItem);
             }
         });
         return root.get();
