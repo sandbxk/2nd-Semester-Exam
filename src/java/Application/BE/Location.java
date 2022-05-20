@@ -9,6 +9,9 @@ public class Location {
         this.zipCode = zipCode;
         this.CityName = cityName;
     }
+    public Location()
+    {
+    }
 
     public Location(int zipCode)
     {
@@ -19,16 +22,9 @@ public class Location {
         return CityName;
     }
 
-    public void setCityName(String cityName) {
-        CityName = cityName;
-    }
 
     public int getZipCode() {
         return zipCode;
     }
-
-    public void setZipCode(int zipCode) {
-        this.zipCode = zipCode;
-    }
-
+    
 }
