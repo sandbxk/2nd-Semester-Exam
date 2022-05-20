@@ -6,10 +6,7 @@ import Application.GUI.Models.CitizenModel;
 import Application.GUI.Models.FunctionalLevels;
 import Application.GUI.Models.HealthLevels;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.scene.control.TreeItem;
-
-import java.util.Collection;
 
 public class StudentViewControllerModel {
 
@@ -82,7 +79,7 @@ public class StudentViewControllerModel {
     }
 
     public void updateObservation(CategoryEntryModel value) {
-        studentDataManager.updateObservation(selectedCitizen, value);
+        studentDataManager.updateObservation(selectedCitizen.getBeCitizen(), value.getContentEntry());
     }
 
     public void recalculateRelevantCategories() {

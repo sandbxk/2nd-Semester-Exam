@@ -13,7 +13,6 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TreeItem;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
@@ -123,7 +122,7 @@ public final class GUIUtils {
             List<CategoryEntryModel> inserted = new ArrayList<>();
 
             for (CategoryEntryModel categoryEntryModel : categoryEntryModels) {
-                categories.put(categoryEntryModel.getCategoryEntry().getCategory(), categoryEntryModels.indexOf(categoryEntryModel));
+                categories.put(categoryEntryModel.getContentEntry().getCategory(), categoryEntryModels.indexOf(categoryEntryModel));
 
 
             }
@@ -131,7 +130,7 @@ public final class GUIUtils {
 
             //Get the hierarchy of the categories by their parent category.
             for(CategoryEntryModel categoryEntryModel : categoryEntryModels){
-                Category child = categoryEntryModel.getCategoryEntry().getCategory();
+                Category child = categoryEntryModel.getContentEntry().getCategory();
                 Category parent = child.getParent();
 
                 if (inserted.contains(categoryEntryModel))
@@ -201,7 +200,7 @@ public final class GUIUtils {
         //Create a set for all the parent categories. Sets do not allow duplicates.
         Set<Category> categoryParents = new HashSet<>();
         categoryParents.addAll(categoryEntryModels.stream() //Add all the parent categories to the set.
-                .map(CategoryEntryModel::getCategoryEntry)
+                .map(CategoryEntryModel::getContentEntry)
                 .map(CategoryEntry::getCategory)
                 .map(Category::getParent)
                 .collect(Collectors.toList()));
@@ -211,7 +210,7 @@ public final class GUIUtils {
 
         //Get the hierarchy of the categories by their parent category.
         for(CategoryEntryModel categoryEntryModel : categoryEntryModels){
-            Category child = categoryEntryModel.getCategoryEntry().getCategory();
+            Category child = categoryEntryModel.getContentEntry().getCategory();
             Category parent = child.getParent();
 
 
@@ -275,7 +274,7 @@ public final class GUIUtils {
             //Create a set for all the parent categories. Sets do not allow duplicates.
             Set<Category> categoryParents = new HashSet<>();
             categoryParents.addAll(categoryEntryModels.stream() //Add all the parent categories to the set.
-                    .map(CategoryEntryModel::getCategoryEntry)
+                    .map(CategoryEntryModel::getContentEntry)
                     .map(CategoryEntry::getCategory)
                     .map(Category::getParent)
                     .collect(Collectors.toList()));
@@ -285,7 +284,7 @@ public final class GUIUtils {
 
             //Get the hierarchy of the categories by their parent category.
             for(CategoryEntryModel categoryEntryModel : categoryEntryModels){
-                Category child = categoryEntryModel.getCategoryEntry().getCategory();
+                Category child = categoryEntryModel.getContentEntry().getCategory();
                 Category parent = child.getParent();
 
 

@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.format.DateTimeFormatter;
 import java.util.ListResourceBundle;
 import java.util.ResourceBundle;
 
@@ -83,7 +82,7 @@ public class StudentViewController implements Initializable {
     }
 
     private void updateCitizenInfo(CitizenModel citizen) {
-        lblCitizenName.setText(citizen.getName() + " " + citizen.getSurname());
+        lblCitizenName.setText(citizen.getFirstName() + " " + citizen.getLastName());
         lblAge.setText(citizen.getAge() + "");
 
         tblViewStudentDashboardHealth.setItems(model.getSelectedCitizen().getAllHealthConditions());
