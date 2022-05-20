@@ -2,21 +2,27 @@ package Application.BE;
 
 public class ContentEntry {
 
-    private Category category;
+    private Category category = null;
 
-    private int id;
+    private Integer id = null;
 
     private String assessment = "";
     private String cause = "";
     private String implications = "";
-    private int currentStatus;
-    private int expectedStatus;
+    private Integer currentStatus = null;
+    private Integer expectedStatus = null;
 
     private String citizenGoals = "";
     private String note = "";
 
     private boolean relevant;
+    private Integer severity = null;
 
+
+    public ContentEntry(Category category)
+    {
+        this.category = category;
+    }
 
     public ContentEntry(int id, Category category, int level) {
         this.id = id;
@@ -138,6 +144,8 @@ public class ContentEntry {
             }
     }
 
-
+    public int getSeverity() {
+        return this.severity;
+    }
 
 }
