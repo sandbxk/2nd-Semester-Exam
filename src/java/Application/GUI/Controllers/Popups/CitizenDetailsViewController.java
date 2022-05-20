@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ListResourceBundle;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class CitizenDetailsViewController implements Initializable {
@@ -62,7 +63,6 @@ public class CitizenDetailsViewController implements Initializable {
     public Button btnEditObservation;
     public Button btnBackToDashboard;
 
-    private CitizenModel selectedCitizen;
     private StudentViewControllerModel model = new StudentViewControllerModel();
 
     @Override
@@ -74,7 +74,7 @@ public class CitizenDetailsViewController implements Initializable {
 
     private void initBundle(ResourceBundle bundle) {
         if (bundle.getObject("selectedCitizen") != null){
-            this.selectedCitizen = (CitizenModel) bundle.getObject("selectedCitizen");
+            model.setSelectedCitizen((CitizenModel) bundle.getObject("selectedCitizen"));
         }
     }
 
@@ -82,25 +82,25 @@ public class CitizenDetailsViewController implements Initializable {
      * sets every compononent of the citizen details view to the values of the selected citizen.
      */
     private void setDataToCitizenTemplateView() {
-        if (selectedCitizen != null) {
+        if (model.getSelectedCitizen() != null) {
             //set the base data of name, surname and age to that of the selected citizen template
-            lblCitizenFirstName.setText(selectedCitizen.getName());
-            lblCitizenSurname.setText(selectedCitizen.getSurname());
-            lblCitizenAge.setText(String.valueOf(selectedCitizen.getAge()));
+            lblCitizenFirstName.setText(model.getSelectedCitizen().getFirstName());
+            lblCitizenSurname.setText(model.getSelectedCitizen().getLastName());
+            lblCitizenAge.setText(String.valueOf(model.getSelectedCitizen().getAge()));
 
             //set the functional abilities TreeTableView to the values of the selected citizen template
             TreeItem<CategoryEntryModel> funcRoot = new TreeItem<>();
-            funcRoot.getChildren().addAll(model.getRelevantFuncCategoriesAsTreeItem(selectedCitizen));
+            funcRoot.getChildren().addAll(model.getRelevantFuncCategoriesAsTreeItem());
             treeTblViewFunc.setRoot(funcRoot);
             treeTblViewFunc.setShowRoot(false);
 
             //set the health categories to the health categories of the selected citizen template
             TreeItem<CategoryEntryModel> healthRoot = new TreeItem<>();
-            healthRoot.getChildren().addAll(model.getRelevantHealthCategoriesAsTreeItem(selectedCitizen));
+            healthRoot.getChildren().addAll(model.getRelevantHealthCategoriesAsTreeItem());
             treeTblViewHealth.setRoot(healthRoot);
             treeTblViewHealth.setShowRoot(false);
 
-            GeneralJournal journal = new GeneralJournal();// selectedCitizen.g.getBeCitizen().getGeneralInfo();
+            GeneralJournal journal = model.getSelectedCitizen().getBeCitizen().getGeneralInfo();
 
             //set the general information section to that of the selected citizen template
             txtAreaGenInfoCoping.setText(journal.getCoping());
@@ -118,16 +118,83 @@ public class CitizenDetailsViewController implements Initializable {
 
     }
 
+
     public void onAddObservation(ActionEvent event) {
-        TreeItem selectedItem = treeTblViewFunc.getSelectionModel().getSelectedItem();
-        if (selectedItem != null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Fejl");
-            alert.setHeaderText("Du skal vælge en observation");
-        }
+        openObservationView(false, null);
     }
 
+    /**
+     * opens the observation view with the given parameters.
+     * editing is true, the view is opened in edit mode, automatically navigating
+     * to the observation selected in this view and autofilling the user inputs to the existing data.
+     * @param event
+     */
     public void onEditObservation(ActionEvent event) {
+        TreeItem<CategoryEntryModel> selectedFuncItem = treeTblViewFunc.getSelectionModel().getSelectedItem();
+        TreeItem<CategoryEntryModel> selectedHealthItem = treeTblViewHealth.getSelectionModel().getSelectedItem();
+        if (selectedFuncItem == null && selectedHealthItem == null || selectedFuncItem != null && selectedHealthItem != null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Fejl");
+            alert.setHeaderText("Vælg venligst én tilstandskategori, hvis observationen skal redigeres");
+            alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/Styles/MainStylesheet.css")).toExternalForm());
+            alert.show();
+        }
+        TreeItem<CategoryEntryModel> selectedItem = null;
+
+        if (selectedFuncItem != null) {
+            selectedItem = selectedFuncItem;
+        }
+        else if (selectedHealthItem != null) {
+            selectedItem = selectedHealthItem;
+        }
+
+        openObservationView(true, selectedItem);
+    }
+
+    private void openObservationView(boolean editing, TreeItem<CategoryEntryModel> selectedItem) {
+        Parent root = null;
+        Stage stage = new Stage();
+
+        try {
+            ResourceBundle resources = new ListResourceBundle()
+            {
+                @Override
+                protected Object[][] getContents()
+                {
+                    return new Object[][]{
+                            {"selectedCitizen", model.getSelectedCitizen()},
+                            {"selectedCategoryEntryModel", selectedItem},
+                            {"isEditing", editing}
+                    };
+                }
+            };
+
+
+            root = FXMLLoader.load(getClass().getResource("/Views/Popups/ObservationView.fxml"), resources);
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        stage.setOnHiding(event -> {
+            //refresh the data in the table and add any newly relevant categories
+            model.recalculateRelevantCategories();
+
+            //set the functional abilities TreeTableView to the values of the selected citizen template
+            TreeItem<CategoryEntryModel> funcRoot = new TreeItem<>();
+            funcRoot.getChildren().addAll(model.getRelevantFuncCategoriesAsTreeItem());
+            treeTblViewFunc.setRoot(funcRoot);
+            treeTblViewFunc.setShowRoot(false);
+
+            //set the health categories to the health categories of the selected citizen template
+            TreeItem<CategoryEntryModel> healthRoot = new TreeItem<>();
+            healthRoot.getChildren().addAll(model.getRelevantHealthCategoriesAsTreeItem());
+            treeTblViewHealth.setRoot(healthRoot);
+            treeTblViewHealth.setShowRoot(false);
+        });
     }
 
     public void onBackToDashboard(ActionEvent event) {
@@ -140,7 +207,7 @@ public class CitizenDetailsViewController implements Initializable {
                 @Override
                 protected Object[][] getContents()
                 {
-                    return new Object[][]{  {"selectedCitizen", selectedCitizen}};
+                    return new Object[][]{  {"selectedCitizen", model.getSelectedCitizen()}};
                 }
             };
 

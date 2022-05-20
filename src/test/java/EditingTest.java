@@ -89,13 +89,14 @@ public class EditingTest {
     @Test
     public void ModelAndBEFields(){
         CitizenModel selected = model.getSelectedCitizenTemplateModel();
-        assertEquals("First Name", selected.getName());
-        assertEquals("First Name", selected.getName());
+        assertEquals("First Name", selected.getFirstName());
+        assertEquals("First Name", selected.getFirstName());
+        assertEquals("First Name", selected.getBeCitizen().getFirstname());
 
-        selected.setName("New First Name");
 
-        assertEquals("New First Name", selected.getName());
-        assertFalse("Name is changed", !"First Name".equals(selected.getName()));
+        selected.setFirstName("New First Name");
+        assertEquals("New First Name", selected.getFirstName());
+        assertFalse("Name is changed", !"First Name".equals(selected.getFirstName()));
 
     }
 

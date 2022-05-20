@@ -33,24 +33,24 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
     private ObjectProperty<HealthLevels> exConHealth;
     private StringProperty note;
     private CategoryType type;
-    private ContentEntry categoryEntry;
+    private ContentEntry contentEntry;
 
 
 
-    public CategoryEntryModel(ContentEntry categoryEntry) {
-        this.categoryEntry = categoryEntry;
-        this.id = categoryEntry.getId();
+    public CategoryEntryModel(ContentEntry contentEntry) {
+        this.contentEntry = contentEntry;
+        this.id = contentEntry.getId();
 
         initProperties();
-        categoryName.set(categoryEntry.getCategoryName());
-        level.set(categoryEntry.getCurrentStatus());
-        assessment.set(categoryEntry.getAssessment());
-        cause.set(categoryEntry.getCause());
-        implications.set(categoryEntry.getImplications());
-        citizenGoals.set(categoryEntry.getCitizenGoals());
-        expectedCondition.set(categoryEntry.getExpectedStatus());
-        note.set(categoryEntry.getNote());
-        type = categoryEntry.getCategory().getType();
+        categoryName.set(contentEntry.getCategoryName());
+        level.set(contentEntry.getCurrentStatus());
+        assessment.set(contentEntry.getAssessment());
+        cause.set(contentEntry.getCause());
+        implications.set(contentEntry.getImplications());
+        citizenGoals.set(contentEntry.getCitizenGoals());
+        expectedCondition.set(contentEntry.getExpectedStatus());
+        note.set(contentEntry.getNote());
+        type = contentEntry.getCategory().getType();
         initBinds();
 
         levelFuncComboBox = new SimpleObjectProperty<>(new ComboBox<>());
@@ -80,7 +80,7 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
 
     public CategoryEntryModel(String categoryName, int level, String note) {
         initProperties();
-        this.categoryEntry = new ContentEntry(-1, new Category(categoryName), level);
+        this.contentEntry = new ContentEntry(-1, new Category(categoryName), level);
         this.categoryName.set(categoryName);
         this.level.set(level);
         assessment.set(" ");
@@ -89,7 +89,7 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
         citizenGoals.set(" ");
         expectedCondition.set(0);
         this.note.set(note);
-        this.type = categoryEntry.getCategory().getType();
+        this.type = contentEntry.getCategory().getType();
         initBinds();
 
         initLevelFuncAndLevelHealth();
@@ -120,15 +120,15 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
     }
 
     private void initBinds() {
-        categoryName.bindBidirectional(new SimpleStringProperty(categoryEntry.getCategoryName()));
-        level.bindBidirectional(new SimpleIntegerProperty(categoryEntry.getCurrentStatus()));
+        categoryName.bindBidirectional(new SimpleStringProperty(contentEntry.getCategoryName()));
+        level.bindBidirectional(new SimpleIntegerProperty(contentEntry.getCurrentStatus()));
 
-        assessment.bindBidirectional(new SimpleStringProperty(categoryEntry.getAssessment()));
-        cause.bindBidirectional(new SimpleStringProperty(categoryEntry.getCause()));
-        implications.bindBidirectional(new SimpleStringProperty(categoryEntry.getImplications()));
-        citizenGoals.bindBidirectional(new SimpleStringProperty(categoryEntry.getCitizenGoals()));
-        expectedCondition.bindBidirectional(new SimpleIntegerProperty(categoryEntry.getExpectedStatus()));
-        note.bindBidirectional(new SimpleStringProperty(categoryEntry.getNote()));
+        assessment.bindBidirectional(new SimpleStringProperty(contentEntry.getAssessment()));
+        cause.bindBidirectional(new SimpleStringProperty(contentEntry.getCause()));
+        implications.bindBidirectional(new SimpleStringProperty(contentEntry.getImplications()));
+        citizenGoals.bindBidirectional(new SimpleStringProperty(contentEntry.getCitizenGoals()));
+        expectedCondition.bindBidirectional(new SimpleIntegerProperty(contentEntry.getExpectedStatus()));
+        note.bindBidirectional(new SimpleStringProperty(contentEntry.getNote()));
     }
 
     /**
@@ -533,12 +533,12 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
         this.type = type;
     }
 
-    public ContentEntry getCategoryEntry() {
-        return categoryEntry;
+    public ContentEntry getContentEntry() {
+        return contentEntry;
     }
 
-    public void setCategoryEntry(ContentEntry categoryEntry) {
-        this.categoryEntry = categoryEntry;
+    public void setContentEntry(ContentEntry contentEntry) {
+        this.contentEntry = contentEntry;
     }
 
     public TreeItem<CategoryEntryModel> getAsTreeItem(){
@@ -551,7 +551,7 @@ public class CategoryEntryModel implements Comparable<CategoryEntryModel> {
         if(o.getId() != this.getId()){
             return this.getId() - o.getId();
         }
-        int name = this.getCategoryEntry().getCategoryName().compareTo(o.getCategoryEntry().getCategoryName());
+        int name = this.getContentEntry().getCategoryName().compareTo(o.getContentEntry().getCategoryName());
         int levelCompare = this.getLevel() - o.getLevel();
         int assessmentCompare = this.getAssessment().compareTo(o.getAssessment());
         int causeCompare = this.getCause().compareTo(o.getCause());
