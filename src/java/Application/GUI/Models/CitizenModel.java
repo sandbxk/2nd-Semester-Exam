@@ -8,7 +8,7 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class CitizenModel {
+public class CitizenModel implements Cloneable{
 
     private StringProperty firstName;
     private StringProperty lastName;
@@ -390,5 +390,10 @@ public class CitizenModel {
         allHealthConditions.addAll(nonRelevantHealthConditions);
         allHealthConditions.addAll(relevantHealthConditions);
         return allHealthConditions;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

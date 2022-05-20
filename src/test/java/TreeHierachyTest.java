@@ -1,10 +1,6 @@
 import Application.BE.Category;
 import Application.BE.CategoryEntry;
 import Application.GUI.Models.CategoryEntryModel;
-import Application.GUI.Models.CitizenTemplateModel;
-import Application.GUI.Models.ControllerModels.CitizenTemplateControllerModel;
-import Application.GUI.Models.FunctionalLevels;
-import Application.GUI.Models.HealthLevels;
 import Application.Utility.GUIUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,7 +10,6 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;

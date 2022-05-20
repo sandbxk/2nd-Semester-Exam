@@ -136,7 +136,7 @@ public class Citizen implements Cloneable
         return generalJournal;
     }
 
-    public void setGeneralInfo (GeneralJournal generalInfo){
+    public void setGeneralJournal(GeneralJournal generalInfo){
         this.generalJournal = generalInfo;
     }
 

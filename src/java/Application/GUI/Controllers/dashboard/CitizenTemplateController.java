@@ -71,6 +71,7 @@ public class CitizenTemplateController implements Initializable {
     private List<TreeTableColumn<CategoryEntryModel, String>> editableTreeTableColumns = new ArrayList<>();
     private List<TextArea> editableTextAreas = new ArrayList<>();
 
+    private CitizenTemplateControllerModel model = new CitizenTemplateControllerModel();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -155,7 +156,7 @@ public class CitizenTemplateController implements Initializable {
      * Creates a copy of the selected citizen template.
      */
     private void onCopyCitizenTemplate() {
-        listViewCitizenTemplates.getItems().add(null);
+        listViewCitizenTemplates.getItems().add(model.copyCitizenTemplate());
     }
 
     private void onNewCitizenEntity() {
@@ -280,22 +281,22 @@ public class CitizenTemplateController implements Initializable {
         listViewCitizenTemplates.setItems(null);
 
         listViewCitizenTemplates.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            // model.setSelectedCitizenTemplateModel((CitizenTemplateModel) newValue);
-            //setDataToCitizenTemplateView();
+            model.setSelectedCitizenTemplateModel((CitizenModel) newValue);
+            setDataToCitizenTemplateView();
         });
 
         listViewCitizenTemplates.getSelectionModel().select(0);
     }
 
-/*
+
     /**
      * sets every compononent of the citizen template view to the values of the selected citizen template.
-     *
+     */
     private void setDataToCitizenTemplateView() {
         if (model.getSelectedCitizenTemplateModel() != null) {
             //set the base data of name, surname and age to that of the selected citizen template
-            txtFieldName.setText(model.getSelectedCitizenTemplateModel().getName());
-            txtFieldSurname.setText(model.getSelectedCitizenTemplateModel().getSurname());
+            txtFieldName.setText(model.getSelectedCitizenTemplateModel().getFirstName());
+            txtFieldSurname.setText(model.getSelectedCitizenTemplateModel().getLastName());
             txtFieldAge.setText(String.valueOf(model.getSelectedCitizenTemplateModel().getAge()));
 
             //set the functional abilities TreeTableView to the values of the selected citizen template
@@ -310,7 +311,7 @@ public class CitizenTemplateController implements Initializable {
             treeTblViewHealth.setRoot(healthRoot);
             treeTblViewHealth.setShowRoot(false);
 
-            GeneralJournal journal = model.getSelectedCitizenTemplateModel().getTemplate().getGeneralInfo();
+            GeneralJournal journal = model.getSelectedCitizenTemplateModel().getBeCitizen().getGeneralInfo();
 
             //set the general information section to that of the selected citizen template
             txtAreaGenInfoCoping.setText(journal.getCoping());
@@ -327,7 +328,7 @@ public class CitizenTemplateController implements Initializable {
         }
 
     }
-    */
+
 
     /**
      * Sets the tables and relevant columns to editable or not. The same applies to the combo boxes within the level columns.
@@ -457,14 +458,11 @@ public class CitizenTemplateController implements Initializable {
      * @param event
      */
     public void onEditCancel(ActionEvent event) {
-        /*
-        ObservableList<CitizenTemplateModel> templateModelObservableList = listViewCitizenTemplates.getItems();
+        ObservableList<CitizenModel> templateModelObservableList = listViewCitizenTemplates.getItems();
         int index = templateModelObservableList.indexOf(model.getSelectedCitizenTemplateModel());
         listViewCitizenTemplates.getItems().set(index, model.getPreEditState());
         listViewCitizenTemplates.getSelectionModel().select(index);
         setEditable(false);
-
-         */
     }
 
     /**
