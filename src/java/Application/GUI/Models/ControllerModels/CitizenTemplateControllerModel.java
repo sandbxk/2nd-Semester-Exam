@@ -221,7 +221,7 @@ public class CitizenTemplateControllerModel {
                 ContentEntry entry = dbWriteFunctionalAbilities.get(cat).getContentEntry();
                 beFunchConditions.put(cat, entry);
             }
-            
+
             //Write changes to the database
           //  teacherDataManager.updateCitizenTemplate(selectedCitizenTemplateModel.getTemplate(), beHealthConditions, beFunctionalAbilities);
         }

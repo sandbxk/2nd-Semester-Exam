@@ -1,6 +1,7 @@
 package Application.Utility;
 
 
+import Application.BE.Category;
 import Application.GUI.Models.AccountModel;
 import Application.GUI.Models.CategoryEntryModel;
 import javafx.collections.ObservableList;
@@ -110,6 +111,16 @@ public final class GUIUtils {
         SortedList<T> sortedUsers = new SortedList<>(filteredData);
 
         listView.setItems(sortedUsers);
+    }
+
+    public static mapToTreeItem(Map<Category, CategoryEntryModel> map, TreeItem<CategoryEntryModel> root){
+        map.forEach((k, v) -> {
+            TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(v);
+            root.getChildren().add(treeItem);
+            if (k.getChildren().size() > 0) {
+                mapToTreeItem(k.getChildren(), treeItem);
+            }
+        });
     }
 
 }
