@@ -1,15 +1,16 @@
 package Application.GUI.Models.ControllerModels;
 
 import Application.BE.Category;
+import Application.BE.Citizen;
 import Application.BLL.StudentDataManager;
-import Application.GUI.Models.CategoryEntryModel;
-import Application.GUI.Models.CitizenModel;
-import Application.GUI.Models.FunctionalLevels;
-import Application.GUI.Models.HealthLevels;
+import Application.GUI.Models.*;
+import Application.Utility.GUIUtils;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class StudentViewControllerModel {
 
@@ -35,8 +36,11 @@ public class StudentViewControllerModel {
 
     public ObservableList<CitizenModel> getAllCitizens()
     {
-      //  return studentDataManager.getAllCitizens();
-        return null;
+        ObservableList<CitizenModel> citizens = FXCollections.observableArrayList();
+        for (Citizen c : studentDataManager.getAssignedCitizens(0)){ //TODO: 0 is a placeholder for the current user
+            citizens.add(new CitizenModel(c));
+        }
+      return citizens;
     }
 
     public CitizenModel getSelectedCitizen() {
@@ -48,38 +52,33 @@ public class StudentViewControllerModel {
     }
 
     public TreeItem<CategoryEntryModel> getAllFuncCategoriesAsTreeItem() {
-        TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("Alle Funktionsevene tilstande"));
-        return null;//listToTreeItem(treeItem, selectedCitizen.getAllFuncCategories());
+        return GUIUtils.mapToTreeItem(selectedCitizen.getAllFuncCategories());
     }
 
     public TreeItem<CategoryEntryModel> getAllHealthConditionsAsTreeItem() {
-        TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("Alle Helbredstilstande"));
-        return null;//listToTreeItem(treeItem, selectedCitizen.getAllHealthConditions());
+        return GUIUtils.mapToTreeItem(selectedCitizen.getAllHealthConditions());
     }
 
 
     public TreeItem<CategoryEntryModel> getRelevantFuncCategoriesAsTreeItem() {
-        TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("Alle relevante Helbredstilstande"));
-        return null;//listToTreeItem(treeItem, selectedCitizen.getRelevantFunctionalAbilities());
+        return GUIUtils.mapToTreeItem(selectedCitizen.getRelevantFunctionalAbilities());
     }
 
     public TreeItem<CategoryEntryModel> getRelevantHealthCategoriesAsTreeItem() {
-        TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("Alle relevante Funktionsevene tilstande"));
-        return null;//listToTreeItem(treeItem, selectedCitizen.getRelevantHealthConditions());
+        return GUIUtils.mapToTreeItem(selectedCitizen.getRelevantHealthConditions());
     }
 
-    /**
-     * Utility method to convert a list to a tree items children.
-     * @param treeItem
-     * @param list
-     * @return
-     */
-    private TreeItem<CategoryEntryModel> listToTreeItem(TreeItem<CategoryEntryModel> treeItem, ObservableList<CategoryEntryModel> list) {
-        for (CategoryEntryModel categoryEntryModel : list) {
-            treeItem.getChildren().add(categoryEntryModel.getAsTreeItem());
-        }
-        return treeItem;
+    public ObservableList<CategoryEntryModel> getRelevantFuncCategoriesAsList() {
+        ObservableList<CategoryEntryModel> list = FXCollections.observableArrayList(selectedCitizen.getRelevantFunctionalAbilities().values());
+        return list;
     }
+
+    public ObservableList<CategoryEntryModel> getRelevantHealthCategoriesAsList() {
+        ObservableList<CategoryEntryModel> list = FXCollections.observableArrayList(selectedCitizen.getRelevantHealthConditions().values());
+        return list;
+    }
+
+
 
     public void updateObservation(CategoryEntryModel value) {
         studentDataManager.updateObservation(selectedCitizen.getBeCitizen(), value.getContentEntry());

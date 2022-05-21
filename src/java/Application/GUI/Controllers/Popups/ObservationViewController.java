@@ -164,7 +164,7 @@ public class ObservationViewController implements Initializable {
         if (observation != null){
 
             //Obligatory fields for functional abilities
-            if (observation.getValue().getCategoryName() == null ) { //|| observation.getValue().getContentEntry().getCategory().getDepth() <= 1){
+            if (observation.getValue().getCategoryName() == null  || observation.getValue().getContentEntry().getCategory().getChildren().size() > 0){
                 showAlert();
                 return;
             }

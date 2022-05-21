@@ -3,15 +3,16 @@ package Application.GUI.Models.ControllerModels;
 import Application.BE.Category;
 import Application.BE.ContentEntry;
 import Application.BLL.TeacherDataManager;
-import Application.GUI.Models.*;
+import Application.GUI.Models.CategoryEntryModel;
+import Application.GUI.Models.CitizenModel;
+import Application.GUI.Models.FunctionalLevels;
+import Application.GUI.Models.HealthLevels;
+import Application.Utility.GUIUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class CitizenTemplateControllerModel {
 
@@ -32,9 +33,7 @@ public class CitizenTemplateControllerModel {
      * @return
      */
     public ObservableList<CitizenModel> getCitizenTemplates() {
-        ObservableList<CitizenModel> citizenTemplates = FXCollections.observableArrayList();
-        citizenTemplates.add(new CitizenModel("John", "Jørgensen", 53));
-        citizenTemplates.add(new CitizenModel("Mark", "Hansen", 9));
+        ObservableList<CitizenModel> citizenTemplates = FXCollections.observableArrayList(teacherDataManager.getAllCitizenTemplates());
         return citizenTemplates;
     }
 
@@ -54,37 +53,24 @@ public class CitizenTemplateControllerModel {
 
     public TreeItem<CategoryEntryModel> getAllFuncCategoriesAsTreeItem() {
         TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("All Functional Ability Categories"));
-        return null;//istToTreeItem(treeItem, selectedCitizenTemplateModel.getAllFuncCategories());
+        return GUIUtils.mapToTreeItem(selectedCitizenTemplateModel.getAllFuncCategories());
     }
 
     public TreeItem<CategoryEntryModel> getAllHealthConditionsAsTreeItem() {
         TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("All Health Categories"));
-        return null;//listToTreeItem(treeItem, selectedCitizenTemplateModel.getAllHealthConditions());
+        return GUIUtils.mapToTreeItem(selectedCitizenTemplateModel.getAllHealthConditions());
     }
 
 
     public TreeItem<CategoryEntryModel> getRelevantFuncCategoriesAsTreeItem() {
-        TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("All Functional Ability Categories"));
-        return null;//listToTreeItem(treeItem, selectedCitizenTemplateModel.getRelevantFunctionalAbilities());
+        return GUIUtils.mapToTreeItem(selectedCitizenTemplateModel.getRelevantFunctionalAbilities());
     }
 
     public TreeItem<CategoryEntryModel> getRelevantHealthCategoriesAsTreeItem() {
-        TreeItem<CategoryEntryModel> treeItem = new TreeItem<>(new CategoryEntryModel("All Health Categories"));
-        return null;//listToTreeItem(treeItem, selectedCitizenTemplateModel.getRelevantHealthConditions());
+        return GUIUtils.mapToTreeItem(selectedCitizenTemplateModel.getRelevantHealthConditions());
     }
 
-    /**
-     * Utility method to convert a list to a tree items children.
-     * @param treeItem
-     * @param list
-     * @return
-     */
-    private TreeItem<CategoryEntryModel> listToTreeItem(TreeItem<CategoryEntryModel> treeItem, ObservableList<CategoryEntryModel> list) {
-        for (CategoryEntryModel categoryEntryModel : list) {
-            treeItem.getChildren().add(categoryEntryModel.getAsTreeItem());
-        }
-        return treeItem;
-    }
+
 
     /**
      * Create a new citizen template and write it to the DB.
@@ -101,7 +87,7 @@ public class CitizenTemplateControllerModel {
      * Delete the selected citizen template.
      **/
     public void deleteCitizenTemplate() {
-        //teacherDataManager.deleteCitizen(selectedCitizenTemplateModel.getTemplate());
+        teacherDataManager.deleteCitizenTemplate(selectedCitizenTemplateModel.getBeCitizen());
     }
 
     /**
@@ -184,7 +170,8 @@ public class CitizenTemplateControllerModel {
             HashMap<Category, CategoryEntryModel> dbWriteFunctionalAbilities = new HashMap<>();
             dbWriteFunctionalAbilities.putAll(selectedCitizenTemplateModel.getAllFuncCategories());
 
-            //List of changed health conditions
+
+            //List of changed health conditions. If no changes are made to the item, it will be removed from the list.
             for (Category health : dbWriteHealthConditions.keySet()) {
                 CategoryEntryModel oldIndex = allOldHealth.get(health);
                 CategoryEntryModel newIndex = dbWriteHealthConditions.get(health);
@@ -197,7 +184,7 @@ public class CitizenTemplateControllerModel {
             }
 
 
-            //List of changed functional abilities
+            //List of changed functional abilities. If no changes are made to the item, it will be removed from the list.
             for (Category func : dbWriteFunctionalAbilities.keySet()) {
                 CategoryEntryModel oldIndex = allOldFunc.get(func);
                 CategoryEntryModel newIndex = dbWriteFunctionalAbilities.get(func);
@@ -216,14 +203,13 @@ public class CitizenTemplateControllerModel {
                 beHealthConditions.put(cat, entry);
             }
 
-            HashMap<Category, ContentEntry> beFunchConditions = new HashMap<>();
+            HashMap<Category, ContentEntry> beFuncConditions = new HashMap<>();
             for (Category cat : dbWriteFunctionalAbilities.keySet()) {
                 ContentEntry entry = dbWriteFunctionalAbilities.get(cat).getContentEntry();
-                beFunchConditions.put(cat, entry);
+                beFuncConditions.put(cat, entry);
             }
 
-            //Write changes to the database
-          //  teacherDataManager.updateCitizenTemplate(selectedCitizenTemplateModel.getTemplate(), beHealthConditions, beFunctionalAbilities);
+            teacherDataManager.updateCitizenTemplate(selectedCitizenTemplateModel.getBeCitizen(), beHealthConditions, beFuncConditions);
         }
     }
 
@@ -240,6 +226,6 @@ public class CitizenTemplateControllerModel {
 
 
     public void newCitizenEntity() {
-        //teacherDataManager.newCitizenEntity(selectedCitizenTemplateModel.getTemplate());
+        teacherDataManager.newCitizenEntity(selectedCitizenTemplateModel.getBeCitizen());
     }
 }

@@ -5,6 +5,7 @@ import Application.DAL.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class TeacherDataManager
 {
@@ -95,7 +96,7 @@ public class TeacherDataManager
     public void copyCitizenTemplate(Citizen template) {
     }
 
-    public void updateCitizenTemplate(Citizen template, List<ContentEntry> beHealthConditions, List<ContentEntry> beFunctionalAbilities) {
+    public void updateCitizenTemplate(Citizen template, Map<Category, ContentEntry> beHealthConditions, Map<Category, ContentEntry> beFunctionalAbilities) {
     }
 
     public void newCitizenEntity(Citizen template) {

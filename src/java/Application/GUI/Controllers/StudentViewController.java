@@ -85,8 +85,8 @@ public class StudentViewController implements Initializable {
         lblCitizenName.setText(citizen.getFirstName() + " " + citizen.getLastName());
         lblAge.setText(citizen.getAge() + "");
 
-        //tblViewStudentDashboardHealth.setItems(model.getSelectedCitizen().getAllHealthConditions());
-        //tblViewStudentDashboardFunc.setItems(model.getSelectedCitizen().getRelevantFunctionalAbilities());
+        tblViewStudentDashboardHealth.setItems(model.getRelevantHealthCategoriesAsList());
+        tblViewStudentDashboardFunc.setItems(model.getRelevantFuncCategoriesAsList());
 
 
         tblViewStudentDashboardHealth.setItems(null);
@@ -104,9 +104,6 @@ public class StudentViewController implements Initializable {
     }
 
 
-    public void onStudentCitizensSearch(ActionEvent event) {
-        model.onStudentCitizensSearch();
-    }
 
     public void onOpenDetails(ActionEvent event) {
         Stage stage = (Stage) btnOpenDetails.getScene().getWindow();

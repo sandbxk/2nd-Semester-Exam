@@ -89,15 +89,11 @@ public class CitizenDetailsViewController implements Initializable {
             lblCitizenAge.setText(String.valueOf(model.getSelectedCitizen().getAge()));
 
             //set the functional abilities TreeTableView to the values of the selected citizen template
-            TreeItem<CategoryEntryModel> funcRoot = new TreeItem<>();
-            funcRoot.getChildren().addAll(model.getRelevantFuncCategoriesAsTreeItem());
-            treeTblViewFunc.setRoot(funcRoot);
+            treeTblViewFunc.setRoot(model.getRelevantFuncCategoriesAsTreeItem());
             treeTblViewFunc.setShowRoot(false);
 
             //set the health categories to the health categories of the selected citizen template
-            TreeItem<CategoryEntryModel> healthRoot = new TreeItem<>();
-            healthRoot.getChildren().addAll(model.getRelevantHealthCategoriesAsTreeItem());
-            treeTblViewHealth.setRoot(healthRoot);
+            treeTblViewHealth.setRoot(model.getRelevantHealthCategoriesAsTreeItem());
             treeTblViewHealth.setShowRoot(false);
 
             GeneralJournal journal = model.getSelectedCitizen().getBeCitizen().getGeneralInfo();
@@ -184,15 +180,11 @@ public class CitizenDetailsViewController implements Initializable {
             model.recalculateRelevantCategories();
 
             //set the functional abilities TreeTableView to the values of the selected citizen template
-            TreeItem<CategoryEntryModel> funcRoot = new TreeItem<>();
-            funcRoot.getChildren().addAll(model.getRelevantFuncCategoriesAsTreeItem());
-            treeTblViewFunc.setRoot(funcRoot);
+            treeTblViewFunc.setRoot(model.getRelevantFuncCategoriesAsTreeItem());
             treeTblViewFunc.setShowRoot(false);
 
             //set the health categories to the health categories of the selected citizen template
-            TreeItem<CategoryEntryModel> healthRoot = new TreeItem<>();
-            healthRoot.getChildren().addAll(model.getRelevantHealthCategoriesAsTreeItem());
-            treeTblViewHealth.setRoot(healthRoot);
+            treeTblViewHealth.setRoot(model.getRelevantHealthCategoriesAsTreeItem());
             treeTblViewHealth.setShowRoot(false);
         });
     }
