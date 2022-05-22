@@ -29,6 +29,7 @@ public class CitizenTemplateController implements Initializable {
     public TextField txtFieldName;
     public TextField txtFieldSurname;
     public TextField txtFieldAge;
+    public Button btnGenerateBaseData;
     public Button btnCitizenTemplateEditOn;
     public Button btnCitizenTemplateEditCancel;
     public Button btnCitizenTemplateEditSave;
@@ -68,7 +69,7 @@ public class CitizenTemplateController implements Initializable {
     public TextArea txtAreaGenInfoHomeLayout;
     public TextArea txtAreaGenInfoNetwork;
 
-   // private CitizenTemplateControllerModel model = new CitizenTemplateControllerModel();
+    // private CitizenTemplateControllerModel model = new CitizenTemplateControllerModel();
     private ContextMenu actionsMenu = new ContextMenu();
     private List<TreeTableColumn<CategoryEntryModel, String>> editableTreeTableColumns = new ArrayList<>();
     private List<TextArea> editableTextAreas = new ArrayList<>();
@@ -382,9 +383,11 @@ public class CitizenTemplateController implements Initializable {
         txtFieldName.setDisable(!editable);
         txtFieldSurname.setDisable(!editable);
         txtFieldAge.setDisable(!editable);
+        btnGenerateBaseData.setVisible(editable);
 
         //ensures another citizen template is not selected while editing
         listViewCitizenTemplates.setDisable(editable);
+
 
         btnCitizenTemplateEditOn.setVisible(!editable); //Only visible if not editable
         btnCitizenTemplateEditSave.setVisible(editable); //Only visible if editable
@@ -507,5 +510,11 @@ public class CitizenTemplateController implements Initializable {
     }
 
 
+    public void onGenerateBaseData(ActionEvent event) {
+        Object[] baseData = model.generateBaseData();
+        txtFieldName.setText((String) baseData[0]);
+        txtFieldSurname.setText((String) baseData[1]);
+        txtFieldAge.setText((String) baseData[2]);
+    }
 }
 

@@ -8,11 +8,14 @@ import Application.GUI.Models.CitizenModel;
 import Application.GUI.Models.FunctionalLevels;
 import Application.GUI.Models.HealthLevels;
 import Application.Utility.GUIUtils;
+import com.github.javafaker.Faker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.Random;
 
 public class CitizenTemplateControllerModel {
 
@@ -228,4 +231,19 @@ public class CitizenTemplateControllerModel {
     public void newCitizenEntity() {
         teacherDataManager.newCitizenEntity(selectedCitizenTemplateModel.getBeCitizen());
     }
+
+    /**
+     * Use the Java Faker library to generate a random name and Java.Random to generate a random age.
+     * @return An Object Array of Strings with the generated date.
+     */
+    public Object[] generateBaseData() {
+        Faker faker = new Faker(new Locale("da-DK"));
+        Object[] baseData = new Object[3];
+        baseData[0] = faker.name().firstName();
+        baseData[1] = faker.name().lastName();
+        baseData[2] = 55 + new Random().nextInt(45) + "";
+
+        return baseData;
+    }
+
 }
