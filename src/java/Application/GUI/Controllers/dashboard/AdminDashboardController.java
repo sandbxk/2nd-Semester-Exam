@@ -24,8 +24,6 @@ public class AdminDashboardController implements Initializable {
     private TableColumn<AccountModel, String> tblClmStudentLastName;
     @FXML
     private TableColumn<AccountModel, String> tblClmStudentEmail;
-    @FXML
-    private TableColumn<AccountModel, String> tblClmStudentClass;
 
     @FXML
     private TableView<AccountModel> tblViewTeacher;
@@ -57,6 +55,7 @@ public class AdminDashboardController implements Initializable {
 
     private void initTableViews()
     {
+
         tblClmSchoolName.setCellValueFactory(param -> param.getValue().getName());
         tblClmSchoolZipCode.setCellValueFactory(param -> param.getValue().getZipCode());
         tblClmSchoolCity.setCellValueFactory(param -> param.getValue().getCity());
@@ -80,6 +79,8 @@ public class AdminDashboardController implements Initializable {
     public void onDeleteStudent(ActionEvent event) {
     }
 
+
+
     public void onNewTeacher(ActionEvent event) {
     }
 
@@ -88,6 +89,8 @@ public class AdminDashboardController implements Initializable {
 
     public void onDeleteTeacher(ActionEvent event) {
     }
+
+
 
     public void onNewSchool(ActionEvent event) {
     }
