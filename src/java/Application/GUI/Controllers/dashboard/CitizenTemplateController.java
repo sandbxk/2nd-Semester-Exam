@@ -135,7 +135,7 @@ public class CitizenTemplateController implements Initializable {
      * Creates a new blank citizen template.
      */
     private void onNewCitizenTemplate() {
-        listViewCitizenTemplates.getItems().add(null);
+        listViewCitizenTemplates.getItems().add(model.newCitizenTemplate());
     }
 
     /**

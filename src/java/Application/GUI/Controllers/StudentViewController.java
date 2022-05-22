@@ -87,10 +87,6 @@ public class StudentViewController implements Initializable {
 
         tblViewStudentDashboardHealth.setItems(model.getRelevantHealthCategoriesAsList());
         tblViewStudentDashboardFunc.setItems(model.getRelevantFuncCategoriesAsList());
-
-
-        tblViewStudentDashboardHealth.setItems(null);
-        tblViewStudentDashboardFunc.setItems(null);
     }
 
     private void initListViewCitizens(){
@@ -115,7 +111,7 @@ public class StudentViewController implements Initializable {
                 @Override
                 protected Object[][] getContents()
                 {
-                    return new Object[][]{  {"selectedCitizen", model.getSelectedCitizen()}};
+                    return new Object[][]{  {"selectedCitizen", model.getSelectedCitizen()}, {"accountType", "student"}};
                 }
             };
 
@@ -125,11 +121,13 @@ public class StudentViewController implements Initializable {
 
         } catch (IOException e) {
             e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Fejl");
+            alert.setHeaderText("Ingen valgt borger");
+            alert.setContentText("Vælg venligst en borger");
+            alert.showAndWait();
         }
     }
 
 
-    public void onAddObservation(ActionEvent event) {
-        model.onAddObservation();
-    }
 }
